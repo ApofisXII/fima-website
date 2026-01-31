@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <img src="#" alt="FIMA Musica Antica">
+            <nav>
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            Footer
+        </footer>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,25 @@
+:root {
+    /* Colors as provided from FIMA */
+    --color-white: #FBF9F5;
+    --color-blue: #18407E;
+    --color-blue-light: #9095BE;
+    --color-yellow: #FBBB21;
+    --color-red: #D62725;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-white);
+    color: #222;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
