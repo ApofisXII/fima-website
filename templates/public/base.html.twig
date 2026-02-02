@@ -2,23 +2,41 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}FIMA • Fondazione Italiana per la Musica Antica</title>
 
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
-    <body>
-        <header class="header">
-            <img class="header__logo" src="{{ asset('images/fima-logo.svg') }}" alt="FIMA Musica Antica">
-            <nav class="header__nav">
-                <a class="header__nav-link" href="{{ path('indexLocalized') }}">Home</a>
-                <a class="header__nav-link" href="">Chi siamo</a>
-                <a class="header__nav-link" href="">Urbino Musica Antica</a>
-                <a class="header__nav-link" href="">Biblioteca</a>
-                <a class="header__nav-link" href="">Recercare</a>
-                <a class="header__nav-link" href="">Periodico</a>
-                <a class="header__nav-link" href="{{ path('newsList') }}">Eventi</a>
-            </nav>
-        </header>
+    <body class="{{ 'urbino' in app.current_route ? 'body--urbino-section' }}">
+        <div class="header-container">
+            <header class="header">
+                <img class="header__logo" src="{{ asset('images/fima-logo.svg') }}" alt="FIMA Musica Antica">
+                <nav class="header__nav">
+                    <a class="header__nav-link" href="{{ path('indexLocalized') }}">Home</a>
+                    <a class="header__nav-link" href="">Chi siamo</a>
+                    <a class="header__nav-link" href="{{ path('urbinoWelcome') }}">Urbino Musica Antica</a>
+                    <a class="header__nav-link" href="">Biblioteca</a>
+                    <a class="header__nav-link" href="">Recercare</a>
+                    <a class="header__nav-link" href="">Periodico</a>
+                    <a class="header__nav-link" href="{{ path('newsList') }}">Eventi</a>
+                </nav>
+            </header>
+            {% if 'urbino' in app.current_route %}
+                <div class="uma-header">
+                    <div>
+                        <div class="uma-header__clip">
+                            <img class="uma-header__logo" src="{{ asset('images/uma-logos/uma-2025-colors.svg') }}" alt="Urbino Musica Antica Logo">
+                        </div>
+                    </div>
+                    <div class="uma-header__links">
+                        <a href="#">Welcome</a>
+                        <a href="#">Corsi</a>
+                        <a href="#">Festival</a>
+                        <a href="#">Mostra</a>
+                        <a href="#">Convegni</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
 
         <main>
             {% block body %}{% endblock %}
@@ -28,15 +46,15 @@
             <div class="box follow-box">
                 <div class="box-title">Seguici!</div>
                 <a href="#" target="_blank" class="follow-box__link">
-                    <img class="follow-box__link-image" src="{{ asset('images/logos/youtube.svg') }}" alt="YouTube">
+                    <img class="follow-box__link-image" src="{{ asset('images/social/youtube.svg') }}" alt="YouTube">
                     <div>Canale YouTube</div>
                 </a>
                 <a href="#" target="_blank" class="follow-box__link">
-                    <img class="follow-box__link-image" src="{{ asset('images/logos/instagram.svg') }}" alt="Instagram">
+                    <img class="follow-box__link-image" src="{{ asset('images/social/instagram.svg') }}" alt="Instagram">
                     <div>Pagina Instagram</div>
                 </a>
                 <a href="#" target="_blank" class="follow-box__link">
-                    <img class="follow-box__link-image" src="{{ asset('images/logos/facebook.svg') }}" alt="Facebook">
+                    <img class="follow-box__link-image" src="{{ asset('images/social/facebook.svg') }}" alt="Facebook">
                     <div>Pagina Facebook</div>
                 </a>
             </div>
@@ -60,7 +78,9 @@
                     <div>Via Col di Lana 7, 00195, Roma</div>
                 </div>
                 <div class="footer__column footer__column--right">
-                    Contenuto
+                    <a href="#">Contatti</a><br>
+                    <a href="#">Amministrazione Trasparente</a><br>
+                    <a href="#">Web design credits</a><br>
                 </div>
             </div>
         </footer>

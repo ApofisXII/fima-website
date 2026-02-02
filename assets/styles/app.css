@@ -45,6 +45,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.body--urbino-section {
+    padding-top: 200px;
+}
+
 h1, h2, h3 {
     font-weight: var(--font-bold-weight-serif);
 }
@@ -64,18 +68,21 @@ h1, h2, h3 {
     color: var(--color-blue);
 }
 
-.header {
+.header-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 9999;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     background-color: var(--color-blue);
     color: var(--color-white);
-    z-index: 9999;
 }
 
 .header__logo {
@@ -250,4 +257,37 @@ h1, h2, h3 {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+}
+
+.uma-header {
+    background-color: var(--color-yellow);
+    color: var(--color-blue);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.uma-header__links {
+    display: flex;
+    gap: 40px;
+}
+
+.uma-header__clip {
+    height: 140px;
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #FFCF5A, #FBBB21);
+    position: absolute;
+    top: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 5px 15px rgba(214, 39, 37, 0.21);
+}
+
+.uma-header__logo {
+    height: 50px;
 }

@@ -16,7 +16,7 @@ final class NewsController extends AbstractController
     {
         $newsList = []; // TODO: Fetch via Repository
 
-        return $this->render('public/news_list.html.twig', [
+        return $this->render('public/news-list.html.twig', [
             'newsList' => $newsList,
         ]);
     }
