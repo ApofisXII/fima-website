@@ -29,6 +29,11 @@
     box-sizing: border-box;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 body {
     font-family: 'Sofia Sans', sans-serif;
     background-color: var(--color-white);
@@ -44,6 +49,10 @@ h1, h2, h3 {
 
 b, strong {
     font-weight: var(--font-bold-weight-sans-serif);
+}
+
+p {
+    line-height: 1.6rem;
 }
 
 h1, h2, h3 {
@@ -124,7 +133,7 @@ h1, h2, h3 {
 
 .box-title {
     font-weight: var(--font-bold-weight-sans-serif);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--color-blue);
     margin-bottom: 10px;
 }
@@ -166,4 +175,26 @@ h1, h2, h3 {
 .news-box__date {
     font-size: 0.8rem;
     opacity: 0.7;
+}
+
+.follow-box__link {
+    background-color: rgba(24, 64, 126, 0.1);
+    border-radius: var(--border-radius-main);
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: var(--font-bold-weight-sans-serif);
+    margin-top: 10px;
+    color: var(--color-blue);
+}
+
+.follow-box__link-image {
+    width: 25px;
+}
+
+.donate-box__angels {
+    background-image: url('../images/donate-angels.webp');
+    background-size: 100% auto;
 }
