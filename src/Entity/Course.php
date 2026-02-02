@@ -54,6 +54,9 @@ class Course
     #[ORM\Column(nullable: true)]
     private ?int $ordering = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +214,18 @@ class Course
     public function setOrdering(?int $ordering): static
     {
         $this->ordering = $ordering;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
