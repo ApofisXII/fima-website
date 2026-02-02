@@ -7,12 +7,16 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
     <body>
-        <header>
-            <img src="#" alt="FIMA Musica Antica">
-            <nav>
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Contact</a>
+        <header class="header">
+            <img class="header__logo" src="{{ asset('images/fima-logo.svg') }}" alt="FIMA Musica Antica">
+            <nav class="header__nav">
+                <a class="header__nav-link" href="{{ path('indexLocalized') }}">Home</a>
+                <a class="header__nav-link" href="">Chi siamo</a>
+                <a class="header__nav-link" href="">Urbino Musica Antica</a>
+                <a class="header__nav-link" href="">Biblioteca</a>
+                <a class="header__nav-link" href="">Recercare</a>
+                <a class="header__nav-link" href="">Periodico</a>
+                <a class="header__nav-link" href="{{ path('newsList') }}">Eventi</a>
             </nav>
         </header>
 
@@ -20,8 +24,25 @@
             {% block body %}{% endblock %}
         </main>
 
-        <footer>
-            Footer
+        <div class="container pre-footer">
+            <div class="box follow-box">
+                <div class="box-title">Seguici!</div>
+            </div>
+            <div class="box donate-box">
+                <div class="box-title">Sostieni FIMA</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container footer__columns">
+                <div class="footer__column">
+                    <div><b>Fondazione Italiana per la Musica Antica</b></div>
+                    <div>Via Col di Lana 7, 00195, Roma</div>
+                </div>
+                <div class="footer__column footer__column--right">
+                    Contenuto
+                </div>
+            </div>
         </footer>
 
         {% block javascripts %}{% endblock %}

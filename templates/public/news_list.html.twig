@@ -1,0 +1,17 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}FIMA Musica Antica - Home{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>News & eventi</h1>
+
+        <div class="news-grid">
+            {% for i in 1..12 %}
+                {% include 'public/_news-box.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
