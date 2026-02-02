@@ -262,7 +262,7 @@ h1, h2, h3 {
 .uma-header {
     background-color: var(--color-yellow);
     color: var(--color-blue);
-    padding: 20px;
+    padding: 0 20px 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -290,4 +290,13 @@ h1, h2, h3 {
 
 .uma-header__logo {
     height: 50px;
+}
+
+.uma-header__link {
+    padding: 18px 0 15px 0;
+}
+
+.uma-header__link--active {
+    color: var(--color-red);
+    border-bottom: solid 3px var(--color-red);
 }

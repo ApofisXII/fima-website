@@ -28,11 +28,11 @@
                         </div>
                     </div>
                     <div class="uma-header__links">
-                        <a href="#">Welcome</a>
-                        <a href="#">Corsi</a>
-                        <a href="#">Festival</a>
-                        <a href="#">Mostra</a>
-                        <a href="#">Convegni</a>
+                        <a href="{{ path('urbinoWelcome') }}" class="uma-header__link {{ app.current_route == 'urbinoWelcome' ? 'uma-header__link--active' }}">Welcome</a>
+                        <a href="#" class="uma-header__link">Corsi</a>
+                        <a href="#" class="uma-header__link">Festival</a>
+                        <a href="#" class="uma-header__link">Mostra</a>
+                        <a href="#" class="uma-header__link">Convegni</a>
                     </div>
                 </div>
             {% endif %}
