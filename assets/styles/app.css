@@ -17,10 +17,12 @@
     --color-yellow: #FBBB21;
     --color-red: #D62725;
 
-    --border-radius-main: 6px;
+    --border-radius-main: 7px;
 
     --font-bold-weight-serif: 600;
     --font-bold-weight-sans-serif: 800;
+
+    --padding-box: 30px;
 }
 
 * {
@@ -73,6 +75,7 @@ h1, h2, h3 {
     padding: 15px;
     background-color: var(--color-blue);
     color: var(--color-white);
+    z-index: 9999;
 }
 
 .header__logo {
@@ -88,7 +91,7 @@ h1, h2, h3 {
 .header__nav-link {
     color: var(--color-white);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .container {
@@ -125,7 +128,7 @@ h1, h2, h3 {
 }
 
 .box {
-    padding: 30px;
+    padding: var(--padding-box);
     border-radius: var(--border-radius-main);
     background-color: var(--color-white);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -143,8 +146,13 @@ h1, h2, h3 {
 }
 
 .donate-box {
+    padding: 0;
     flex: 2;
     background: linear-gradient(to bottom right, #FEF1CB, #FFFCF3);
+}
+
+.donate-box__body {
+    padding: var(--padding-box);
 }
 
 .news-grid {
@@ -169,7 +177,8 @@ h1, h2, h3 {
 }
 
 .news-box__title {
-    margin-bottom: 2px;
+    font-size: 1.1rem;
+    font-weight: var(--font-bold-weight-sans-serif);
 }
 
 .news-box__date {
@@ -196,5 +205,49 @@ h1, h2, h3 {
 
 .donate-box__angels {
     background-image: url('../images/donate-angels.webp');
-    background-size: 100% auto;
+    background-size: auto 100%;
+    padding: var(--padding-box);
+}
+
+.btn {
+    display: block;
+    width: fit-content;
+    padding: 15px 30px;
+    border-radius: var(--border-radius-main);
+    background-color: var(--color-yellow);
+    color: white;
+    box-shadow: 0 5px 15px rgba(214, 39, 37, 0.21);
+    font-weight: var(--font-bold-weight-sans-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.02rem;
+}
+
+.news-box__date-container {
+    height: 90px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.news-box__date-box {
+    background: white;
+    border-radius: var(--border-radius-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70px;
+    height: 70px;
+    color: var(--color-blue);
+    font-weight: var(--font-bold-weight-sans-serif);
+}
+
+.news-box__day {
+    font-size: 1.3rem;
+}
+
+.news-box__content {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
 }
