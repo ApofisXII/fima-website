@@ -40,7 +40,7 @@ body {
     font-family: 'Sofia Sans', sans-serif;
     background-color: var(--color-white);
     color: #222;
-    padding-top: 150px;
+    padding-top: 90px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -102,7 +102,7 @@ h1, h2, h3 {
 }
 
 .container {
-    margin: auto;
+    margin: 0 auto;
     width: 90%;
     max-width: 1224px;
 }
@@ -299,4 +299,29 @@ h1, h2, h3 {
 .uma-header__link--active {
     color: var(--color-red);
     border-bottom: solid 3px var(--color-red);
+}
+
+.callout-uma {
+    margin-top: -50px;
+}
+
+.home-hero {
+    height: 70vh;
+    background-color: var(--color-blue);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    color: white;
+    padding-bottom: 100px;
+}
+
+.home-hero__since {
+    font-size: 1.5rem;
+}
+
+.home-hero__title {
+    color: white;
+    font-weight: normal;
+    text-align: left;
+    font-size: 4rem;
 }

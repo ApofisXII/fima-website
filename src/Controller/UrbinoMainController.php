@@ -16,4 +16,13 @@ final class UrbinoMainController extends AbstractController
         return $this->render('public/urbino-welcome.html.twig');
     }
 
+    #[Route('/courses', name: 'urbinoCoursesList')]
+    public function urbinoCoursesList(): Response
+    {
+        $courses = []; // Todo: fetch from database
+        return $this->render('public/urbino-courses.html.twig', [
+            "courses" => $courses,
+        ]);
+    }
+
 }

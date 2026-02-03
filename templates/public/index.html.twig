@@ -4,9 +4,21 @@
 
 {% block body %}
 
-    <div class="container">
-        <h1>Benvenuti a FIMA Musica Antica</h1>
-        <p>Scopri il mondo della musica antica con noi!</p>
+    <div class="home-hero">
+        <div class="container">
+            <div class="home-hero__since">Dal 1968</div>
+            <h1 class="home-hero__title">Fondazione Italiana per la Musica Antica</h1>
+        </div>
+    </div>
+
+    <div class="container box callout-uma">
+        <div>
+            immagine
+        </div>
+        <div>
+            Testo<br>
+            <a href="{{ path('urbinoWelcome') }}">Scopri Urbino Musica Antica</a>
+        </div>
     </div>
 
 {% endblock %}
