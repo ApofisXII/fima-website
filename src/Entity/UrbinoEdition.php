@@ -32,7 +32,7 @@ class UrbinoEdition
     private ?string $period_description = null;
 
     #[ORM\Column]
-    private ?bool $is_current_edition = null;
+    private ?bool $is_public_visible = null;
 
     public function getId(): ?int
     {
@@ -111,15 +111,16 @@ class UrbinoEdition
         return $this;
     }
 
-    public function isCurrentEdition(): ?bool
+    public function isPublicVisible(): ?bool
     {
-        return $this->is_current_edition;
+        return $this->is_public_visible;
     }
 
-    public function setIsCurrentEdition(bool $is_current_edition): static
+    public function setIsPublicVisible(bool $is_public_visible): static
     {
-        $this->is_current_edition = $is_current_edition;
+        $this->is_public_visible = $is_public_visible;
 
         return $this;
     }
+
 }

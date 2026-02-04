@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UrbinoEditionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,10 +11,18 @@ use Symfony\Component\Routing\Attribute\Route;
 final class UrbinoMainController extends AbstractController
 {
 
+    public function __construct(
+        private UrbinoEditionRepository $urbinoEditionRepository,
+    ) {}
+
     #[Route('/welcome', name: 'urbinoWelcome')]
     public function urbinoWelcome(): Response
     {
-        return $this->render('public/urbino-welcome.html.twig');
+        $currentEdition = $this->urbinoEditionRepository->findCurrentEdition();
+
+        return $this->render('public/urbino-welcome.html.twig', [
+            "currenteEdition" => $currentEdition,
+        ]);
     }
 
     #[Route('/courses', name: 'urbinoCoursesList')]

@@ -16,28 +16,15 @@ class UrbinoEditionRepository extends ServiceEntityRepository
         parent::__construct($registry, UrbinoEdition::class);
     }
 
-    //    /**
-    //     * @return UrbinoEdition[] Returns an array of UrbinoEdition objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findCurrentEdition(): ?UrbinoEdition
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.is_deleted = false')
+            ->andWhere('u.is_public_visible = true')
+            ->addOrderBy('u.year', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
-    //    public function findOneBySomeField($value): ?UrbinoEdition
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }
