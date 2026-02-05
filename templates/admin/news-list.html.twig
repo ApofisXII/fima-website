@@ -9,8 +9,8 @@
         <thead>
         <tr>
             <th>Titolo</th>
-            <th>Creato</th>
             <th>Visibilità</th>
+            <th>Creato</th>
             <th></th>
         </tr>
         </thead>
@@ -37,6 +37,11 @@
                 { data: "newsDetailLink" },
             ],
             columnDefs: [
+                {
+                    targets: 1, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
+                    }
+                },
                 {
                     targets: 3, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>APRI</a>";
