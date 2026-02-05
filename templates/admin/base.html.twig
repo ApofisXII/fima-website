@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>FIMA | Admin{% block title %}{% endblock %}</title>
+        {% block importmap %}{{ importmap('admin') }}{% endblock %}
+    </head>
+    <body>
+
+        {% if app.user %}
+            <div class="gg-main-column-left">
+
+                <img class="gg-main-logo" src="{{ asset('images/fima-logo-dark.svg') }}" alt="Logo">
+
+                <div class="gg-navbar-divider">Admin area</div>
+                <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
+                <a href="#" class="gg-navbar-link">News</a>
+                <a href="#" class="gg-navbar-link">UMA Edizioni</a>
+                <a href="#" class="gg-navbar-link">UMA Corsi</a>
+                <a href="#" class="gg-navbar-link">UMA Eventi</a>
+
+                <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>
+
+            </div>
+        {% endif %}
+
+        <div class="gg-main-column-right">
+
+            {% block body %}{% endblock %}
+
+        </div>
+
+        <!-- Custom JS -->
+        {% block js %}{% endblock %}
+
+    </body>
+</html>

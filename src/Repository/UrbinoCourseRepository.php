@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Course;
+use App\Entity\UrbinoCourse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Course>
+ * @extends ServiceEntityRepository<UrbinoCourse>
  */
-class CourseRepository extends ServiceEntityRepository
+class UrbinoCourseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Course::class);
+        parent::__construct($registry, UrbinoCourse::class);
     }
 
     //    /**
-    //     * @return Course[] Returns an array of Course objects
+    //     * @return UrbinoCourse[] Returns an array of UrbinoCourse objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class CourseRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Course
+    //    public function findOneBySomeField($value): ?UrbinoCourse
     //    {
     //        return $this->createQueryBuilder('c')
     //            ->andWhere('c.exampleField = :val')

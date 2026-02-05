@@ -63,7 +63,7 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     {% for imageName in ["arcidiocesi-urbino.webp", "club-unesco-montefeltro.webp", "confraternita-san-giuseppe.webp", "conservatorio-rossini.webp", "erdis-marche.webp", "fai.webp", "isiau.webp", "legato-albani.webp", "universita-urbino.webp"] %}
-                        <img class="splide__slide partner-logos__logo {{ imageName in ["erdis-marche.webp", "fai.webp"] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-support/' ~ imageName) }}" alt="{{ imageName|split('.webp')|first }}">
+                        <img class="splide__slide partner-logos__logo {{ imageName in ["erdis-marche.webp", "fai.webp", "isiau.webp"] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-support/' ~ imageName) }}" alt="{{ imageName|split('.webp')|first }}">
                     {% endfor %}
                 </ul>
             </div>
@@ -87,11 +87,10 @@
             type: 'loop',
             arrows: false,
             pagination: false,
-            speed: 1000,
-            drag: true,
+            drag: false,
             autoScroll: {
                 pauseOnHover: false,
-                speed: 109
+                speed: 0.5,
             }
         }
 
@@ -99,7 +98,10 @@
             const carouselContribute = new Splide(document.querySelector("#carousel-contribute"), commonCarouselOptions).mount({ AutoScroll });
             let customOptions = {
                 ...commonCarouselOptions,
-                speed: 1300,
+                autoScroll: {
+                    pauseOnHover: false,
+                    speed: 1,
+                }
             };
             const carouselSupport = new Splide(document.querySelector("#carousel-support"), customOptions).mount({ AutoScroll });
         });
