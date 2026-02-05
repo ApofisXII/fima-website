@@ -384,9 +384,24 @@ h2 {
 
 .partner-logos {
     background-color: white;
-    padding: 20px 0;
+    padding: 40px 0;
+}
+
+.partner-logos__logo {
+    height: auto;
+    width: auto;
+    max-height: 80px;
+}
+
+.partner-logos__logo--horizontal {
+    max-height: 50px;
 }
 
 .section-home {
     margin-bottom: 80px;
+}
+
+.splide__list {
+    display: flex;
+    align-items: center;
 }
