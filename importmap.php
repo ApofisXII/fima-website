@@ -30,4 +30,17 @@ return [
     '@splidejs/splide-extension-auto-scroll' => [
         'version' => '0.5.3',
     ],
+    'datatables.net-dt' => [
+        'version' => '2.3.7',
+    ],
+    'jquery' => [
+        'version' => '4.0.0',
+    ],
+    'datatables.net' => [
+        'version' => '2.3.7',
+    ],
+    'datatables.net-dt/css/dataTables.dataTables.min.css' => [
+        'version' => '2.3.7',
+        'type' => 'css',
+    ],
 ];

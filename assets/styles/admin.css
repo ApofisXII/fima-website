@@ -110,7 +110,7 @@ body {
     text-decoration: underline;
 }
 
-.dataTables_wrapper {
+.dataTables_wrapper, .dt-container {
     background-color: white;
     border-radius: 8px;
     padding: 30px;

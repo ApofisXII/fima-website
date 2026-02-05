@@ -5,8 +5,47 @@
     <div class="gg-h1">Notizie ed eventi</div>
     <a class="gg-btn gg-h1-btn hoverizzato" href="{{ path('adminNewsDetail') }}">Nuova notizia</a>
 
-    <div>
-        Todo :)
-    </div>
+    <table id="main-table">
+        <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Creato</th>
+            <th>Visibilità</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        import DataTable from 'datatables.net-dt';
+        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+
+        const table = new DataTable("#main-table", {
+            serverSide: true,
+            ajax: {
+                url: "{{ path('adminNewsListJson') }}",
+            },
+            ordering: false,
+            columns: [
+                { data: "titleIt" },
+                { data: "isPublic" },
+                { data: "createdAt" },
+                { data: "newsDetailLink" },
+            ],
+            columnDefs: [
+                {
+                    targets: 3, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn'>APRI</a>";
+                    }
+                }
+            ],
+            pageLength: 25,
+        });
+
+    </script>
 
 {% endblock %}

@@ -44,6 +44,9 @@ class News
     #[ORM\Column(nullable: true)]
     private ?\DateTime $event_datetime = null;
 
+    #[ORM\Column]
+    private ?bool $is_public = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +168,18 @@ class News
     public function setEventDatetime(?\DateTime $event_datetime): static
     {
         $this->event_datetime = $event_datetime;
+
+        return $this;
+    }
+
+    public function isPublic(): ?bool
+    {
+        return $this->is_public;
+    }
+
+    public function setIsPublic(bool $is_public): static
+    {
+        $this->is_public = $is_public;
 
         return $this;
     }

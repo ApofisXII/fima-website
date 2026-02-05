@@ -23,8 +23,9 @@ final readonly class NewsService
             ->setBodyIt($payload->bodyIt)
             ->setBodyEn($payload->bodyEn)
             ->setCreatedAt(new \DateTime())
-            ->setSlug($this->slugger->slug($payload->titleIt))
+            ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
             ->setHasCoverImage(false)
+            ->setIsPublic(false)
             ->setIsEvent(false);
 
         return $this->newsRepository->save($news);
@@ -37,7 +38,7 @@ final readonly class NewsService
             ->setTitleEn($payload->titleEn)
             ->setBodyIt($payload->bodyIt)
             ->setBodyEn($payload->bodyEn)
-            ->setSlug($this->slugger->slug($payload->titleIt));
+            ->setSlug($this->slugger->slug(strtolower($payload->titleIt)));
 
         return $this->newsRepository->save($news);
     }
