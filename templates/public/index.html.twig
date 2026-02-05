@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="container box callout-uma">
+    <section class="container box callout-uma">
         <div>
             <img class="callout-uma__logo" src="{{ asset('images/uma-logos/uma-2025-colors.svg') }}" alt="Urbino Musica Antica Logo">
         </div>
@@ -23,6 +23,39 @@
             <br>
             <a class="btn" href="{{ path('urbinoWelcome') }}">Scopri Urbino Musica Antica</a>
         </div>
-    </div>
+    </section>
+
+    <section class="container section-home">
+        <div class="title-with-action">
+            <h2>News ed eventi</h2>
+            <a href="{{ path('newsList') }}" class="title-with-action__action">
+                <div class="title-with-action__action-text">Vedi tutti gli eventi</div>
+                <img class="title-with-action__action-icon" src="{{ asset('images/arrow-right-blue.svg') }}" alt="Vedi">
+            </a>
+        </div>
+        <div class="news-grid">
+            {% for i in 1..3 %}
+                {% include 'public/_news-box.html.twig' %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section-home">
+        <div class="container">
+            <h2>Con il patrocinio e contributo</h2>
+        </div>
+        <div class="partner-logos">
+            [TODO Carosello qui]
+        </div>
+    </section>
+
+    <section class="section-home">
+        <div class="container">
+            <h2>Con il sostegno</h2>
+        </div>
+        <div class="partner-logos">
+            [TODO Carosello qui]
+        </div>
+    </section>
 
 {% endblock %}
