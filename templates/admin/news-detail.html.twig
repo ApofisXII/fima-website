@@ -1,0 +1,76 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} news</div>
+
+    <form id="page-form" method="post" action="{{ path('adminNewsDetailSave') }}" enctype="multipart/form-data">
+        <input type="hidden" name="newsId" value="{{ news ? news.id : "0" }}">
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Dettaglio notizia</h3>
+            <div class="secundary">{{ news ? news.id }}</div>
+
+            <label>Titolo (italiano)</label>
+            <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
+
+            <label>Titolo (inglese)</label>
+            <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+
+            <label>Corpo (italiano)</label>
+            <textarea name="bodyIt" class="tiny-area" placeholder="Content">{{ news ? news.bodyIt|raw }}</textarea>
+
+            <label>Corpo (inglese)</label>
+            <textarea name="bodyEn" class="tiny-area" placeholder="Content">{{ news ? news.bodyEn|raw }}</textarea>
+
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Other details</h3>
+            <div class="columns">
+                <div>
+                    <label>Image</label>
+                    <input type="file" name="cover_image" accept="image/*">
+                    {% if news and news.hasCoverImage %}
+                        <img class="tree-model-cover" alt="" src="{{ asset('uploads-news/'~news.id~'.webp') }}?v={{ random(1,9999) }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <button class="gg-submit-btn hoverizzato">Save data</button>
+
+    </form>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        document.getElementById('page-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            fetch('{{ path('adminNewsDetailSave') }}', {
+                method: 'POST',
+                body: new FormData(e.target)
+            })
+            .then(async response =>  {
+                let ressponseDecoded = await response.json();
+
+                if (!response.ok) {
+                    alert(ressponseDecoded.message);
+                    return null;
+                }
+                return ressponseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                console.log('Success:', data);
+                location.href = "{{ path('adminNewsList') }}";
+            })
+        });
+    </script>
+
+{% endblock %}

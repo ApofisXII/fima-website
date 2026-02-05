@@ -12,7 +12,7 @@ final class UrbinoMainController extends AbstractController
 {
 
     public function __construct(
-        private UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoEditionRepository $urbinoEditionRepository,
     ) {}
 
     #[Route('/welcome', name: 'urbinoWelcome')]
@@ -21,7 +21,7 @@ final class UrbinoMainController extends AbstractController
         $currentEdition = $this->urbinoEditionRepository->findCurrentEdition();
 
         return $this->render('public/urbino-welcome.html.twig', [
-            "currenteEdition" => $currentEdition,
+            "currentEdition" => $currentEdition,
         ]);
     }
 

@@ -35,6 +35,15 @@ class News
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\Column]
+    private ?bool $has_cover_image = null;
+
+    #[ORM\Column]
+    private ?bool $is_event = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $event_datetime = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +129,42 @@ class News
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function hasCoverImage(): ?bool
+    {
+        return $this->has_cover_image;
+    }
+
+    public function setHasCoverImage(bool $has_cover_image): static
+    {
+        $this->has_cover_image = $has_cover_image;
+
+        return $this;
+    }
+
+    public function isEvent(): ?bool
+    {
+        return $this->is_event;
+    }
+
+    public function setIsEvent(bool $is_event): static
+    {
+        $this->is_event = $is_event;
+
+        return $this;
+    }
+
+    public function getEventDatetime(): ?\DateTime
+    {
+        return $this->event_datetime;
+    }
+
+    public function setEventDatetime(?\DateTime $event_datetime): static
+    {
+        $this->event_datetime = $event_datetime;
 
         return $this;
     }

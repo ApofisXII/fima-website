@@ -14,7 +14,7 @@
 
                 <div class="gg-navbar-divider">Admin area</div>
                 <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
-                <a href="#" class="gg-navbar-link">News</a>
+                <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ app.current_route == 'adminNewsList' ? 'selected' }}">Notizie</a>
                 <a href="#" class="gg-navbar-link">UMA Edizioni</a>
                 <a href="#" class="gg-navbar-link">UMA Corsi</a>
                 <a href="#" class="gg-navbar-link">UMA Eventi</a>
