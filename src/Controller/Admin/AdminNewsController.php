@@ -43,9 +43,9 @@ class AdminNewsController extends AbstractController
         $news = $this->newsRepository->findOneBy(["id" => $payload->newsId]);
 
         if (null === $news) {
-            $news = $this->newsService->create($payload);
+            $this->newsService->create($payload);
         } else {
-            $news = $this->newsService->update($news, $payload);
+            $this->newsService->update($news, $payload);
         }
 
         return $this->json([
