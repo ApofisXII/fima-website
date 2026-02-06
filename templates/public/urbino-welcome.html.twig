@@ -4,12 +4,13 @@
 
 {% block body %}
 
-    <div class="container">
-        <h1>Urbino Musica Antica</h1>
+    <div class="uma-hero">
+        <video class="uma-hero__video" src="{{ asset('videos/uma-welcome.mp4') }}" muted loop playsinline autoplay></video>
+        <img class="uma-hero__logo" src="{{ asset('images/uma-logos/uma-2026-white.svg') }}" alt="Urbino Musica Antica">
+    </div>
 
-        <p>
-            Welcome to Urbino Musica Antica, a festival dedicated to the celebration of early music in the historic city of Urbino. Join us for a series of concerts, workshops, and events that bring to life the rich musical heritage of the Renaissance and Baroque periods.
-        </p>
+    <div>
+        TODO Box rosso con putti in absolute in basso
     </div>
 
 {% endblock %}
