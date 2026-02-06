@@ -80,6 +80,13 @@ h2 {
     font-size: 1.8rem;
 }
 
+.hover {
+    transition: all 0.3s ease;
+}
+.hover:hover {
+    transform: scale(1.05);
+}
+
 .header-container {
     position: fixed;
     top: 0;
@@ -408,7 +415,6 @@ h2 {
 
 .uma-hero {
     height: 500px;
-    background-color: #aaa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -416,9 +422,11 @@ h2 {
 
 .uma-hero__video {
     height: 100%;
+    max-height: 500px;
     width: 100%;
     object-fit: cover;
     position: absolute;
+    z-index: -1;
 }
 
 .uma-hero__logo {
@@ -438,7 +446,7 @@ h2 {
 }
 
 .uma-welcome__left {
-    min-width: 350px;
+    min-width: 320px;
 }
 
 .uma-welcome__title {
