@@ -18,6 +18,7 @@ security:
             custom_authenticator: App\Security\AdminAuthenticator
             logout:
                 path: adminLogout
+                target: adminLogin
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 6048000

@@ -18,18 +18,18 @@
             <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
 
             <label>Corpo (italiano)</label>
-            <textarea name="bodyIt" class="tiny-area" placeholder="Content">{{ news ? news.bodyIt|raw }}</textarea>
+            <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
 
             <label>Corpo (inglese)</label>
-            <textarea name="bodyEn" class="tiny-area" placeholder="Content">{{ news ? news.bodyEn|raw }}</textarea>
+            <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
 
         </div>
 
         <div class="box multi-detail-box gg-form">
-            <h3>Other details</h3>
+            <h3>Immagine</h3>
             <div class="columns">
                 <div>
-                    <label>Image</label>
+                    <label>Carica immagine</label>
                     <input type="file" name="cover_image" accept="image/*">
                     {% if news and news.hasCoverImage %}
                         <img class="tree-model-cover" alt="" src="{{ asset('uploads-news/'~news.id~'.webp') }}?v={{ random(1,9999) }}">
