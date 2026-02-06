@@ -424,3 +424,42 @@ h2 {
 .uma-hero__logo {
     width: 200px;
 }
+
+.uma-welcome {
+    padding: 50px;
+    margin-top: -50px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    min-height: 200px;
+    background: linear-gradient(to bottom right, #D62725, #99110F);
+    color: white;
+    position: relative;
+}
+
+.uma-welcome__left {
+    min-width: 350px;
+}
+
+.uma-welcome__title {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: normal;
+    color: white;
+}
+
+.uma-welcome__date {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: var(--font-bold-weight-sans-serif);
+}
+
+.uma-welcome__angels {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.2;
+}
