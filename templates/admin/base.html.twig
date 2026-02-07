@@ -10,9 +10,9 @@
         {% if app.user %}
             <div class="gg-main-column-left">
 
-                <img class="gg-main-logo" src="{{ asset('images/fima-logo-admin.svg') }}" alt="Logo">
+                <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
 
-                <div class="gg-navbar-divider">Admin area</div>
+                <div class="gg-navbar-divider">Area admin</div>
                 <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
                 <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ app.current_route == 'adminNewsList' ? 'selected' }}">Notizie</a>
                 <a href="#" class="gg-navbar-link">UMA Edizioni</a>

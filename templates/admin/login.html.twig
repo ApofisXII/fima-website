@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <img class="login-logo" src="{{ asset('images/fima-logo-admin.svg') }}" alt="Logo">
+    <img class="login-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo FIMA">
     <form method="post" class="gg-login-box gg-form">
         <h1>Accedi</h1>
 
@@ -16,7 +16,7 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button class="gg-btn hoverizzato" type="submit">Login</button>
+        <button class="gg-btn hoverizzato" type="submit">Accedi</button>
 
         {% if error %}
             <div class="center-text">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

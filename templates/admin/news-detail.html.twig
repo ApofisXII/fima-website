@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} news</div>
+    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} notizia</div>
 
     <form id="page-form" method="post" action="{{ path('adminNewsDetailSave') }}" enctype="multipart/form-data">
         <input type="hidden" name="newsId" value="{{ news ? news.id : "0" }}">
@@ -11,17 +11,23 @@
             <h3>Dettaglio notizia</h3>
             <div class="secundary">{{ news ? "ID "~news.id }}</div>
 
-            <label>Titolo (italiano)</label>
-            <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
+            <div class="gg-multilang-form">
+                <div>
+                    <label>Titolo (italiano)</label>
+                    <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
 
-            <label>Titolo (inglese)</label>
-            <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+                    <label>Corpo (italiano)</label>
+                    <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                </div>
 
-            <label>Corpo (italiano)</label>
-            <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                <div>
+                    <label>Titolo (inglese)</label>
+                    <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
 
-            <label>Corpo (inglese)</label>
-            <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                    <label>Corpo (inglese)</label>
+                    <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                </div>
+            </div>
 
         </div>
 
@@ -38,7 +44,7 @@
             </div>
         </div>
 
-        <button class="gg-submit-btn hoverizzato">Save data</button>
+        <button class="gg-submit-btn hoverizzato">Salva notizia</button>
 
     </form>
 
@@ -49,6 +55,7 @@
     <script src="https://cdn.tiny.cloud/1/pw9v13qg31fojqozs5wmm990o8oki0icqnk9a0qu3e8shthj/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
     <script type="module">
+        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({
             selector: 'textarea',
             menubar: false,
@@ -57,6 +64,7 @@
             branding: false,
             paste_as_text: true,
             statusbar: false,
+            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; }`,
         });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {

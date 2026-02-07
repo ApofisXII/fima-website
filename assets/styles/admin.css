@@ -19,6 +19,10 @@
     --color-yellow: #FBBB21;
     --color-red: #D62725;
 
+    --color-selected: #F3F5F9;
+    --color-hover: #F9FAFC;
+
+
     --border-radius-main: 7px;
 
     --font-bold-weight-serif: 600;
@@ -37,7 +41,7 @@
 body {
     font-family: 'Sofia Sans', sans-serif;
     color: #333;
-    background-color: #f5f5f5;
+    background-color: var(--color-selected);
     display: flex;
     align-items: flex-start;
     justify-content: stretch;
@@ -80,6 +84,7 @@ body {
     font-size: 0.8rem;
     opacity: 0.3;
     letter-spacing: 3px;
+    color: var(--color-blue);
 }
 
 .gg-navbar-link {
@@ -89,13 +94,13 @@ body {
     color: inherit;
     padding: 10px;
     padding-left: 15px;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 .gg-navbar-link.selected {
-    background-color: #F0F0F0;
+    background-color: var(--color-selected);
 }
 .gg-navbar-link:not(.selected):hover {
-    background-color: rgba(240, 240, 240, 0.4);
+    background-color: var(--color-hover);
 }
 
 .gg-h1 {
@@ -174,7 +179,7 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
     border: none;
-    background-color: #e9e9e9;
+    background-color: var(--color-selected);
     font-size: inherit;
     outline: none;
 }
@@ -189,13 +194,13 @@ body {
 
 .gg-submit-btn {
     font-weight: bold;
-    background: #5BCB9C;
+    background: var(--color-blue);
     color: white;
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
     border: none;
     border-radius: 4px;
     display: block;
@@ -230,7 +235,7 @@ body {
     font-weight: bold;
     width: fit-content;
     border: none;
-    background-color: #333;
+    background-color: var(--color-blue);
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 10px;
@@ -262,7 +267,7 @@ body {
 }
 
 .gg-login-box h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
     text-align: center;
@@ -407,4 +412,200 @@ h3 {
 
 .gg-page-loading__spinner {
     height: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media all and (max-width: 1500px) {
+
+    .gg-main-column-right {
+        overflow-y: scroll;
+        overflow-x: scroll;
+        padding: 30px 10px;
+        box-sizing: border-box;
+    }
+
+    .dt-layout-table {
+        overflow-x: scroll;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+@media all and (max-width: 900px) {
+
+    .login-logo {
+        height: 70px;
+        margin-top: 70px;
+        margin-bottom: 50px;
+    }
+
+    .gg-login-box {
+        padding: 30px;
+    }
+
+    .gg-login-box h1 {
+        font-size: 1.8rem;
+    }
+
+    .columns.flex-wrap {
+        gap: 20px;
+    }
+
+    .title {
+        margin-bottom: 15px;
+    }
+
+    .title--lg {
+        font-size: 2.2rem;
+    }
+
+    .title--m {
+        font-size: 1.6rem;
+    }
+
+    .title--s {
+        font-size: 1.2rem;
+    }
+
+    .title--xs {
+        font-size: 1.1rem;
+    }
+
+    .title--xxs {
+        font-size: 1.0rem;
+    }
+
+    .gg-main-column-left__burger {
+        display: block;
+    }
+
+    .gg-main-logo {
+        display: none;
+    }
+
+    .gg-main-column-left {
+        min-width: unset;
+        padding: 30px 15px;
+    }
+
+    .gg-main-column-left__list {
+        display: none;
+    }
+
+    .multi-detail-box {
+        padding: 20px 10px;
+    }
+
+    .gg-navbar-link {
+        padding: 10px 0 10px 5px;
+    }
+
+    .gg-navbar-divider {
+        padding-left: 5px;
+    }
+
+    .gg-btn {
+        font-size: 0.9rem;
+    }
+
+    .stats-row__box {
+        padding: 10px;
+    }
+
+    .stats-row__box__number {
+        font-size: 1.8rem;
+    }
+
+    .fc-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fc-header-toolbar {
+        gap: 10px;
+    }
+
+    .fc-toolbar-title {
+        font-size: 1.5rem !important;
+    }
+
+    .fc .fc-timegrid-slot-label {
+        font-size: 0.75rem;
+    }
+
+    .fc .fc-timegrid-axis {
+        width: 40px !important;
+    }
+
+    .fc .fc-col-header-cell {
+        font-size: 0.7rem;
+    }
+
+    .fc .fc-timegrid-event {
+        font-size: 0.75rem;
+        padding: 2px;
+    }
+
+    .columns {
+        column-gap: 30px;
+    }
+
+    .dt-layout-row {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    td {
+        min-width: 80px;
+    }
+
+    .dt-type-date {
+        min-width: 120px;
+    }
+
+    .reorder {
+        min-width: 40px !important;
+    }
+
+    .dt-layout-start {
+        align-self: flex-start;
+        margin-left: 14px;
+    }
+
+    .columns--direction {
+        flex-direction: column;
+    }
+
+    .gg-form textarea {
+        min-height: 200px;
+    }
+
+    .gg-multilang-form {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
