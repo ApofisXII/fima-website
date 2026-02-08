@@ -12,14 +12,24 @@
 
                 <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
 
-                <div class="gg-navbar-divider">Area admin</div>
-                <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
-                <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ app.current_route == 'adminNewsList' ? 'selected' }}">Notizie</a>
-                <a href="#" class="gg-navbar-link">UMA Edizioni</a>
-                <a href="#" class="gg-navbar-link">UMA Corsi</a>
-                <a href="#" class="gg-navbar-link">UMA Eventi</a>
+                <button class="gg-main-column-left__burger" onclick="toggleAdminMenu()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-                <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>
+                <div class="vertical-scroll">
+                    <div class="gg-main-column-left__list">
+                        <div class="gg-navbar-divider">Area admin</div>
+                        <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
+                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ app.current_route == 'adminNewsList' ? 'selected' }}">Notizie</a>
+                        <a href="#" class="gg-navbar-link">UMA Edizioni</a>
+                        <a href="#" class="gg-navbar-link">UMA Corsi</a>
+                        <a href="#" class="gg-navbar-link">UMA Eventi</a>
+
+                        <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>
+                    </div>
+                </div>
 
             </div>
         {% endif %}
@@ -31,6 +41,14 @@
         </div>
 
         <!-- Custom JS -->
+        <script>
+            function toggleAdminMenu() {
+                const list = document.querySelector('.gg-main-column-left__list');
+                if (list) {
+                    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+                }
+            }
+        </script>
         {% block js %}{% endblock %}
 
     </body>

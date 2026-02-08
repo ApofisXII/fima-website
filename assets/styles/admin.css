@@ -53,9 +53,12 @@ body {
     min-width: 300px;
     height: calc(100vh - 2px);
     background-color: white;
-    border-right: solid 2px #EBEBEB;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
     padding: 30px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .gg-main-column-right {
@@ -103,6 +106,22 @@ body {
     background-color: var(--color-hover);
 }
 
+.gg-main-column-left__burger {
+    display: none;
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--color-blue);
+}
+
+.vertical-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
 .gg-h1 {
     font-size: 2.2rem;
     font-weight: bold;
@@ -145,11 +164,7 @@ body {
     background-color: white;
     border-radius: 8px;
     padding: 30px;
-    border: solid 2px #EBEBEB;
-}
-
-.dataTables_wrapper .dataTables_filter input {
-    margin-left: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
 .gg-multilang-form {
@@ -160,6 +175,16 @@ body {
 }
 .gg-multilang-form > div {
     flex: 1;
+}
+
+.dt-input {
+    border-radius: 10px !important;
+    margin-left: 10px !important;
+}
+
+div.dt-container select.dt-input {
+    margin-right: 6px !important;
+    margin-left: 6px !important;
 }
 
 .gg-form label {
@@ -204,7 +229,6 @@ body {
     border: none;
     border-radius: 4px;
     display: block;
-    margin: auto;
     margin-top: 30px;
     text-decoration: none;
 }
@@ -502,8 +526,9 @@ h3 {
     }
 
     .gg-main-column-left {
+        width: auto;
         min-width: unset;
-        padding: 30px 15px;
+        padding: 20px 1px;
     }
 
     .gg-main-column-left__list {
@@ -601,6 +626,10 @@ h3 {
     .gg-multilang-form {
         flex-direction: column;
         gap: 20px;
+    }
+
+    .gg-multilang-form > div {
+        width: 100%;
     }
 
     .checkbox-group {

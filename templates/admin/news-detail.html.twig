@@ -8,8 +8,8 @@
         <input type="hidden" name="newsId" value="{{ news ? news.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
-            <h3>Dettaglio notizia</h3>
-            <div class="secundary">{{ news ? "ID "~news.id }}</div>
+            <h3>{{ news ? (news.titleIt ~ ' - ' ~ news.titleEn) : 'Dettaglio notizia' }}</h3>
+{#            <div class="secundary">{{ news ? "ID "~news.id }}</div>#}
 
             <div class="gg-multilang-form">
                 <div>
