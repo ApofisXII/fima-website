@@ -1,0 +1,86 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">{{ edition ? 'Modifica' : 'Nuova' }} edizione</div>
+
+    <form id="page-form" method="post" action="{{ path('adminUrbinoEditionsDetailSave') }}">
+        <input type="hidden" name="editionId" value="{{ edition ? edition.id : "0" }}">
+
+        <div class="box multi-detail-box gg-form">
+            <h3>{{ edition ? edition.editionName : 'Dettaglio edizione' }}</h3>
+
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Nome edizione</label>
+                    <input type="text" name="editionName" placeholder="Nome edizione" value="{{ edition ? edition.editionName }}" required>
+                </div>
+                <div class="gg-form-row__year">
+                    <label>Anno</label>
+                    <input type="number" name="year" placeholder="Anno" value="{{ edition ? edition.year }}" required>
+                </div>
+            </div>
+
+            <label>Descrizione periodo (opzionale)</label>
+            <input type="text" name="periodDescription" placeholder="Es: 18-25 agosto 2024" value="{{ edition ? edition.periodDescription }}">
+
+            <label style="display: flex; align-items: center; gap: 10px; margin-top: 30px;">
+                <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
+                <span>Edizione visibile pubblicamente</span>
+            </label>
+
+        </div>
+
+        <button type="submit" class="gg-submit-btn hoverizzato">Salva edizione</button>
+
+    </form>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        document.getElementById('page-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            // Convert checkbox to boolean
+            const isPublicVisible = formData.get('isPublicVisible') === '1';
+
+            const payload = {
+                editionId: formData.get('editionId'),
+                editionName: formData.get('editionName'),
+                year: parseInt(formData.get('year')),
+                periodDescription: formData.get('periodDescription') || null,
+                isPublicVisible: isPublicVisible
+            };
+
+            fetch('{{ path('adminUrbinoEditionsDetailSave') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(async response =>  {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message || 'Errore nel salvataggio');
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.href = "{{ path('adminUrbinoEditionsList') }}";
+            })
+            .catch(error => {
+                alert('Errore: ' + error.message);
+            });
+        });
+    </script>
+
+{% endblock %}

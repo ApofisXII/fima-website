@@ -22,10 +22,14 @@
                     <div class="gg-main-column-left__list">
                         <div class="gg-navbar-divider">Area admin</div>
                         <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
-                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ app.current_route == 'adminNewsList' ? 'selected' }}">Notizie</a>
-                        <a href="#" class="gg-navbar-link">UMA Edizioni</a>
-                        <a href="#" class="gg-navbar-link">UMA Corsi</a>
-                        <a href="#" class="gg-navbar-link">UMA Eventi</a>
+
+                        <div class="gg-navbar-divider">FIMA</div>
+                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie</a>
+
+                        <div class="gg-navbar-divider">Urbino</div>
+                        <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>
+                        <a href="#" class="gg-navbar-link">Corsi</a>
+                        <a href="#" class="gg-navbar-link">Eventi</a>
 
                         <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>
                     </div>
@@ -45,7 +49,8 @@
             function toggleAdminMenu() {
                 const list = document.querySelector('.gg-main-column-left__list');
                 if (list) {
-                    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+                    const currentDisplay = window.getComputedStyle(list).display;
+                    list.style.display = currentDisplay === 'none' ? 'block' : 'none';
                 }
             }
         </script>

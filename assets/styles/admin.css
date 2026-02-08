@@ -80,7 +80,7 @@ body {
 }
 
 .gg-navbar-divider {
-    margin-top: 50px;
+    margin-top: 20px;
     padding-left: 15px;
     text-transform: uppercase;
     font-weight: bold;
@@ -88,6 +88,7 @@ body {
     opacity: 0.3;
     letter-spacing: 3px;
     color: var(--color-blue);
+    text-wrap: nowrap;
 }
 
 .gg-navbar-link {
@@ -123,7 +124,7 @@ body {
 }
 
 .gg-h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -198,7 +199,7 @@ div.dt-container select.dt-input {
     margin-top: 0 !important;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form textarea {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form textarea {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -213,8 +214,37 @@ div.dt-container select.dt-input {
     font-size: .9rem;
 }
 
+.gg-form textarea::placeholder {
+    font-size: .9rem;
+    opacity: 0.5;
+}
+
 .gg-form textarea {
     min-height: 300px;
+}
+
+.tox-tinymce {
+    border: 1px solid #EBEBEB !important;
+}
+
+.tox-edit-area::placeholder,
+.tox-edit-area__iframe::placeholder {
+    opacity: 0.5 !important;
+    color: #999 !important;
+}
+
+.gg-form-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.gg-form-row__main {
+    flex: 1;
+}
+
+.gg-form-row__year {
+    width: 150px;
 }
 
 .gg-submit-btn {
@@ -319,7 +349,7 @@ div.dt-container select.dt-input {
     overflow: hidden;
     border-radius: 8px;
     background-color: white;
-    border: solid 2px #EBEBEB;
+    border: solid 1px #EBEBEB;
 }
 
 .stats-row__box__number {
@@ -526,9 +556,9 @@ h3 {
     }
 
     .gg-main-column-left {
-        width: auto;
+        width: fit-content;
         min-width: unset;
-        padding: 20px 1px;
+        padding: 20px 10px;
     }
 
     .gg-main-column-left__list {
@@ -629,6 +659,15 @@ h3 {
     }
 
     .gg-multilang-form > div {
+        width: 100%;
+    }
+
+    .gg-form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .gg-form-row__year {
         width: 100%;
     }
 
