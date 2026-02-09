@@ -5,6 +5,9 @@ namespace App\Service;
 use App\DTO\Admin\NewsRequestDTO;
 use App\Entity\News;
 use App\Repository\NewsRepository;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class NewsService
@@ -13,6 +16,8 @@ final readonly class NewsService
     public function __construct(
         private NewsRepository $newsRepository,
         private SluggerInterface $slugger,
+        private ParameterBagInterface $parameterBag,
+        private Filesystem $filesystem,
     ) {}
 
     public function create(NewsRequestDTO $payload): News
@@ -25,8 +30,9 @@ final readonly class NewsService
             ->setCreatedAt(new \DateTime())
             ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
             ->setHasCoverImage(false)
-            ->setIsPublic(false)
-            ->setIsEvent(false);
+            ->setIsPublic($payload->isPublic ?? false)
+            ->setIsEvent($payload->isEvent ?? false)
+            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null);
 
         return $this->newsRepository->save($news);
     }
@@ -38,9 +44,29 @@ final readonly class NewsService
             ->setTitleEn($payload->titleEn)
             ->setBodyIt($payload->bodyIt)
             ->setBodyEn($payload->bodyEn)
-            ->setSlug($this->slugger->slug(strtolower($payload->titleIt)));
+            ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
+            ->setIsPublic($payload->isPublic ?? false)
+            ->setIsEvent($payload->isEvent ?? false)
+            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null);
 
         return $this->newsRepository->save($news);
+    }
+
+    public function saveCoverImage(News $news, UploadedFile $uploadedFile): News
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
+        $imageName = $news->getId() . '.webp';
+
+        if (!$this->filesystem->exists($serverPath)) {
+            $this->filesystem->mkdir($serverPath, 0755);
+        }
+
+        $uploadedFile->move($serverPath, $imageName);
+
+        $news->setHasCoverImage(true);
+        $this->newsRepository->save($news);
+
+        return $news;
     }
 
 }

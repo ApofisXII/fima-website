@@ -44,6 +44,28 @@
             </div>
         </div>
 
+        <div class="box multi-detail-box gg-form">
+            <h3>Impostazioni</h3>
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublic" value="1" {{ news and news.isPublic ? 'checked' }}>
+                    <span>Notizia visibile pubblicamente</span>
+                </label>
+
+                <label>
+                    <input type="checkbox" id="isEvent" name="isEvent" value="1" {{ news and news.isEvent ? 'checked' }} onchange="toggleEventDateTime()">
+                    <span>È un evento</span>
+                </label>
+            </div>
+
+            <div id="eventDateTimeContainer" style="{{ news and news.isEvent ? '' : 'display: none;' }}">
+                <label>Data e ora evento</label>
+                <input type="datetime-local" name="eventDatetime" id="eventDatetime" value="{{ news and news.eventDatetime ? news.eventDatetime|date('Y-m-d\\TH:i') }}">
+            </div>
+
+        </div>
+
         <button class="gg-submit-btn hoverizzato">Salva notizia</button>
 
     </form>
@@ -66,6 +88,12 @@
             statusbar: false,
             content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
         });
+
+        function toggleEventDateTime() {
+            const isEvent = document.getElementById('isEvent').checked;
+            const container = document.getElementById('eventDateTimeContainer');
+            container.style.display = isEvent ? 'block' : 'none';
+        }
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();

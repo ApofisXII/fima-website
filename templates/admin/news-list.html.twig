@@ -5,7 +5,7 @@
     <div class="gg-h1">Notizie ed eventi</div>
 
     <div style="margin-bottom: 20px;">
-        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminNewsDetail') }}">+ Nuova notizia</a>
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminNewsDetail') }}">+ Nuova notizia / evento</a>
     </div>
 
     <table id="main-table">
@@ -13,7 +13,7 @@
         <tr>
             <th>Titolo</th>
             <th>Visibilità</th>
-            <th>Creato</th>
+            <th>Creata</th>
             <th></th>
         </tr>
         </thead>
@@ -47,7 +47,7 @@
                 },
                 {
                     targets: 3, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>APRI</a>";
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica</a>";
                     }
                 }
             ],

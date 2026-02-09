@@ -23,6 +23,12 @@ class NewsRequestDTO
         #[Assert\Length(min: 10, minMessage: "Il corpo in inglese deve essere lungo almeno {{ limit }} caratteri.")]
         public ?string $bodyEn,
 
+        public ?bool $isPublic = false,
+
+        public ?bool $isEvent = false,
+
+        public ?string $eventDatetime = null,
+
     ) {}
 
 }
