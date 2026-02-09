@@ -76,6 +76,14 @@
 
     <script src="https://cdn.tiny.cloud/1/pw9v13qg31fojqozs5wmm990o8oki0icqnk9a0qu3e8shthj/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
+    <script>
+        function toggleEventDateTime() {
+            const isEvent = document.getElementById('isEvent').checked;
+            const container = document.getElementById('eventDateTimeContainer');
+            container.style.display = isEvent ? 'block' : 'none';
+        }
+    </script>
+
     <script type="module">
         const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({
@@ -88,12 +96,6 @@
             statusbar: false,
             content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
         });
-
-        function toggleEventDateTime() {
-            const isEvent = document.getElementById('isEvent').checked;
-            const container = document.getElementById('eventDateTimeContainer');
-            container.style.display = isEvent ? 'block' : 'none';
-        }
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();

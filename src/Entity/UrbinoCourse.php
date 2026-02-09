@@ -57,6 +57,9 @@ class UrbinoCourse
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\Column]
+    private ?bool $is_image_uploaded = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +229,18 @@ class UrbinoCourse
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isImageUploaded(): ?bool
+    {
+        return $this->is_image_uploaded;
+    }
+
+    public function setIsImageUploaded(bool $is_image_uploaded): static
+    {
+        $this->is_image_uploaded = $is_image_uploaded;
 
         return $this;
     }

@@ -28,7 +28,7 @@
 
                         <div class="gg-navbar-divider">Urbino</div>
                         <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>
-                        <a href="#" class="gg-navbar-link">Corsi</a>
+                        <a href="{{ path('adminUrbinoCoursesList') }}" class="gg-navbar-link {{ 'UrbinoCourses' in app.current_route ? 'selected' }}">Corsi</a>
                         <a href="#" class="gg-navbar-link">Eventi</a>
 
                         <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>

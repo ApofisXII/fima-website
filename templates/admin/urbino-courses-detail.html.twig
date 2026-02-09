@@ -1,0 +1,130 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">{{ course ? 'Modifica' : 'Nuovo' }} corso</div>
+
+    <form id="page-form" method="post" action="{{ path('adminUrbinoCoursesDetailSave') }}" enctype="multipart/form-data">
+        <input type="hidden" name="courseId" value="{{ course ? course.id : "0" }}">
+
+        <div class="box multi-detail-box gg-form">
+            <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ course.subjectIt) : 'Dettaglio corso' }}</h3>
+
+            <label>Docente</label>
+            <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
+
+            <label>Edizione</label>
+            <select name="urbinoEditionId" required>
+                <option value="">Seleziona edizione</option>
+                {% for edition in editions %}
+                    <option value="{{ edition.id }}" {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
+                        {{ edition.editionName }} ({{ edition.year }})
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div class="gg-multilang-form">
+                <div>
+                    <label>Materia (italiano)</label>
+                    <input type="text" name="subjectIt" placeholder="Materia (italiano)" value="{{ course ? course.subjectIt }}">
+
+                    <label>Descrizione programma (italiano)</label>
+                    <textarea name="programDescriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (italiano)">{{ course ? course.programDescriptionIt|raw }}</textarea>
+
+                    <label>Biografia docente (italiano)</label>
+                    <textarea name="bioDescriptionIt" class="tiny-area" placeholder="Scrivi qui la biografia del docente (italiano)">{{ course ? course.bioDescriptionIt|raw }}</textarea>
+                </div>
+
+                <div>
+                    <label>Materia (inglese)</label>
+                    <input type="text" name="subjectEn" placeholder="Materia (inglese)" value="{{ course ? course.subjectEn }}">
+
+                    <label>Descrizione programma (inglese)</label>
+                    <textarea name="programDescriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (inglese)">{{ course ? course.programDescriptionEn|raw }}</textarea>
+
+                    <label>Biografia docente (inglese)</label>
+                    <textarea name="bioDescriptionEn" class="tiny-area" placeholder="Scrivi qui la biografia del docente (inglese)">{{ course ? course.bioDescriptionEn|raw }}</textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Immagine docente</h3>
+            <div class="columns">
+                <div>
+                    <label>Carica immagine</label>
+                    <input type="file" name="teacherImage" accept="image/*">
+                    {% if course and course.isImageUploaded %}
+                        <img class="gg-admin-copertina" alt="Foto docente" src="{{ asset('uploads-urbino-courses/'~course.id~'.webp') }}?v={{ random(1,9999) }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Impostazioni</h3>
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPreselectionRequired" value="1" {{ course and course.isPreselectionRequired ? 'checked' }}>
+                    <span>Richiede preselezione</span>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="isSoldOut" value="1" {{ course and course.isSoldOut ? 'checked' }}>
+                    <span>Sold out</span>
+                </label>
+            </div>
+
+        </div>
+
+        <button class="gg-submit-btn hoverizzato">Salva corso</button>
+
+    </form>
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="https://cdn.tiny.cloud/1/pw9v13qg31fojqozs5wmm990o8oki0icqnk9a0qu3e8shthj/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script type="module">
+        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            toolbar: 'bold underline link bullist numlist removeformat',
+            plugins: 'link | lists | paste',
+            branding: false,
+            paste_as_text: true,
+            statusbar: false,
+            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
+        });
+
+        document.getElementById('page-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            tinymce.triggerSave(true, true);
+
+            fetch('{{ path('adminUrbinoCoursesDetailSave') }}', {
+                method: 'POST',
+                body: new FormData(e.target)
+            })
+            .then(async response =>  {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message);
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.href = "{{ path('adminUrbinoCoursesList') }}";
+            })
+        });
+    </script>
+
+{% endblock %}

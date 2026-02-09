@@ -16,28 +16,11 @@ class UrbinoCourseRepository extends ServiceEntityRepository
         parent::__construct($registry, UrbinoCourse::class);
     }
 
-    //    /**
-    //     * @return UrbinoCourse[] Returns an array of UrbinoCourse objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function save(UrbinoCourse $entity): UrbinoCourse
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
 
-    //    public function findOneBySomeField($value): ?UrbinoCourse
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $entity;
+    }
 }

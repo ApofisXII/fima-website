@@ -217,7 +217,7 @@ div.dt-container select.dt-input {
     margin-top: 0;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form textarea {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form textarea, .gg-form select {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -226,6 +226,33 @@ div.dt-container select.dt-input {
     background-color: var(--color-selected);
     font-size: inherit;
     outline: none;
+}
+
+.gg-form input[type="file"] {
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: none;
+    font-size: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+.gg-form input[type="file"]::file-selector-button {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--color-blue);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.gg-form input[type="file"]::file-selector-button:hover {
+    opacity: 0.9;
 }
 
 .gg-form input::placeholder {
@@ -437,9 +464,19 @@ table .chip {
     padding: 5px 12px 5px 12px;
 }
 
+.chip--neutral {
+    background-color: #E8ECF2;
+    color: #5a6b7f;
+}
+
+.chip--event {
+    background-color: #ffedc4;
+    color: #9d7410;
+}
+
 .chip--deleted {
-    background-color: #e9e9e9;
-    color: #888;
+    background-color: #ffe5e5;
+    color: #c96565;
 }
 
 .chip--visible {
@@ -490,6 +527,29 @@ h3 {
 
 .gg-page-loading__spinner {
     height: 40px;
+}
+
+.reorder {
+    text-align: center !important;
+}
+
+.reorder-handle {
+    cursor: move;
+    color: #ccc;
+    display: inline-block;
+    padding: 5px;
+}
+
+.reorder-handle:hover {
+    color: var(--color-blue);
+}
+
+tbody tr {
+    cursor: default;
+}
+
+tbody tr[draggable="true"] {
+    cursor: move;
 }
 
 
