@@ -10,18 +10,24 @@
         <div class="box multi-detail-box gg-form">
             <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ course.subjectIt) : 'Dettaglio corso' }}</h3>
 
-            <label>Docente</label>
-            <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Docente</label>
+                    <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
+                </div>
 
-            <label>Edizione</label>
-            <select name="urbinoEditionId" required>
-                <option value="">Seleziona edizione</option>
-                {% for edition in editions %}
-                    <option value="{{ edition.id }}" {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
-                        {{ edition.editionName }} ({{ edition.year }})
-                    </option>
-                {% endfor %}
-            </select>
+                <div class="gg-form-row__year">
+                    <label>Edizione</label>
+                    <select name="urbinoEditionId" required>
+                        <option value="">Seleziona edizione</option>
+                        {% for edition in editions %}
+                            <option value="{{ edition.id }}" {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
+                                {{ edition.editionName }} ({{ edition.year }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
 
             <div class="gg-multilang-form">
                 <div>

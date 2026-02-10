@@ -217,7 +217,7 @@ div.dt-container select.dt-input {
     margin-top: 0;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form textarea, .gg-form select {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form textarea, .gg-form select {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -228,17 +228,35 @@ div.dt-container select.dt-input {
     outline: none;
 }
 
+.gg-form input[type="datetime-local"] {
+    width: fit-content;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;padding: 8px 15px;
+}
+
+.gg-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("../images/icons/icon-chevron-down.svg");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
 .gg-form input[type="file"] {
+    padding-left: 0;
     border-radius: 10px;
-    box-sizing: border-box;
     border: none;
     font-size: inherit;
     outline: none;
     cursor: pointer;
 }
 
-.gg-form input[type="file"]::file-selector-button {
-    padding: 8px 20px;
+.gg-form input[type="file"]::-webkit-file-upload-button {
+    padding: 10px 20px;
     border-radius: 8px;
     border: none;
     background-color: var(--color-blue);
@@ -248,7 +266,24 @@ div.dt-container select.dt-input {
     letter-spacing: 1px;
     font-size: 0.85rem;
     cursor: pointer;
-    margin-right: 15px;
+}
+
+.gg-form input[type="file"]::file-selector-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-right: 40px;
+    border: none;
+    background-color: var(--color-blue);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.gg-form input[type="file"]::-webkit-file-upload-button:hover {
+    opacity: 0.9;
 }
 
 .gg-form input[type="file"]::file-selector-button:hover {
@@ -289,7 +324,7 @@ div.dt-container select.dt-input {
 }
 
 .gg-form-row__year {
-    width: 150px;
+    width: 300px;
 }
 
 .gg-submit-btn {

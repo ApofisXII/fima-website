@@ -1,0 +1,134 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">{{ event ? 'Modifica' : 'Nuovo' }} evento</div>
+
+    <form id="page-form" method="post" action="{{ path('adminUrbinoEventsDetailSave') }}">
+        <input type="hidden" name="eventId" value="{{ event ? event.id : "0" }}">
+
+        <div class="box multi-detail-box gg-form">
+            <h3>{{ event ? event.title : 'Dettaglio evento' }}</h3>
+
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Titolo</label>
+                    <input type="text" name="title" placeholder="Titolo evento" value="{{ event ? event.title }}" required>
+                </div>
+
+                <div class="gg-form-row__year">
+                    <label>Edizione</label>
+                    <select name="urbinoEditionId" required>
+                        <option value="">Seleziona edizione</option>
+                        {% for edition in editions %}
+                            <option value="{{ edition.id }}" {{ event and event.urbinoEdition and event.urbinoEdition.id == edition.id ? 'selected' }}>
+                                {{ edition.editionName }} ({{ edition.year }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <label>Data e ora evento</label>
+            <input type="datetime-local" name="eventDatetime" value="{{ event and event.eventDatetime ? event.eventDatetime|date('Y-m-d\\TH:i') }}" required>
+
+            <div class="gg-multilang-form">
+                <div>
+                    <label>Sottotitolo (italiano)</label>
+                    <input type="text" name="subtitleIt" placeholder="Sottotitolo (italiano)" value="{{ event ? event.subtitleIt }}" required>
+
+                    <label>Descrizione (italiano)</label>
+                    <textarea name="descriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione (italiano)">{{ event ? event.descriptionIt|raw }}</textarea>
+                </div>
+
+                <div>
+                    <label>Sottotitolo (inglese)</label>
+                    <input type="text" name="subtitleEn" placeholder="Sottotitolo (inglese)" value="{{ event ? event.subtitleEn }}">
+
+                    <label>Descrizione (inglese)</label>
+                    <textarea name="descriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione (inglese)">{{ event ? event.descriptionEn|raw }}</textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Location e biglietti</h3>
+
+            <label>Location (breve)</label>
+            <input type="text" name="locationShort" placeholder="es. Palazzo Ducale di UrbinoPr" value="{{ event ? event.locationShort }}">
+
+            <label>Location (estesa)</label>
+            <input type="text" name="locationLong" placeholder="es. Piazza Rinascimento, 13, 61029 Urbino PU" value="{{ event ? event.locationLong }}">
+
+            <label>Link biglietti</label>
+            <input type="text" name="ticketLink" placeholder="https://..." value="{{ event ? event.ticketLink }}">
+
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Impostazioni</h3>
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublic" value="1" {{ event and event.isPublic ? 'checked' }}>
+                    <span>Evento visibile pubblicamente</span>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="isDeleted" value="1" {{ event and event.isDeleted ? 'checked' }}>
+                    <span>Evento eliminato</span>
+                </label>
+            </div>
+
+        </div>
+
+        <button class="gg-submit-btn hoverizzato">Salva evento</button>
+
+    </form>
+
+{% endblock %}
+
+{% block js %}
+
+    <script src="https://cdn.tiny.cloud/1/pw9v13qg31fojqozs5wmm990o8oki0icqnk9a0qu3e8shthj/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script type="module">
+        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            toolbar: 'bold underline link bullist numlist removeformat',
+            plugins: 'link | lists | paste',
+            branding: false,
+            paste_as_text: true,
+            statusbar: false,
+            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
+        });
+
+        document.getElementById('page-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            tinymce.triggerSave(true, true);
+
+            fetch('{{ path('adminUrbinoEventsDetailSave') }}', {
+                method: 'POST',
+                body: new FormData(e.target)
+            })
+            .then(async response =>  {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message);
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.href = "{{ path('adminUrbinoEventsList') }}";
+            })
+        });
+    </script>
+
+{% endblock %}

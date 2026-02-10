@@ -2,17 +2,18 @@
 
 {% block body %}
 
-    <div class="gg-h1">Edizioni Urbino</div>
+    <div class="gg-h1">Eventi Urbino</div>
 
     <div style="margin-bottom: 20px;">
-        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoEditionsDetail') }}">+ Nuova edizione</a>
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoEventsDetail') }}">+ Nuovo evento</a>
     </div>
 
     <table id="main-table">
         <thead>
         <tr>
-            <th>Nome edizione</th>
-            <th>Anno</th>
+            <th>Titolo</th>
+            <th>Edizione</th>
+            <th>Data e ora</th>
             <th>Visibilità</th>
             <th>Creata</th>
             <th></th>
@@ -31,24 +32,25 @@
         const table = new DataTable("#main-table", {
             serverSide: true,
             ajax: {
-                url: "{{ path('adminUrbinoEditionsListJson') }}",
+                url: "{{ path('adminUrbinoEventsListJson') }}",
             },
             ordering: false,
             columns: [
+                { data: "title" },
                 { data: "editionName" },
-                { data: "year" },
-                { data: "isPublicVisible" },
+                { data: "eventDatetime" },
+                { data: "isPublic" },
                 { data: "createdAt" },
-                { data: "editionDetailLink" },
+                { data: "eventDetailLink" },
             ],
             columnDefs: [
                 {
-                    targets: 2, render: function(data, type, row) {
+                    targets: 3, render: function(data, type, row) {
                         return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
                     }
                 },
                 {
-                    targets: 4, render: function(data, type, row) {
+                    targets: 5, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>Modifica</a>";
                     }
                 }
