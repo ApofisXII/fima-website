@@ -135,6 +135,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #B85450;
 }
 
 .logout-icon {
