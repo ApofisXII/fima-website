@@ -44,4 +44,12 @@ class UrbinoEventService
 
         return $this->urbinoEventRepository->save($event);
     }
+
+    public function softDelete(UrbinoEvent $event): UrbinoEvent
+    {
+        $event->setIsDeleted(true);
+        $event->setUpdatedAt(new \DateTime());
+
+        return $this->urbinoEventRepository->save($event);
+    }
 }

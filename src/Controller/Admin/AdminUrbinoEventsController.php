@@ -97,4 +97,22 @@ class AdminUrbinoEventsController extends AbstractController
             "message" => "Dati salvati",
         ]);
     }
+
+    #[Route(path: '/delete/{eventId}', name: 'adminUrbinoEventsDelete', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEventsDelete(int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->findOneBy(["id" => $eventId]);
+
+        if (!$event) {
+            return $this->json([
+                "message" => "Evento non trovato",
+            ], 404);
+        }
+
+        $this->urbinoEventService->softDelete($event);
+
+        return $this->json([
+            "message" => "Evento eliminato",
+        ]);
+    }
 }

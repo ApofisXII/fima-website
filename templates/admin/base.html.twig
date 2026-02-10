@@ -10,7 +10,9 @@
         {% if app.user %}
             <div class="gg-main-header">
                 <div class="gg-main-header__top">
-                    <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
+                    <a href="{{ path('adminDashboard') }}">
+                        <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
+                    </a>
 
                     <button class="gg-main-header__burger" onclick="toggleAdminMenu()">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

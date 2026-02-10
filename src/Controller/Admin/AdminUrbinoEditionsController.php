@@ -93,4 +93,22 @@ class AdminUrbinoEditionsController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/delete/{editionId}', name: 'adminUrbinoEditionsDelete', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEditionsDelete(int $editionId): Response
+    {
+        $edition = $this->urbinoEditionRepository->findOneBy(["id" => $editionId]);
+
+        if (!$edition) {
+            return $this->json([
+                "message" => "Edizione non trovata",
+            ], 404);
+        }
+
+        $this->urbinoEditionService->softDelete($edition);
+
+        return $this->json([
+            "message" => "Edizione eliminata",
+        ]);
+    }
+
 }

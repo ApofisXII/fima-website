@@ -78,9 +78,26 @@
 
         </div>
 
-        <button class="gg-submit-btn hoverizzato">Salva evento</button>
+        <div class="gg-btn-group">
+            <button class="gg-submit-btn hoverizzato">Salva evento</button>
+            {% if event %}
+                <button id="delete-btn" class="gg-delete-btn hoverizzato">Elimina evento</button>
+            {% endif %}
+        </div>
 
     </form>
+
+    {% if event %}
+        <div id="delete-modal" class="gg-modal" style="display: none;">
+            <div class="gg-modal-content">
+                <p>Confermi di voler eliminare questo evento?</p>
+                <div class="gg-modal-buttons">
+                    <button id="confirm-delete" class="gg-modal-btn gg-modal-btn--danger">Sì, elimina</button>
+                    <button id="cancel-delete" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}
 
@@ -124,6 +141,50 @@
                 location.href = "{{ path('adminUrbinoEventsList') }}";
             })
         });
+
+        {% if event %}
+        const modal = document.getElementById('delete-modal');
+        const deleteBtn = document.getElementById('delete-btn');
+        const confirmBtn = document.getElementById('confirm-delete');
+        const cancelBtn = document.getElementById('cancel-delete');
+
+        deleteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        confirmBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+
+            fetch('{{ path('adminUrbinoEventsDelete', {'eventId': event.id}) }}', {
+                method: 'DELETE'
+            })
+            .then(async response => {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message);
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.href = "{{ path('adminUrbinoEventsList') }}";
+            });
+        });
+        {% endif %}
     </script>
 
 {% endblock %}
