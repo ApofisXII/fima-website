@@ -99,6 +99,18 @@
 
     </form>
 
+    {% if course %}
+        <div id="delete-modal" class="gg-modal" style="display: none;">
+            <div class="gg-modal-content">
+                <p>Confermi di voler eliminare questo corso?</p>
+                <div class="gg-modal-buttons">
+                    <button id="confirm-delete" class="gg-modal-btn gg-modal-btn--danger">Sì, elimina</button>
+                    <button id="cancel-delete" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
 
 {% block js %}
@@ -143,12 +155,28 @@
         });
 
         {% if course %}
-        document.getElementById('delete-btn').addEventListener('click', function(e) {
-            e.preventDefault();
+        const modal = document.getElementById('delete-modal');
+        const deleteBtn = document.getElementById('delete-btn');
+        const confirmBtn = document.getElementById('confirm-delete');
+        const cancelBtn = document.getElementById('cancel-delete');
 
-            if (!confirm('Sei sicuro di voler eliminare questo corso?')) {
-                return;
+        deleteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
             }
+        });
+
+        confirmBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
 
             fetch('{{ path('adminUrbinoCoursesDelete', {'courseId': course.id}) }}', {
                 method: 'DELETE'
