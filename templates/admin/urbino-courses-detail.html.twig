@@ -90,7 +90,12 @@
 
         </div>
 
-        <button class="gg-submit-btn hoverizzato">Salva corso</button>
+        <div class="gg-btn-group">
+            <button class="gg-submit-btn hoverizzato">Salva corso</button>
+            {% if course %}
+                <button id="delete-btn" class="gg-delete-btn hoverizzato">Elimina corso</button>
+            {% endif %}
+        </div>
 
     </form>
 
@@ -136,6 +141,34 @@
                 location.href = "{{ path('adminUrbinoCoursesList') }}";
             })
         });
+
+        {% if course %}
+        document.getElementById('delete-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!confirm('Sei sicuro di voler eliminare questo corso?')) {
+                return;
+            }
+
+            fetch('{{ path('adminUrbinoCoursesDelete', {'courseId': course.id}) }}', {
+                method: 'DELETE'
+            })
+            .then(async response => {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message);
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.href = "{{ path('adminUrbinoCoursesList') }}";
+            });
+        });
+        {% endif %}
     </script>
 
 {% endblock %}

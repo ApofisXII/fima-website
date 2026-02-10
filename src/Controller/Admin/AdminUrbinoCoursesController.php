@@ -119,4 +119,22 @@ class AdminUrbinoCoursesController extends AbstractController
             "updated" => true,
         ]);
     }
+
+    #[Route(path: '/delete/{courseId}', name: 'adminUrbinoCoursesDelete', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoCoursesDelete(int $courseId): Response
+    {
+        $course = $this->urbinoCourseRepository->findOneBy(["id" => $courseId]);
+
+        if (!$course) {
+            return $this->json([
+                "message" => "Corso non trovato",
+            ], 404);
+        }
+
+        $this->urbinoCourseService->softDelete($course);
+
+        return $this->json([
+            "message" => "Corso eliminato",
+        ]);
+    }
 }

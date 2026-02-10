@@ -164,7 +164,6 @@ body {
 
 .hoverizzato {
     cursor: pointer;
-    transition: opacity .2s ease-in-out;
 }
 .hoverizzato:hover {
     opacity: 0.6;
@@ -352,6 +351,12 @@ div.dt-container select.dt-input {
     width: 300px;
 }
 
+.gg-btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
 .gg-submit-btn {
     font-weight: bold;
     background: var(--color-blue);
@@ -364,8 +369,35 @@ div.dt-container select.dt-input {
     border: none;
     border-radius: 10px;
     display: block;
-    margin-top: 30px;
+    margin-top: 0;
     text-decoration: none;
+}
+
+.gg-delete-btn {
+    font-weight: bold;
+    background: var(--color-red);
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    margin-top: 0;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .gg-btn-group {
+        flex-direction: column;
+    }
+
+    .gg-submit-btn,
+    .gg-delete-btn {
+        width: 100%;
+    }
 }
 
 .gg-admin-copertina {

@@ -63,6 +63,9 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_afternoon_course = null;
 
+    #[ORM\Column]
+    private ?bool $is_deleted = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -256,6 +259,18 @@ class UrbinoCourse
     public function setIsAfternoonCourse(bool $is_afternoon_course): static
     {
         $this->is_afternoon_course = $is_afternoon_course;
+
+        return $this;
+    }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->is_deleted;
+    }
+
+    public function setIsDeleted(bool $is_deleted): static
+    {
+        $this->is_deleted = $is_deleted;
 
         return $this;
     }

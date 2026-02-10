@@ -111,4 +111,12 @@ class UrbinoCourseService
 
         return $course;
     }
+
+    public function softDelete(UrbinoCourse $course): UrbinoCourse
+    {
+        $course->setIsDeleted(true);
+        $course->setUpdatedAt(new \DateTime());
+
+        return $this->urbinoCourseRepository->save($course);
+    }
 }

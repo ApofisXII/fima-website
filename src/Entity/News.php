@@ -47,6 +47,9 @@ class News
     #[ORM\Column]
     private ?bool $is_public = null;
 
+    #[ORM\Column]
+    private ?bool $is_deleted = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +183,18 @@ class News
     public function setIsPublic(bool $is_public): static
     {
         $this->is_public = $is_public;
+
+        return $this;
+    }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->is_deleted;
+    }
+
+    public function setIsDeleted(bool $is_deleted): static
+    {
+        $this->is_deleted = $is_deleted;
 
         return $this;
     }
