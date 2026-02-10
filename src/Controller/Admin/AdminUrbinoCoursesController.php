@@ -60,6 +60,7 @@ class AdminUrbinoCoursesController extends AbstractController
                 "teacherFullName" => $item->getTeacherFullName(),
                 "subjectIt" => $item->getSubjectIt(),
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
+                "isAfternoonCourse" => $item->isAfternoonCourse(),
                 "isSoldOut" => $item->isSoldOut(),
                 "createdAt" => $item->getCreatedAt()->format("d/m/Y H:i"),
                 "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
@@ -109,11 +110,13 @@ class AdminUrbinoCoursesController extends AbstractController
     #[Route(path: '/reorder', name: 'adminUrbinoCoursesReorder', methods: ['POST'], format: 'json')]
     public function adminUrbinoCoursesReorder(Request $request): Response
     {
-        $orderedIds = json_decode($request->getContent(), true)['orderedIds'] ?? [];
-        $this->urbinoCourseService->updateOrdering($orderedIds);
+        $data = json_decode($request->getContent(), true);
+        $diffCourses = $data['diff_courses'] ?? [];
+
+        $this->urbinoCourseService->updateOrdering($diffCourses);
 
         return $this->json([
-            "message" => "Ordinamento salvato",
+            "updated" => true,
         ]);
     }
 }

@@ -24,14 +24,17 @@
                         <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
 
                         <div class="gg-navbar-divider">FIMA</div>
-                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie ed eventi</a>
+                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie</a>
 
                         <div class="gg-navbar-divider">Urbino</div>
                         <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>
                         <a href="{{ path('adminUrbinoCoursesList') }}" class="gg-navbar-link {{ 'UrbinoCourses' in app.current_route ? 'selected' }}">Corsi</a>
                         <a href="{{ path('adminUrbinoEventsList') }}" class="gg-navbar-link {{ 'UrbinoEvents' in app.current_route ? 'selected' }}">Eventi</a>
 
-                        <a href="{{ path('adminLogout') }}" class="gg-navbar-link">Logout</a>
+                        <a href="{{ path('adminLogout') }}" class="gg-navbar-link gg-navbar-link--logout">
+                            Logout
+                            <img src="{{ asset('images/icons/logout.svg') }}" alt="Logout" class="logout-icon">
+                        </a>
                     </div>
                 </div>
 

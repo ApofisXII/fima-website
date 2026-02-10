@@ -73,6 +73,11 @@
 
             <div class="gg-checkbox-group">
                 <label>
+                    <input type="checkbox" name="isAfternoonCourse" value="1" {{ course and course.isAfternoonCourse ? 'checked' }}>
+                    <span>Corso pomeridiano</span>
+                </label>
+
+                <label>
                     <input type="checkbox" name="isPreselectionRequired" value="1" {{ course and course.isPreselectionRequired ? 'checked' }}>
                     <span>Richiede preselezione</span>
                 </label>

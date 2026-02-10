@@ -15,6 +15,7 @@
             <th>Docente</th>
             <th>Materia</th>
             <th>Edizione</th>
+            <th>Tipo</th>
             <th>Stato</th>
             <th>Creata</th>
             <th></th>
@@ -29,43 +30,46 @@
     <script type="module">
         import DataTable from 'datatables.net-dt';
         import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+        import 'datatables.net-rowreorder-dt';
+        import 'datatables.net-rowreorder-dt/css/rowReorder.dataTables.min.css';
 
         const table = new DataTable("#main-table", {
+            rowReorder: {
+                selector: 'td.reorder'
+            },
             serverSide: true,
             ajax: {
                 url: "{{ path('adminUrbinoCoursesListJson') }}",
             },
             ordering: false,
-            drawCallback: function() {
-                document.querySelectorAll('#main-table tbody tr').forEach(row => {
-                    row.setAttribute('draggable', 'true');
-                });
-            },
             columns: [
                 { data: "id", className: "reorder" },
                 { data: "teacherFullName" },
                 { data: "subjectIt" },
                 { data: "editionName" },
+                { data: "isAfternoonCourse" },
                 { data: "isSoldOut" },
                 { data: "createdAt" },
                 { data: "courseDetailLink" },
             ],
             columnDefs: [
                 {
-                    targets: 0, orderable: false, render: function(data, type, row) {
-                        return '<div class="reorder-handle" data-id="'+data+'">' +
-                               '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-                               '<path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
-                               '</svg></div>';
-                    }
+                    className: 'reorder',
+                    render: () => '≡',
+                    targets: 0
                 },
                 {
                     targets: 4, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--event'>Pomeridiano</span>" : "<span class='chip chip--neutral'>Principale</span>";
+                    }
+                },
+                {
+                    targets: 5, render: function(data, type, row) {
                         return data ? "<span class='chip chip--deleted'>Sold out</span>" : "<span class='chip chip--visible'>Disponibile</span>";
                     }
                 },
                 {
-                    targets: 6, render: function(data, type, row) {
+                    targets: 7, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>Modifica</a>";
                     }
                 }
@@ -88,67 +92,37 @@
             }
         });
 
-        let draggedRow = null;
-
-        document.addEventListener('dragstart', function(e) {
-            if (e.target.closest('.reorder-handle')) {
-                draggedRow = e.target.closest('tr');
-                e.dataTransfer.effectAllowed = 'move';
-                draggedRow.style.opacity = '0.5';
+        table.on('row-reorder', function (e, diff, edit) {
+            if (diff.length === 0) {
+                return false;
             }
-        });
 
-        document.addEventListener('dragend', function(e) {
-            if (draggedRow) {
-                draggedRow.style.opacity = '';
-                draggedRow = null;
-            }
-        });
-
-        document.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            if (draggedRow && e.target.closest('tbody tr')) {
-                e.dataTransfer.dropEffect = 'move';
-            }
-        });
-
-        document.addEventListener('drop', function(e) {
-            e.preventDefault();
-            const targetRow = e.target.closest('tbody tr');
-
-            if (draggedRow && targetRow && draggedRow !== targetRow) {
-                const tbody = targetRow.parentNode;
-                const allRows = Array.from(tbody.querySelectorAll('tr'));
-                const draggedIndex = allRows.indexOf(draggedRow);
-                const targetIndex = allRows.indexOf(targetRow);
-
-                if (draggedIndex < targetIndex) {
-                    targetRow.after(draggedRow);
-                } else {
-                    targetRow.before(draggedRow);
-                }
-
-                const orderedIds = Array.from(tbody.querySelectorAll('.reorder-handle')).map(el =>
-                    parseInt(el.getAttribute('data-id'))
-                );
-
-                fetch("{{ path('adminUrbinoCoursesReorder') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ orderedIds: orderedIds })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Ordinamento salvato');
-                    table.ajax.reload(null, false);
-                })
-                .catch(error => {
-                    console.error('Errore durante il salvataggio:', error);
-                    table.ajax.reload();
+            let diff_courses = [];
+            diff.forEach(function (row) {
+                const rowData = table.row(row.node).data();
+                diff_courses.push({
+                    id: rowData.id,
+                    old_position: row.oldPosition,
+                    new_position: row.newPosition
                 });
-            }
+            });
+
+            fetch("{{ path('adminUrbinoCoursesReorder') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ diff_courses: diff_courses })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ordinamento salvato');
+                table.ajax.reload(null, false);
+            })
+            .catch(error => {
+                console.error('Errore durante il salvataggio:', error);
+                table.ajax.reload();
+            });
         });
 
     </script>

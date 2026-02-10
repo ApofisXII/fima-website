@@ -21,7 +21,17 @@
 
     --color-selected: #F3F5F9;
     --color-hover: #F9FAFC;
+    --color-hover-logout: #FDF6F6;
 
+    /* Chip colors */
+    --chip-neutral-bg: #E8ECF2;
+    --chip-neutral-text: #5a6b7f;
+    --chip-event-bg: #ffedc4;
+    --chip-event-text: #9d7410;
+    --chip-deleted-bg: #ffe5e5;
+    --chip-deleted-text: #c96565;
+    --chip-visible-bg: #d3e8d2;
+    --chip-visible-text: #368336;
 
     --border-radius-main: 7px;
 
@@ -105,6 +115,21 @@ body {
 }
 .gg-navbar-link:not(.selected):hover {
     background-color: var(--color-hover);
+}
+
+.gg-navbar-link--logout {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-icon {
+    width: 18px;
+}
+
+.gg-navbar-link.gg-navbar-link--logout:hover {
+    background-color: var(--color-hover-logout);
 }
 
 .gg-main-column-left__burger {
@@ -426,6 +451,11 @@ div.dt-container select.dt-input {
     padding: 20px;
 }
 
+.stats-row__box--invisible {
+    background-color: transparent !important;
+    box-shadow: unset !important;
+}
+
 table.dataTable td.dt-type-numeric {
     text-align: left !important;
 }
@@ -500,23 +530,23 @@ table .chip {
 }
 
 .chip--neutral {
-    background-color: #E8ECF2;
-    color: #5a6b7f;
+    background-color: var(--chip-neutral-bg);
+    color: var(--chip-neutral-text);
 }
 
 .chip--event {
-    background-color: #ffedc4;
-    color: #9d7410;
+    background-color: var(--chip-event-bg);
+    color: var(--chip-event-text);
 }
 
 .chip--deleted {
-    background-color: #ffe5e5;
-    color: #c96565;
+    background-color: var(--chip-deleted-bg);
+    color: var(--chip-deleted-text);
 }
 
 .chip--visible {
-    background-color: #d3e8d2;
-    color: #368336;
+    background-color: var(--chip-visible-bg);
+    color: var(--chip-visible-text);
 }
 
 h3 {

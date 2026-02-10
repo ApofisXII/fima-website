@@ -23,5 +23,6 @@ class UrbinoCourseRequestDTO
         public ?string $bioDescriptionEn = null,
         public ?bool $isPreselectionRequired = false,
         public ?bool $isSoldOut = false,
+        public ?bool $isAfternoonCourse = false,
     ) {}
 }

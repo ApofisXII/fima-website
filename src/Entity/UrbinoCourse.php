@@ -60,6 +60,9 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_image_uploaded = null;
 
+    #[ORM\Column]
+    private ?bool $is_afternoon_course = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -241,6 +244,18 @@ class UrbinoCourse
     public function setIsImageUploaded(bool $is_image_uploaded): static
     {
         $this->is_image_uploaded = $is_image_uploaded;
+
+        return $this;
+    }
+
+    public function isAfternoonCourse(): ?bool
+    {
+        return $this->is_afternoon_course;
+    }
+
+    public function setIsAfternoonCourse(bool $is_afternoon_course): static
+    {
+        $this->is_afternoon_course = $is_afternoon_course;
 
         return $this;
     }

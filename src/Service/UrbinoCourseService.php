@@ -26,6 +26,7 @@ class UrbinoCourseService
         $course = new UrbinoCourse();
         $course->setCreatedAt(new \DateTime());
         $course->setIsImageUploaded(false);
+        $course->setIsAfternoonCourse(false);
         return $this->update($course, $dto);
     }
 
@@ -46,6 +47,7 @@ class UrbinoCourseService
         $course->setBioDescriptionEn($dto->bioDescriptionEn);
         $course->setIsPreselectionRequired($dto->isPreselectionRequired ?? false);
         $course->setIsSoldOut($dto->isSoldOut ?? false);
+        $course->setIsAfternoonCourse($dto->isAfternoonCourse ?? false);
 
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;
@@ -68,16 +70,29 @@ class UrbinoCourseService
         return $this->urbinoCourseRepository->save($course);
     }
 
-    public function updateOrdering(array $orderedIds): void
+    public function updateOrdering(array $diffCourses): void
     {
-        foreach ($orderedIds as $position => $id) {
-            $course = $this->urbinoCourseRepository->find($id);
+        $em = $this->urbinoCourseRepository->getEntityManager();
+
+        foreach ($diffCourses as $diff) {
+            $course = $this->urbinoCourseRepository->find($diff['id']);
             if ($course) {
-                $course->setOrdering($position);
+                $course->setOrdering($diff['new_position'] + 1);
                 $course->setUpdatedAt(new \DateTime());
-                $this->urbinoCourseRepository->save($course);
             }
         }
+
+        $em->flush();
+
+        $allCourses = $this->urbinoCourseRepository->findBy([], ['ordering' => 'ASC']);
+
+        $position = 1;
+        foreach ($allCourses as $course) {
+            $course->setOrdering($position);
+            $position++;
+        }
+
+        $em->flush();
     }
 
     public function saveTeacherImage(UrbinoCourse $course, UploadedFile $uploadedFile): UrbinoCourse

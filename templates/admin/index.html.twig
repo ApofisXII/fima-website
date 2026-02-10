@@ -4,8 +4,36 @@
 
     <div class="gg-h1">Dashboard</div>
 
-    <div>
-        Fima dashboard
+    <h3 style="margin-top: 30px; margin-bottom: 15px;">FIMA</h3>
+    <div class="stats-row">
+        <div class="box stats-row__box">
+            <div class="secundary">Notizie</div>
+            <div class="stats-row__box__number">{{ newsCount }}</div>
+            <a href="{{ path('adminNewsList') }}" style="margin-top: 15px; display: inline-block;">Vedi tutte →</a>
+        </div>
+        <div class="box stats-row__box box stats-row__box--invisible"></div>
+        <div class="box stats-row__box box stats-row__box--invisible"></div>
+    </div>
+
+    <h3 style="margin-top: 40px; margin-bottom: 15px;">Urbino</h3>
+    <div class="stats-row">
+        <div class="box stats-row__box">
+            <div class="secundary">Edizioni</div>
+            <div class="stats-row__box__number">{{ editionsCount }}</div>
+            <a href="{{ path('adminUrbinoEditionsList') }}" style="margin-top: 15px; display: inline-block;">Vedi tutte →</a>
+        </div>
+
+        <div class="box stats-row__box">
+            <div class="secundary">Corsi</div>
+            <div class="stats-row__box__number">{{ coursesCount }}</div>
+            <a href="{{ path('adminUrbinoCoursesList') }}" style="margin-top: 15px; display: inline-block;">Vedi tutti →</a>
+        </div>
+
+        <div class="box stats-row__box">
+            <div class="secundary">Eventi</div>
+            <div class="stats-row__box__number">{{ eventsCount }}</div>
+            <a href="{{ path('adminUrbinoEventsList') }}" style="margin-top: 15px; display: inline-block;">Vedi tutti →</a>
+        </div>
     </div>
 
 {% endblock %}
