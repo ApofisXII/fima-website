@@ -58,7 +58,7 @@ body {
     border-top: solid 2px #EBEBEB;
 }
 
-.gg-main-column-left {
+.gg-main-header {
     width: 300px;
     min-width: 300px;
     height: calc(100vh - 2px);
@@ -71,22 +71,37 @@ body {
     gap: 20px;
 }
 
+.gg-main-header__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.gg-main-header__burger {
+    display: none;
+}
+
+.gg-main-header__menu {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .gg-main-column-right {
     width: 100%;
     height: calc(100vh - 2px);
     overflow-y: scroll;
-    padding: 30px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 30px 50px;
     box-sizing: border-box;
 }
 
 .gg-main-logo {
-    margin: auto;
-    margin-top: 20px;
-    display: block;
     max-height: 100px;
     max-width: 200px;
+    margin-top: 20px;
 }
 
 .gg-navbar-divider {
@@ -98,7 +113,6 @@ body {
     opacity: 0.3;
     letter-spacing: 3px;
     color: var(--color-blue);
-    text-wrap: nowrap;
 }
 
 .gg-navbar-link {
@@ -106,8 +120,7 @@ body {
     margin-top: 10px;
     text-decoration: none;
     color: inherit;
-    padding: 10px;
-    padding-left: 15px;
+    padding: 10px 15px;
     border-radius: 10px;
 }
 .gg-navbar-link.selected {
@@ -118,7 +131,7 @@ body {
 }
 
 .gg-navbar-link--logout {
-    margin-top: 20px;
+    margin-top: auto;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -132,20 +145,89 @@ body {
     background-color: var(--color-hover-logout);
 }
 
-.gg-main-column-left__burger {
-    display: none;
-    width: fit-content;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--color-blue);
-}
+/* Mobile Layout */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
 
-.vertical-scroll {
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 1;
+    .gg-main-header {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .gg-main-header__top {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 30px;
+        border-bottom: 1px solid #EBEBEB;
+    }
+
+    .gg-main-logo {
+        max-height: 50px;
+        max-width: 150px;
+        margin-top: 0;
+    }
+
+    .gg-main-header__burger {
+        display: flex;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        color: var(--color-blue);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gg-main-header__menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        padding: 0 30px;
+    }
+
+    .gg-main-header__menu.open {
+        max-height: 500px;
+        padding: 20px 30px;
+    }
+
+    .gg-navbar-divider {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding-left: 0;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .gg-navbar-divider:first-child {
+        margin-top: 0;
+    }
+
+    .gg-navbar-link {
+        display: inline-block;
+        margin-top: 5px;
+        margin-right: 10px;
+        padding: 8px 15px;
+        border-radius: 8px;
+    }
+
+    .gg-navbar-link--logout {
+        display: inline-flex;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+
+    .gg-main-column-right {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        padding: 20px;
+    }
 }
 
 .gg-h1 {

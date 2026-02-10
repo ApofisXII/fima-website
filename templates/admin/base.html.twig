@@ -8,36 +8,34 @@
     <body>
 
         {% if app.user %}
-            <div class="gg-main-column-left">
+            <div class="gg-main-header">
+                <div class="gg-main-header__top">
+                    <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
 
-                <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
-
-                <button class="gg-main-column-left__burger" onclick="toggleAdminMenu()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-                <div class="vertical-scroll">
-                    <div class="gg-main-column-left__list">
-                        <div class="gg-navbar-divider">Area admin</div>
-                        <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
-
-                        <div class="gg-navbar-divider">FIMA</div>
-                        <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie</a>
-
-                        <div class="gg-navbar-divider">Urbino</div>
-                        <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>
-                        <a href="{{ path('adminUrbinoCoursesList') }}" class="gg-navbar-link {{ 'UrbinoCourses' in app.current_route ? 'selected' }}">Corsi</a>
-                        <a href="{{ path('adminUrbinoEventsList') }}" class="gg-navbar-link {{ 'UrbinoEvents' in app.current_route ? 'selected' }}">Eventi</a>
-
-                        <a href="{{ path('adminLogout') }}" class="gg-navbar-link gg-navbar-link--logout">
-                            Logout
-                            <img src="{{ asset('images/icons/logout.svg') }}" alt="Logout" class="logout-icon">
-                        </a>
-                    </div>
+                    <button class="gg-main-header__burger" onclick="toggleAdminMenu()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
 
+                <div class="gg-main-header__menu">
+                    <div class="gg-navbar-divider">Area admin</div>
+                    <a href="{{ path('adminDashboard') }}" class="gg-navbar-link {{ app.current_route == 'adminDashboard' ? 'selected' }}">Dashboard</a>
+
+                    <div class="gg-navbar-divider">FIMA</div>
+                    <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie</a>
+
+                    <div class="gg-navbar-divider">Urbino</div>
+                    <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>
+                    <a href="{{ path('adminUrbinoCoursesList') }}" class="gg-navbar-link {{ 'UrbinoCourses' in app.current_route ? 'selected' }}">Corsi</a>
+                    <a href="{{ path('adminUrbinoEventsList') }}" class="gg-navbar-link {{ 'UrbinoEvents' in app.current_route ? 'selected' }}">Eventi</a>
+
+                    <a href="{{ path('adminLogout') }}" class="gg-navbar-link gg-navbar-link--logout">
+                        Logout
+                        <img src="{{ asset('images/icons/logout.svg') }}" alt="Logout" class="logout-icon">
+                    </a>
+                </div>
             </div>
         {% endif %}
 
@@ -50,10 +48,9 @@
         <!-- Custom JS -->
         <script>
             function toggleAdminMenu() {
-                const list = document.querySelector('.gg-main-column-left__list');
-                if (list) {
-                    const currentDisplay = window.getComputedStyle(list).display;
-                    list.style.display = currentDisplay === 'none' ? 'block' : 'none';
+                const menu = document.querySelector('.gg-main-header__menu');
+                if (menu) {
+                    menu.classList.toggle('open');
                 }
             }
         </script>
