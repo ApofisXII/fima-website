@@ -215,15 +215,12 @@ body {
     }
 
     .gg-navbar-divider {
-        margin-top: 25px;
-        margin-bottom: 10px;
+        margin-top: 30px;
+        margin-bottom: 0;
+        margin-left: 15px;
         padding-left: 0;
         font-size: 0.75rem;
         letter-spacing: 2px;
-    }
-
-    .gg-navbar-divider {
-        margin-left: 15px;
     }
 
     .gg-navbar-divider:first-child {
@@ -653,6 +650,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     box-sizing: border-box;
     padding: 50px 60px;
     border-radius: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
 .gg-login-box h1 {
