@@ -1068,9 +1068,22 @@ tbody tr[draggable="true"] {
     .gg-form-row {
         flex-direction: column;
         align-items: stretch;
+        gap: 0;
+    }
+
+    .gg-form-row > * {
+        margin-top: 15px;
+    }
+
+    .gg-form-row > *:first-child {
+        margin-top: 0;
     }
 
     .gg-form-row__year {
+        width: 100%;
+    }
+
+    .gg-form-row--three .gg-form-row__year {
         width: 100%;
     }
 
