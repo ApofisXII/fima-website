@@ -10,7 +10,7 @@
         <div class="box multi-detail-box gg-form">
             <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ course.subjectIt) : 'Dettaglio corso' }}</h3>
 
-            <div class="gg-form-row">
+            <div class="gg-form-row gg-form-row--three">
                 <div class="gg-form-row__main">
                     <label>Docente</label>
                     <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
@@ -26,6 +26,11 @@
                             </option>
                         {% endfor %}
                     </select>
+                </div>
+
+                <div class="gg-form-row__year">
+                    <label>Prezzo del corso (in €)</label>
+                    <input type="number" name="priceEuros" step="0.01" min="0" placeholder="0.00" value="{{ course and course.priceCents ? (course.priceCents / 100)|number_format(2, '.', '') }}">
                 </div>
             </div>
 

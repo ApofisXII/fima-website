@@ -473,6 +473,14 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     width: 300px;
 }
 
+.gg-form-row--three .gg-form-row__main {
+    flex: 2;
+}
+
+.gg-form-row--three .gg-form-row__year {
+    width: 200px;
+}
+
 .gg-btn-group {
     display: flex;
     gap: 15px;

@@ -24,5 +24,6 @@ class UrbinoCourseRequestDTO
         public ?bool $isPreselectionRequired = false,
         public ?bool $isSoldOut = false,
         public ?bool $isAfternoonCourse = false,
+        public ?float $priceEuros = null,
     ) {}
 }

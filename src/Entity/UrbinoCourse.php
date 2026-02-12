@@ -66,6 +66,9 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_deleted = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $price_cents = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -271,6 +274,18 @@ class UrbinoCourse
     public function setIsDeleted(bool $is_deleted): static
     {
         $this->is_deleted = $is_deleted;
+
+        return $this;
+    }
+
+    public function getPriceCents(): ?int
+    {
+        return $this->price_cents;
+    }
+
+    public function setPriceCents(?int $price_cents): static
+    {
+        $this->price_cents = $price_cents;
 
         return $this;
     }

@@ -49,6 +49,15 @@ class UrbinoCourseService
         $course->setIsSoldOut($dto->isSoldOut ?? false);
         $course->setIsAfternoonCourse($dto->isAfternoonCourse ?? false);
 
+        // Price handling: afternoon courses are free (null), otherwise convert euros to cents
+        if ($dto->isAfternoonCourse) {
+            $course->setPriceCents(null);
+        } elseif ($dto->priceEuros !== null) {
+            $course->setPriceCents((int) round($dto->priceEuros * 100));
+        } else {
+            $course->setPriceCents(null);
+        }
+
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;
             if ($dto->subjectIt) {
