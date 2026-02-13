@@ -56,7 +56,7 @@ class AdminNewsController extends AbstractController
                 "titleIt" => $item->getTitleIt(),
                 "isEvent" => $item->isEvent(),
                 "isPublic" => $item->isPublic(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
                 "newsDetailLink" => $this->generateUrl("adminNewsDetail", ["newsId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());
