@@ -80,6 +80,13 @@ h2 {
     font-size: 1.8rem;
 }
 
+.hover {
+    transition: all 0.3s ease;
+}
+.hover:hover {
+    transform: scale(1.05);
+}
+
 .header-container {
     position: fixed;
     top: 0;
@@ -408,7 +415,6 @@ h2 {
 
 .uma-hero {
     height: 500px;
-    background-color: #aaa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -416,11 +422,52 @@ h2 {
 
 .uma-hero__video {
     height: 100%;
+    max-height: 500px;
     width: 100%;
     object-fit: cover;
     position: absolute;
+    z-index: -1;
 }
 
 .uma-hero__logo {
     width: 200px;
+}
+
+.uma-welcome {
+    padding: 50px;
+    margin-top: -50px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    min-height: 200px;
+    background: linear-gradient(to bottom right, #D62725, #99110F);
+    color: white;
+    position: relative;
+}
+
+.uma-welcome__left {
+    min-width: 320px;
+}
+
+.uma-welcome__title {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: normal;
+    color: white;
+}
+
+.uma-welcome__date {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: var(--font-bold-weight-sans-serif);
+}
+
+.uma-welcome__angels {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.2;
 }
