@@ -18,6 +18,7 @@ class UrbinoCourseRepository extends ServiceEntityRepository
 
     public function save(UrbinoCourse $entity): UrbinoCourse
     {
+        $entity->setUpdatedAt(new \DateTime());
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 

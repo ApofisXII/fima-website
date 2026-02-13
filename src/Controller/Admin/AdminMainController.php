@@ -23,10 +23,10 @@ class AdminMainController extends AbstractController
     #[Route(path: '', name: 'adminDashboard')]
     public function adminDashboard(): Response
     {
-        $newsCount = $this->newsRepository->count([]);
-        $editionsCount = $this->urbinoEditionRepository->count([]);
-        $coursesCount = $this->urbinoCourseRepository->count([]);
-        $eventsCount = $this->urbinoEventRepository->count([]);
+        $newsCount = $this->newsRepository->count(['is_deleted' => false]);
+        $editionsCount = $this->urbinoEditionRepository->count(['is_deleted' => false]);
+        $coursesCount = $this->urbinoCourseRepository->count(['is_deleted' => false]);
+        $eventsCount = $this->urbinoEventRepository->count(['is_deleted' => false]);
 
         return $this->render('admin/index.html.twig', [
             'newsCount' => $newsCount,

@@ -131,7 +131,7 @@ class AdminUrbinoCoursesController extends AbstractController
             ], 404);
         }
 
-        $this->urbinoCourseService->softDelete($course);
+        $this->urbinoCourseService->delete($course);
 
         return $this->json([
             "message" => "Corso eliminato",

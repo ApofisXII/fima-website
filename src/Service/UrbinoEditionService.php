@@ -39,7 +39,7 @@ final readonly class UrbinoEditionService
         return $this->urbinoEditionRepository->save($edition);
     }
 
-    public function softDelete(UrbinoEdition $edition): UrbinoEdition
+    public function delete(UrbinoEdition $edition): UrbinoEdition
     {
         $edition->setIsDeleted(true);
         $edition->setUpdatedAt(new \DateTime());

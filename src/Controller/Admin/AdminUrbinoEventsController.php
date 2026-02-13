@@ -109,7 +109,7 @@ class AdminUrbinoEventsController extends AbstractController
             ], 404);
         }
 
-        $this->urbinoEventService->softDelete($event);
+        $this->urbinoEventService->delete($event);
 
         return $this->json([
             "message" => "Evento eliminato",

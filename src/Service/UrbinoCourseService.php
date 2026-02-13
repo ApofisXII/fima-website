@@ -33,9 +33,6 @@ class UrbinoCourseService
     public function update(UrbinoCourse $course, UrbinoCourseRequestDTO $dto): UrbinoCourse
     {
         $edition = $this->urbinoEditionRepository->find($dto->urbinoEditionId);
-        if (!$edition) {
-            throw new \Exception("Edizione non trovata");
-        }
 
         $course->setTeacherFullName($dto->teacherFullName);
         $course->setUrbinoEdition($edition);
@@ -49,10 +46,7 @@ class UrbinoCourseService
         $course->setIsSoldOut($dto->isSoldOut ?? false);
         $course->setIsAfternoonCourse($dto->isAfternoonCourse ?? false);
 
-        // Price handling: afternoon courses are free (null), otherwise convert euros to cents
-        if ($dto->isAfternoonCourse) {
-            $course->setPriceCents(null);
-        } elseif ($dto->priceEuros !== null) {
+        if ($dto->priceEuros !== null) {
             $course->setPriceCents((int) round($dto->priceEuros * 100));
         } else {
             $course->setPriceCents(null);
@@ -85,10 +79,8 @@ class UrbinoCourseService
 
         foreach ($diffCourses as $diff) {
             $course = $this->urbinoCourseRepository->find($diff['id']);
-            if ($course) {
-                $course->setOrdering($diff['new_position'] + 1);
-                $course->setUpdatedAt(new \DateTime());
-            }
+            $course->setOrdering($diff['new_position'] + 1);
+            $course->setUpdatedAt(new \DateTime());
         }
 
         $em->flush();
@@ -108,10 +100,6 @@ class UrbinoCourseService
     {
         $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-courses/';
         $imageName = $course->getId() . '.webp';
-
-        if (!$this->filesystem->exists($serverPath)) {
-            $this->filesystem->mkdir($serverPath, 0755);
-        }
 
         $uploadedFile->move($serverPath, $imageName);
 
@@ -138,7 +126,7 @@ class UrbinoCourseService
         return $course;
     }
 
-    public function softDelete(UrbinoCourse $course): UrbinoCourse
+    public function delete(UrbinoCourse $course): UrbinoCourse
     {
         $course->setIsDeleted(true);
         $course->setUpdatedAt(new \DateTime());

@@ -104,7 +104,7 @@ class AdminUrbinoEditionsController extends AbstractController
             ], 404);
         }
 
-        $this->urbinoEditionService->softDelete($edition);
+        $this->urbinoEditionService->delete($edition);
 
         return $this->json([
             "message" => "Edizione eliminata",

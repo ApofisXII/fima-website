@@ -18,6 +18,7 @@ class UrbinoEventRepository extends ServiceEntityRepository
 
     public function save(UrbinoEvent $entity): UrbinoEvent
     {
+        $entity->setUpdatedAt(new \DateTime());
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 

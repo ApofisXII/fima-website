@@ -57,10 +57,6 @@ final readonly class NewsService
         $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
         $imageName = $news->getId() . '.webp';
 
-        if (!$this->filesystem->exists($serverPath)) {
-            $this->filesystem->mkdir($serverPath, 0755);
-        }
-
         $uploadedFile->move($serverPath, $imageName);
 
         $news->setHasCoverImage(true);
