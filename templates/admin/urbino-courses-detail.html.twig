@@ -260,50 +260,50 @@
             });
         });
 
-        {% if course.isImageUploaded %}
-        const imageModal = document.getElementById('delete-image-modal');
-        const deleteImageBtn = document.getElementById('delete-image-btn');
-        const confirmImageBtn = document.getElementById('confirm-delete-image');
-        const cancelImageBtn = document.getElementById('cancel-delete-image');
+            {% if course.isImageUploaded %}
+            const imageModal = document.getElementById('delete-image-modal');
+            const deleteImageBtn = document.getElementById('delete-image-btn');
+            const confirmImageBtn = document.getElementById('confirm-delete-image');
+            const cancelImageBtn = document.getElementById('cancel-delete-image');
 
-        deleteImageBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            imageModal.style.display = 'flex';
-        });
-
-        cancelImageBtn.addEventListener('click', function() {
-            imageModal.style.display = 'none';
-        });
-
-        imageModal.addEventListener('click', function(e) {
-            if (e.target === imageModal) {
-                imageModal.style.display = 'none';
-            }
-        });
-
-        confirmImageBtn.addEventListener('click', function() {
-            imageModal.style.display = 'none';
-
-            fetch('{{ path('adminUrbinoCoursesDeleteImage', {'courseId': course.id}) }}', {
-                method: 'DELETE'
-            })
-            .then(async response => {
-                let responseDecoded = await response.json();
-                if (!response.ok) {
-                    alert(responseDecoded.message);
-                    return null;
-                }
-                return responseDecoded;
-            })
-            .then(data => {
-                if (!data) {
-                    return;
-                }
-                sessionStorage.setItem('courseDetailScrollPosition', window.scrollY);
-                location.reload();
+            deleteImageBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                imageModal.style.display = 'flex';
             });
-        });
-        {% endif %}
+
+            cancelImageBtn.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+            });
+
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+
+            confirmImageBtn.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+
+                fetch('{{ path('adminUrbinoCoursesDeleteImage', {'courseId': course.id}) }}', {
+                    method: 'DELETE'
+                })
+                .then(async response => {
+                    let responseDecoded = await response.json();
+                    if (!response.ok) {
+                        alert(responseDecoded.message);
+                        return null;
+                    }
+                    return responseDecoded;
+                })
+                .then(data => {
+                    if (!data) {
+                        return;
+                    }
+                    sessionStorage.setItem('courseDetailScrollPosition', window.scrollY);
+                    location.reload();
+                });
+            });
+            {% endif %}
         {% endif %}
     </script>
 

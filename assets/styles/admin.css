@@ -175,6 +175,7 @@ body {
     padding-right: 12px;
     background-color: var(--color-blue);
     border-radius: 8px;
+    text-wrap: nowrap;
 }
 
 .gg-table-link {
