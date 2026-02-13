@@ -137,4 +137,46 @@ class AdminUrbinoCoursesController extends AbstractController
             "message" => "Corso eliminato",
         ]);
     }
+
+    #[Route(path: '/upload-image/{courseId}', name: 'adminUrbinoCoursesUploadImage', methods: ['POST'], format: 'json')]
+    public function adminUrbinoCoursesUploadImage(int $courseId, #[MapUploadedFile] ?UploadedFile $teacherImage): Response
+    {
+        $course = $this->urbinoCourseRepository->findOneBy(["id" => $courseId]);
+
+        if (!$course) {
+            return $this->json([
+                "message" => "Corso non trovato",
+            ], 404);
+        }
+
+        if (!$teacherImage) {
+            return $this->json([
+                "message" => "Nessuna immagine selezionata",
+            ], 400);
+        }
+
+        $this->urbinoCourseService->saveTeacherImage($course, $teacherImage);
+
+        return $this->json([
+            "message" => "Immagine salvata",
+        ]);
+    }
+
+    #[Route(path: '/delete-image/{courseId}', name: 'adminUrbinoCoursesDeleteImage', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoCoursesDeleteImage(int $courseId): Response
+    {
+        $course = $this->urbinoCourseRepository->findOneBy(["id" => $courseId]);
+
+        if (!$course) {
+            return $this->json([
+                "message" => "Corso non trovato",
+            ], 404);
+        }
+
+        $this->urbinoCourseService->deleteTeacherImage($course);
+
+        return $this->json([
+            "message" => "Immagine eliminata",
+        ]);
+    }
 }

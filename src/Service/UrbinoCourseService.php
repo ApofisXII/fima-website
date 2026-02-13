@@ -106,7 +106,7 @@ class UrbinoCourseService
 
     public function saveTeacherImage(UrbinoCourse $course, UploadedFile $uploadedFile): UrbinoCourse
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-urbino-courses/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-courses/';
         $imageName = $course->getId() . '.webp';
 
         if (!$this->filesystem->exists($serverPath)) {
@@ -116,6 +116,23 @@ class UrbinoCourseService
         $uploadedFile->move($serverPath, $imageName);
 
         $course->setIsImageUploaded(true);
+        $this->urbinoCourseRepository->save($course);
+
+        return $course;
+    }
+
+    public function deleteTeacherImage(UrbinoCourse $course): UrbinoCourse
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-courses/';
+        $imageName = $course->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
+
+        if ($this->filesystem->exists($imagePath)) {
+            $this->filesystem->remove($imagePath);
+        }
+
+        $course->setIsImageUploaded(false);
+        $course->setUpdatedAt(new \DateTime());
         $this->urbinoCourseRepository->save($course);
 
         return $course;
