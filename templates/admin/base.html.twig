@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>FIMA | Admin{% block title %}{% endblock %}</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport">
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/logos/fav-icon.png') }}">
         {% block importmap %}{{ importmap('admin') }}{% endblock %}
     </head>
     <body>
@@ -11,7 +13,7 @@
             <div class="gg-main-header">
                 <div class="gg-main-header__top">
                     <a href="{{ path('adminDashboard') }}">
-                        <img class="gg-main-logo" src="{{ asset('images/fima-logo-blue.svg') }}" alt="Logo">
+                        <img class="gg-main-logo" src="{{ asset('images/logos/fima-logo-blue.svg') }}" alt="Logo">
                     </a>
 
                     <button class="gg-main-header__burger" onclick="toggleAdminMenu()">
