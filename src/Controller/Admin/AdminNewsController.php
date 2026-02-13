@@ -54,8 +54,9 @@ class AdminNewsController extends AbstractController
         $list = array_map(function ($item) {
             return [
                 "titleIt" => $item->getTitleIt(),
+                "isEvent" => $item->isEvent(),
                 "isPublic" => $item->isPublic(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
                 "newsDetailLink" => $this->generateUrl("adminNewsDetail", ["newsId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());
@@ -84,9 +85,13 @@ class AdminNewsController extends AbstractController
         $news = $this->newsRepository->findOneBy(["id" => $payload->newsId]);
 
         if (null === $news) {
-            $this->newsService->create($payload);
+            $news = $this->newsService->create($payload);
         } else {
-            $this->newsService->update($news, $payload);
+            $news = $this->newsService->update($news, $payload);
+        }
+
+        if ($coverImage) {
+            $this->newsService->saveCoverImage($news, $coverImage);
         }
 
         return $this->json([

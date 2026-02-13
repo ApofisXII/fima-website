@@ -2,19 +2,20 @@
 
 {% block body %}
 
-    <div class="gg-h1">Notizie</div>
+    <div class="gg-h1">Eventi Urbino</div>
 
     <div style="margin-bottom: 20px;">
-        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminNewsDetail') }}">+ Nuova notizia / evento</a>
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoEventsDetail') }}">+ Nuovo evento</a>
     </div>
 
     <table id="main-table">
         <thead>
         <tr>
             <th>Titolo</th>
-            <th>Tipo</th>
+            <th>Edizione</th>
+            <th>Data e ora</th>
             <th>Visibilità</th>
-            <th>Creata</th>
+            <th>Creato</th>
             <th></th>
         </tr>
         </thead>
@@ -31,30 +32,26 @@
         const table = new DataTable("#main-table", {
             serverSide: true,
             ajax: {
-                url: "{{ path('adminNewsListJson') }}",
+                url: "{{ path('adminUrbinoEventsListJson') }}",
             },
             ordering: false,
             columns: [
-                { data: "titleIt" },
-                { data: "isEvent" },
+                { data: "title" },
+                { data: "editionName" },
+                { data: "eventDatetime" },
                 { data: "isPublic" },
                 { data: "createdAt" },
-                { data: "newsDetailLink" },
+                { data: "eventDetailLink" },
             ],
             columnDefs: [
                 {
-                    targets: 1, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--event'>Evento</span>" : "<span class='chip chip--neutral'>Notizia</span>";
+                    targets: 3, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
                     }
                 },
                 {
-                    targets: 2, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
-                    }
-                },
-                {
-                    targets: 4, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>Modifica notizia</a>";
+                    targets: 5, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica evento</a>";
                     }
                 }
             ],

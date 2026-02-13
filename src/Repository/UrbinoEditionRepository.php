@@ -16,6 +16,14 @@ class UrbinoEditionRepository extends ServiceEntityRepository
         parent::__construct($registry, UrbinoEdition::class);
     }
 
+    public function save(UrbinoEdition $entity): UrbinoEdition
+    {
+        $entity->setUpdatedAt(new \DateTime());
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+        return $entity;
+    }
+
     public function findCurrentEdition(): ?UrbinoEdition
     {
         return $this->createQueryBuilder('u')

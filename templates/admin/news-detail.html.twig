@@ -2,34 +2,40 @@
 
 {% block body %}
 
-    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} news</div>
+    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} notizia</div>
 
     <form id="page-form" method="post" action="{{ path('adminNewsDetailSave') }}" enctype="multipart/form-data">
         <input type="hidden" name="newsId" value="{{ news ? news.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
-            <h3>Dettaglio notizia</h3>
-            <div class="secundary">{{ news ? "ID "~news.id }}</div>
+            <h3>{{ news ? (news.titleIt ~ ' - ' ~ news.titleEn) : 'Dettaglio notizia' }}</h3>
+{#            <div class="secundary">{{ news ? "ID "~news.id }}</div>#}
 
-            <label>Titolo (italiano)</label>
-            <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
+            <div class="gg-multilang-form">
+                <div>
+                    <label>Titolo (italiano)</label>
+                    <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
 
-            <label>Titolo (inglese)</label>
-            <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+                    <label>Corpo (italiano)</label>
+                    <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                </div>
 
-            <label>Corpo (italiano)</label>
-            <textarea name="bodyIt" class="tiny-area" placeholder="Content">{{ news ? news.bodyIt|raw }}</textarea>
+                <div>
+                    <label>Titolo (inglese)</label>
+                    <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
 
-            <label>Corpo (inglese)</label>
-            <textarea name="bodyEn" class="tiny-area" placeholder="Content">{{ news ? news.bodyEn|raw }}</textarea>
+                    <label>Corpo (inglese)</label>
+                    <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                </div>
+            </div>
 
         </div>
 
         <div class="box multi-detail-box gg-form">
-            <h3>Other details</h3>
+            <h3>Immagine</h3>
             <div class="columns">
                 <div>
-                    <label>Image</label>
+                    <label>Carica immagine</label>
                     <input type="file" name="cover_image" accept="image/*">
                     {% if news and news.hasCoverImage %}
                         <img class="tree-model-cover" alt="" src="{{ asset('uploads-news/'~news.id~'.webp') }}?v={{ random(1,9999) }}">
@@ -38,7 +44,29 @@
             </div>
         </div>
 
-        <button class="gg-submit-btn hoverizzato">Save data</button>
+        <div class="box multi-detail-box gg-form">
+            <h3>Impostazioni</h3>
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublic" value="1" {{ news and news.isPublic ? 'checked' }}>
+                    <span>Notizia visibile pubblicamente</span>
+                </label>
+
+                <label>
+                    <input type="checkbox" id="isEvent" name="isEvent" value="1" {{ news and news.isEvent ? 'checked' }} onchange="toggleEventDateTime()">
+                    <span>È un evento</span>
+                </label>
+            </div>
+
+            <div id="eventDateTimeContainer" style="{{ news and news.isEvent ? '' : 'display: none;' }}">
+                <label>Data e ora evento</label>
+                <input type="datetime-local" name="eventDatetime" id="eventDatetime" value="{{ news and news.eventDatetime ? news.eventDatetime|date('Y-m-d\\TH:i') }}">
+            </div>
+
+        </div>
+
+        <button class="gg-submit-btn hoverizzato">Salva notizia</button>
 
     </form>
 
@@ -46,9 +74,18 @@
 
 {% block js %}
 
-    <script src="https://cdn.tiny.cloud/1/pw9v13qg31fojqozs5wmm990o8oki0icqnk9a0qu3e8shthj/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/19quagaglhpufzna2p27cvo8kg2miu2f2flha91bl6aj5yqg/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script>
+        function toggleEventDateTime() {
+            const isEvent = document.getElementById('isEvent').checked;
+            const container = document.getElementById('eventDateTimeContainer');
+            container.style.display = isEvent ? 'block' : 'none';
+        }
+    </script>
 
     <script type="module">
+        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({
             selector: 'textarea',
             menubar: false,
@@ -57,6 +94,7 @@
             branding: false,
             paste_as_text: true,
             statusbar: false,
+            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
         });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {

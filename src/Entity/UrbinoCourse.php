@@ -57,6 +57,18 @@ class UrbinoCourse
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\Column]
+    private ?bool $is_image_uploaded = null;
+
+    #[ORM\Column]
+    private ?bool $is_afternoon_course = null;
+
+    #[ORM\Column]
+    private ?bool $is_deleted = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $price_cents = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +238,54 @@ class UrbinoCourse
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isImageUploaded(): ?bool
+    {
+        return $this->is_image_uploaded;
+    }
+
+    public function setIsImageUploaded(bool $is_image_uploaded): static
+    {
+        $this->is_image_uploaded = $is_image_uploaded;
+
+        return $this;
+    }
+
+    public function isAfternoonCourse(): ?bool
+    {
+        return $this->is_afternoon_course;
+    }
+
+    public function setIsAfternoonCourse(bool $is_afternoon_course): static
+    {
+        $this->is_afternoon_course = $is_afternoon_course;
+
+        return $this;
+    }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->is_deleted;
+    }
+
+    public function setIsDeleted(bool $is_deleted): static
+    {
+        $this->is_deleted = $is_deleted;
+
+        return $this;
+    }
+
+    public function getPriceCents(): ?int
+    {
+        return $this->price_cents;
+    }
+
+    public function setPriceCents(?int $price_cents): static
+    {
+        $this->price_cents = $price_cents;
 
         return $this;
     }

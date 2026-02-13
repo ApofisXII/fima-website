@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}FIMA • Fondazione Italiana per la Musica Antica</title>
-
+        <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport">
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/logos/fav-icon.png') }}">
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
     <body class="{{ 'urbino' in app.current_route ? 'body--urbino-section' }}">
         <div class="header-container">
             <header class="header">
-                <img class="header__logo" src="{{ asset('images/fima-logo.svg') }}" alt="FIMA Musica Antica">
+                <img class="header__logo" src="{{ asset('images/logos/fima-logo.svg') }}" alt="FIMA Musica Antica">
                 <nav class="header__nav">
                     <a class="header__nav-link" href="{{ path('indexLocalized') }}">Home</a>
                     <a class="header__nav-link" href="">Chi siamo</a>
@@ -24,7 +25,7 @@
                 <div class="uma-header">
                     <div>
                         <div class="uma-header__clip">
-                            <img class="uma-header__logo" src="{{ asset('images/uma-logos/uma-2026-colors.svg') }}" alt="Urbino Musica Antica Logo">
+                            <img class="uma-header__logo" src="{{ asset('images/logos/uma-logos/uma-2026-colors.svg') }}" alt="Urbino Musica Antica Logo">
                         </div>
                     </div>
                     <div class="uma-header__links">

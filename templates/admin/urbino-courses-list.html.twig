@@ -1,0 +1,130 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">Corsi Urbino</div>
+
+    <div style="margin-bottom: 20px;">
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoCoursesDetail') }}">+ Nuovo corso</a>
+    </div>
+
+    <table id="main-table">
+        <thead>
+        <tr>
+            <th class="reorder"></th>
+            <th>Docente</th>
+            <th>Materia</th>
+            <th>Edizione</th>
+            <th>Tipo</th>
+            <th>Stato</th>
+            <th>Creato</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        import DataTable from 'datatables.net-dt';
+        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+        import 'datatables.net-rowreorder-dt';
+        import 'datatables.net-rowreorder-dt/css/rowReorder.dataTables.min.css';
+
+        const table = new DataTable("#main-table", {
+            rowReorder: {
+                selector: 'td.reorder'
+            },
+            serverSide: true,
+            ajax: {
+                url: "{{ path('adminUrbinoCoursesListJson') }}",
+            },
+            ordering: false,
+            columns: [
+                { data: "id", className: "reorder" },
+                { data: "teacherFullName" },
+                { data: "subjectIt" },
+                { data: "editionName" },
+                { data: "isAfternoonCourse" },
+                { data: "isSoldOut" },
+                { data: "createdAt" },
+                { data: "courseDetailLink" },
+            ],
+            columnDefs: [
+                {
+                    className: 'reorder',
+                    render: () => '<span style="cursor: grab;">≡</span>',
+                    targets: 0
+                },
+                {
+                    targets: 4, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--event'>Pomeridiano</span>" : "<span class='chip chip--neutral'>Principale</span>";
+                    }
+                },
+                {
+                    targets: 5, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--deleted'>Sold out</span>" : "<span class='chip chip--visible'>Disponibile</span>";
+                    }
+                },
+                {
+                    targets: 7, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica corso</a>";
+                    }
+                }
+            ],
+            pageLength: 25,
+            language: {
+                search: "Cerca:",
+                lengthMenu: "Mostra _MENU_ risultati per pagina",
+                info: "Mostrati da _START_ a _END_ di _TOTAL_ risultati",
+                infoEmpty: "Nessun risultato disponibile",
+                infoFiltered: "(filtrati da _MAX_ risultati totali)",
+                paginate: {
+                    first: "Primo",
+                    last: "Ultimo",
+                    next: "Successivo",
+                    previous: "Precedente"
+                },
+                emptyTable: "Nessun dato disponibile nella tabella",
+                zeroRecords: "Nessun risultato trovato"
+            }
+        });
+
+        table.on('row-reorder', function (e, diff, edit) {
+            if (diff.length === 0) {
+                return false;
+            }
+
+            let diff_courses = [];
+            diff.forEach(function (row) {
+                const rowData = table.row(row.node).data();
+                diff_courses.push({
+                    id: rowData.id,
+                    old_position: row.oldPosition,
+                    new_position: row.newPosition
+                });
+            });
+
+            fetch("{{ path('adminUrbinoCoursesReorder') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ diff_courses: diff_courses })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ordinamento salvato');
+                table.ajax.reload(null, false);
+            })
+            .catch(error => {
+                console.error('Errore durante il salvataggio:', error);
+                table.ajax.reload();
+            });
+        });
+
+    </script>
+
+{% endblock %}

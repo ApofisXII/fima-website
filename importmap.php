@@ -31,16 +31,26 @@ return [
         'version' => '0.5.3',
     ],
     'datatables.net-dt' => [
-        'version' => '2.3.7',
+        'version' => '2.3.6',
     ],
     'jquery' => [
         'version' => '4.0.0',
     ],
     'datatables.net' => [
-        'version' => '2.3.7',
+        'version' => '2.3.6',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
-        'version' => '2.3.7',
+        'version' => '2.3.6',
+        'type' => 'css',
+    ],
+    'datatables.net-rowreorder-dt' => [
+        'version' => '1.5.1',
+    ],
+    'datatables.net-rowreorder' => [
+        'version' => '1.5.1',
+    ],
+    'datatables.net-rowreorder-dt/css/rowReorder.dataTables.min.css' => [
+        'version' => '1.5.1',
         'type' => 'css',
     ],
 ];
