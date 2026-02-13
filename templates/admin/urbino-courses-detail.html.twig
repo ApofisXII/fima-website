@@ -62,15 +62,11 @@
 
         <div class="box multi-detail-box gg-form">
             <h3>Immagine docente</h3>
-            <div class="columns">
-                <div>
-                    <label>Carica immagine</label>
-                    <input type="file" name="teacherImage" accept="image/*">
-                    {% if course and course.isImageUploaded %}
-                        <img class="gg-admin-copertina" alt="Foto docente" src="{{ asset('uploads-urbino-courses/'~course.id~'.webp') }}?v={{ random(1,9999) }}">
-                    {% endif %}
-                </div>
-            </div>
+            {% if course and course.isImageUploaded %}
+                <img class="gg-admin-copertina" alt="Foto docente" src="{{ asset('uploads-urbino-courses/'~course.id~'.webp') }}?v={{ random(1,9999) }}">
+            {% endif %}
+            <label>Carica immagine</label>
+            <input type="file" name="teacherImage" accept="image/*">
         </div>
 
         <div class="box multi-detail-box gg-form">
