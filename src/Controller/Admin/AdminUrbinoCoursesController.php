@@ -62,7 +62,7 @@ class AdminUrbinoCoursesController extends AbstractController
                 "teacherFullName" => $item->getTeacherFullName(),
                 "categoryName" => $item->getUrbinoCourseCategory()?->getNameIt(),
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
-                "isAfternoonCourse" => $item->isAfternoonCourse(),
+                "scheduleType" => $item->getScheduleType(),
                 "isSoldOut" => $item->isSoldOut(),
                 "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
                 "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),

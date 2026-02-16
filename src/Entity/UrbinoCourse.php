@@ -9,6 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoCourseRepository::class)]
 class UrbinoCourse
 {
+    public const SCHEDULE_TYPE_MAIN = "main";
+    public const SCHEDULE_TYPE_AFTERNOON = "afternoon";
+    public const SCHEDULE_TYPES = [
+        self::SCHEDULE_TYPE_MAIN,
+        self::SCHEDULE_TYPE_AFTERNOON,
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -58,8 +65,8 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_image_uploaded = null;
 
-    #[ORM\Column]
-    private ?bool $is_afternoon_course = null;
+    #[ORM\Column(length: 255)]
+    private ?string $schedule_type = null;
 
     #[ORM\Column]
     private ?bool $is_deleted = null;
@@ -240,14 +247,14 @@ class UrbinoCourse
         return $this;
     }
 
-    public function isAfternoonCourse(): ?bool
+    public function getScheduleType(): ?string
     {
-        return $this->is_afternoon_course;
+        return $this->schedule_type;
     }
 
-    public function setIsAfternoonCourse(bool $is_afternoon_course): static
+    public function setScheduleType(string $schedule_type): static
     {
-        $this->is_afternoon_course = $is_afternoon_course;
+        $this->schedule_type = $schedule_type;
 
         return $this;
     }

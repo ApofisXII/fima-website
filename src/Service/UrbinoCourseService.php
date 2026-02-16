@@ -7,6 +7,7 @@ use App\Entity\UrbinoCourse;
 use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
+use App\Utils\ImageUtils;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,6 +22,7 @@ class UrbinoCourseService
         private readonly SluggerInterface $slugger,
         private readonly ParameterBagInterface $parameterBag,
         private readonly Filesystem $filesystem,
+        private readonly ImageUtils $imageUtils,
     ) {}
 
     public function create(UrbinoCourseRequestDTO $dto): UrbinoCourse
@@ -28,7 +30,8 @@ class UrbinoCourseService
         $course = new UrbinoCourse();
         $course->setCreatedAt(new \DateTime());
         $course->setIsImageUploaded(false);
-        $course->setIsAfternoonCourse(false);
+        $course->setScheduleType(UrbinoCourse::SCHEDULE_TYPE_MAIN);
+        $course->setIsDeleted(false);
         return $this->update($course, $dto);
     }
 
@@ -46,7 +49,7 @@ class UrbinoCourseService
         $course->setBioDescriptionEn($dto->bioDescriptionEn);
         $course->setIsPreselectionRequired($dto->isPreselectionRequired ?? false);
         $course->setIsSoldOut($dto->isSoldOut ?? false);
-        $course->setIsAfternoonCourse($dto->isAfternoonCourse ?? false);
+        $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_MAIN);
 
         if ($dto->priceEuros !== null) {
             $course->setPriceCents((int) round($dto->priceEuros * 100));
@@ -102,8 +105,10 @@ class UrbinoCourseService
     {
         $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-courses/';
         $imageName = $course->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
 
         $uploadedFile->move($serverPath, $imageName);
+        $this->imageUtils->compressImage($imagePath);
 
         $course->setIsImageUploaded(true);
         $this->urbinoCourseRepository->save($course);

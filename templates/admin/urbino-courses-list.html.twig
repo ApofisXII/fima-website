@@ -47,7 +47,7 @@
                 { data: "teacherFullName" },
                 { data: "categoryName" },
                 { data: "editionName" },
-                { data: "isAfternoonCourse" },
+                { data: "scheduleType" },
                 { data: "isSoldOut" },
                 { data: "createdAt" },
                 { data: "courseDetailLink" },
@@ -60,7 +60,7 @@
                 },
                 {
                     targets: 4, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--event'>Pomeridiano</span>" : "<span class='chip chip--neutral'>Principale</span>";
+                        return data === 'afternoon' ? "<span class='chip chip--event'>Pomeridiano</span>" : "<span class='chip chip--neutral'>Principale</span>";
                     }
                 },
                 {

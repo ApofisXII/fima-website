@@ -99,4 +99,48 @@ class AdminNewsController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/upload-image/{newsId}', name: 'adminNewsUploadImage', methods: ['POST'], format: 'json')]
+    public function adminNewsUploadImage(Request $request, int $newsId): Response
+    {
+        $news = $this->newsRepository->findOneBy(["id" => $newsId]);
+
+        if (!$news) {
+            return $this->json([
+                "message" => "Notizia non trovata",
+            ], 404);
+        }
+
+        $uploadedFile = $request->files->get('coverImage');
+
+        if (!$uploadedFile) {
+            return $this->json([
+                "message" => "Nessun file caricato",
+            ], 400);
+        }
+
+        $this->newsService->saveCoverImage($news, $uploadedFile);
+
+        return $this->json([
+            "message" => "Immagine caricata",
+        ]);
+    }
+
+    #[Route(path: '/delete-image/{newsId}', name: 'adminNewsDeleteImage', methods: ['DELETE'], format: 'json')]
+    public function adminNewsDeleteImage(int $newsId): Response
+    {
+        $news = $this->newsRepository->findOneBy(["id" => $newsId]);
+
+        if (!$news) {
+            return $this->json([
+                "message" => "Notizia non trovata",
+            ], 404);
+        }
+
+        $this->newsService->deleteCoverImage($news);
+
+        return $this->json([
+            "message" => "Immagine eliminata",
+        ]);
+    }
+
 }

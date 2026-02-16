@@ -6,18 +6,26 @@ use App\DTO\Admin\UrbinoEventRequestDTO;
 use App\Entity\UrbinoEvent;
 use App\Repository\UrbinoEditionRepository;
 use App\Repository\UrbinoEventRepository;
+use App\Utils\ImageUtils;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UrbinoEventService
 {
     public function __construct(
         private readonly UrbinoEventRepository $urbinoEventRepository,
         private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly Filesystem $filesystem,
+        private readonly ImageUtils $imageUtils,
     ) {}
 
     public function create(UrbinoEventRequestDTO $dto): UrbinoEvent
     {
         $event = new UrbinoEvent();
         $event->setCreatedAt(new \DateTime());
+        $event->setHasCoverImage(false);
         return $this->update($event, $dto);
     }
 
@@ -51,5 +59,38 @@ class UrbinoEventService
         $event->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEventRepository->save($event);
+    }
+
+    public function saveCoverImage(UrbinoEvent $event, UploadedFile $uploadedFile): UrbinoEvent
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $imageName = $event->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
+
+        $uploadedFile->move($serverPath, $imageName);
+        $this->imageUtils->compressImage($imagePath);
+
+        $event->setHasCoverImage(true);
+        $event->setUpdatedAt(new \DateTime());
+        $this->urbinoEventRepository->save($event);
+
+        return $event;
+    }
+
+    public function deleteCoverImage(UrbinoEvent $event): UrbinoEvent
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $imageName = $event->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
+
+        if ($this->filesystem->exists($imagePath)) {
+            $this->filesystem->remove($imagePath);
+        }
+
+        $event->setHasCoverImage(false);
+        $event->setUpdatedAt(new \DateTime());
+        $this->urbinoEventRepository->save($event);
+
+        return $event;
     }
 }

@@ -31,6 +31,28 @@
 
         </div>
 
+        <div class="box multi-detail-box gg-form">
+            <h3>Informazioni per i partecipanti</h3>
+
+            <div class="gg-multilang-form">
+                <div>
+                    <label>Come iscriversi (italiano)</label>
+                    <textarea name="enrollmentInfoIt" class="tiny-area" placeholder="Scrivi qui le informazioni su come iscriversi (italiano)" required>{{ edition ? edition.enrollmentInfoIt|raw }}</textarea>
+
+                    <label>Dove alloggiare (italiano)</label>
+                    <textarea name="accommodationInfoIt" class="tiny-area" placeholder="Scrivi qui le informazioni sull'alloggio (italiano)" required>{{ edition ? edition.accommodationInfoIt|raw }}</textarea>
+                </div>
+
+                <div>
+                    <label>Come iscriversi (inglese)</label>
+                    <textarea name="enrollmentInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni su come iscriversi (inglese)" required>{{ edition ? edition.enrollmentInfoEn|raw }}</textarea>
+
+                    <label>Dove alloggiare (inglese)</label>
+                    <textarea name="accommodationInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni sull'alloggio (inglese)" required>{{ edition ? edition.accommodationInfoEn|raw }}</textarea>
+                </div>
+            </div>
+        </div>
+
         <div class="gg-btn-group">
             <button type="submit" class="gg-submit-btn hoverizzato">Salva edizione</button>
             {% if edition %}
@@ -56,9 +78,24 @@
 
 {% block js %}
 
+    <script src="https://cdn.tiny.cloud/1/19quagaglhpufzna2p27cvo8kg2miu2f2flha91bl6aj5yqg/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
     <script type="module">
+        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            toolbar: 'bold underline link bullist numlist removeformat',
+            plugins: 'link | lists | paste',
+            branding: false,
+            paste_as_text: true,
+            statusbar: false,
+            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
+        });
+
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            tinymce.triggerSave(true, true);
 
             const formData = new FormData(e.target);
 
@@ -70,7 +107,11 @@
                 editionName: formData.get('editionName'),
                 year: parseInt(formData.get('year')),
                 periodDescription: formData.get('periodDescription') || null,
-                isPublicVisible: isPublicVisible
+                isPublicVisible: isPublicVisible,
+                enrollmentInfoIt: formData.get('enrollmentInfoIt'),
+                enrollmentInfoEn: formData.get('enrollmentInfoEn'),
+                accommodationInfoIt: formData.get('accommodationInfoIt'),
+                accommodationInfoEn: formData.get('accommodationInfoEn')
             };
 
             fetch('{{ path('adminUrbinoEditionsDetailSave') }}', {

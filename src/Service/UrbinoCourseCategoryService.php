@@ -14,6 +14,18 @@ final readonly class UrbinoCourseCategoryService
 
     public function create(UrbinoCourseCategoryRequestDTO $payload): UrbinoCourseCategory
     {
+        // Controlla se esiste già una categoria con lo stesso nome italiano
+        $existingCategory = $this->urbinoCourseCategoryRepository->createQueryBuilder('c')
+            ->andWhere('c.name_it = :nameIt')
+            ->andWhere('c.is_deleted = false')
+            ->setParameter('nameIt', $payload->nameIt)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if ($existingCategory) {
+            throw new \Exception('Esiste già una categoria con questo nome');
+        }
+
         $category = (new UrbinoCourseCategory())
             ->setNameIt($payload->nameIt)
             ->setNameEn($payload->nameEn)

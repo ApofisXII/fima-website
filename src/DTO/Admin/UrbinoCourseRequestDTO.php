@@ -2,6 +2,7 @@
 
 namespace App\DTO\Admin;
 
+use App\Entity\UrbinoCourse;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UrbinoCourseRequestDTO
@@ -24,7 +25,11 @@ class UrbinoCourseRequestDTO
         public ?string $bioDescriptionEn = null,
         public ?bool $isPreselectionRequired = false,
         public ?bool $isSoldOut = false,
-        public ?bool $isAfternoonCourse = false,
+
+        #[Assert\NotBlank(message: "Il tipo di orario è obbligatorio.")]
+        #[Assert\Choice(choices: UrbinoCourse::SCHEDULE_TYPES, message: "Il tipo di orario selezionato non è valido.")]
+        public ?string $scheduleType = null,
+
         public ?float $priceEuros = null,
     ) {}
 }

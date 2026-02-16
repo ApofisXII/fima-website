@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UrbinoEditionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UrbinoEditionRepository::class)]
@@ -33,6 +34,18 @@ class UrbinoEdition
 
     #[ORM\Column]
     private ?bool $is_public_visible = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $enrollment_info_it = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $enrollment_info_en = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $accommodation_info_it = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $accommodation_info_en = null;
 
     public function getId(): ?int
     {
@@ -119,6 +132,54 @@ class UrbinoEdition
     public function setIsPublicVisible(bool $is_public_visible): static
     {
         $this->is_public_visible = $is_public_visible;
+
+        return $this;
+    }
+
+    public function getEnrollmentInfoIt(): ?string
+    {
+        return $this->enrollment_info_it;
+    }
+
+    public function setEnrollmentInfoIt(string $enrollment_info_it): static
+    {
+        $this->enrollment_info_it = $enrollment_info_it;
+
+        return $this;
+    }
+
+    public function getEnrollmentInfoEn(): ?string
+    {
+        return $this->enrollment_info_en;
+    }
+
+    public function setEnrollmentInfoEn(string $enrollment_info_en): static
+    {
+        $this->enrollment_info_en = $enrollment_info_en;
+
+        return $this;
+    }
+
+    public function getAccommodationInfoIt(): ?string
+    {
+        return $this->accommodation_info_it;
+    }
+
+    public function setAccommodationInfoIt(string $accommodation_info_it): static
+    {
+        $this->accommodation_info_it = $accommodation_info_it;
+
+        return $this;
+    }
+
+    public function getAccommodationInfoEn(): ?string
+    {
+        return $this->accommodation_info_en;
+    }
+
+    public function setAccommodationInfoEn(string $accommodation_info_en): static
+    {
+        $this->accommodation_info_en = $accommodation_info_en;
 
         return $this;
     }

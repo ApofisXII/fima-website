@@ -79,17 +79,23 @@ class AdminUrbinoCategoriesController extends AbstractController
     #[Route(path: '/detail', name: 'adminUrbinoCategoriesDetailSave', methods: ['POST'], format: 'json')]
     public function adminUrbinoCategoriesDetailSave(#[MapRequestPayload] UrbinoCourseCategoryRequestDTO $payload): Response
     {
-        $category = $this->urbinoCourseCategoryRepository->findOneBy(["id" => $payload->categoryId]);
+        try {
+            $category = $this->urbinoCourseCategoryRepository->findOneBy(["id" => $payload->categoryId]);
 
-        if (null === $category) {
-            $this->urbinoCourseCategoryService->create($payload);
-        } else {
-            $this->urbinoCourseCategoryService->update($category, $payload);
+            if (null === $category) {
+                $this->urbinoCourseCategoryService->create($payload);
+            } else {
+                $this->urbinoCourseCategoryService->update($category, $payload);
+            }
+
+            return $this->json([
+                "message" => "Categoria salvata",
+            ]);
+        } catch (\Exception $e) {
+            return $this->json([
+                "message" => $e->getMessage(),
+            ], 400);
         }
-
-        return $this->json([
-            "message" => "Categoria salvata",
-        ]);
     }
 
     #[Route(path: '/delete/{categoryId}', name: 'adminUrbinoCategoriesDelete', methods: ['DELETE'], format: 'json')]

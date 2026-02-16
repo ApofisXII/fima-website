@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="gg-form-row gg-form-row--two">
+            <div class="gg-form-row gg-form-row--three">
                 <div class="gg-form-row__year">
                     <label>Categoria</label>
                     <select name="urbinoCategoryId" id="category-select" required>
@@ -40,6 +40,14 @@
                             </option>
                         {% endfor %}
                         <option value="__create_new__" style="font-weight: bold; color: var(--color-blue);">+ Crea nuova categoria</option>
+                    </select>
+                </div>
+
+                <div class="gg-form-row__year">
+                    <label>Tipo di corso</label>
+                    <select name="scheduleType" required>
+                        <option value="main" {{ course and course.scheduleType == 'main' ? 'selected' }}>Principale</option>
+                        <option value="afternoon" {{ course and course.scheduleType == 'afternoon' ? 'selected' }}>Pomeridiano</option>
                     </select>
                 </div>
 
@@ -90,11 +98,6 @@
             <h3>Impostazioni</h3>
 
             <div class="gg-checkbox-group">
-                <label>
-                    <input type="checkbox" name="isAfternoonCourse" value="1" {{ course and course.isAfternoonCourse ? 'checked' }}>
-                    <span>Corso pomeridiano</span>
-                </label>
-
                 <label>
                     <input type="checkbox" name="isPreselectionRequired" value="1" {{ course and course.isPreselectionRequired ? 'checked' }}>
                     <span>Richiede preselezione</span>

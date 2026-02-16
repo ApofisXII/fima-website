@@ -366,7 +366,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 }
 
 .gg-form-row--three .gg-form-row__year {
-    width: 200px;
+    flex: 1;
 }
 
 .gg-form-row--two .gg-form-row__main {
@@ -459,6 +459,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
+    padding-top: 10px;
 }
 
 .gg-modal-btn {
@@ -522,15 +523,17 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-modal-form-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 10px 15px;
+    border-radius: 10px;
     box-sizing: border-box;
-    font-size: 0.95rem;
+    border: none;
+    background-color: var(--color-selected);
+    font-size: inherit;
+    outline: none;
 }
 
-.gg-modal-form-group input:focus {
-    outline: none;
+.gg-modal-form-group input::placeholder {
+    font-size: 0.9rem;
 }
 
 .gg-admin-copertina {

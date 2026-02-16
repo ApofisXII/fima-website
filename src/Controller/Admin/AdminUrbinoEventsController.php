@@ -115,4 +115,48 @@ class AdminUrbinoEventsController extends AbstractController
             "message" => "Evento eliminato",
         ]);
     }
+
+    #[Route(path: '/upload-image/{eventId}', name: 'adminUrbinoEventsUploadImage', methods: ['POST'], format: 'json')]
+    public function adminUrbinoEventsUploadImage(Request $request, int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->findOneBy(["id" => $eventId]);
+
+        if (!$event) {
+            return $this->json([
+                "message" => "Evento non trovato",
+            ], 404);
+        }
+
+        $uploadedFile = $request->files->get('coverImage');
+
+        if (!$uploadedFile) {
+            return $this->json([
+                "message" => "Nessun file caricato",
+            ], 400);
+        }
+
+        $this->urbinoEventService->saveCoverImage($event, $uploadedFile);
+
+        return $this->json([
+            "message" => "Immagine caricata",
+        ]);
+    }
+
+    #[Route(path: '/delete-image/{eventId}', name: 'adminUrbinoEventsDeleteImage', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEventsDeleteImage(int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->findOneBy(["id" => $eventId]);
+
+        if (!$event) {
+            return $this->json([
+                "message" => "Evento non trovato",
+            ], 404);
+        }
+
+        $this->urbinoEventService->deleteCoverImage($event);
+
+        return $this->json([
+            "message" => "Immagine eliminata",
+        ]);
+    }
 }
