@@ -18,12 +18,19 @@
 
     <script type="module">
         let categoriesData = [];
+        let openCategories = new Set(); // Track which categories are open
 
         // Fetch data
         async function loadData() {
             const response = await fetch('{{ path('adminUrbinoCoursesListJson') }}');
             const data = await response.json();
             categoriesData = data.categories;
+
+            // Open all categories by default on first load
+            if (openCategories.size === 0) {
+                categoriesData.forEach(cat => openCategories.add(cat.id));
+            }
+
             renderCategories();
         }
 
@@ -40,16 +47,20 @@
 
                 const header = document.createElement('div');
                 header.className = 'category-header';
+
+                const isOpen = openCategories.has(category.id);
+                const toggleClass = isOpen ? 'class="category-toggle open"' : 'class="category-toggle"';
+
                 header.innerHTML = `
                     <span class="category-drag-handle">≡</span>
                     <span class="category-name">${category.nameIt} / ${category.nameEn}</span>
-                    <span class="category-count">${category.courses.length} corsi</span>
-                    <span class="category-toggle"></span>
+                    <span class="category-count">${category.courses.length} ${category.courses.length === 1 ? 'corso' : 'corsi'}</span>
+                    <span ${toggleClass}></span>
                 `;
 
                 const coursesContainer = document.createElement('div');
                 coursesContainer.className = 'category-courses';
-                coursesContainer.style.display = 'none';
+                coursesContainer.style.display = isOpen ? 'block' : 'none';
 
                 if (category.courses.length > 0) {
                     const table = document.createElement('table');
@@ -103,8 +114,17 @@
                 header.addEventListener('click', (e) => {
                     if (e.target.closest('.category-drag-handle')) return;
                     const isVisible = coursesContainer.style.display !== 'none';
-                    coursesContainer.style.display = isVisible ? 'none' : 'block';
-                    header.querySelector('.category-toggle').classList.toggle('open', !isVisible);
+                    const newState = !isVisible;
+
+                    coursesContainer.style.display = newState ? 'block' : 'none';
+                    header.querySelector('.category-toggle').classList.toggle('open', newState);
+
+                    // Update open categories set
+                    if (newState) {
+                        openCategories.add(category.id);
+                    } else {
+                        openCategories.delete(category.id);
+                    }
                 });
 
                 categoryEl.appendChild(header);
@@ -183,7 +203,7 @@
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
         }
 
         .category-header {
@@ -191,13 +211,13 @@
             align-items: center;
             gap: 15px;
             padding: 15px 20px;
-            background: #f8f9fa;
+            background: white;
             cursor: pointer;
             user-select: none;
         }
 
         .category-header:hover {
-            background: #e9ecef;
+            background: #f8f9fa;
         }
 
         .category-drag-handle {
@@ -224,9 +244,9 @@
         .category-toggle {
             width: 0;
             height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 8px solid #6c757d;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid #6c757d;
             transition: transform 0.2s ease;
         }
 
@@ -241,28 +261,29 @@
         .courses-table {
             width: 100%;
             border-collapse: collapse;
+            border-spacing: 0;
         }
 
         .courses-table thead {
-            background: #f8f9fa;
+            background: white;
         }
 
         .courses-table th {
             text-align: left;
-            padding: 12px 15px;
+            padding: 10px 18px;
             font-weight: 600;
             font-size: 14px;
-            color: #495057;
-            border-bottom: 2px solid #dee2e6;
+            color: #333;
+            border-bottom: 1px solid #ccc;
         }
 
         .courses-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #dee2e6;
+            padding: 10px 18px;
+            border-top: 1px solid #e0e0e0;
         }
 
         .courses-table tbody tr:hover {
-            background: #f8f9fa;
+            background: #f9f9f9;
         }
 
         .courses-table .reorder {

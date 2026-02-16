@@ -789,6 +789,10 @@ h3 {
     color: var(--color-blue);
 }
 
+.category-drag-handle {
+    margin-top: -3px;
+}
+
 .dt-layout-table {
     overflow-x: scroll;
 }
