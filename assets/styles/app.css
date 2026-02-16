@@ -471,3 +471,24 @@ h2 {
     width: 100%;
     opacity: 0.2;
 }
+
+.uma-activities {
+    display: flex;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.uma-activity {
+    flex: 1;
+    text-align: center;
+}
+
+.uma-activity__logo {
+    height: 100px;
+    margin: 20px;
+}
+
+.btn--uma-activity {
+    display: inline-block;
+    margin-top: 20px;
+}
