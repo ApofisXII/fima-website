@@ -85,7 +85,7 @@
                         const row = document.createElement('tr');
                         row.dataset.courseId = course.id;
                         row.innerHTML = `
-                            <td class="reorder"><span style="cursor: grab;">≡</span></td>
+                            <td class="reorder"><span style="cursor: grab; font-size: 18px; color: dimgray">≡</span></td>
                             <td>${course.teacherFullName}</td>
                             <td>${course.editionName}</td>
                             <td>${course.scheduleType === 'afternoon' ? '<span class="chip chip--event">Pomeridiano</span>' : '<span class="chip chip--neutral">Principale</span>'}</td>
