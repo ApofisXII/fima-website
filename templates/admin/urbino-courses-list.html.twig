@@ -19,14 +19,17 @@
     <script type="module">
         let categoriesData = [];
         let openCategories = new Set();
+        let isDragging = false;
+        let isFirstLoad = true;
 
         async function loadData() {
             const response = await fetch('{{ path('adminUrbinoCoursesListJson') }}');
             const data = await response.json();
             categoriesData = data.categories;
 
-            if (openCategories.size === 0) {
+            if (isFirstLoad) {
                 categoriesData.forEach(cat => openCategories.add(cat.id));
+                isFirstLoad = false;
             }
 
             renderCategories();
@@ -108,6 +111,8 @@
 
                 header.addEventListener('click', (e) => {
                     if (e.target.closest('.category-drag-handle')) return;
+                    if (isDragging) return;
+
                     const isVisible = coursesContainer.style.display !== 'none';
                     const newState = !isVisible;
 
@@ -129,8 +134,14 @@
             new Sortable(container, {
                 handle: '.category-drag-handle',
                 animation: 150,
+                onStart: function(evt) {
+                    isDragging = true;
+                },
                 onEnd: function(evt) {
                     handleCategoryReorder();
+                    setTimeout(() => {
+                        isDragging = false;
+                    }, 100);
                 }
             });
         }
