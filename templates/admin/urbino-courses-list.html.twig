@@ -18,15 +18,13 @@
 
     <script type="module">
         let categoriesData = [];
-        let openCategories = new Set(); // Track which categories are open
+        let openCategories = new Set();
 
-        // Fetch data
         async function loadData() {
             const response = await fetch('{{ path('adminUrbinoCoursesListJson') }}');
             const data = await response.json();
             categoriesData = data.categories;
 
-            // Open all categories by default on first load
             if (openCategories.size === 0) {
                 categoriesData.forEach(cat => openCategories.add(cat.id));
             }
@@ -34,7 +32,6 @@
             renderCategories();
         }
 
-        // Render categories accordion
         function renderCategories() {
             const container = document.getElementById('categories-container');
             container.innerHTML = '';
@@ -98,7 +95,6 @@
 
                     coursesContainer.appendChild(table);
 
-                    // Initialize Sortable for courses
                     new Sortable(tbody, {
                         handle: '.reorder',
                         animation: 150,
@@ -110,7 +106,6 @@
                     coursesContainer.innerHTML = '<p class="no-courses">Nessun corso in questa categoria</p>';
                 }
 
-                // Toggle accordion
                 header.addEventListener('click', (e) => {
                     if (e.target.closest('.category-drag-handle')) return;
                     const isVisible = coursesContainer.style.display !== 'none';
@@ -119,7 +114,6 @@
                     coursesContainer.style.display = newState ? 'block' : 'none';
                     header.querySelector('.category-toggle').classList.toggle('open', newState);
 
-                    // Update open categories set
                     if (newState) {
                         openCategories.add(category.id);
                     } else {
@@ -132,7 +126,6 @@
                 container.appendChild(categoryEl);
             });
 
-            // Initialize Sortable for categories
             new Sortable(container, {
                 handle: '.category-drag-handle',
                 animation: 150,
@@ -142,7 +135,6 @@
             });
         }
 
-        // Handle category reorder
         async function handleCategoryReorder() {
             const container = document.getElementById('categories-container');
             const categoryElements = container.querySelectorAll('.category-accordion');
@@ -168,11 +160,10 @@
                     body: JSON.stringify({ diff_categories })
                 });
 
-                await loadData(); // Reload to update
+                await loadData();
             }
         }
 
-        // Handle course reorder within category
         async function handleCourseReorder(categoryId, tbody) {
             const rows = tbody.querySelectorAll('tr');
             const diff_courses = [];
@@ -182,7 +173,7 @@
                 diff_courses.push({
                     id: courseId,
                     new_position: newIndex,
-                    old_position: newIndex // We don't track old position for now
+                    old_position: newIndex
                 });
             });
 
@@ -193,7 +184,6 @@
             });
         }
 
-        // Load initial data
         loadData();
     </script>
 

@@ -38,7 +38,6 @@ class AdminUrbinoCoursesController extends AbstractController
     #[Route(path: '/json', name: 'adminUrbinoCoursesListJson')]
     public function adminUrbinoCoursesListJson(): Response
     {
-        // Get all categories ordered
         $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("cat")
             ->andWhere("cat.is_deleted = false")
             ->orderBy("cat.ordering", "ASC")
@@ -49,7 +48,6 @@ class AdminUrbinoCoursesController extends AbstractController
         $categoriesData = [];
 
         foreach ($categories as $category) {
-            // Get courses for this category
             $courses = $this->urbinoCourseRepository->createQueryBuilder("c")
                 ->leftJoin("c.urbino_edition", "e")
                 ->andWhere("c.urbino_course_category = :categoryId")

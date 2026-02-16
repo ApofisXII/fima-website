@@ -19,10 +19,8 @@ final class Version20260216145230 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // 1. Add ordering column
         $this->addSql('ALTER TABLE urbino_course_category ADD ordering INT DEFAULT NULL');
 
-        // 2. Initialize ordering for existing categories (ordered by name_it)
         $this->addSql('
             SET @row_number = 0;
             UPDATE urbino_course_category
