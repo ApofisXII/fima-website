@@ -36,44 +36,52 @@ class AdminUrbinoCoursesController extends AbstractController
     }
 
     #[Route(path: '/json', name: 'adminUrbinoCoursesListJson')]
-    public function adminUrbinoCoursesListJson(#[MapQueryString] DataTableRequestDTO $payload): Response
+    public function adminUrbinoCoursesListJson(): Response
     {
-        $qb = $this->urbinoCourseRepository->createQueryBuilder("c")
-            ->leftJoin("c.urbino_edition", "e")
-            ->orderBy("c.ordering", "asc")
-            ->addOrderBy("c.id", "desc");
+        // Get all categories ordered
+        $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("cat")
+            ->andWhere("cat.is_deleted = false")
+            ->orderBy("cat.ordering", "ASC")
+            ->addOrderBy("cat.id", "ASC")
+            ->getQuery()
+            ->getResult();
 
-        if ($payload->search["value"]) {
-            $search = $payload->search["value"];
-            $qb->andWhere("c.teacher_full_name LIKE :search OR e.edition_name LIKE :search")
-                ->setParameter("search", "%".$search."%");
+        $categoriesData = [];
+
+        foreach ($categories as $category) {
+            // Get courses for this category
+            $courses = $this->urbinoCourseRepository->createQueryBuilder("c")
+                ->leftJoin("c.urbino_edition", "e")
+                ->andWhere("c.urbino_course_category = :categoryId")
+                ->andWhere("c.is_deleted = false")
+                ->setParameter("categoryId", $category->getId())
+                ->orderBy("c.ordering", "ASC")
+                ->addOrderBy("c.id", "DESC")
+                ->getQuery()
+                ->getResult();
+
+            $coursesData = array_map(function ($item) {
+                return [
+                    "id" => $item->getId(),
+                    "teacherFullName" => $item->getTeacherFullName(),
+                    "editionName" => $item->getUrbinoEdition()?->getEditionName(),
+                    "scheduleType" => $item->getScheduleType(),
+                    "isSoldOut" => $item->isSoldOut(),
+                    "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                    "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
+                ];
+            }, $courses);
+
+            $categoriesData[] = [
+                "id" => $category->getId(),
+                "nameIt" => $category->getNameIt(),
+                "nameEn" => $category->getNameEn(),
+                "courses" => $coursesData,
+            ];
         }
 
-        $adapter = new QueryAdapter($qb->getQuery());
-        $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
-            adapter: $adapter,
-            currentPage: floor($payload->start / $payload->length) + 1,
-            maxPerPage: $payload->length,
-        );
-
-        $list = array_map(function ($item) {
-            return [
-                "id" => $item->getId(),
-                "teacherFullName" => $item->getTeacherFullName(),
-                "categoryName" => $item->getUrbinoCourseCategory()?->getNameIt(),
-                "editionName" => $item->getUrbinoEdition()?->getEditionName(),
-                "scheduleType" => $item->getScheduleType(),
-                "isSoldOut" => $item->isSoldOut(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
-                "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
-            ];
-        }, (array) $pagerfanta->getCurrentPageResults());
-
         return $this->json([
-            "data" => $list,
-            "draw" => $payload->draw,
-            "recordsFiltered" => $pagerfanta->getNbResults(),
-            "recordsTotal" => $pagerfanta->getNbResults(),
+            "categories" => $categoriesData,
         ]);
     }
 

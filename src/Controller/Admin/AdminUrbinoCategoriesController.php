@@ -115,4 +115,17 @@ class AdminUrbinoCategoriesController extends AbstractController
             "message" => "Categoria eliminata",
         ]);
     }
+
+    #[Route(path: '/reorder', name: 'adminUrbinoCategoriesReorder', methods: ['POST'], format: 'json')]
+    public function adminUrbinoCategoriesReorder(Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $diffCategories = $data['diff_categories'] ?? [];
+
+        $this->urbinoCourseCategoryService->updateOrdering($diffCategories);
+
+        return $this->json([
+            "message" => "Ordinamento salvato",
+        ]);
+    }
 }

@@ -26,10 +26,17 @@ final readonly class UrbinoCourseCategoryService
             throw new \Exception('Esiste già una categoria con questo nome');
         }
 
+        // Calculate ordering
+        $maxOrdering = $this->urbinoCourseCategoryRepository->createQueryBuilder('c')
+            ->select('MAX(c.ordering)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
         $category = (new UrbinoCourseCategory())
             ->setNameIt($payload->nameIt)
             ->setNameEn($payload->nameEn)
             ->setIsDeleted(false)
+            ->setOrdering(($maxOrdering ?? 0) + 1)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime());
 
@@ -52,5 +59,28 @@ final readonly class UrbinoCourseCategoryService
         $category->setUpdatedAt(new \DateTime());
 
         return $this->urbinoCourseCategoryRepository->save($category);
+    }
+
+    public function updateOrdering(array $diffCategories): void
+    {
+        $em = $this->urbinoCourseCategoryRepository->getEntityManager();
+
+        foreach ($diffCategories as $diff) {
+            $category = $this->urbinoCourseCategoryRepository->find($diff['id']);
+            $category->setOrdering($diff['new_position'] + 1);
+            $category->setUpdatedAt(new \DateTime());
+        }
+
+        $em->flush();
+
+        $allCategories = $this->urbinoCourseCategoryRepository->findBy([], ['ordering' => 'ASC']);
+
+        $position = 1;
+        foreach ($allCategories as $category) {
+            $category->setOrdering($position);
+            $position++;
+        }
+
+        $em->flush();
     }
 }

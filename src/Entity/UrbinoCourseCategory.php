@@ -28,6 +28,9 @@ class UrbinoCourseCategory
     #[ORM\Column]
     private ?bool $is_deleted = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $ordering = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +88,17 @@ class UrbinoCourseCategory
     public function setIsDeleted(bool $is_deleted): static
     {
         $this->is_deleted = $is_deleted;
+        return $this;
+    }
+
+    public function getOrdering(): ?int
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(?int $ordering): static
+    {
+        $this->ordering = $ordering;
         return $this;
     }
 }
