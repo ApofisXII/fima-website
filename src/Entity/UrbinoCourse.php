@@ -21,6 +21,10 @@ class UrbinoCourse
     #[ORM\JoinColumn(nullable: false)]
     private ?UrbinoEdition $urbino_edition = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UrbinoCourseCategory $urbino_course_category = null;
+
     #[ORM\Column]
     private ?bool $is_preselection_required = null;
 
@@ -32,12 +36,6 @@ class UrbinoCourse
 
     #[ORM\Column]
     private ?\DateTime $updated_at = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $subject_it = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $subject_en = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $program_description_it = null;
@@ -146,26 +144,14 @@ class UrbinoCourse
         return $this;
     }
 
-    public function getSubjectIt(): ?string
+    public function getUrbinoCourseCategory(): ?UrbinoCourseCategory
     {
-        return $this->subject_it;
+        return $this->urbino_course_category;
     }
 
-    public function setSubjectIt(?string $subject_it): static
+    public function setUrbinoCourseCategory(?UrbinoCourseCategory $urbino_course_category): static
     {
-        $this->subject_it = $subject_it;
-
-        return $this;
-    }
-
-    public function getSubjectEn(): ?string
-    {
-        return $this->subject_en;
-    }
-
-    public function setSubjectEn(?string $subject_en): static
-    {
-        $this->subject_en = $subject_en;
+        $this->urbino_course_category = $urbino_course_category;
 
         return $this;
     }

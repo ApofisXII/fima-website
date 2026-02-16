@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\DTO\Admin\UrbinoCourseRequestDTO;
 use App\Entity\UrbinoCourse;
+use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -16,6 +17,7 @@ class UrbinoCourseService
     public function __construct(
         private readonly UrbinoCourseRepository $urbinoCourseRepository,
         private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
         private readonly SluggerInterface $slugger,
         private readonly ParameterBagInterface $parameterBag,
         private readonly Filesystem $filesystem,
@@ -33,11 +35,11 @@ class UrbinoCourseService
     public function update(UrbinoCourse $course, UrbinoCourseRequestDTO $dto): UrbinoCourse
     {
         $edition = $this->urbinoEditionRepository->find($dto->urbinoEditionId);
+        $category = $this->urbinoCourseCategoryRepository->find($dto->urbinoCategoryId);
 
         $course->setTeacherFullName($dto->teacherFullName);
         $course->setUrbinoEdition($edition);
-        $course->setSubjectIt($dto->subjectIt);
-        $course->setSubjectEn($dto->subjectEn);
+        $course->setUrbinoCourseCategory($category);
         $course->setProgramDescriptionIt($dto->programDescriptionIt);
         $course->setProgramDescriptionEn($dto->programDescriptionEn);
         $course->setBioDescriptionIt($dto->bioDescriptionIt);
@@ -54,8 +56,8 @@ class UrbinoCourseService
 
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;
-            if ($dto->subjectIt) {
-                $slugText .= ' ' . $dto->subjectIt;
+            if ($category && $category->getNameIt()) {
+                $slugText .= ' ' . $category->getNameIt();
             }
             $course->setSlug($this->slugger->slug(strtolower($slugText)));
         }

@@ -15,8 +15,9 @@ class UrbinoCourseRequestDTO
         #[Assert\NotBlank]
         public int $urbinoEditionId = 0,
 
-        public ?string $subjectIt = null,
-        public ?string $subjectEn = null,
+        #[Assert\NotBlank(message: "La categoria è obbligatoria.")]
+        public ?int $urbinoCategoryId = null,
+
         public ?string $programDescriptionIt = null,
         public ?string $programDescriptionEn = null,
         public ?string $bioDescriptionIt = null,

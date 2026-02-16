@@ -350,6 +350,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     display: flex;
     gap: 20px;
     align-items: flex-end;
+    margin-bottom: 15px;
 }
 
 .gg-form-row__main {
@@ -366,6 +367,14 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-form-row--three .gg-form-row__year {
     width: 200px;
+}
+
+.gg-form-row--two .gg-form-row__main {
+    flex: 1;
+}
+
+.gg-form-row--two .gg-form-row__year {
+    flex: 1;
 }
 
 .gg-btn-group {
@@ -479,6 +488,49 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-modal-btn--cancel:hover {
     opacity: 0.8;
+}
+
+.gg-modal-btn--primary {
+    background: var(--color-blue);
+    color: white;
+}
+
+.gg-modal-btn--primary:hover {
+    opacity: 0.9;
+}
+
+.gg-modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.gg-modal-form-group {
+    margin-bottom: 15px;
+}
+
+.gg-modal-form-group:last-of-type {
+    margin-bottom: 20px;
+}
+
+.gg-modal-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.gg-modal-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+}
+
+.gg-modal-form-group input:focus {
+    outline: none;
 }
 
 .gg-admin-copertina {
@@ -1056,18 +1108,15 @@ tbody tr[draggable="true"] {
         width: 100%;
     }
 
+    .gg-multilang-form > div > label,
+    .gg-multilang-form > div > textarea {
+        margin-top: 15px;
+    }
+
     .gg-form-row {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
-    }
-
-    .gg-form-row > * {
-        margin-top: 15px;
-    }
-
-    .gg-form-row > *:first-child {
-        margin-top: 0;
     }
 
     .gg-form-row__year {

@@ -1,0 +1,69 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">Categorie Corsi Urbino</div>
+
+    <div style="margin-bottom: 20px;">
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoCategoriesDetail') }}">+ Nuova categoria</a>
+    </div>
+
+    <table id="main-table">
+        <thead>
+        <tr>
+            <th>Nome (Italiano)</th>
+            <th>Nome (Inglese)</th>
+            <th>Creata</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        import DataTable from 'datatables.net-dt';
+        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+
+        const table = new DataTable("#main-table", {
+            serverSide: true,
+            ajax: {
+                url: "{{ path('adminUrbinoCategoriesListJson') }}",
+            },
+            ordering: false,
+            columns: [
+                { data: "nameIt" },
+                { data: "nameEn" },
+                { data: "createdAt" },
+                { data: "categoryDetailLink" },
+            ],
+            columnDefs: [
+                {
+                    targets: 3, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn' style='white-space: nowrap;'>Modifica categoria</a>";
+                    }
+                }
+            ],
+            pageLength: 25,
+            language: {
+                search: "Cerca:",
+                lengthMenu: "Mostra _MENU_ risultati per pagina",
+                info: "Mostrati da _START_ a _END_ di _TOTAL_ risultati",
+                infoEmpty: "Nessun risultato disponibile",
+                infoFiltered: "(filtrati da _MAX_ risultati totali)",
+                paginate: {
+                    first: "Primo",
+                    last: "Ultimo",
+                    next: "Successivo",
+                    previous: "Precedente"
+                },
+                emptyTable: "Nessun dato disponibile nella tabella",
+                zeroRecords: "Nessun risultato trovato"
+            }
+        });
+
+    </script>
+
+{% endblock %}

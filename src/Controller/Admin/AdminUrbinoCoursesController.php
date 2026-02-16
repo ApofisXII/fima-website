@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\DTO\Admin\DataTableRequestDTO;
 use App\DTO\Admin\UrbinoCourseRequestDTO;
+use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
 use App\Service\UrbinoCourseService;
@@ -24,6 +25,7 @@ class AdminUrbinoCoursesController extends AbstractController
     public function __construct(
         private readonly UrbinoCourseRepository $urbinoCourseRepository,
         private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
         private readonly UrbinoCourseService $urbinoCourseService,
     ) {}
 
@@ -43,7 +45,7 @@ class AdminUrbinoCoursesController extends AbstractController
 
         if ($payload->search["value"]) {
             $search = $payload->search["value"];
-            $qb->andWhere("c.teacher_full_name LIKE :search OR c.subject_it LIKE :search OR c.subject_en LIKE :search OR e.edition_name LIKE :search")
+            $qb->andWhere("c.teacher_full_name LIKE :search OR e.edition_name LIKE :search")
                 ->setParameter("search", "%".$search."%");
         }
 
@@ -58,7 +60,7 @@ class AdminUrbinoCoursesController extends AbstractController
             return [
                 "id" => $item->getId(),
                 "teacherFullName" => $item->getTeacherFullName(),
-                "subjectIt" => $item->getSubjectIt(),
+                "categoryName" => $item->getUrbinoCourseCategory()?->getNameIt(),
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
                 "isAfternoonCourse" => $item->isAfternoonCourse(),
                 "isSoldOut" => $item->isSoldOut(),
@@ -80,10 +82,16 @@ class AdminUrbinoCoursesController extends AbstractController
     {
         $course = $this->urbinoCourseRepository->findOneBy(["id" => $request->query->get("courseId")]);
         $editions = $this->urbinoEditionRepository->findAll();
+        $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("c")
+            ->andWhere("c.is_deleted = false")
+            ->orderBy("c.name_it", "asc")
+            ->getQuery()
+            ->getResult();
 
         return $this->render('admin/urbino-courses-detail.html.twig', [
             "course" => $course,
             "editions" => $editions,
+            "categories" => $categories,
         ]);
     }
 
