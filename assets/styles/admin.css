@@ -154,6 +154,13 @@ body {
     margin-bottom: 50px;
 }
 
+.gg-tip {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
 .nascondi {
     display: none;
 }
