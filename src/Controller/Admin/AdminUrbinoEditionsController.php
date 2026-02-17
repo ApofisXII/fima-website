@@ -54,7 +54,7 @@ class AdminUrbinoEditionsController extends AbstractController
                 "editionName" => $item->getEditionName(),
                 "year" => $item->getYear(),
                 "isPublicVisible" => $item->isPublicVisible(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "editionDetailLink" => $this->generateUrl("adminUrbinoEditionsDetail", ["editionId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());

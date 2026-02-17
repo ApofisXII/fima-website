@@ -59,13 +59,23 @@ class AdminUrbinoCoursesController extends AbstractController
                 ->getResult();
 
             $coursesData = array_map(function ($item) {
+                $dateRange = '';
+                if ($item->getDateStart() && $item->getDateEnd()) {
+                    $dateRange = 'Dal ' . $item->getDateStart()->format('d/m') . ' al ' . $item->getDateEnd()->format('d/m');
+                } elseif ($item->getDateStart()) {
+                    $dateRange = 'Dal ' . $item->getDateStart()->format('d/m');
+                } elseif ($item->getDateEnd()) {
+                    $dateRange = 'Al ' . $item->getDateEnd()->format('d/m');
+                }
+
                 return [
                     "id" => $item->getId(),
                     "teacherFullName" => $item->getTeacherFullName(),
                     "editionName" => $item->getUrbinoEdition()?->getEditionName(),
+                    "dateRange" => $dateRange,
                     "scheduleType" => $item->getScheduleType(),
                     "isSoldOut" => $item->isSoldOut(),
-                    "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                    "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                     "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
                 ];
             }, $courses);

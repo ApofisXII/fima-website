@@ -57,7 +57,7 @@ class AdminUrbinoEventsController extends AbstractController
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
                 "eventDatetime" => $item->getEventDatetime()->format("d/m/Y H:i"),
                 "isPublic" => $item->isPublic(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "eventDetailLink" => $this->generateUrl("adminUrbinoEventsDetail", ["eventId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());

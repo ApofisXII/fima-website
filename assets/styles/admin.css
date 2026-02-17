@@ -277,6 +277,24 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     padding: 8px 15px;
 }
 
+.course-form-field {
+    flex: 1;
+}
+
+.course-dates-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.course-date-field {
+    flex: 1;
+}
+
+.course-date-field input[type="date"] {
+    width: 100%;
+}
+
 .gg-form select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1199,6 +1217,11 @@ tbody tr[draggable="true"] {
         min-width: 80px;
     }
 
+    .course-form-field, .gg-form-row__year, .course-dates-wrapper {
+        flex: 1;
+        margin-bottom: 10px;
+    }
+
     .dt-type-date {
         min-width: 120px;
     }
@@ -1238,6 +1261,10 @@ tbody tr[draggable="true"] {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
+    }
+
+    .gg-form-row--no-margin {
+        margin-bottom: unset;
     }
 
     .gg-form-row__year {

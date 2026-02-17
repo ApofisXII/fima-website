@@ -10,13 +10,13 @@
         <div class="box multi-detail-box gg-form">
             <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ (course.urbinoCourseCategory ? course.urbinoCourseCategory.nameIt : 'Senza categoria')) : 'Dettaglio corso' }}</h3>
 
-            <div class="gg-form-row gg-form-row--two">
-                <div class="gg-form-row__main">
+            <div class="gg-form-row gg-form-row--no-margin">
+                <div class="course-form-field">
                     <label>Docente</label>
                     <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
                 </div>
 
-                <div class="gg-form-row__year">
+                <div class="course-form-field">
                     <label>Edizione</label>
                     <select name="urbinoEditionId" required>
                         <option value="">Seleziona edizione</option>
@@ -26,6 +26,18 @@
                             </option>
                         {% endfor %}
                     </select>
+                </div>
+
+                <div class="course-dates-wrapper">
+                    <div class="course-date-field">
+                        <label>Data di inizio</label>
+                        <input type="date" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}" required>
+                    </div>
+
+                    <div class="course-date-field">
+                        <label>Data di fine</label>
+                        <input type="date" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}" required>
+                    </div>
                 </div>
             </div>
 
@@ -54,17 +66,6 @@
                 <div class="gg-form-row__year">
                     <label>Prezzo del corso (in €)</label>
                     <input type="number" name="priceEuros" step="0.01" min="0" placeholder="0.00" value="{{ course and course.priceCents ? (course.priceCents / 100)|number_format(2, '.', '') }}">
-                </div>
-            </div>
-
-            <div style="display: flex; gap: 20px; align-items: flex-end;">
-                <div>
-                    <label>Data inizio corso</label>
-                    <input type="date" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}">
-                </div>
-                <div>
-                    <label>Data fine corso</label>
-                    <input type="date" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}">
                 </div>
             </div>
 
