@@ -102,13 +102,7 @@ class AdminNewsController extends AbstractController
     #[Route(path: '/upload-image/{newsId}', name: 'adminNewsUploadImage', methods: ['POST'], format: 'json')]
     public function adminNewsUploadImage(Request $request, int $newsId): Response
     {
-        $news = $this->newsRepository->findOneBy(["id" => $newsId]);
-
-        if (!$news) {
-            return $this->json([
-                "message" => "Notizia non trovata",
-            ], 404);
-        }
+        $news = $this->newsRepository->find($newsId);
 
         $uploadedFile = $request->files->get('coverImage');
 
@@ -128,13 +122,7 @@ class AdminNewsController extends AbstractController
     #[Route(path: '/delete-image/{newsId}', name: 'adminNewsDeleteImage', methods: ['DELETE'], format: 'json')]
     public function adminNewsDeleteImage(int $newsId): Response
     {
-        $news = $this->newsRepository->findOneBy(["id" => $newsId]);
-
-        if (!$news) {
-            return $this->json([
-                "message" => "Notizia non trovata",
-            ], 404);
-        }
+        $news = $this->newsRepository->find($newsId);
 
         $this->newsService->deleteCoverImage($news);
 

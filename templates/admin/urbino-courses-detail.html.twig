@@ -47,7 +47,7 @@
                     <label>Tipo di corso</label>
                     <select name="scheduleType" required>
                         <option value="main" {{ course and course.scheduleType == 'main' ? 'selected' }}>Principale</option>
-                        <option value="afternoon" {{ course and course.scheduleType == 'afternoon' ? 'selected' }}>Pomeridiano</option>
+                        <option value="secondary_afternoon" {{ course and course.scheduleType == 'secondary_afternoon' ? 'selected' }}>Pomeridiano</option>
                     </select>
                 </div>
 

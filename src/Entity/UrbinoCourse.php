@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 class UrbinoCourse
 {
     public const SCHEDULE_TYPE_MAIN = "main";
-    public const SCHEDULE_TYPE_AFTERNOON = "afternoon";
+    public const SCHEDULE_TYPE_SECONDARY_AFTERNOON = "secondary_afternoon";
     public const SCHEDULE_TYPES = [
         self::SCHEDULE_TYPE_MAIN,
-        self::SCHEDULE_TYPE_AFTERNOON,
+        self::SCHEDULE_TYPE_SECONDARY_AFTERNOON,
     ];
 
     #[ORM\Id]
