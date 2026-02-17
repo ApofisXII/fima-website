@@ -57,6 +57,18 @@ class UrbinoCourseService
             $course->setPriceCents(null);
         }
 
+        if ($dto->dateStart) {
+            $course->setDateStart(new \DateTime($dto->dateStart));
+        } else {
+            $course->setDateStart(null);
+        }
+
+        if ($dto->dateEnd) {
+            $course->setDateEnd(new \DateTime($dto->dateEnd));
+        } else {
+            $course->setDateEnd(null);
+        }
+
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;
             if ($category && $category->getNameIt()) {

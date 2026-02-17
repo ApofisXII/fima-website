@@ -21,17 +21,11 @@ class UrbinoEditionRequestDTO
 
         public ?bool $isPublicVisible = false,
 
-        #[Assert\NotBlank(message: "Le informazioni di iscrizione in italiano sono obbligatorie.")]
+        #[Assert\NotBlank(message: "Le informazioni per i partecipanti in italiano sono obbligatorie.")]
         public ?string $enrollmentInfoIt,
 
-        #[Assert\NotBlank(message: "Le informazioni di iscrizione in inglese sono obbligatorie.")]
+        #[Assert\NotBlank(message: "Le informazioni per i partecipanti in inglese sono obbligatorie.")]
         public ?string $enrollmentInfoEn,
-
-        #[Assert\NotBlank(message: "Le informazioni sull'alloggio in italiano sono obbligatorie.")]
-        public ?string $accommodationInfoIt,
-
-        #[Assert\NotBlank(message: "Le informazioni sull'alloggio in inglese sono obbligatorie.")]
-        public ?string $accommodationInfoEn,
 
     ) {}
 

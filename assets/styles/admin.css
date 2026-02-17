@@ -257,7 +257,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     margin-top: 0;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form textarea, .gg-form select {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form input[type="date"], .gg-form textarea, .gg-form select {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -268,11 +268,13 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     outline: none;
 }
 
-.gg-form input[type="datetime-local"] {
+.gg-form input[type="datetime-local"],
+.gg-form input[type="date"] {
     width: fit-content;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;padding: 8px 15px;
+    appearance: none;
+    padding: 8px 15px;
 }
 
 .gg-form select {
@@ -1254,5 +1256,9 @@ tbody tr[draggable="true"] {
 
     .category-courses {
         overflow-x: auto;
+    }
+
+    .gg-form input[type="date"] {
+        width: 100%;
     }
 }

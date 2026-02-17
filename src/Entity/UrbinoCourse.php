@@ -44,6 +44,12 @@ class UrbinoCourse
     #[ORM\Column]
     private ?\DateTime $updated_at = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $date_start = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $date_end = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $program_description_it = null;
 
@@ -279,6 +285,30 @@ class UrbinoCourse
     public function setPriceCents(?int $price_cents): static
     {
         $this->price_cents = $price_cents;
+
+        return $this;
+    }
+
+    public function getDateStart(): ?\DateTime
+    {
+        return $this->date_start;
+    }
+
+    public function setDateStart(?\DateTime $date_start): static
+    {
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTime
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(?\DateTime $date_end): static
+    {
+        $this->date_end = $date_end;
 
         return $this;
     }

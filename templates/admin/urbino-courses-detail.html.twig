@@ -57,6 +57,17 @@
                 </div>
             </div>
 
+            <div style="display: flex; gap: 20px; align-items: flex-end;">
+                <div>
+                    <label>Data inizio corso</label>
+                    <input type="date" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}">
+                </div>
+                <div>
+                    <label>Data fine corso</label>
+                    <input type="date" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}">
+                </div>
+            </div>
+
             <div class="gg-multilang-form">
                 <div>
                     <label>Descrizione programma (italiano)</label>

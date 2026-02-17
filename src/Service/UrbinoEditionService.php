@@ -22,8 +22,6 @@ final readonly class UrbinoEditionService
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
             ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
-            ->setAccommodationInfoIt($payload->accommodationInfoIt)
-            ->setAccommodationInfoEn($payload->accommodationInfoEn)
             ->setIsDeleted(false)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime());
@@ -40,8 +38,6 @@ final readonly class UrbinoEditionService
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
             ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
-            ->setAccommodationInfoIt($payload->accommodationInfoIt)
-            ->setAccommodationInfoEn($payload->accommodationInfoEn)
             ->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEditionRepository->save($edition);

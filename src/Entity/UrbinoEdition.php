@@ -41,12 +41,6 @@ class UrbinoEdition
     #[ORM\Column(type: Types::TEXT)]
     private ?string $enrollment_info_en = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $accommodation_info_it = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $accommodation_info_en = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -156,30 +150,6 @@ class UrbinoEdition
     public function setEnrollmentInfoEn(string $enrollment_info_en): static
     {
         $this->enrollment_info_en = $enrollment_info_en;
-
-        return $this;
-    }
-
-    public function getAccommodationInfoIt(): ?string
-    {
-        return $this->accommodation_info_it;
-    }
-
-    public function setAccommodationInfoIt(string $accommodation_info_it): static
-    {
-        $this->accommodation_info_it = $accommodation_info_it;
-
-        return $this;
-    }
-
-    public function getAccommodationInfoEn(): ?string
-    {
-        return $this->accommodation_info_en;
-    }
-
-    public function setAccommodationInfoEn(string $accommodation_info_en): static
-    {
-        $this->accommodation_info_en = $accommodation_info_en;
 
         return $this;
     }
