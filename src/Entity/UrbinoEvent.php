@@ -57,6 +57,9 @@ class UrbinoEvent
     #[ORM\Column]
     private ?bool $is_public = null;
 
+    #[ORM\Column]
+    private ?bool $has_cover_image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +229,18 @@ class UrbinoEvent
     public function setIsPublic(bool $is_public): static
     {
         $this->is_public = $is_public;
+
+        return $this;
+    }
+
+    public function hasCoverImage(): ?bool
+    {
+        return $this->has_cover_image;
+    }
+
+    public function setHasCoverImage(bool $has_cover_image): static
+    {
+        $this->has_cover_image = $has_cover_image;
 
         return $this;
     }

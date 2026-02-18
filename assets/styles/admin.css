@@ -154,6 +154,13 @@ body {
     margin-bottom: 50px;
 }
 
+.gg-tip {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
 .nascondi {
     display: none;
 }
@@ -170,9 +177,7 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.8rem;
-    padding: 6px;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding: 6px 12px;
     background-color: var(--color-blue);
     border-radius: 8px;
     text-wrap: nowrap;
@@ -252,7 +257,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     margin-top: 0;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form textarea, .gg-form select {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form input[type="date"], .gg-form textarea, .gg-form select {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -263,12 +268,37 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     outline: none;
 }
 
-.gg-form input[type="datetime-local"] {
+.gg-form input[type="datetime-local"],
+.gg-form input[type="date"] {
     width: fit-content;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;padding: 8px 15px;
+    appearance: none;
+    padding: 8px 15px;
 }
+
+.course-form-field {
+    flex: 1;
+}
+
+.course-dates-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.course-date-field {
+    flex: 1;
+}
+
+.course-date-field input[type="date"] {
+    width: 100%;
+}
+
+.course-date-field input[type="date"].date-is-default {
+    color: #aaa;
+}
+
 
 .gg-form select {
     -webkit-appearance: none;
@@ -352,6 +382,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     display: flex;
     gap: 20px;
     align-items: flex-end;
+    margin-bottom: 15px;
 }
 
 .gg-form-row__main {
@@ -367,7 +398,15 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 }
 
 .gg-form-row--three .gg-form-row__year {
-    width: 200px;
+    flex: 1;
+}
+
+.gg-form-row--two .gg-form-row__main {
+    flex: 1;
+}
+
+.gg-form-row--two .gg-form-row__year {
+    flex: 1;
 }
 
 .gg-btn-group {
@@ -452,6 +491,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
+    padding-top: 10px;
 }
 
 .gg-modal-btn {
@@ -481,6 +521,51 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-modal-btn--cancel:hover {
     opacity: 0.8;
+}
+
+.gg-modal-btn--primary {
+    background: var(--color-blue);
+    color: white;
+}
+
+.gg-modal-btn--primary:hover {
+    opacity: 0.9;
+}
+
+.gg-modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.gg-modal-form-group {
+    margin-bottom: 15px;
+}
+
+.gg-modal-form-group:last-of-type {
+    margin-bottom: 20px;
+}
+
+.gg-modal-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.gg-modal-form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: none;
+    background-color: var(--color-selected);
+    font-size: inherit;
+    outline: none;
+}
+
+.gg-modal-form-group input::placeholder {
+    font-size: 0.9rem;
 }
 
 .gg-admin-copertina {
@@ -748,6 +833,111 @@ tbody tr[draggable="true"] {
     cursor: move;
 }
 
+.category-accordion {
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.category-header:hover {
+    background: #f8f9fa;
+}
+
+.category-drag-handle {
+    cursor: grab;
+    font-size: 20px;
+    color: #6c757d;
+    margin-top: -3px;
+}
+
+.category-drag-handle:active {
+    cursor: grabbing;
+}
+
+.category-name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.category-count {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.category-toggle {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #6c757d;
+    transition: transform 0.2s ease;
+}
+
+.category-toggle.open {
+    transform: rotate(180deg);
+}
+
+.category-courses {
+    padding: 30px;
+    padding-top: 10px;
+}
+
+.courses-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.courses-table thead {
+    background: white;
+}
+
+.courses-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #bbb;
+}
+
+.courses-table td {
+    padding: 8px 10px;
+    border-top: 1px solid #bbb;
+}
+
+.courses-table .reorder {
+    width: 40px;
+    text-align: center;
+}
+
+.no-courses {
+    padding: 30px;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.sortable-ghost {
+    opacity: 0.4;
+}
+
+.sortable-drag {
+    opacity: 1;
+}
+
 
 
 
@@ -875,6 +1065,10 @@ tbody tr[draggable="true"] {
     }
 
     .gg-h1 {
+        text-align: center;
+    }
+
+    .gg-tip {
         text-align: center;
     }
 
@@ -1028,6 +1222,11 @@ tbody tr[draggable="true"] {
         min-width: 80px;
     }
 
+    .course-form-field, .gg-form-row__year, .course-dates-wrapper {
+        flex: 1;
+        margin-bottom: 10px;
+    }
+
     .dt-type-date {
         min-width: 120px;
     }
@@ -1058,18 +1257,19 @@ tbody tr[draggable="true"] {
         width: 100%;
     }
 
+    .gg-multilang-form > div > label,
+    .gg-multilang-form > div > textarea {
+        margin-top: 15px;
+    }
+
     .gg-form-row {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
     }
 
-    .gg-form-row > * {
-        margin-top: 15px;
-    }
-
-    .gg-form-row > *:first-child {
-        margin-top: 0;
+    .gg-form-row--no-margin {
+        margin-bottom: unset;
     }
 
     .gg-form-row__year {
@@ -1084,5 +1284,13 @@ tbody tr[draggable="true"] {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+    }
+
+    .category-courses {
+        overflow-x: auto;
+    }
+
+    .gg-form input[type="date"] {
+        width: 100%;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UrbinoEditionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UrbinoEditionRepository::class)]
@@ -17,7 +18,10 @@ class UrbinoEdition
     private ?string $edition_name = null;
 
     #[ORM\Column]
-    private ?int $year = null;
+    private ?\DateTime $date_start = null;
+
+    #[ORM\Column]
+    private ?\DateTime $date_end = null;
 
     #[ORM\Column]
     private ?\DateTime $created_at = null;
@@ -28,11 +32,14 @@ class UrbinoEdition
     #[ORM\Column]
     private ?bool $is_deleted = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $period_description = null;
-
     #[ORM\Column]
     private ?bool $is_public_visible = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $enrollment_info_it = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $enrollment_info_en = null;
 
     public function getId(): ?int
     {
@@ -51,14 +58,26 @@ class UrbinoEdition
         return $this;
     }
 
-    public function getYear(): ?int
+    public function getDateStart(): ?\DateTime
     {
-        return $this->year;
+        return $this->date_start;
     }
 
-    public function setYear(int $year): static
+    public function setDateStart(\DateTime $date_start): static
     {
-        $this->year = $year;
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTime
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(\DateTime $date_end): static
+    {
+        $this->date_end = $date_end;
 
         return $this;
     }
@@ -99,18 +118,6 @@ class UrbinoEdition
         return $this;
     }
 
-    public function getPeriodDescription(): ?string
-    {
-        return $this->period_description;
-    }
-
-    public function setPeriodDescription(?string $period_description): static
-    {
-        $this->period_description = $period_description;
-
-        return $this;
-    }
-
     public function isPublicVisible(): ?bool
     {
         return $this->is_public_visible;
@@ -119,6 +126,30 @@ class UrbinoEdition
     public function setIsPublicVisible(bool $is_public_visible): static
     {
         $this->is_public_visible = $is_public_visible;
+
+        return $this;
+    }
+
+    public function getEnrollmentInfoIt(): ?string
+    {
+        return $this->enrollment_info_it;
+    }
+
+    public function setEnrollmentInfoIt(string $enrollment_info_it): static
+    {
+        $this->enrollment_info_it = $enrollment_info_it;
+
+        return $this;
+    }
+
+    public function getEnrollmentInfoEn(): ?string
+    {
+        return $this->enrollment_info_en;
+    }
+
+    public function setEnrollmentInfoEn(string $enrollment_info_en): static
+    {
+        $this->enrollment_info_en = $enrollment_info_en;
 
         return $this;
     }

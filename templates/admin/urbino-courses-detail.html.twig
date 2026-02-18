@@ -8,23 +8,61 @@
         <input type="hidden" name="courseId" value="{{ course ? course.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
-            <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ course.subjectIt) : 'Dettaglio corso' }}</h3>
+            <h3>{{ course ? (course.teacherFullName ~ ' - ' ~ (course.urbinoCourseCategory ? course.urbinoCourseCategory.nameIt : 'Senza categoria')) : 'Dettaglio corso' }}</h3>
 
-            <div class="gg-form-row gg-form-row--three">
-                <div class="gg-form-row__main">
+            <div class="gg-form-row gg-form-row--no-margin">
+                <div class="course-form-field">
                     <label>Docente</label>
                     <input type="text" name="teacherFullName" placeholder="Nome completo del docente" value="{{ course ? course.teacherFullName }}" required>
                 </div>
 
-                <div class="gg-form-row__year">
+                <div class="course-form-field">
                     <label>Edizione</label>
-                    <select name="urbinoEditionId" required>
+                    <select name="urbinoEditionId" id="edition-select" required>
                         <option value="">Seleziona edizione</option>
                         {% for edition in editions %}
-                            <option value="{{ edition.id }}" {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
-                                {{ edition.editionName }} ({{ edition.year }})
+                            <option value="{{ edition.id }}"
+                                    data-date-start="{{ edition.dateStart|date('Y-m-d') }}"
+                                    data-date-end="{{ edition.dateEnd|date('Y-m-d') }}"
+                                    {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
+                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
                             </option>
                         {% endfor %}
+                    </select>
+                </div>
+
+                <div class="course-dates-wrapper">
+                    <div class="course-date-field">
+                        <label>Data di inizio</label>
+                        <input type="date" id="date-start" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}">
+                    </div>
+
+                    <div class="course-date-field">
+                        <label>Data di fine</label>
+                        <input type="date" id="date-end" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="gg-form-row gg-form-row--three">
+                <div class="gg-form-row__year">
+                    <label>Categoria</label>
+                    <select name="urbinoCategoryId" id="category-select" required>
+                        <option value="">Seleziona o crea categoria</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {{ course and course.urbinoCourseCategory and course.urbinoCourseCategory.id == category.id ? 'selected' }}>
+                                {{ category.nameIt }} / {{ category.nameEn }}
+                            </option>
+                        {% endfor %}
+                        <option value="__create_new__" style="font-weight: bold; color: var(--color-blue);">+ Crea nuova categoria</option>
+                    </select>
+                </div>
+
+                <div class="gg-form-row__year">
+                    <label>Tipo di corso</label>
+                    <select name="scheduleType" required>
+                        <option value="main" {{ course and course.scheduleType == 'main' ? 'selected' }}>Principale</option>
+                        <option value="secondary_afternoon" {{ course and course.scheduleType == 'secondary_afternoon' ? 'selected' }}>Pomeridiano</option>
                     </select>
                 </div>
 
@@ -36,9 +74,6 @@
 
             <div class="gg-multilang-form">
                 <div>
-                    <label>Materia (italiano)</label>
-                    <input type="text" name="subjectIt" placeholder="Materia (italiano)" value="{{ course ? course.subjectIt }}">
-
                     <label>Descrizione programma (italiano)</label>
                     <textarea name="programDescriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (italiano)">{{ course ? course.programDescriptionIt|raw }}</textarea>
 
@@ -47,9 +82,6 @@
                 </div>
 
                 <div>
-                    <label>Materia (inglese)</label>
-                    <input type="text" name="subjectEn" placeholder="Materia (inglese)" value="{{ course ? course.subjectEn }}">
-
                     <label>Descrizione programma (inglese)</label>
                     <textarea name="programDescriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (inglese)">{{ course ? course.programDescriptionEn|raw }}</textarea>
 
@@ -81,11 +113,6 @@
             <h3>Impostazioni</h3>
 
             <div class="gg-checkbox-group">
-                <label>
-                    <input type="checkbox" name="isAfternoonCourse" value="1" {{ course and course.isAfternoonCourse ? 'checked' }}>
-                    <span>Corso pomeridiano</span>
-                </label>
-
                 <label>
                     <input type="checkbox" name="isPreselectionRequired" value="1" {{ course and course.isPreselectionRequired ? 'checked' }}>
                     <span>Richiede preselezione</span>
@@ -132,11 +159,72 @@
         {% endif %}
     {% endif %}
 
+    <div id="create-category-modal" class="gg-modal" style="display: none;">
+        <div class="gg-modal-content">
+            <h3>Crea nuova categoria</h3>
+            <form id="create-category-form">
+                <div class="gg-modal-form-group">
+                    <label>Nome categoria (italiano)</label>
+                    <input type="text" id="new-category-name-it" placeholder="Nome italiano" required>
+                </div>
+                <div class="gg-modal-form-group">
+                    <label>Nome categoria (inglese)</label>
+                    <input type="text" id="new-category-name-en" placeholder="Nome inglese" required>
+                </div>
+                <div class="gg-modal-buttons">
+                    <button type="submit" class="gg-modal-btn gg-modal-btn--primary">Crea categoria</button>
+                    <button type="button" id="cancel-create-category" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block js %}
 
     <script src="https://cdn.tiny.cloud/1/19quagaglhpufzna2p27cvo8kg2miu2f2flha91bl6aj5yqg/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script>
+        const editionSelect = document.getElementById('edition-select');
+        const dateStartInput = document.getElementById('date-start');
+        const dateEndInput = document.getElementById('date-end');
+
+        function setDefaultDate(input, value) {
+            input.value = value;
+            input.classList.add('date-is-default');
+        }
+
+        dateStartInput.addEventListener('change', function() {
+            this.classList.remove('date-is-default');
+        });
+
+        dateEndInput.addEventListener('change', function() {
+            this.classList.remove('date-is-default');
+        });
+
+        editionSelect.addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            if (selected.value && selected.dataset.dateStart) {
+                setDefaultDate(dateStartInput, selected.dataset.dateStart);
+                setDefaultDate(dateEndInput, selected.dataset.dateEnd);
+            } else {
+                dateStartInput.value = '';
+                dateEndInput.value = '';
+                dateStartInput.classList.remove('date-is-default');
+                dateEndInput.classList.remove('date-is-default');
+            }
+        });
+
+        // All'avvio: se i campi sono vuoti e c'è un'edizione selezionata, pre-popola come default
+        if (!dateStartInput.value) {
+            const selected = editionSelect.options[editionSelect.selectedIndex];
+            if (selected.value && selected.dataset.dateStart) {
+                setDefaultDate(dateStartInput, selected.dataset.dateStart);
+                setDefaultDate(dateEndInput, selected.dataset.dateEnd);
+            }
+        }
+    </script>
 
     <script type="module">
         // Restore scroll position after reload
@@ -145,6 +233,104 @@
             window.scrollTo(0, parseInt(savedScrollPosition));
             sessionStorage.removeItem('courseDetailScrollPosition');
         }
+
+        // Category creation modal handling
+        const categorySelect = document.getElementById('category-select');
+        const createCategoryModal = document.getElementById('create-category-modal');
+        const createCategoryForm = document.getElementById('create-category-form');
+        const cancelCreateCategory = document.getElementById('cancel-create-category');
+        let previousCategoryValue = categorySelect.value;
+
+        categorySelect.addEventListener('change', function(e) {
+            if (this.value === '__create_new__') {
+                createCategoryModal.style.display = 'flex';
+                document.getElementById('new-category-name-it').focus();
+            } else {
+                previousCategoryValue = this.value;
+            }
+        });
+
+        cancelCreateCategory.addEventListener('click', function() {
+            createCategoryModal.style.display = 'none';
+            categorySelect.value = previousCategoryValue;
+            document.getElementById('new-category-name-it').value = '';
+            document.getElementById('new-category-name-en').value = '';
+        });
+
+        createCategoryModal.addEventListener('click', function(e) {
+            if (e.target === createCategoryModal) {
+                cancelCreateCategory.click();
+            }
+        });
+
+        createCategoryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nameIt = document.getElementById('new-category-name-it').value;
+            const nameEn = document.getElementById('new-category-name-en').value;
+
+            fetch('{{ path('adminUrbinoCategoriesDetailSave') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    categoryId: 0,
+                    nameIt: nameIt,
+                    nameEn: nameEn
+                })
+            })
+            .then(async response => {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message || 'Errore nella creazione della categoria');
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+
+                // Ricarica le categorie per ottenere il nuovo ID
+                fetch('{{ path('adminUrbinoCoursesDetail') }}?courseId={{ course ? course.id : 0 }}')
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newSelect = doc.getElementById('category-select');
+                        const currentSelect = document.getElementById('category-select');
+
+                        // Trova la nuova categoria
+                        const newOptions = Array.from(newSelect.options).filter(opt =>
+                            opt.text.includes(nameIt) && opt.value !== '__create_new__'
+                        );
+
+                        if (newOptions.length > 0) {
+                            const newOption = newOptions[0];
+                            // Inserisci la nuova opzione prima dell'opzione "Crea nuova categoria"
+                            const createNewOption = currentSelect.querySelector('option[value="__create_new__"]');
+                            const optionClone = document.createElement('option');
+                            optionClone.value = newOption.value;
+                            optionClone.textContent = newOption.text;
+                            currentSelect.insertBefore(optionClone, createNewOption);
+
+                            // Seleziona la nuova categoria
+                            currentSelect.value = newOption.value;
+                            previousCategoryValue = newOption.value;
+                        }
+
+                        // Chiudi modal e resetta form
+                        createCategoryModal.style.display = 'none';
+                        document.getElementById('new-category-name-it').value = '';
+                        document.getElementById('new-category-name-en').value = '';
+                    });
+            })
+            .catch(error => {
+                alert('Errore: ' + error.message);
+            });
+        });
 
         const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({

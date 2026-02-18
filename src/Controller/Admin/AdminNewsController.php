@@ -56,7 +56,7 @@ class AdminNewsController extends AbstractController
                 "titleIt" => $item->getTitleIt(),
                 "isEvent" => $item->isEvent(),
                 "isPublic" => $item->isPublic(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "newsDetailLink" => $this->generateUrl("adminNewsDetail", ["newsId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());
@@ -96,6 +96,38 @@ class AdminNewsController extends AbstractController
 
         return $this->json([
             "message" => "Dati salvati",
+        ]);
+    }
+
+    #[Route(path: '/upload-image/{newsId}', name: 'adminNewsUploadImage', methods: ['POST'], format: 'json')]
+    public function adminNewsUploadImage(Request $request, int $newsId): Response
+    {
+        $news = $this->newsRepository->find($newsId);
+
+        $uploadedFile = $request->files->get('coverImage');
+
+        if (!$uploadedFile) {
+            return $this->json([
+                "message" => "Nessun file caricato",
+            ], 400);
+        }
+
+        $this->newsService->saveCoverImage($news, $uploadedFile);
+
+        return $this->json([
+            "message" => "Immagine caricata",
+        ]);
+    }
+
+    #[Route(path: '/delete-image/{newsId}', name: 'adminNewsDeleteImage', methods: ['DELETE'], format: 'json')]
+    public function adminNewsDeleteImage(int $newsId): Response
+    {
+        $news = $this->newsRepository->find($newsId);
+
+        $this->newsService->deleteCoverImage($news);
+
+        return $this->json([
+            "message" => "Immagine eliminata",
         ]);
     }
 

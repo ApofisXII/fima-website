@@ -2,19 +2,17 @@
 
 {% block body %}
 
-    <div class="gg-h1">Edizioni Urbino</div>
+    <div class="gg-h1">Categorie Corsi Urbino</div>
 
     <div style="margin-bottom: 20px;">
-        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoEditionsDetail') }}">+ Nuova edizione</a>
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoCategoriesDetail') }}">+ Nuova categoria</a>
     </div>
 
     <table id="main-table">
         <thead>
         <tr>
-            <th>Nome edizione</th>
-            <th>Anno</th>
-            <th>Date</th>
-            <th>Visibilità</th>
+            <th>Nome (Italiano)</th>
+            <th>Nome (Inglese)</th>
             <th>Creata</th>
             <th></th>
         </tr>
@@ -32,26 +30,19 @@
         const table = new DataTable("#main-table", {
             serverSide: true,
             ajax: {
-                url: "{{ path('adminUrbinoEditionsListJson') }}",
+                url: "{{ path('adminUrbinoCategoriesListJson') }}",
             },
             ordering: false,
             columns: [
-                { data: "editionName" },
-                { data: "year" },
-                { data: "dateRange" },
-                { data: "isPublicVisible" },
+                { data: "nameIt" },
+                { data: "nameEn" },
                 { data: "createdAt" },
-                { data: "editionDetailLink" },
+                { data: "categoryDetailLink" },
             ],
             columnDefs: [
                 {
                     targets: 3, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
-                    }
-                },
-                {
-                    targets: 5, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>Modifica edizione</a>";
+                        return "<a href='"+data+"' class='gg-table-btn' style='white-space: nowrap;'>Modifica categoria</a>";
                     }
                 }
             ],

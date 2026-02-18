@@ -4,8 +4,10 @@ namespace App\Service;
 
 use App\DTO\Admin\UrbinoCourseRequestDTO;
 use App\Entity\UrbinoCourse;
+use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
+use App\Utils\ImageUtils;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,9 +18,11 @@ class UrbinoCourseService
     public function __construct(
         private readonly UrbinoCourseRepository $urbinoCourseRepository,
         private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
         private readonly SluggerInterface $slugger,
         private readonly ParameterBagInterface $parameterBag,
         private readonly Filesystem $filesystem,
+        private readonly ImageUtils $imageUtils,
     ) {}
 
     public function create(UrbinoCourseRequestDTO $dto): UrbinoCourse
@@ -26,25 +30,26 @@ class UrbinoCourseService
         $course = new UrbinoCourse();
         $course->setCreatedAt(new \DateTime());
         $course->setIsImageUploaded(false);
-        $course->setIsAfternoonCourse(false);
+        $course->setScheduleType(UrbinoCourse::SCHEDULE_TYPE_MAIN);
+        $course->setIsDeleted(false);
         return $this->update($course, $dto);
     }
 
     public function update(UrbinoCourse $course, UrbinoCourseRequestDTO $dto): UrbinoCourse
     {
         $edition = $this->urbinoEditionRepository->find($dto->urbinoEditionId);
+        $category = $this->urbinoCourseCategoryRepository->find($dto->urbinoCategoryId);
 
         $course->setTeacherFullName($dto->teacherFullName);
         $course->setUrbinoEdition($edition);
-        $course->setSubjectIt($dto->subjectIt);
-        $course->setSubjectEn($dto->subjectEn);
+        $course->setUrbinoCourseCategory($category);
         $course->setProgramDescriptionIt($dto->programDescriptionIt);
         $course->setProgramDescriptionEn($dto->programDescriptionEn);
         $course->setBioDescriptionIt($dto->bioDescriptionIt);
         $course->setBioDescriptionEn($dto->bioDescriptionEn);
         $course->setIsPreselectionRequired($dto->isPreselectionRequired ?? false);
         $course->setIsSoldOut($dto->isSoldOut ?? false);
-        $course->setIsAfternoonCourse($dto->isAfternoonCourse ?? false);
+        $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_MAIN);
 
         if ($dto->priceEuros !== null) {
             $course->setPriceCents((int) round($dto->priceEuros * 100));
@@ -52,10 +57,28 @@ class UrbinoCourseService
             $course->setPriceCents(null);
         }
 
+        $dateStart = $dto->dateStart ? new \DateTime($dto->dateStart) : $edition->getDateStart();
+        $dateEnd   = $dto->dateEnd   ? new \DateTime($dto->dateEnd)   : $edition->getDateEnd();
+
+        if ($dateStart < $edition->getDateStart() || $dateStart > $edition->getDateEnd()) {
+            throw new \InvalidArgumentException('La data di inizio del corso deve essere compresa nell\'intervallo dell\'edizione (' . $edition->getDateStart()->format('d/m/Y') . ' - ' . $edition->getDateEnd()->format('d/m/Y') . ').');
+        }
+
+        if ($dateEnd < $edition->getDateStart() || $dateEnd > $edition->getDateEnd()) {
+            throw new \InvalidArgumentException('La data di fine del corso deve essere compresa nell\'intervallo dell\'edizione (' . $edition->getDateStart()->format('d/m/Y') . ' - ' . $edition->getDateEnd()->format('d/m/Y') . ').');
+        }
+
+        if ($dateStart > $dateEnd) {
+            throw new \InvalidArgumentException('La data di inizio del corso non può essere successiva alla data di fine.');
+        }
+
+        $course->setDateStart($dateStart);
+        $course->setDateEnd($dateEnd);
+
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;
-            if ($dto->subjectIt) {
-                $slugText .= ' ' . $dto->subjectIt;
+            if ($category && $category->getNameIt()) {
+                $slugText .= ' ' . $category->getNameIt();
             }
             $course->setSlug($this->slugger->slug(strtolower($slugText)));
         }
@@ -100,8 +123,10 @@ class UrbinoCourseService
     {
         $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-courses/';
         $imageName = $course->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
 
         $uploadedFile->move($serverPath, $imageName);
+        $this->imageUtils->compressImage($imagePath);
 
         $course->setIsImageUploaded(true);
         $this->urbinoCourseRepository->save($course);

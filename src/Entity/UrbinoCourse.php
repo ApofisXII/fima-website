@@ -9,6 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoCourseRepository::class)]
 class UrbinoCourse
 {
+    public const SCHEDULE_TYPE_MAIN = "main";
+    public const SCHEDULE_TYPE_SECONDARY_AFTERNOON = "secondary_afternoon";
+    public const SCHEDULE_TYPES = [
+        self::SCHEDULE_TYPE_MAIN,
+        self::SCHEDULE_TYPE_SECONDARY_AFTERNOON,
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,6 +27,10 @@ class UrbinoCourse
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?UrbinoEdition $urbino_edition = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UrbinoCourseCategory $urbino_course_category = null;
 
     #[ORM\Column]
     private ?bool $is_preselection_required = null;
@@ -33,11 +44,11 @@ class UrbinoCourse
     #[ORM\Column]
     private ?\DateTime $updated_at = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $subject_it = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $date_start = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $subject_en = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $date_end = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $program_description_it = null;
@@ -60,8 +71,8 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_image_uploaded = null;
 
-    #[ORM\Column]
-    private ?bool $is_afternoon_course = null;
+    #[ORM\Column(length: 255)]
+    private ?string $schedule_type = null;
 
     #[ORM\Column]
     private ?bool $is_deleted = null;
@@ -146,26 +157,14 @@ class UrbinoCourse
         return $this;
     }
 
-    public function getSubjectIt(): ?string
+    public function getUrbinoCourseCategory(): ?UrbinoCourseCategory
     {
-        return $this->subject_it;
+        return $this->urbino_course_category;
     }
 
-    public function setSubjectIt(?string $subject_it): static
+    public function setUrbinoCourseCategory(?UrbinoCourseCategory $urbino_course_category): static
     {
-        $this->subject_it = $subject_it;
-
-        return $this;
-    }
-
-    public function getSubjectEn(): ?string
-    {
-        return $this->subject_en;
-    }
-
-    public function setSubjectEn(?string $subject_en): static
-    {
-        $this->subject_en = $subject_en;
+        $this->urbino_course_category = $urbino_course_category;
 
         return $this;
     }
@@ -254,14 +253,14 @@ class UrbinoCourse
         return $this;
     }
 
-    public function isAfternoonCourse(): ?bool
+    public function getScheduleType(): ?string
     {
-        return $this->is_afternoon_course;
+        return $this->schedule_type;
     }
 
-    public function setIsAfternoonCourse(bool $is_afternoon_course): static
+    public function setScheduleType(string $schedule_type): static
     {
-        $this->is_afternoon_course = $is_afternoon_course;
+        $this->schedule_type = $schedule_type;
 
         return $this;
     }
@@ -286,6 +285,30 @@ class UrbinoCourse
     public function setPriceCents(?int $price_cents): static
     {
         $this->price_cents = $price_cents;
+
+        return $this;
+    }
+
+    public function getDateStart(): ?\DateTime
+    {
+        return $this->date_start;
+    }
+
+    public function setDateStart(?\DateTime $date_start): static
+    {
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTime
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(?\DateTime $date_end): static
+    {
+        $this->date_end = $date_end;
 
         return $this;
     }
