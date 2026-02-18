@@ -22,7 +22,7 @@
                         <option value="">Seleziona edizione</option>
                         {% for edition in editions %}
                             <option value="{{ edition.id }}" {{ event and event.urbinoEdition and event.urbinoEdition.id == edition.id ? 'selected' }}>
-                                {{ edition.editionName }} ({{ edition.year }})
+                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
                             </option>
                         {% endfor %}
                     </select>
@@ -67,6 +67,23 @@
         </div>
 
         <div class="box multi-detail-box gg-form">
+            <h3>Immagine di copertina</h3>
+            {% if event and event.hasCoverImage %}
+                <img class="gg-admin-copertina" alt="Copertina evento" src="{{ asset('uploads-uma-event/'~event.id~'.webp') }}?v={{ random(1,9999) }}">
+            {% endif %}
+            <label>Carica immagine</label>
+            <input type="file" name="coverImage" id="cover-image-input" accept="image/*">
+            {% if event %}
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" id="upload-image-btn" class="gg-submit-btn hoverizzato" style="height: 36px;">Salva immagine</button>
+                    {% if event.hasCoverImage %}
+                        <button type="button" id="delete-image-btn" class="gg-delete-btn hoverizzato" style="height: 36px; border-radius: 8px;">Elimina immagine</button>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="box multi-detail-box gg-form">
             <h3>Impostazioni</h3>
 
             <div class="gg-checkbox-group">
@@ -97,6 +114,18 @@
                 </div>
             </div>
         </div>
+
+        {% if event.hasCoverImage %}
+            <div id="delete-image-modal" class="gg-modal" style="display: none;">
+                <div class="gg-modal-content">
+                    <p>Confermi di voler eliminare l'immagine di copertina?</p>
+                    <div class="gg-modal-buttons">
+                        <button id="confirm-delete-image" class="gg-modal-btn gg-modal-btn--danger">Sì, elimina</button>
+                        <button id="cancel-delete-image" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 
 {% endblock %}
@@ -184,6 +213,84 @@
                 location.href = "{{ path('adminUrbinoEventsList') }}";
             });
         });
+
+        const uploadImageBtn = document.getElementById('upload-image-btn');
+        const coverImageInput = document.getElementById('cover-image-input');
+
+        uploadImageBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!coverImageInput.files || !coverImageInput.files[0]) {
+                alert('Seleziona prima un\'immagine');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('coverImage', coverImageInput.files[0]);
+
+            fetch('{{ path('adminUrbinoEventsUploadImage', {'eventId': event.id}) }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message);
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+                location.reload();
+            });
+        });
+
+            {% if event.hasCoverImage %}
+            const imageModal = document.getElementById('delete-image-modal');
+            const deleteImageBtn = document.getElementById('delete-image-btn');
+            const confirmImageBtn = document.getElementById('confirm-delete-image');
+            const cancelImageBtn = document.getElementById('cancel-delete-image');
+
+            deleteImageBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                imageModal.style.display = 'flex';
+            });
+
+            cancelImageBtn.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+            });
+
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+
+            confirmImageBtn.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+
+                fetch('{{ path('adminUrbinoEventsDeleteImage', {'eventId': event.id}) }}', {
+                    method: 'DELETE'
+                })
+                .then(async response => {
+                    let responseDecoded = await response.json();
+                    if (!response.ok) {
+                        alert(responseDecoded.message);
+                        return null;
+                    }
+                    return responseDecoded;
+                })
+                .then(data => {
+                    if (!data) {
+                        return;
+                    }
+                    location.reload();
+                });
+            });
+            {% endif %}
         {% endif %}
     </script>
 

@@ -8,123 +8,198 @@
         <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminUrbinoCoursesDetail') }}">+ Nuovo corso</a>
     </div>
 
-    <table id="main-table">
-        <thead>
-        <tr>
-            <th class="reorder"></th>
-            <th>Docente</th>
-            <th>Materia</th>
-            <th>Edizione</th>
-            <th>Tipo</th>
-            <th>Stato</th>
-            <th>Creato</th>
-            <th></th>
-        </tr>
-        </thead>
-    </table>
+    <p class="gg-tip">💡 Trascina le categorie e i corsi per riordinarli nel sito pubblico</p>
+
+    <div id="categories-container"></div>
 
 {% endblock %}
 
 {% block js %}
 
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
     <script type="module">
-        import DataTable from 'datatables.net-dt';
-        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
-        import 'datatables.net-rowreorder-dt';
-        import 'datatables.net-rowreorder-dt/css/rowReorder.dataTables.min.css';
+        let categoriesData = [];
+        let openCategories = new Set();
+        let isDragging = false;
+        let isFirstLoad = true;
 
-        const table = new DataTable("#main-table", {
-            rowReorder: {
-                selector: 'td.reorder'
-            },
-            serverSide: true,
-            ajax: {
-                url: "{{ path('adminUrbinoCoursesListJson') }}",
-            },
-            ordering: false,
-            columns: [
-                { data: "id", className: "reorder" },
-                { data: "teacherFullName" },
-                { data: "subjectIt" },
-                { data: "editionName" },
-                { data: "isAfternoonCourse" },
-                { data: "isSoldOut" },
-                { data: "createdAt" },
-                { data: "courseDetailLink" },
-            ],
-            columnDefs: [
-                {
-                    className: 'reorder',
-                    render: () => '<span style="cursor: grab;">≡</span>',
-                    targets: 0
-                },
-                {
-                    targets: 4, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--event'>Pomeridiano</span>" : "<span class='chip chip--neutral'>Principale</span>";
-                    }
-                },
-                {
-                    targets: 5, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--deleted'>Sold out</span>" : "<span class='chip chip--visible'>Disponibile</span>";
-                    }
-                },
-                {
-                    targets: 7, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>Modifica corso</a>";
-                    }
+        async function loadData() {
+            const response = await fetch('{{ path('adminUrbinoCoursesListJson') }}');
+            const data = await response.json();
+            categoriesData = data.categories;
+
+            if (isFirstLoad) {
+                categoriesData.forEach(cat => openCategories.add(cat.id));
+                isFirstLoad = false;
+            }
+
+            renderCategories();
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            categoriesData.forEach((category, index) => {
+                const categoryEl = document.createElement('div');
+                categoryEl.className = 'category-accordion';
+                categoryEl.dataset.categoryId = category.id;
+                categoryEl.dataset.index = index;
+
+                const header = document.createElement('div');
+                header.className = 'category-header';
+
+                const isOpen = openCategories.has(category.id);
+                const toggleClass = isOpen ? 'class="category-toggle open"' : 'class="category-toggle"';
+
+                header.innerHTML = `
+                    <span class="category-drag-handle">≡</span>
+                    <span class="category-name">${category.nameIt} / ${category.nameEn}</span>
+                    <span class="category-count">${category.courses.length} ${category.courses.length === 1 ? 'corso' : 'corsi'}</span>
+                    <span ${toggleClass}></span>
+                `;
+
+                const coursesContainer = document.createElement('div');
+                coursesContainer.className = 'category-courses';
+                coursesContainer.style.display = isOpen ? 'block' : 'none';
+
+                if (category.courses.length > 0) {
+                    const table = document.createElement('table');
+                    table.className = 'courses-table';
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th class="reorder"></th>
+                                <th>Docente</th>
+                                <th>Edizione</th>
+                                <th>Date</th>
+                                <th>Tipo</th>
+                                <th>Stato</th>
+                                <th>Creato</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="courses-tbody"></tbody>
+                    `;
+
+                    const tbody = table.querySelector('.courses-tbody');
+                    category.courses.forEach(course => {
+                        const row = document.createElement('tr');
+                        row.dataset.courseId = course.id;
+                        row.innerHTML = `
+                            <td class="reorder"><span style="cursor: grab; font-size: 18px; color: dimgray">≡</span></td>
+                            <td>${course.teacherFullName}</td>
+                            <td>${course.editionName}</td>
+                            <td>${course.dateRange}</td>
+                            <td>${course.scheduleType === 'secondary_afternoon' ? '<span class="chip chip--event">Pomeridiano</span>' : '<span class="chip chip--neutral">Principale</span>'}</td>
+                            <td>${course.isSoldOut ? '<span class="chip chip--deleted">Sold out</span>' : '<span class="chip chip--visible">Disponibile</span>'}</td>
+                            <td>${course.createdAt}</td>
+                            <td><a href="${course.courseDetailLink}" class="gg-table-btn">Modifica corso</a></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+
+                    coursesContainer.appendChild(table);
+
+                    new Sortable(tbody, {
+                        handle: '.reorder',
+                        animation: 150,
+                        onEnd: function(evt) {
+                            handleCourseReorder(category.id, tbody);
+                        }
+                    });
+                } else {
+                    coursesContainer.innerHTML = '<p class="no-courses">Nessun corso in questa categoria</p>';
                 }
-            ],
-            pageLength: 25,
-            language: {
-                search: "Cerca:",
-                lengthMenu: "Mostra _MENU_ risultati per pagina",
-                info: "Mostrati da _START_ a _END_ di _TOTAL_ risultati",
-                infoEmpty: "Nessun risultato disponibile",
-                infoFiltered: "(filtrati da _MAX_ risultati totali)",
-                paginate: {
-                    first: "Primo",
-                    last: "Ultimo",
-                    next: "Successivo",
-                    previous: "Precedente"
+
+                header.addEventListener('click', (e) => {
+                    if (e.target.closest('.category-drag-handle')) return;
+                    if (isDragging) return;
+
+                    const isVisible = coursesContainer.style.display !== 'none';
+                    const newState = !isVisible;
+
+                    coursesContainer.style.display = newState ? 'block' : 'none';
+                    header.querySelector('.category-toggle').classList.toggle('open', newState);
+
+                    if (newState) {
+                        openCategories.add(category.id);
+                    } else {
+                        openCategories.delete(category.id);
+                    }
+                });
+
+                categoryEl.appendChild(header);
+                categoryEl.appendChild(coursesContainer);
+                container.appendChild(categoryEl);
+            });
+
+            new Sortable(container, {
+                handle: '.category-drag-handle',
+                animation: 150,
+                onStart: function(evt) {
+                    isDragging = true;
                 },
-                emptyTable: "Nessun dato disponibile nella tabella",
-                zeroRecords: "Nessun risultato trovato"
-            }
-        });
+                onEnd: function(evt) {
+                    handleCategoryReorder();
+                    setTimeout(() => {
+                        isDragging = false;
+                    }, 100);
+                }
+            });
+        }
 
-        table.on('row-reorder', function (e, diff, edit) {
-            if (diff.length === 0) {
-                return false;
-            }
+        async function handleCategoryReorder() {
+            const container = document.getElementById('categories-container');
+            const categoryElements = container.querySelectorAll('.category-accordion');
 
-            let diff_courses = [];
-            diff.forEach(function (row) {
-                const rowData = table.row(row.node).data();
+            const diff_categories = [];
+            categoryElements.forEach((el, newIndex) => {
+                const oldIndex = parseInt(el.dataset.index);
+                const categoryId = parseInt(el.dataset.categoryId);
+
+                if (oldIndex !== newIndex) {
+                    diff_categories.push({
+                        id: categoryId,
+                        old_position: oldIndex,
+                        new_position: newIndex
+                    });
+                }
+            });
+
+            if (diff_categories.length > 0) {
+                await fetch('{{ path('adminUrbinoCategoriesReorder') }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ diff_categories })
+                });
+
+                await loadData();
+            }
+        }
+
+        async function handleCourseReorder(categoryId, tbody) {
+            const rows = tbody.querySelectorAll('tr');
+            const diff_courses = [];
+
+            rows.forEach((row, newIndex) => {
+                const courseId = parseInt(row.dataset.courseId);
                 diff_courses.push({
-                    id: rowData.id,
-                    old_position: row.oldPosition,
-                    new_position: row.newPosition
+                    id: courseId,
+                    new_position: newIndex,
+                    old_position: newIndex
                 });
             });
 
-            fetch("{{ path('adminUrbinoCoursesReorder') }}", {
+            await fetch('{{ path('adminUrbinoCoursesReorder') }}', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ diff_courses: diff_courses })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Ordinamento salvato');
-                table.ajax.reload(null, false);
-            })
-            .catch(error => {
-                console.error('Errore durante il salvataggio:', error);
-                table.ajax.reload();
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ diff_courses })
             });
-        });
+        }
 
+        loadData();
     </script>
 
 {% endblock %}

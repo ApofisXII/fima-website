@@ -5,6 +5,7 @@ namespace App\Service;
 use App\DTO\Admin\NewsRequestDTO;
 use App\Entity\News;
 use App\Repository\NewsRepository;
+use App\Utils\ImageUtils;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,6 +19,7 @@ final readonly class NewsService
         private SluggerInterface $slugger,
         private ParameterBagInterface $parameterBag,
         private Filesystem $filesystem,
+        private ImageUtils $imageUtils,
     ) {}
 
     public function create(NewsRequestDTO $payload): News
@@ -56,10 +58,28 @@ final readonly class NewsService
     {
         $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
         $imageName = $news->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
 
         $uploadedFile->move($serverPath, $imageName);
+        $this->imageUtils->compressImage($imagePath);
 
         $news->setHasCoverImage(true);
+        $this->newsRepository->save($news);
+
+        return $news;
+    }
+
+    public function deleteCoverImage(News $news): News
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
+        $imageName = $news->getId() . '.webp';
+        $imagePath = $serverPath . $imageName;
+
+        if ($this->filesystem->exists($imagePath)) {
+            $this->filesystem->remove($imagePath);
+        }
+
+        $news->setHasCoverImage(false);
         $this->newsRepository->save($news);
 
         return $news;

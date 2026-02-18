@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\DTO\Admin\DataTableRequestDTO;
 use App\DTO\Admin\UrbinoCourseRequestDTO;
+use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
 use App\Service\UrbinoCourseService;
@@ -24,6 +25,7 @@ class AdminUrbinoCoursesController extends AbstractController
     public function __construct(
         private readonly UrbinoCourseRepository $urbinoCourseRepository,
         private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
         private readonly UrbinoCourseService $urbinoCourseService,
     ) {}
 
@@ -34,44 +36,60 @@ class AdminUrbinoCoursesController extends AbstractController
     }
 
     #[Route(path: '/json', name: 'adminUrbinoCoursesListJson')]
-    public function adminUrbinoCoursesListJson(#[MapQueryString] DataTableRequestDTO $payload): Response
+    public function adminUrbinoCoursesListJson(): Response
     {
-        $qb = $this->urbinoCourseRepository->createQueryBuilder("c")
-            ->leftJoin("c.urbino_edition", "e")
-            ->orderBy("c.ordering", "asc")
-            ->addOrderBy("c.id", "desc");
+        $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("cat")
+            ->andWhere("cat.is_deleted = false")
+            ->orderBy("cat.ordering", "ASC")
+            ->addOrderBy("cat.id", "ASC")
+            ->getQuery()
+            ->getResult();
 
-        if ($payload->search["value"]) {
-            $search = $payload->search["value"];
-            $qb->andWhere("c.teacher_full_name LIKE :search OR c.subject_it LIKE :search OR c.subject_en LIKE :search OR e.edition_name LIKE :search")
-                ->setParameter("search", "%".$search."%");
+        $categoriesData = [];
+
+        foreach ($categories as $category) {
+            $courses = $this->urbinoCourseRepository->createQueryBuilder("c")
+                ->leftJoin("c.urbino_edition", "e")
+                ->andWhere("c.urbino_course_category = :categoryId")
+                ->andWhere("c.is_deleted = false")
+                ->setParameter("categoryId", $category->getId())
+                ->orderBy("c.ordering", "ASC")
+                ->addOrderBy("c.id", "DESC")
+                ->getQuery()
+                ->getResult();
+
+            $coursesData = array_map(function ($item) {
+                $dateRange = '';
+                if ($item->getDateStart() && $item->getDateEnd()) {
+                    $dateRange = 'Dal ' . $item->getDateStart()->format('d/m') . ' al ' . $item->getDateEnd()->format('d/m');
+                } elseif ($item->getDateStart()) {
+                    $dateRange = 'Dal ' . $item->getDateStart()->format('d/m');
+                } elseif ($item->getDateEnd()) {
+                    $dateRange = 'Al ' . $item->getDateEnd()->format('d/m');
+                }
+
+                return [
+                    "id" => $item->getId(),
+                    "teacherFullName" => $item->getTeacherFullName(),
+                    "editionName" => $item->getUrbinoEdition()?->getEditionName(),
+                    "dateRange" => $dateRange,
+                    "scheduleType" => $item->getScheduleType(),
+                    "isSoldOut" => $item->isSoldOut(),
+                    "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
+                    "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
+                ];
+            }, $courses);
+
+            $categoriesData[] = [
+                "id" => $category->getId(),
+                "nameIt" => $category->getNameIt(),
+                "nameEn" => $category->getNameEn(),
+                "courses" => $coursesData,
+            ];
         }
 
-        $adapter = new QueryAdapter($qb->getQuery());
-        $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
-            adapter: $adapter,
-            currentPage: floor($payload->start / $payload->length) + 1,
-            maxPerPage: $payload->length,
-        );
-
-        $list = array_map(function ($item) {
-            return [
-                "id" => $item->getId(),
-                "teacherFullName" => $item->getTeacherFullName(),
-                "subjectIt" => $item->getSubjectIt(),
-                "editionName" => $item->getUrbinoEdition()?->getEditionName(),
-                "isAfternoonCourse" => $item->isAfternoonCourse(),
-                "isSoldOut" => $item->isSoldOut(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
-                "courseDetailLink" => $this->generateUrl("adminUrbinoCoursesDetail", ["courseId" => $item->getId()]),
-            ];
-        }, (array) $pagerfanta->getCurrentPageResults());
-
         return $this->json([
-            "data" => $list,
-            "draw" => $payload->draw,
-            "recordsFiltered" => $pagerfanta->getNbResults(),
-            "recordsTotal" => $pagerfanta->getNbResults(),
+            "categories" => $categoriesData,
         ]);
     }
 
@@ -80,10 +98,16 @@ class AdminUrbinoCoursesController extends AbstractController
     {
         $course = $this->urbinoCourseRepository->findOneBy(["id" => $request->query->get("courseId")]);
         $editions = $this->urbinoEditionRepository->findAll();
+        $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("c")
+            ->andWhere("c.is_deleted = false")
+            ->orderBy("c.name_it", "asc")
+            ->getQuery()
+            ->getResult();
 
         return $this->render('admin/urbino-courses-detail.html.twig', [
             "course" => $course,
             "editions" => $editions,
+            "categories" => $categories,
         ]);
     }
 
@@ -92,10 +116,14 @@ class AdminUrbinoCoursesController extends AbstractController
     {
         $course = $this->urbinoCourseRepository->findOneBy(["id" => $payload->courseId]);
 
-        if (null === $course) {
-            $course = $this->urbinoCourseService->create($payload);
-        } else {
-            $course = $this->urbinoCourseService->update($course, $payload);
+        try {
+            if (null === $course) {
+                $course = $this->urbinoCourseService->create($payload);
+            } else {
+                $course = $this->urbinoCourseService->update($course, $payload);
+            }
+        } catch (\InvalidArgumentException $e) {
+            return $this->json(["message" => $e->getMessage()], 400);
         }
 
         if ($teacherImage) {

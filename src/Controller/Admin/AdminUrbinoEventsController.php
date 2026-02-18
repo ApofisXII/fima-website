@@ -57,7 +57,7 @@ class AdminUrbinoEventsController extends AbstractController
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
                 "eventDatetime" => $item->getEventDatetime()->format("d/m/Y H:i"),
                 "isPublic" => $item->isPublic(),
-                "createdAt" => $item->getCreatedAt()->format("d/m/Y \\a\\l\\l\\e H:i"),
+                "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "eventDetailLink" => $this->generateUrl("adminUrbinoEventsDetail", ["eventId" => $item->getId()]),
             ];
         }, (array) $pagerfanta->getCurrentPageResults());
@@ -113,6 +113,44 @@ class AdminUrbinoEventsController extends AbstractController
 
         return $this->json([
             "message" => "Evento eliminato",
+        ]);
+    }
+
+    #[Route(path: '/upload-image/{eventId}', name: 'adminUrbinoEventsUploadImage', methods: ['POST'], format: 'json')]
+    public function adminUrbinoEventsUploadImage(Request $request, int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->findOneBy(["id" => $eventId]);
+
+        if (!$event) {
+            return $this->json([
+                "message" => "Evento non trovato",
+            ], 404);
+        }
+
+        $uploadedFile = $request->files->get('coverImage');
+
+        if (!$uploadedFile) {
+            return $this->json([
+                "message" => "Nessun file caricato",
+            ], 400);
+        }
+
+        $this->urbinoEventService->saveCoverImage($event, $uploadedFile);
+
+        return $this->json([
+            "message" => "Immagine caricata",
+        ]);
+    }
+
+    #[Route(path: '/delete-image/{eventId}', name: 'adminUrbinoEventsDeleteImage', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEventsDeleteImage(int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->find($eventId);
+
+        $this->urbinoEventService->deleteCoverImage($event);
+
+        return $this->json([
+            "message" => "Immagine eliminata",
         ]);
     }
 }

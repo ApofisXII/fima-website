@@ -29,7 +29,7 @@ class UrbinoEditionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')
             ->andWhere('u.is_deleted = false')
             ->andWhere('u.is_public_visible = true')
-            ->addOrderBy('u.year', 'desc')
+            ->addOrderBy('u.date_start', 'desc')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

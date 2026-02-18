@@ -17,9 +17,11 @@ final readonly class UrbinoEditionService
     {
         $edition = (new UrbinoEdition())
             ->setEditionName($payload->editionName)
-            ->setYear($payload->year)
-            ->setPeriodDescription($payload->periodDescription)
+            ->setDateStart(new \DateTime($payload->dateStart))
+            ->setDateEnd(new \DateTime($payload->dateEnd))
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
+            ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
+            ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
             ->setIsDeleted(false)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime());
@@ -31,9 +33,11 @@ final readonly class UrbinoEditionService
     {
         $edition
             ->setEditionName($payload->editionName)
-            ->setYear($payload->year)
-            ->setPeriodDescription($payload->periodDescription)
+            ->setDateStart(new \DateTime($payload->dateStart))
+            ->setDateEnd(new \DateTime($payload->dateEnd))
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
+            ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
+            ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
             ->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEditionRepository->save($edition);
