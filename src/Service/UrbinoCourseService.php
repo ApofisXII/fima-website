@@ -57,17 +57,23 @@ class UrbinoCourseService
             $course->setPriceCents(null);
         }
 
-        if ($dto->dateStart) {
-            $course->setDateStart(new \DateTime($dto->dateStart));
-        } else {
-            $course->setDateStart(null);
+        $dateStart = $dto->dateStart ? new \DateTime($dto->dateStart) : $edition->getDateStart();
+        $dateEnd   = $dto->dateEnd   ? new \DateTime($dto->dateEnd)   : $edition->getDateEnd();
+
+        if ($dateStart < $edition->getDateStart() || $dateStart > $edition->getDateEnd()) {
+            throw new \InvalidArgumentException('La data di inizio del corso deve essere compresa nell\'intervallo dell\'edizione (' . $edition->getDateStart()->format('d/m/Y') . ' - ' . $edition->getDateEnd()->format('d/m/Y') . ').');
         }
 
-        if ($dto->dateEnd) {
-            $course->setDateEnd(new \DateTime($dto->dateEnd));
-        } else {
-            $course->setDateEnd(null);
+        if ($dateEnd < $edition->getDateStart() || $dateEnd > $edition->getDateEnd()) {
+            throw new \InvalidArgumentException('La data di fine del corso deve essere compresa nell\'intervallo dell\'edizione (' . $edition->getDateStart()->format('d/m/Y') . ' - ' . $edition->getDateEnd()->format('d/m/Y') . ').');
         }
+
+        if ($dateStart > $dateEnd) {
+            throw new \InvalidArgumentException('La data di inizio del corso non può essere successiva alla data di fine.');
+        }
+
+        $course->setDateStart($dateStart);
+        $course->setDateEnd($dateEnd);
 
         if (!$course->getSlug()) {
             $slugText = $dto->teacherFullName;

@@ -18,7 +18,10 @@ class UrbinoEdition
     private ?string $edition_name = null;
 
     #[ORM\Column]
-    private ?int $year = null;
+    private ?\DateTime $date_start = null;
+
+    #[ORM\Column]
+    private ?\DateTime $date_end = null;
 
     #[ORM\Column]
     private ?\DateTime $created_at = null;
@@ -28,9 +31,6 @@ class UrbinoEdition
 
     #[ORM\Column]
     private ?bool $is_deleted = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $period_description = null;
 
     #[ORM\Column]
     private ?bool $is_public_visible = null;
@@ -58,14 +58,26 @@ class UrbinoEdition
         return $this;
     }
 
-    public function getYear(): ?int
+    public function getDateStart(): ?\DateTime
     {
-        return $this->year;
+        return $this->date_start;
     }
 
-    public function setYear(int $year): static
+    public function setDateStart(\DateTime $date_start): static
     {
-        $this->year = $year;
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTime
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(\DateTime $date_end): static
+    {
+        $this->date_end = $date_end;
 
         return $this;
     }
@@ -102,18 +114,6 @@ class UrbinoEdition
     public function setIsDeleted(bool $is_deleted): static
     {
         $this->is_deleted = $is_deleted;
-
-        return $this;
-    }
-
-    public function getPeriodDescription(): ?string
-    {
-        return $this->period_description;
-    }
-
-    public function setPeriodDescription(?string $period_description): static
-    {
-        $this->period_description = $period_description;
 
         return $this;
     }

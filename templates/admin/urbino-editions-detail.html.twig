@@ -10,24 +10,24 @@
         <div class="box multi-detail-box gg-form">
             <h3>{{ edition ? edition.editionName : 'Dettaglio edizione' }}</h3>
 
-            <div class="gg-form-row">
-                <div class="gg-form-row__main">
+            <div class="gg-form-row gg-form-row--no-margin">
+                <div class="course-form-field">
                     <label>Nome edizione</label>
                     <input type="text" name="editionName" placeholder="Nome edizione" value="{{ edition ? edition.editionName }}" required>
                 </div>
-                <div class="gg-form-row__year">
-                    <label>Anno</label>
-                    <input type="number" name="year" placeholder="Anno" value="{{ edition ? edition.year }}" required>
+
+                <div class="course-dates-wrapper">
+                    <div class="course-date-field">
+                        <label>Data di inizio</label>
+                        <input type="date" name="dateStart" value="{{ edition and edition.dateStart ? edition.dateStart|date('Y-m-d') }}" required>
+                    </div>
+
+                    <div class="course-date-field">
+                        <label>Data di fine</label>
+                        <input type="date" name="dateEnd" value="{{ edition and edition.dateEnd ? edition.dateEnd|date('Y-m-d') }}" required>
+                    </div>
                 </div>
             </div>
-
-            <label>Descrizione periodo (opzionale)</label>
-            <input type="text" name="periodDescription" placeholder="Es: 18-25 agosto 2024" value="{{ edition ? edition.periodDescription }}">
-
-            <label style="display: flex; align-items: center; gap: 10px; margin-top: 30px;">
-                <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
-                <span>Edizione visibile pubblicamente</span>
-            </label>
 
         </div>
 
@@ -44,6 +44,17 @@
                     <label>Informazioni - iscrizione e alloggio (inglese)</label>
                     <textarea name="enrollmentInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (inglese)" required>{{ edition ? edition.enrollmentInfoEn|raw }}</textarea>
                 </div>
+            </div>
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Impostazioni</h3>
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
+                    <span>Edizione visibile pubblicamente</span>
+                </label>
             </div>
         </div>
 
@@ -99,8 +110,8 @@
             const payload = {
                 editionId: formData.get('editionId'),
                 editionName: formData.get('editionName'),
-                year: parseInt(formData.get('year')),
-                periodDescription: formData.get('periodDescription') || null,
+                dateStart: formData.get('dateStart'),
+                dateEnd: formData.get('dateEnd'),
                 isPublicVisible: isPublicVisible,
                 enrollmentInfoIt: formData.get('enrollmentInfoIt'),
                 enrollmentInfoEn: formData.get('enrollmentInfoEn')

@@ -116,10 +116,14 @@ class AdminUrbinoCoursesController extends AbstractController
     {
         $course = $this->urbinoCourseRepository->findOneBy(["id" => $payload->courseId]);
 
-        if (null === $course) {
-            $course = $this->urbinoCourseService->create($payload);
-        } else {
-            $course = $this->urbinoCourseService->update($course, $payload);
+        try {
+            if (null === $course) {
+                $course = $this->urbinoCourseService->create($payload);
+            } else {
+                $course = $this->urbinoCourseService->update($course, $payload);
+            }
+        } catch (\InvalidArgumentException $e) {
+            return $this->json(["message" => $e->getMessage()], 400);
         }
 
         if ($teacherImage) {

@@ -30,10 +30,8 @@ class UrbinoCourseRequestDTO
         #[Assert\Choice(choices: UrbinoCourse::SCHEDULE_TYPES, message: "Il tipo di orario selezionato non è valido.")]
         public ?string $scheduleType = null,
 
-        #[Assert\NotBlank(message: "La data di inizio è obbligatoria.")]
         public ?string $dateStart = null,
 
-        #[Assert\NotBlank(message: "La data di fine è obbligatoria.")]
         public ?string $dateEnd = null,
 
         public ?float $priceEuros = null,

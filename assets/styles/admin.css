@@ -295,6 +295,11 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     width: 100%;
 }
 
+.course-date-field input[type="date"].date-is-default {
+    color: #aaa;
+}
+
+
 .gg-form select {
     -webkit-appearance: none;
     -moz-appearance: none;

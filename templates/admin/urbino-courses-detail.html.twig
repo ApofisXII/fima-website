@@ -18,11 +18,14 @@
 
                 <div class="course-form-field">
                     <label>Edizione</label>
-                    <select name="urbinoEditionId" required>
+                    <select name="urbinoEditionId" id="edition-select" required>
                         <option value="">Seleziona edizione</option>
                         {% for edition in editions %}
-                            <option value="{{ edition.id }}" {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
-                                {{ edition.editionName }} ({{ edition.year }})
+                            <option value="{{ edition.id }}"
+                                    data-date-start="{{ edition.dateStart|date('Y-m-d') }}"
+                                    data-date-end="{{ edition.dateEnd|date('Y-m-d') }}"
+                                    {{ course and course.urbinoEdition and course.urbinoEdition.id == edition.id ? 'selected' }}>
+                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
                             </option>
                         {% endfor %}
                     </select>
@@ -31,12 +34,12 @@
                 <div class="course-dates-wrapper">
                     <div class="course-date-field">
                         <label>Data di inizio</label>
-                        <input type="date" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}" required>
+                        <input type="date" id="date-start" name="dateStart" value="{{ course and course.dateStart ? course.dateStart|date('Y-m-d') }}">
                     </div>
 
                     <div class="course-date-field">
                         <label>Data di fine</label>
-                        <input type="date" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}" required>
+                        <input type="date" id="date-end" name="dateEnd" value="{{ course and course.dateEnd ? course.dateEnd|date('Y-m-d') }}">
                     </div>
                 </div>
             </div>
@@ -181,6 +184,47 @@
 {% block js %}
 
     <script src="https://cdn.tiny.cloud/1/19quagaglhpufzna2p27cvo8kg2miu2f2flha91bl6aj5yqg/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script>
+        const editionSelect = document.getElementById('edition-select');
+        const dateStartInput = document.getElementById('date-start');
+        const dateEndInput = document.getElementById('date-end');
+
+        function setDefaultDate(input, value) {
+            input.value = value;
+            input.classList.add('date-is-default');
+        }
+
+        dateStartInput.addEventListener('change', function() {
+            this.classList.remove('date-is-default');
+        });
+
+        dateEndInput.addEventListener('change', function() {
+            this.classList.remove('date-is-default');
+        });
+
+        editionSelect.addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            if (selected.value && selected.dataset.dateStart) {
+                setDefaultDate(dateStartInput, selected.dataset.dateStart);
+                setDefaultDate(dateEndInput, selected.dataset.dateEnd);
+            } else {
+                dateStartInput.value = '';
+                dateEndInput.value = '';
+                dateStartInput.classList.remove('date-is-default');
+                dateEndInput.classList.remove('date-is-default');
+            }
+        });
+
+        // All'avvio: se i campi sono vuoti e c'è un'edizione selezionata, pre-popola come default
+        if (!dateStartInput.value) {
+            const selected = editionSelect.options[editionSelect.selectedIndex];
+            if (selected.value && selected.dataset.dateStart) {
+                setDefaultDate(dateStartInput, selected.dataset.dateStart);
+                setDefaultDate(dateEndInput, selected.dataset.dateEnd);
+            }
+        }
+    </script>
 
     <script type="module">
         // Restore scroll position after reload

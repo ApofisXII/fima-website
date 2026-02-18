@@ -34,11 +34,11 @@ class AdminUrbinoEditionsController extends AbstractController
     {
         $qb = $this->urbinoEditionRepository->createQueryBuilder("e")
             ->andWhere("e.is_deleted = false")
-            ->orderBy("e.year", "desc");
+            ->orderBy("e.date_start", "desc");
 
         if ($payload->search["value"]) {
             $search = $payload->search["value"];
-            $qb->andWhere("e.edition_name LIKE :search OR e.period_description LIKE :search OR e.year LIKE :search")
+            $qb->andWhere("e.edition_name LIKE :search")
                 ->setParameter("search", "%".$search."%");
         }
 
@@ -52,7 +52,8 @@ class AdminUrbinoEditionsController extends AbstractController
         $list = array_map(function ($item) {
             return [
                 "editionName" => $item->getEditionName(),
-                "year" => $item->getYear(),
+                "year" => $item->getDateStart()->format('Y'),
+                "dateRange" => 'Dal ' . $item->getDateStart()->format('d/m') . ' al ' . $item->getDateEnd()->format('d/m'),
                 "isPublicVisible" => $item->isPublicVisible(),
                 "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "editionDetailLink" => $this->generateUrl("adminUrbinoEditionsDetail", ["editionId" => $item->getId()]),

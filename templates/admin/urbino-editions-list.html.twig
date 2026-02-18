@@ -13,6 +13,7 @@
         <tr>
             <th>Nome edizione</th>
             <th>Anno</th>
+            <th>Date</th>
             <th>Visibilità</th>
             <th>Creata</th>
             <th></th>
@@ -37,18 +38,19 @@
             columns: [
                 { data: "editionName" },
                 { data: "year" },
+                { data: "dateRange" },
                 { data: "isPublicVisible" },
                 { data: "createdAt" },
                 { data: "editionDetailLink" },
             ],
             columnDefs: [
                 {
-                    targets: 2, render: function(data, type, row) {
+                    targets: 3, render: function(data, type, row) {
                         return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
                     }
                 },
                 {
-                    targets: 4, render: function(data, type, row) {
+                    targets: 5, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>Modifica edizione</a>";
                     }
                 }

@@ -22,7 +22,7 @@
                         <option value="">Seleziona edizione</option>
                         {% for edition in editions %}
                             <option value="{{ edition.id }}" {{ event and event.urbinoEdition and event.urbinoEdition.id == edition.id ? 'selected' }}>
-                                {{ edition.editionName }} ({{ edition.year }})
+                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
                             </option>
                         {% endfor %}
                     </select>
