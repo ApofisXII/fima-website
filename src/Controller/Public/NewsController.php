@@ -2,6 +2,7 @@
 
 namespace App\Controller\Public;
 
+use App\Repository\NewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,10 +12,16 @@ use Symfony\Component\Routing\Attribute\Route;
 final class NewsController extends AbstractController
 {
 
+    public function __construct(
+        private NewsRepository $newsRepository,
+    ) {}
+
     #[Route('', name: 'newsList')]
     public function newsList(Request $request): Response
     {
-        $newsList = []; // TODO: Fetch via Repository
+        $newsList = $this->newsRepository->findBy([
+            "is_deleted" => false,
+        ], ["created_at" => "desc"]);
 
         return $this->render('public/news-list.html.twig', [
             'newsList' => $newsList,
