@@ -145,13 +145,7 @@ class AdminUrbinoEventsController extends AbstractController
     #[Route(path: '/delete-image/{eventId}', name: 'adminUrbinoEventsDeleteImage', methods: ['DELETE'], format: 'json')]
     public function adminUrbinoEventsDeleteImage(int $eventId): Response
     {
-        $event = $this->urbinoEventRepository->findOneBy(["id" => $eventId]);
-
-        if (!$event) {
-            return $this->json([
-                "message" => "Evento non trovato",
-            ], 404);
-        }
+        $event = $this->urbinoEventRepository->find($eventId);
 
         $this->urbinoEventService->deleteCoverImage($event);
 
