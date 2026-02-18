@@ -13,16 +13,16 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class UrbinoCourseService
+final readonly class UrbinoCourseService
 {
     public function __construct(
-        private readonly UrbinoCourseRepository $urbinoCourseRepository,
-        private readonly UrbinoEditionRepository $urbinoEditionRepository,
-        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
-        private readonly SluggerInterface $slugger,
-        private readonly ParameterBagInterface $parameterBag,
-        private readonly Filesystem $filesystem,
-        private readonly ImageUtils $imageUtils,
+        private UrbinoCourseRepository         $urbinoCourseRepository,
+        private UrbinoEditionRepository        $urbinoEditionRepository,
+        private UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository,
+        private SluggerInterface               $slugger,
+        private ParameterBagInterface          $parameterBag,
+        private Filesystem                     $filesystem,
+        private ImageUtils                     $imageUtils,
     ) {}
 
     public function create(UrbinoCourseRequestDTO $dto): UrbinoCourse

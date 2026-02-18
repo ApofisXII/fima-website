@@ -24,7 +24,7 @@ final readonly class NewsService
 
     public function create(NewsRequestDTO $payload): News
     {
-        $news = (new News())
+        $news = new News()
             ->setTitleIt($payload->titleIt)
             ->setTitleEn($payload->titleEn)
             ->setBodyIt($payload->bodyIt)
@@ -32,6 +32,7 @@ final readonly class NewsService
             ->setCreatedAt(new \DateTime())
             ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
             ->setHasCoverImage(false)
+            ->setIsDeleted(false)
             ->setIsPublic($payload->isPublic ?? false)
             ->setIsEvent($payload->isEvent ?? false)
             ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null);
