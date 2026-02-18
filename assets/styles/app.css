@@ -275,7 +275,7 @@ h2 {
 }
 
 .news-box__content {
-    height: 60px;
+    height: 80px;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
