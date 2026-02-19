@@ -4,7 +4,7 @@
 
     <div class="gg-h1">{{ edition ? 'Modifica' : 'Nuova' }} edizione</div>
 
-    <form id="page-form" method="post" action="{{ path('adminUrbinoEditionsDetailSave') }}">
+    <form id="page-form" method="post" action="{{ path('adminUrbinoEditionsDetailSave') }}" novalidate>
         <input type="hidden" name="editionId" value="{{ edition ? edition.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
