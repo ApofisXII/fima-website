@@ -2,19 +2,17 @@
 
 {% block body %}
 
-    <div class="gg-h1">Notizie</div>
+    <div class="gg-h1">Categorie Notizie</div>
 
     <div style="margin-bottom: 20px;">
-        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminNewsDetail') }}">+ Nuova notizia / evento</a>
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminNewsCategoriesDetail') }}">+ Nuova categoria</a>
     </div>
 
     <table id="main-table">
         <thead>
         <tr>
-            <th>Titolo</th>
-            <th>Categoria</th>
-            <th>Tipo</th>
-            <th>Visibilità</th>
+            <th>Nome (Italiano)</th>
+            <th>Nome (Inglese)</th>
             <th>Creata</th>
             <th></th>
         </tr>
@@ -32,31 +30,19 @@
         const table = new DataTable("#main-table", {
             serverSide: true,
             ajax: {
-                url: "{{ path('adminNewsListJson') }}",
+                url: "{{ path('adminNewsCategoriesListJson') }}",
             },
             ordering: false,
             columns: [
-                { data: "titleIt" },
-                { data: "categoryName" },
-                { data: "isEvent" },
-                { data: "isPublic" },
+                { data: "nameIt" },
+                { data: "nameEn" },
                 { data: "createdAt" },
-                { data: "newsDetailLink" },
+                { data: "categoryDetailLink" },
             ],
             columnDefs: [
                 {
-                    targets: 2, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--event'>Evento</span>" : "<span class='chip chip--neutral'>Notizia</span>";
-                    }
-                },
-                {
                     targets: 3, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--visible'>" + (row.isEvent ? "Pubblico" : "Pubblica") + "</span>" : "<span class='chip chip--deleted'>" + (row.isEvent ? "Nascosto" : "Nascosta") + "</span>";
-                    }
-                },
-                {
-                    targets: 5, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>" + (row.isEvent ? "Modifica evento" : "Modifica notizia") + "</a>";
+                        return "<a href='"+data+"' class='gg-table-btn' style='white-space: nowrap;'>Modifica categoria</a>";
                     }
                 }
             ],

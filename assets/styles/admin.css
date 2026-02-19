@@ -401,12 +401,20 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     flex: 1;
 }
 
+.gg-form-row--two {
+    gap: 40px;
+}
+
 .gg-form-row--two .gg-form-row__main {
     flex: 1;
 }
 
 .gg-form-row--two .gg-form-row__year {
     flex: 1;
+}
+
+.gg-form-row__year input[type="datetime-local"] {
+    width: 100%;
 }
 
 .gg-btn-group {

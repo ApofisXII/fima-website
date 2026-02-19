@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\DTO\Admin\NewsRequestDTO;
 use App\Entity\News;
+use App\Repository\NewsCategoryRepository;
 use App\Repository\NewsRepository;
 use App\Utils\ImageUtils;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -16,6 +17,7 @@ final readonly class NewsService
 
     public function __construct(
         private NewsRepository $newsRepository,
+        private NewsCategoryRepository $newsCategoryRepository,
         private SluggerInterface $slugger,
         private ParameterBagInterface $parameterBag,
         private Filesystem $filesystem,
@@ -24,6 +26,8 @@ final readonly class NewsService
 
     public function create(NewsRequestDTO $payload): News
     {
+        $category = $payload->newsCategoryId ? $this->newsCategoryRepository->find($payload->newsCategoryId) : null;
+
         $news = (new News())
             ->setTitleIt($payload->titleIt)
             ->setTitleEn($payload->titleEn)
@@ -32,15 +36,18 @@ final readonly class NewsService
             ->setCreatedAt(new \DateTime())
             ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
             ->setHasCoverImage(false)
+            ->setIsDeleted(false)
             ->setIsPublic($payload->isPublic ?? false)
-            ->setIsEvent($payload->isEvent ?? false)
-            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null);
+            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null)
+            ->setNewsCategory($category);
 
         return $this->newsRepository->save($news);
     }
 
     public function update(News $news, NewsRequestDTO $payload): News
     {
+        $category = $payload->newsCategoryId ? $this->newsCategoryRepository->find($payload->newsCategoryId) : null;
+
         $news
             ->setTitleIt($payload->titleIt)
             ->setTitleEn($payload->titleEn)
@@ -48,8 +55,8 @@ final readonly class NewsService
             ->setBodyEn($payload->bodyEn)
             ->setSlug($this->slugger->slug(strtolower($payload->titleIt)))
             ->setIsPublic($payload->isPublic ?? false)
-            ->setIsEvent($payload->isEvent ?? false)
-            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null);
+            ->setEventDatetime($payload->eventDatetime ? new \DateTime($payload->eventDatetime) : null)
+            ->setNewsCategory($category);
 
         return $this->newsRepository->save($news);
     }
