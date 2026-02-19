@@ -8,7 +8,7 @@
         <h1>News & eventi</h1>
 
         <div class="news-grid">
-            {% for i in 1..12 %}
+            {% for news in newsList %}
                 {% include 'public/_news-box.html.twig' %}
             {% endfor %}
         </div>

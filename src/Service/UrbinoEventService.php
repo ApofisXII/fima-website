@@ -11,14 +11,14 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class UrbinoEventService
+final readonly class UrbinoEventService
 {
     public function __construct(
-        private readonly UrbinoEventRepository $urbinoEventRepository,
-        private readonly UrbinoEditionRepository $urbinoEditionRepository,
-        private readonly ParameterBagInterface $parameterBag,
-        private readonly Filesystem $filesystem,
-        private readonly ImageUtils $imageUtils,
+        private UrbinoEventRepository $urbinoEventRepository,
+        private UrbinoEditionRepository $urbinoEditionRepository,
+        private ParameterBagInterface $parameterBag,
+        private Filesystem $filesystem,
+        private ImageUtils $imageUtils,
     ) {}
 
     public function create(UrbinoEventRequestDTO $dto): UrbinoEvent

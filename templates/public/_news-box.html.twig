@@ -1,14 +1,17 @@
-<a href="#" class="news-box hover">
+{# require variable: news #}
+<a href="{{ path('newsDetail', {'news':news.id, 'slug':news.slug}) }}" {% if news.coverImage %}style="background-image: url('{{ asset('uploads-news/'~news.id~'.webp') }}');"{% endif %} class="news-box hover">
     <div class="news-box__inner">
         <div class="news-box__date-container">
-            <div class="news-box__date-box">
-                <div class="news-box__day">00</div>
-                <div class="news-box__month">XXX</div>
-            </div>
+            {% if news.eventDatetime is not null %}
+                <div class="news-box__date-box">
+                    <div class="news-box__day">{{ news.eventDatetime.format("d") }}</div>
+                    <div class="news-box__month">{{ news.eventDatetime.format("M") }}</div>
+                </div>
+            {% endif %}
         </div>
         <div class="news-box__content">
-            <div class="news-box__title">Titolo articolo</div>
-            <div class="news-box__date">Pubblicato il 00/00/0000</div>
+            <div class="news-box__title">{{ news.titleIt }}</div>
+            <div class="news-box__date">Pubblicato il {{ news.createdAt.format("d/m/y") }}</div>
         </div>
     </div>
 </a>

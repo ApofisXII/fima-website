@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="uma-hero">
-        <video class="uma-hero__video" src="{{ asset('videos/uma-welcome.mp4') }}" muted loop playsinline autoplay></video>
+        <video class="uma-hero__video" poster="{{ asset('videos/uma-welcome.webp') }}" src="{{ asset('videos/uma-welcome.mov') }}" muted loop playsinline autoplay></video>
         <img class="uma-hero__logo" src="{{ asset('images/logos/uma-logos/uma-2026-white.svg') }}" alt="Urbino Musica Antica">
     </div>
 
@@ -19,6 +19,23 @@
             <p>
                 Urbino Musica Antica è già da molto tempo un riferimento per chi ama la musica antica. Nella magnifica cornice di questa importante città medievale, per nove giorni si canta, si suona e si balla, alternando le lezioni individuali della mattina con le tante attività di gruppo pomeridiane, tra cui l’orchestra, il consort, la musica da camera, la polifonia, il laboratorio sull'oratorio, la danza rinascimentale e barocca.
             </p>
+        </div>
+    </div>
+
+    <div class="container uma-activities">
+        <div class="box uma-activity">
+            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-courses-logo.svg') }}" alt="Corsi">
+            <p>
+                Il corpo docenti dei corsi di Urbino riunisce alcuni tra i più affermati ed apprezzati artisti italiani ed internazionali, mentori e formatori d'eccezione.
+            </p>
+            <a href="{{ path('urbinoCoursesList') }}" class="btn hover btn--uma-activity">Scopri i corsi</a>
+        </div>
+        <div class="box uma-activity">
+            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-festival-logo.svg') }}" alt="Corsi">
+            <p>
+                Urbino Musica Antica è anche un festival, con concerti, conferenze e progetti speciali che coinvolgono artisti di fama internazionale, giovani talenti e le realtà musicali del territorio.
+            </p>
+            <a href="#" class="btn hover btn--uma-activity">Scopri gli eventi</a>
         </div>
     </div>
 

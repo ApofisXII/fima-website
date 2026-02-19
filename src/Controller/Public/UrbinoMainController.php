@@ -34,4 +34,14 @@ final class UrbinoMainController extends AbstractController
         ]);
     }
 
+    #[Route('/info', name: 'urbinoInformations')]
+    public function urbinoInformations(): Response
+    {
+        $currentEdition = $this->urbinoEditionRepository->findCurrentEdition();
+
+        return $this->render('public/urbino-informations.html.twig', [
+            "currentEdition" => $currentEdition,
+        ]);
+    }
+
 }

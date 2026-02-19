@@ -88,9 +88,10 @@
     <script type="module">
         const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({
-            selector: 'textarea',
+            selector: '.tiny-area',
             menubar: false,
-            toolbar: 'bold underline link bullist numlist removeformat',
+            toolbar: 'blocks | bold underline link bullist numlist removeformat',
+            block_formats: 'Paragrafo=p; Titoletto=h2; Titoletto secondario=h3',
             plugins: 'link | lists | paste',
             branding: false,
             paste_as_text: true,

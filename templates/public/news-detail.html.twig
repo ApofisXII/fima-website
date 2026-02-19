@@ -1,0 +1,28 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ news.titleIt }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container news-header" {% if news.coverImage %}style="background-image: url('{{ asset('uploads-news/'~news.id~'.webp') }}');"{% endif %}>
+        <div class="news-header__inner">
+            <div class="news-header__date-container">
+                {% if news.eventDatetime is not null %}
+                    <div class="news-box__date-box">
+                        <div class="news-box__day">{{ news.eventDatetime.format("d") }}</div>
+                        <div class="news-box__month">{{ news.eventDatetime.format("M") }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <div class="news-header__pubdate">Pubblicata il {{ news.createdAt.format("d/m/y") }}</div>
+                <h1 class="news-header__title">{{ news.titleIt }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-from-admin text-from-admin--article">
+        {{ news.bodyIt|raw }}
+    </div>
+
+{% endblock %}

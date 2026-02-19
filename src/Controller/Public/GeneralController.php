@@ -2,6 +2,7 @@
 
 namespace App\Controller\Public;
 
+use App\Repository\NewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class GeneralController extends AbstractController
 {
+    public function __construct(
+        private readonly NewsRepository $newsRepository,
+    ) {}
+
     #[Route('/', name: 'indexRedirectLocalize')]
     public function indexRedirectLocalize(Request $request): Response
     {
@@ -22,6 +27,18 @@ final class GeneralController extends AbstractController
     #[Route('/{_locale}', name: 'indexLocalized')]
     public function indexLocalized(): Response
     {
-        return $this->render('public/index.html.twig');
+        $newsList = $this->newsRepository->findBy([
+            "is_deleted" => false,
+        ], ["created_at" => "desc"], 3);
+
+        return $this->render('public/index.html.twig', [
+            "newsList" => $newsList,
+        ]);
+    }
+
+    #[Route('/{_locale}/donate', name: 'donate')]
+    public function donate(): Response
+    {
+        return $this->render('public/donate.html.twig');
     }
 }

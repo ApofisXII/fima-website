@@ -1,0 +1,15 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}Urbino Musica Antica • Informazioni • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Informazioni generali</h1>
+
+        <div class="text-from-admin">
+            {{ currentEdition.enrollmentInfoIt|raw }}
+        </div>
+    </div>
+
+{% endblock %}

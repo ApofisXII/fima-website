@@ -15,7 +15,7 @@ final readonly class UrbinoEditionService
 
     public function create(UrbinoEditionRequestDTO $payload): UrbinoEdition
     {
-        $edition = (new UrbinoEdition())
+        $edition = new UrbinoEdition()
             ->setEditionName($payload->editionName)
             ->setDateStart(new \DateTime($payload->dateStart))
             ->setDateEnd(new \DateTime($payload->dateEnd))
