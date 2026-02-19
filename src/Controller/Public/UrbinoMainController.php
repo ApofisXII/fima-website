@@ -2,6 +2,9 @@
 
 namespace App\Controller\Public;
 
+use App\DTO\Website\CoursesInCategoryDTO;
+use App\Repository\UrbinoCourseCategoryRepository;
+use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +15,8 @@ final class UrbinoMainController extends AbstractController
 {
 
     public function __construct(
-        private readonly UrbinoEditionRepository $urbinoEditionRepository,
+        private readonly UrbinoEditionRepository        $urbinoEditionRepository,
+        private readonly UrbinoCourseCategoryRepository $urbinoCourseCategoryRepository, private readonly UrbinoCourseRepository $urbinoCourseRepository,
     ) {}
 
     #[Route('/welcome', name: 'urbinoWelcome')]
@@ -28,9 +32,30 @@ final class UrbinoMainController extends AbstractController
     #[Route('/courses', name: 'urbinoCoursesList')]
     public function urbinoCoursesList(): Response
     {
-        $courses = []; // Todo: fetch from database
+        $currentEdition = $this->urbinoEditionRepository->findCurrentEdition();
+
+        $categories = $this->urbinoCourseCategoryRepository->findBy([
+            "is_deleted" => false,
+        ], ["ordering" => "asc"]);
+
+        $coursesInCategories = [];
+        foreach ($categories as $category) {
+            $courses = $this->urbinoCourseRepository->findBy([
+                "urbino_edition" => $currentEdition,
+                "urbino_course_category" => $category,
+                "is_deleted" => false,
+            ], ["ordering" => "asc"]);
+
+            if (count($courses) > 0) {
+                $coursesInCategories[] = new CoursesInCategoryDTO(
+                    category: $category,
+                    courses: $courses,
+                );
+            }
+        }
+
         return $this->render('public/urbino-courses.html.twig', [
-            "courses" => $courses,
+            "coursesInCategories" => $coursesInCategories,
         ]);
     }
 

@@ -7,9 +7,18 @@
     <div class="container">
         <h1>Corsi</h1>
 
-        <p>
-            Todo: corsi
-        </p>
+        <div>
+            {% for courseInCategory in coursesInCategories %}
+
+                <h2>{{ courseInCategory.category.nameIt }}</h2>
+                <div>
+                    {% for course in courseInCategory.courses %}
+                        <div>{{ course.teacherFullName }}</div>
+                    {% endfor %}
+                </div>
+
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
