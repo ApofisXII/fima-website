@@ -652,6 +652,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 .gg-login-error {
     margin-top: 20px;
     color: #c0392b;
+    font-size: .9rem;
     text-align: center;
 }
 
