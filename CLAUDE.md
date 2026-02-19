@@ -137,6 +137,14 @@ PHPUnit configuration enforces strict standards:
 - Uses `tests/` directory for test files
 - Test environment uses separate database with `_test` suffix
 
+## Admin Controller Conventions
+
+- **Non fare null check dopo `find()`**: nei controller admin non aggiungere mai `if (!$entity)` dopo una chiamata a `find()`. L'admin è un contesto controllato e si assume che gli ID passati siano validi. Esempio corretto:
+  ```php
+  $category = $this->categoryRepository->find($categoryId);
+  $this->categoryService->delete($category);
+  ```
+
 ## Maintainer
 
 Project maintained by [@ApofisXII](https://github.com/ApofisXII).

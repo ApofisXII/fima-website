@@ -103,12 +103,6 @@ class AdminNewsCategoriesController extends AbstractController
     {
         $category = $this->newsCategoryRepository->find($categoryId);
 
-        if (!$category) {
-            return $this->json([
-                "message" => "Categoria non trovata",
-            ], 404);
-        }
-
         $this->newsCategoryService->delete($category);
 
         return $this->json([
