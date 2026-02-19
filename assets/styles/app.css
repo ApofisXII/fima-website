@@ -194,6 +194,7 @@ h2 {
 }
 
 .news-box {
+    background-color: var(--color-blue);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -202,15 +203,16 @@ h2 {
 }
 
 .news-box__inner {
-    background: linear-gradient(to bottom, rgba(24, 64, 126, 0.1), rgba(24, 64, 126, 0.5));
+    background: linear-gradient(to bottom, rgba(24, 64, 126, 0.1), rgba(24, 64, 126, 0.8));
     border-radius: var(--border-radius-main);
     padding: 20px;
     color: white;
 }
 
 .news-box__title {
-    font-size: 1.2rem;
-    font-weight: var(--font-bold-weight-sans-serif);
+    font-size: 1.1rem;
+    font-family: 'Platypi', serif;
+    margin-bottom: 10px;
 }
 
 .news-box__date {
@@ -507,9 +509,20 @@ h2 {
     text-align: left;
 }
 
+.text-from-admin--article {
+    max-width: 700px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
 .text-from-admin h2, .text-from-admin h3 {
     margin-top: 30px;
     margin-bottom: 10px;
+}
+
+.news-header__date-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .donation-option {
@@ -533,4 +546,32 @@ h2 {
     font-size: 1.2rem;
     text-align: center;
     margin-top: 40px;
+}
+
+.news-header {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--border-radius-main);
+    background-color: var(--color-blue);
+    margin-top: 40px;
+}
+
+.news-header__inner {
+    border-radius: var(--border-radius-main);
+    padding: 50px;
+    background: linear-gradient(to bottom, rgba(24, 64, 126, 0.1), rgba(24, 64, 126, 0.5));
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.news-header__title {
+    margin: 0;
+    text-align: left;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: normal;
 }

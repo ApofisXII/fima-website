@@ -1,5 +1,5 @@
 {# require variable: news #}
-<a href="#" class="news-box hover">
+<a href="{{ path('newsDetail', {'news':news.id, 'slug':news.slug}) }}" {% if news.coverImage %}style="background-image: url('{{ asset('uploads-news/'~news.id~'.webp') }}');"{% endif %} class="news-box hover">
     <div class="news-box__inner">
         <div class="news-box__date-container">
             {% if news.eventDatetime is not null %}

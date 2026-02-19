@@ -2,6 +2,7 @@
 
 namespace App\Controller\Public;
 
+use App\Entity\News;
 use App\Repository\NewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,22 @@ final class NewsController extends AbstractController
 
         return $this->render('public/news-list.html.twig', [
             'newsList' => $newsList,
+        ]);
+    }
+
+    #[Route('/{news}/{slug}', name: 'newsDetail')]
+    public function newsDetail(News $news, string $slug): Response
+    {
+        // If slug changed, handle graceful redirect to the new URL
+        if ($slug !== $news->getSlug()) {
+            return $this->redirectToRoute('newsDetail', [
+                'news' => $news->getId(),
+                'slug' => $news->getSlug(),
+            ], Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        return $this->render('public/news-detail.html.twig', [
+            'news' => $news,
         ]);
     }
 
