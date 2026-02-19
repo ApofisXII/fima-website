@@ -51,12 +51,12 @@
                 },
                 {
                     targets: 3, render: function(data, type, row) {
-                        return data ? "<span class='chip chip--visible'>" + (row.isEvent ? "Pubblico" : "Pubblica") + "</span>" : "<span class='chip chip--deleted'>" + (row.isEvent ? "Nascosto" : "Nascosta") + "</span>";
+                        return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
                     }
                 },
                 {
                     targets: 5, render: function(data, type, row) {
-                        return "<a href='"+data+"' class='gg-table-btn'>" + (row.isEvent ? "Modifica evento" : "Modifica notizia") + "</a>";
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica notizia</a>";Ste
                     }
                 }
             ],
