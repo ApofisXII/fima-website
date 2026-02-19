@@ -19,7 +19,7 @@
         <button class="gg-btn hoverizzato" type="submit">Accedi</button>
 
         {% if error %}
-            <div class="center-text">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="gg-login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
     </form>
 
