@@ -378,6 +378,69 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     color: #999 !important;
 }
 
+.tox .tox-tbtn--select {
+    background-color: var(--color-selected) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    min-width: 140px !important;
+}
+
+
+.tox .tox-tbtn--select:hover {
+    background-color: #e8ecf2 !important;
+}
+
+.tox .tox-tbtn--select .tox-tbtn__select-label {
+    font-family: 'Sofia Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: #333 !important;
+    font-weight: 500 !important;
+}
+
+@media (min-width: 901px) {
+    .tox .tox-toolbar__group {
+        border-left: none !important;
+        border-right: none !important;
+        padding: 0 !important;
+    }
+
+    .tox .tox-editor-header {
+        padding: 6px 12px !important;
+    }
+}
+
+.tox .tox-menu,
+.tox .tox-collection,
+.tox .tox-collection--list {
+    background-color: white !important;
+    border-radius: 10px !important;
+    min-width: 180px !important;
+}
+
+.tox .tox-collection__item-label,
+.tox .tox-collection__item-label * {
+    white-space: nowrap !important;
+}
+
+.tox .tox-collection__item {
+    background-color: white !important;
+    color: #333 !important;
+    border-radius: 10px !important;
+    padding: 6px 12px !important;
+}
+
+.tox .tox-collection__item:hover,
+.tox .tox-collection__item--active {
+    background-color: var(--color-selected) !important;
+    color: #333 !important;
+}
+
+.tox .tox-collection__item-label,
+.tox .tox-collection__item-label * {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
 .gg-form-row {
     display: flex;
     gap: 20px;
@@ -1307,5 +1370,19 @@ tbody tr[draggable="true"] {
 
     .gg-form input[type="date"] {
         width: 100%;
+    }
+
+    .tox .tox-toolbar__primary {
+        flex-wrap: wrap !important;
+    }
+
+    .tox .tox-toolbar__group:first-child {
+        width: 100% !important;
+        border-right: none !important;
+    }
+
+    .tox .tox-tbtn--select {
+        width: 100% !important;
+        justify-content: space-between !important;
     }
 }
