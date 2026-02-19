@@ -2,13 +2,13 @@
 
 {% block body %}
 
-    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} notizia / evento</div>
+    <div class="gg-h1">{{ news ? 'Modifica' : 'Nuova' }} notizia</div>
 
     <form id="page-form" method="post" action="{{ path('adminNewsDetailSave') }}" enctype="multipart/form-data">
         <input type="hidden" name="newsId" value="{{ news ? news.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
-            <h3>{{ news ? (news.titleIt ~ ' - ' ~ news.titleEn) : 'Dettaglio notizia / evento' }}</h3>
+            <h3>{{ news ? (news.titleIt ~ ' - ' ~ news.titleEn) : 'Dettaglio notizia' }}</h3>
 
             <div class="gg-form-row gg-form-row--two">
                 <div class="gg-form-row__year">
