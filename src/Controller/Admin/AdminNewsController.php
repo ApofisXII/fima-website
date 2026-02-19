@@ -117,6 +117,12 @@ class AdminNewsController extends AbstractController
             ], 400);
         }
 
+        if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
+            return $this->json([
+                "message" => "Il file è troppo grande",
+            ], 400);
+        }
+
         $this->newsService->saveCoverImage($news, $uploadedFile);
 
         return $this->json([
