@@ -57,8 +57,14 @@ b, strong {
     font-weight: var(--font-bold-weight-sans-serif);
 }
 
-p {
+p, ul {
     line-height: 1.6rem;
+    margin-bottom: 10px;
+}
+
+li {
+    line-height: 1.4rem;
+    margin-left: 25px;
 }
 
 h1, h2, h3 {
@@ -504,4 +510,27 @@ h2 {
 .text-from-admin h2, .text-from-admin h3 {
     margin-top: 30px;
     margin-bottom: 10px;
+}
+
+.donation-option {
+    margin-top: 25px;
+}
+
+.donation-option__title {
+    font-size: 1.3rem;
+    font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-blue);
+    margin-bottom: 10px;
+}
+
+.link-bold {
+    font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-blue);
+    cursor: pointer;
+}
+
+.donation-trailing {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 40px;
 }
