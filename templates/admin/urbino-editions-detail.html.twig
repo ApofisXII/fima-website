@@ -4,7 +4,7 @@
 
     <div class="gg-h1">{{ edition ? 'Modifica' : 'Nuova' }} edizione</div>
 
-    <form id="page-form" method="post" action="{{ path('adminUrbinoEditionsDetailSave') }}" novalidate>
+    <form id="page-form" method="post" action="{{ path('adminUrbinoEditionsDetailSave') }}">
         <input type="hidden" name="editionId" value="{{ edition ? edition.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
@@ -37,12 +37,12 @@
             <div class="gg-multilang-form">
                 <div>
                     <label>Informazioni - iscrizione e alloggio (italiano)</label>
-                    <textarea name="enrollmentInfoIt" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (italiano)" required>{{ edition ? edition.enrollmentInfoIt|raw }}</textarea>
+                    <textarea name="enrollmentInfoIt" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (italiano)">{{ edition ? edition.enrollmentInfoIt|raw }}</textarea>
                 </div>
 
                 <div>
                     <label>Informazioni - iscrizione e alloggio (inglese)</label>
-                    <textarea name="enrollmentInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (inglese)" required>{{ edition ? edition.enrollmentInfoEn|raw }}</textarea>
+                    <textarea name="enrollmentInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (inglese)">{{ edition ? edition.enrollmentInfoEn|raw }}</textarea>
                 </div>
             </div>
         </div>
