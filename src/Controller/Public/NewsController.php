@@ -13,11 +13,11 @@ final class NewsController extends AbstractController
 {
 
     public function __construct(
-        private NewsRepository $newsRepository,
+        private readonly NewsRepository $newsRepository,
     ) {}
 
     #[Route('', name: 'newsList')]
-    public function newsList(Request $request): Response
+    public function newsList(): Response
     {
         $newsList = $this->newsRepository->findBy([
             "is_deleted" => false,
