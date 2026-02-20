@@ -31,20 +31,25 @@
             </div>
 
             <div class="gg-multilang-form">
-                <div>
-                    <label>Titolo (italiano)</label>
-                    <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
-
-                    <label>Corpo (italiano)</label>
-                    <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Titolo (italiano)</label>
+                        <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Titolo (inglese)</label>
+                        <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+                    </div>
                 </div>
-
-                <div>
-                    <label>Titolo (inglese)</label>
-                    <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
-
-                    <label>Corpo (inglese)</label>
-                    <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Corpo (italiano)</label>
+                        <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Corpo (inglese)</label>
+                        <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                    </div>
                 </div>
             </div>
 

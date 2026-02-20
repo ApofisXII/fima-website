@@ -11,14 +11,15 @@
             <h3>{{ category ? (category.nameIt ~ ' / ' ~ category.nameEn) : 'Dettaglio categoria' }}</h3>
 
             <div class="gg-multilang-form">
-                <div>
-                    <label>Nome categoria (italiano)</label>
-                    <input type="text" name="nameIt" placeholder="Nome categoria in italiano" value="{{ category ? category.nameIt }}" required>
-                </div>
-
-                <div>
-                    <label>Nome categoria (inglese)</label>
-                    <input type="text" name="nameEn" placeholder="Nome categoria in inglese" value="{{ category ? category.nameEn }}" required>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Nome categoria (italiano)</label>
+                        <input type="text" name="nameIt" placeholder="Nome categoria in italiano" value="{{ category ? category.nameIt }}" required>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Nome categoria (inglese)</label>
+                        <input type="text" name="nameEn" placeholder="Nome categoria in inglese" value="{{ category ? category.nameEn }}" required>
+                    </div>
                 </div>
             </div>
 

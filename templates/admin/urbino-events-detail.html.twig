@@ -47,20 +47,25 @@
             </div>
 
             <div class="gg-multilang-form">
-                <div>
-                    <label>Sottotitolo (italiano)</label>
-                    <input type="text" name="subtitleIt" placeholder="Sottotitolo (italiano)" value="{{ event ? event.subtitleIt }}" required>
-
-                    <label>Descrizione (italiano)</label>
-                    <textarea name="descriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione (italiano)">{{ event ? event.descriptionIt|raw }}</textarea>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Sottotitolo (italiano)</label>
+                        <input type="text" name="subtitleIt" placeholder="Sottotitolo (italiano)" value="{{ event ? event.subtitleIt }}" required>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Sottotitolo (inglese)</label>
+                        <input type="text" name="subtitleEn" placeholder="Sottotitolo (inglese)" value="{{ event ? event.subtitleEn }}">
+                    </div>
                 </div>
-
-                <div>
-                    <label>Sottotitolo (inglese)</label>
-                    <input type="text" name="subtitleEn" placeholder="Sottotitolo (inglese)" value="{{ event ? event.subtitleEn }}">
-
-                    <label>Descrizione (inglese)</label>
-                    <textarea name="descriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione (inglese)">{{ event ? event.descriptionEn|raw }}</textarea>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Descrizione (italiano)</label>
+                        <textarea name="descriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione (italiano)">{{ event ? event.descriptionIt|raw }}</textarea>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Descrizione (inglese)</label>
+                        <textarea name="descriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione (inglese)">{{ event ? event.descriptionEn|raw }}</textarea>
+                    </div>
                 </div>
             </div>
 
