@@ -756,6 +756,7 @@ table.dataTable thead th span.dt-column-order {
     height: 6px;
     vertical-align: middle;
     margin-left: 7px;
+    margin-top: -6px;
     overflow: visible;
 }
 
