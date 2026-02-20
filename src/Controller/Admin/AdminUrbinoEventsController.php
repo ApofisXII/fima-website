@@ -34,9 +34,22 @@ class AdminUrbinoEventsController extends AbstractController
     #[Route(path: '/json', name: 'adminUrbinoEventsListJson')]
     public function adminUrbinoEventsListJson(#[MapQueryString] DataTableRequestDTO $payload): Response
     {
+        $columnMap = [
+            0 => 'e.title',
+            1 => 'e.category',
+            2 => 'ed.edition_name',
+            3 => 'e.event_datetime',
+            4 => 'e.is_public',
+            5 => 'e.created_at',
+        ];
+
+        $orderColumnIndex = (int) ($payload->order[0]['column'] ?? 3);
+        $orderDir = strtolower($payload->order[0]['dir'] ?? 'desc') === 'asc' ? 'asc' : 'desc';
+        $orderColumn = $columnMap[$orderColumnIndex] ?? 'e.event_datetime';
+
         $qb = $this->urbinoEventRepository->createQueryBuilder("e")
             ->leftJoin("e.urbino_edition", "ed")
-            ->orderBy("e.event_datetime", "desc");
+            ->orderBy($orderColumn, $orderDir);
 
         if ($payload->search["value"]) {
             $search = $payload->search["value"];

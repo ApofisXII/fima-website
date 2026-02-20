@@ -34,16 +34,20 @@
             ajax: {
                 url: "{{ path('adminNewsListJson') }}",
             },
-            ordering: false,
+            order: [[4, 'desc']],
+            autoWidth: false,
             columns: [
                 { data: "titleIt" },
                 { data: "categoryName" },
                 { data: "isEvent" },
-                { data: "isPublic" },
+                { data: "isPublic", orderable: false },
                 { data: "createdAt" },
-                { data: "newsDetailLink" },
+                { data: "newsDetailLink", orderable: false },
             ],
             columnDefs: [
+                {
+                    targets: '_all', orderSequence: ['desc', 'asc', '']
+                },
                 {
                     targets: 2, render: function(data, type, row) {
                         return data ? "<span class='chip chip--event'>Evento</span>" : "<span class='chip chip--neutral'>Notizia</span>";
@@ -53,6 +57,9 @@
                     targets: 3, render: function(data, type, row) {
                         return data ? "<span class='chip chip--visible'>Pubblica</span>" : "<span class='chip chip--deleted'>Nascosta</span>";
                     }
+                },
+                {
+                    targets: 4, className: "dt-nowrap", width: "1%"
                 },
                 {
                     targets: 5, render: function(data, type, row) {

@@ -37,8 +37,20 @@ class AdminNewsController extends AbstractController
     #[Route(path: '/json', name: 'adminNewsListJson')]
     public function adminNewsListJson(#[MapQueryString] DataTableRequestDTO $payload): Response
     {
+        $columnMap = [
+            0 => 'n.title_it',
+            1 => 'c.name_it',
+            2 => 'n.event_datetime',
+            4 => 'n.created_at',
+        ];
+
+        $orderColumnIndex = (int) ($payload->order[0]['column'] ?? 0);
+        $orderDir = strtolower($payload->order[0]['dir'] ?? 'desc') === 'asc' ? 'asc' : 'desc';
+        $orderColumn = $columnMap[$orderColumnIndex] ?? 'n.title_it';
+
         $qb = $this->newsRepository->createQueryBuilder("n")
-            ->orderBy("n.id", "desc");
+            ->leftJoin("n.news_category", "c")
+            ->orderBy($orderColumn, $orderDir);
 
         if ($payload->search["value"]) {
             $search = $payload->search["value"];

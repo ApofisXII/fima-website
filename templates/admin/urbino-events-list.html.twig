@@ -35,17 +35,20 @@
             ajax: {
                 url: "{{ path('adminUrbinoEventsListJson') }}",
             },
-            ordering: false,
+            order: [[3, 'desc']],
             columns: [
                 { data: "title" },
                 { data: "category" },
                 { data: "editionName" },
                 { data: "eventDatetime" },
-                { data: "isPublic" },
-                { data: "createdAt" },
-                { data: "eventDetailLink" },
+                { data: "isPublic", orderable: false },
+                { data: "createdAt", orderable: false },
+                { data: "eventDetailLink", orderable: false },
             ],
             columnDefs: [
+                {
+                    targets: '_all', orderSequence: ['desc', 'asc', '']
+                },
                 {
                     targets: 1, render: function(data, type, row) {
                         const map = {
