@@ -22,8 +22,15 @@
                 </div>
 
                 <div class="gg-form-row__year">
-                    <label>Data e ora evento</label>
-                    <input type="datetime-local" name="eventDatetime" value="{{ event and event.eventDatetime ? event.eventDatetime|date('Y-m-d\\TH:i') }}" required>
+                    <label>Edizione</label>
+                    <select name="urbinoEditionId" required>
+                        <option value="">Seleziona edizione</option>
+                        {% for edition in editions %}
+                            <option value="{{ edition.id }}" {{ event and event.urbinoEdition and event.urbinoEdition.id == edition.id ? 'selected' }}>
+                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
+                            </option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 
@@ -34,15 +41,8 @@
                 </div>
 
                 <div class="gg-form-row__year">
-                    <label>Edizione</label>
-                    <select name="urbinoEditionId" required>
-                        <option value="">Seleziona edizione</option>
-                        {% for edition in editions %}
-                            <option value="{{ edition.id }}" {{ event and event.urbinoEdition and event.urbinoEdition.id == edition.id ? 'selected' }}>
-                                {{ edition.editionName }} ({{ edition.dateStart|date('Y') }})
-                            </option>
-                        {% endfor %}
-                    </select>
+                    <label>Data e ora evento</label>
+                    <input type="datetime-local" name="eventDatetime" value="{{ event and event.eventDatetime ? event.eventDatetime|date('Y-m-d\\TH:i') }}" required>
                 </div>
             </div>
 
