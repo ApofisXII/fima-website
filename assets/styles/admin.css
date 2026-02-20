@@ -33,6 +33,12 @@
     --chip-deleted-text: #c96565;
     --chip-visible-bg: #d3e8d2;
     --chip-visible-text: #368336;
+    --chip-festival-bg: var(--chip-event-bg);
+    --chip-festival-text: var(--chip-event-text);
+    --chip-mostra-bg: var(--chip-neutral-bg);
+    --chip-mostra-text: var(--chip-neutral-text);
+    --chip-convegni-bg: #fde3cc;
+    --chip-convegni-text: #b86020;
 
     --border-radius-main: 7px;
 
@@ -837,6 +843,21 @@ table .chip {
 .chip--visible {
     background-color: var(--chip-visible-bg);
     color: var(--chip-visible-text);
+}
+
+.chip--festival {
+    background-color: var(--chip-festival-bg);
+    color: var(--chip-festival-text);
+}
+
+.chip--mostra {
+    background-color: var(--chip-mostra-bg);
+    color: var(--chip-mostra-text);
+}
+
+.chip--convegni {
+    background-color: var(--chip-convegni-bg);
+    color: var(--chip-convegni-text);
 }
 
 h3 {

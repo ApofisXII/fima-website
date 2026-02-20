@@ -29,6 +29,14 @@
                 </div>
             </div>
 
+            <label>Categoria</label>
+            <select name="category" required>
+                <option value="">Seleziona categoria</option>
+                <option value="Festival" {{ event and event.category == 'Festival' ? 'selected' }}>Festival</option>
+                <option value="Mostra" {{ event and event.category == 'Mostra' ? 'selected' }}>Mostra</option>
+                <option value="Convegni" {{ event and event.category == 'Convegni' ? 'selected' }}>Convegni</option>
+            </select>
+
             <label>Data e ora evento</label>
             <input type="datetime-local" name="eventDatetime" value="{{ event and event.eventDatetime ? event.eventDatetime|date('Y-m-d\\TH:i') }}" required>
 

@@ -48,6 +48,7 @@ final readonly class UrbinoEventService
         $event->setDescriptionEn($dto->descriptionEn);
         $event->setIsPublic($dto->isPublic ?? false);
         $event->setIsDeleted($dto->isDeleted ?? false);
+        $event->setCategory($dto->category ?? '');
         $event->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEventRepository->save($event);

@@ -54,6 +54,7 @@ class AdminUrbinoEventsController extends AbstractController
         $list = array_map(function ($item) {
             return [
                 "title" => $item->getTitle(),
+                "category" => $item->getCategory(),
                 "editionName" => $item->getUrbinoEdition()?->getEditionName(),
                 "eventDatetime" => $item->getEventDatetime()->format("d/m/Y H:i"),
                 "isPublic" => $item->isPublic(),
