@@ -72,6 +72,13 @@
                 </div>
             </div>
 
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Link form di iscrizione</label>
+                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ course ? course.enrollmentLink }}">
+                </div>
+            </div>
+
             <div class="gg-multilang-form">
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
@@ -105,10 +112,10 @@
             <label>Carica immagine</label>
             <input type="file" name="teacherImage" id="teacher-image-input" accept="image/*">
             {% if course %}
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button type="button" id="upload-image-btn" class="gg-submit-btn hoverizzato" style="height: 36px;">Salva immagine</button>
+                <div class="gg-action-btn-group">
+                    <button type="button" id="upload-image-btn" class="gg-action-btn hoverizzato">Salva immagine</button>
                     {% if course.isImageUploaded %}
-                        <button type="button" id="delete-image-btn" class="gg-delete-btn hoverizzato" style="height: 36px; border-radius: 8px;">Elimina immagine</button>
+                        <button type="button" id="delete-image-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina immagine</button>
                     {% endif %}
                 </div>
             {% endif %}
@@ -128,6 +135,7 @@
                     <span>Sold out</span>
                 </label>
             </div>
+
 
         </div>
 

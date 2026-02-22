@@ -9,10 +9,12 @@ use App\Service\UrbinoEditionService;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Attribute\MapUploadedFile;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/admin/urbino-editions')]
@@ -110,6 +112,30 @@ class AdminUrbinoEditionsController extends AbstractController
         return $this->json([
             "message" => "Edizione eliminata",
         ]);
+    }
+
+    #[Route(path: '/upload-programme-pdf/{editionId}', name: 'adminUrbinoEditionsUploadProgrammePdf', methods: ['POST'], format: 'json')]
+    public function adminUrbinoEditionsUploadProgrammePdf(int $editionId, #[MapUploadedFile] ?UploadedFile $programmePdf): Response
+    {
+        $edition = $this->urbinoEditionRepository->find($editionId);
+
+        if (!$programmePdf) {
+            return $this->json(["message" => "Nessun file selezionato"], 400);
+        }
+
+        $this->urbinoEditionService->saveProgrammePdf($edition, $programmePdf);
+
+        return $this->json(["message" => "PDF caricato"]);
+    }
+
+    #[Route(path: '/delete-programme-pdf/{editionId}', name: 'adminUrbinoEditionsDeleteProgrammePdf', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEditionsDeleteProgrammePdf(int $editionId): Response
+    {
+        $edition = $this->urbinoEditionRepository->find($editionId);
+
+        $this->urbinoEditionService->deleteProgrammePdf($edition);
+
+        return $this->json(["message" => "PDF eliminato"]);
     }
 
 }

@@ -29,6 +29,13 @@
                 </div>
             </div>
 
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
+                    <span>Edizione visibile pubblicamente</span>
+                </label>
+            </div>
+
         </div>
 
         <div class="box multi-detail-box gg-form">
@@ -48,16 +55,25 @@
             </div>
         </div>
 
+        {% if edition %}
         <div class="box multi-detail-box gg-form">
-            <h3>Impostazioni</h3>
+            <h3>Programma dell'edizione (PDF)</h3>
 
-            <div class="gg-checkbox-group">
-                <label>
-                    <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
-                    <span>Edizione visibile pubblicamente</span>
-                </label>
+            {% if edition.isProgrammePdfUploaded %}
+                <p><a href="{{ asset('uploads-uma-edition/' ~ edition.id ~ '.pdf') }}" target="_blank">Visualizza PDF caricato</a></p>
+            {% endif %}
+
+            <label>Carica PDF</label>
+            <input type="file" id="programme-pdf-input" accept="application/pdf">
+
+            <div class="gg-action-btn-group">
+                <button type="button" id="upload-pdf-btn" class="gg-action-btn hoverizzato">Salva PDF</button>
+                {% if edition.isProgrammePdfUploaded %}
+                    <button type="button" id="delete-pdf-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina PDF</button>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
 
         <div class="gg-btn-group">
             <button type="submit" class="gg-submit-btn hoverizzato">Salva edizione</button>
@@ -147,6 +163,50 @@
         });
 
         {% if edition %}
+        const uploadPdfBtn = document.getElementById('upload-pdf-btn');
+        const programmePdfInput = document.getElementById('programme-pdf-input');
+
+        uploadPdfBtn.addEventListener('click', function() {
+            if (!programmePdfInput.files || !programmePdfInput.files[0]) {
+                alert('Seleziona prima un file PDF');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('programmePdf', programmePdfInput.files[0]);
+
+            fetch('{{ path('adminUrbinoEditionsUploadProgrammePdf', {'editionId': edition.id}) }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+
+        {% if edition.isProgrammePdfUploaded %}
+        document.getElementById('delete-pdf-btn').addEventListener('click', function() {
+            if (!confirm('Confermi di voler eliminare il PDF?')) return;
+
+            fetch('{{ path('adminUrbinoEditionsDeleteProgrammePdf', {'editionId': edition.id}) }}', {
+                method: 'DELETE'
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+        {% endif %}
+
         const modal = document.getElementById('delete-modal');
         const deleteBtn = document.getElementById('delete-btn');
         const confirmBtn = document.getElementById('confirm-delete');

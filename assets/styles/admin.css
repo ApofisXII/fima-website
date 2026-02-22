@@ -167,6 +167,7 @@ body {
     font-style: italic;
 }
 
+
 .nascondi {
     display: none;
 }
@@ -251,14 +252,46 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     gap: 15px;
 }
 
+.gg-checkbox-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.gg-checkbox-group input[type="checkbox"]:checked {
+    background-color: var(--color-blue);
+    border-color: var(--color-blue);
+}
+
+.gg-checkbox-group input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 3px;
+    height: 6px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
 .gg-checkbox-group label {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 0;
+    cursor: pointer;
 }
 
-.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form input[type="date"], .gg-form textarea, .gg-form select {
+.gg-form input[type="text"], .gg-form input[type="email"], .gg-form input[type="password"], .gg-form input[type="number"], .gg-form input[type="datetime-local"], .gg-form input[type="date"], .gg-form input[type="url"], .gg-form textarea, .gg-form select {
     width: 100%;
     padding: 10px 15px;
     border-radius: 10px;
@@ -301,7 +334,8 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 }
 
 
-.gg-form select {
+.gg-form select,
+.gg-select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -310,6 +344,18 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     background-position: right 15px center;
     background-size: 20px;
     padding-right: 40px;
+}
+
+.gg-select {
+    padding: 10px 15px;
+    padding-right: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--color-selected);
+    font-size: inherit;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
 }
 
 .gg-form input[type="file"] {
@@ -493,9 +539,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     color: white;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 12px 40px 10px;
     border: none;
     border-radius: 10px;
     display: block;
@@ -509,9 +553,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     color: white;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 12px 40px 10px;
     border: none;
     border-radius: 10px;
     display: block;
@@ -527,6 +569,33 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-upload-image-btn {
     height: 36px;
+    margin-top: 20px;
+}
+
+.gg-action-btn {
+    font-weight: bold;
+    background: var(--color-blue);
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 9px 20px 8px;
+    border: none;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: none;
+}
+
+.gg-action-btn--delete {
+    background: var(--color-red-soft);
+}
+
+.gg-action-btn-group {
+    display: flex;
+    gap: 10px;
     margin-top: 20px;
 }
 
@@ -668,9 +737,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     background-color: var(--color-blue);
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 12px 20px 10px;
     display: block;
     color: white;
     text-decoration: none;
@@ -680,6 +747,10 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-btn--plus {
     padding-right: 24px;
+}
+
+.gg-list-actions {
+    margin-bottom: 20px;
 }
 
 .gg-h1-btn {
@@ -795,6 +866,54 @@ table.dataTable thead th.dt-ordering-desc span.dt-column-order::after {
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+.gg-edition-tabs-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.gg-edition-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.gg-edition-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .gg-edition-tabs-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, var(--color-selected));
+        pointer-events: none;
+    }
+}
+
+.gg-edition-tab {
+    padding: 8px 18px 7px;
+    border-radius: 10px;
+    border: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background-color: white;
+    color: #888;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.gg-edition-tab.active {
+    background-color: var(--color-blue);
+    color: white;
+    font-weight: 600;
 }
 
 .stats-row__box__number {
