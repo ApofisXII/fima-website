@@ -93,7 +93,7 @@
                             <tr>
                                 <th class="reorder"></th>
                                 <th>Docente</th>
-                                <th>Edizione</th>
+                                <th>Materia</th>
                                 <th>Date</th>
                                 <th>Tipo</th>
                                 <th>Stato</th>
@@ -111,7 +111,7 @@
                         row.innerHTML = `
                             <td class="reorder"><span style="cursor: grab; font-size: 18px; color: dimgray">≡</span></td>
                             <td>${course.teacherFullName}</td>
-                            <td>${course.editionName}</td>
+                            <td>${course.disciplineIt} / ${course.disciplineEn}</td>
                             <td>${course.dateRange}</td>
                             <td>${course.scheduleType === 'secondary_afternoon' ? '<span class="chip chip--event">Pomeridiano</span>' : '<span class="chip chip--neutral">Principale</span>'}</td>
                             <td>${course.isSoldOut ? '<span class="chip chip--deleted">Sold out</span>' : '<span class="chip chip--visible">Disponibile</span>'}</td>

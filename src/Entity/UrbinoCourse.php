@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoCourseRepository::class)]
 class UrbinoCourse
 {
-    public const string SCHEDULE_TYPE_MAIN = "main";
-    public const string SCHEDULE_TYPE_SECONDARY_AFTERNOON = "secondary_afternoon";
+    public const string SCHEDULE_TYPE_MAIN = "schedule_type_main";
+    public const string SCHEDULE_TYPE_SECONDARY_AFTERNOON = "schedule_type_secondary_afternoon";
     public const array SCHEDULE_TYPES = [
         self::SCHEDULE_TYPE_MAIN,
         self::SCHEDULE_TYPE_SECONDARY_AFTERNOON,
@@ -82,6 +82,12 @@ class UrbinoCourse
 
     #[ORM\Column(length: 2048, nullable: true)]
     private ?string $enrollment_link = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $discipline_it = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $discipline_en = null;
 
     public function getId(): ?int
     {
@@ -333,6 +339,30 @@ class UrbinoCourse
     public function setEnrollmentLink(?string $enrollment_link): static
     {
         $this->enrollment_link = $enrollment_link;
+
+        return $this;
+    }
+
+    public function getDisciplineIt(): ?string
+    {
+        return $this->discipline_it;
+    }
+
+    public function setDisciplineIt(string $discipline_it): static
+    {
+        $this->discipline_it = $discipline_it;
+
+        return $this;
+    }
+
+    public function getDisciplineEn(): ?string
+    {
+        return $this->discipline_en;
+    }
+
+    public function setDisciplineEn(string $discipline_en): static
+    {
+        $this->discipline_en = $discipline_en;
 
         return $this;
     }

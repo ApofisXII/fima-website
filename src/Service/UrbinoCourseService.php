@@ -51,6 +51,8 @@ final readonly class UrbinoCourseService
         $course->setIsSoldOut($dto->isSoldOut ?? false);
         $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_MAIN);
         $course->setEnrollmentLink($dto->enrollmentLink ?: null);
+        $course->setDisciplineIt($dto->disciplineIt);
+        $course->setDisciplineEn($dto->disciplineEn);
 
         if ($dto->priceEuros !== null) {
             $course->setPriceCents((int) round($dto->priceEuros * 100));

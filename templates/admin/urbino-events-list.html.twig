@@ -52,12 +52,14 @@
                 {
                     targets: 1, render: function(data, type, row) {
                         const map = {
-                            'Festival': 'festival',
-                            'Mostra':   'mostra',
-                            'Convegni': 'convegni',
+                            'event_type_festival': { label: 'Festival',  cls: 'festival' },
+                            'event_type_mostra':   { label: 'Mostra',    cls: 'mostra'   },
+                            'event_type_convegni': { label: 'Convegni',  cls: 'convegni' },
                         };
-                        const cls = map[data] ?? 'neutral';
-                        return "<span class='chip chip--" + cls + "'>" + (data ?? '—') + "</span>";
+                        const entry = map[data];
+                        return entry
+                            ? "<span class='chip chip--" + entry.cls + "'>" + entry.label + "</span>"
+                            : "<span class='chip chip--neutral'>" + (data ?? '—') + "</span>";
                     }
                 },
                 {
