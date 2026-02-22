@@ -1,0 +1,64 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'contacts.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'contacts.heading'|trans }}</h1>
+
+        <div class="contacts-grid">
+
+            <div class="box contact-block">
+                <div class="box-title">{{ 'contacts.address.title'|trans }}</div>
+                <p>Via Col di Lana 7 • 00195 • Roma</p>
+            </div>
+
+            <div class="box contact-block">
+                <div class="box-title">{{ 'contacts.phone.title'|trans }}</div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.phone.label'|trans }}</span>
+                    <a class="link-bold hover" href="tel:+390632108006">+39 06 3210806</a>
+                </div>
+            </div>
+
+            <div class="box contact-block">
+                <div class="box-title">{{ 'contacts.email.title'|trans }}</div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.secretary'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:segreteria@fima-online.org">segreteria@fima-online.org</a>
+                </div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.treasurer'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:tesoriere@fima-online.org">tesoriere@fima-online.org</a>
+                </div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.president'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:presidente@fima-online.org">presidente@fima-online.org</a>
+                </div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.courses_director'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:direzione.corsi@fima-online.org">direzione.corsi@fima-online.org</a>
+                </div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.festival_director'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:direzione.festival@fima-online.org">direzione.festival@fima-online.org</a>
+                </div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.email.courses_info'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:corsi@fima-online.org">corsi@fima-online.org</a>
+                </div>
+            </div>
+
+            <div class="box contact-block">
+                <div class="box-title">{{ 'contacts.pec.title'|trans }}</div>
+                <div class="contact-email-row">
+                    <span>{{ 'contacts.pec.label'|trans }}</span>
+                    <a class="link-bold hover" href="mailto:fima@pcert.postecert.it">fima@pcert.postecert.it</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

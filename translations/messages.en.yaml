@@ -155,6 +155,9 @@ urbino_course_detail:
     program: 'Programme'
     biography: 'Biography'
 
+schedule_type_main: 'Main course'
+schedule_type_secondary_afternoon: 'Additional afternoon course'
+
 urbino_courses:
     page_title: 'Urbino Musica Antica • Courses'
     heading: 'Courses'

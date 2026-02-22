@@ -1,0 +1,158 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'library.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'library.heading'|trans }}</h1>
+
+        {# Storia - testo pieno senza box #}
+        <div class="library-intro">
+            <p>{{ 'library.history.p1'|trans }}</p>
+            <p>{{ 'library.history.p2'|trans }}</p>
+            <p>{{ 'library.history.p3'|trans }}</p>
+            <p class="library-intro__decree">{{ 'library.history.decree'|trans }}</p>
+        </div>
+
+        {# Strip info rapide #}
+        <div class="library-info-strip">
+            <div class="library-info-strip__block box">
+                <div class="box-title">{{ 'library.hours.title'|trans }}</div>
+                <div class="library-info-strip__row">
+                    <span>{{ 'library.hours.tuesday'|trans }}</span>
+                    <span>{{ 'library.hours.time'|trans }}</span>
+                </div>
+                <div class="library-info-strip__row">
+                    <span>{{ 'library.hours.thursday'|trans }}</span>
+                    <span>{{ 'library.hours.time'|trans }}</span>
+                </div>
+                <div class="library-info-strip__row">
+                    <span>{{ 'library.hours.friday'|trans }}</span>
+                    <span>{{ 'library.hours.time'|trans }}</span>
+                </div>
+                <p class="library-info-strip__notice">
+                    {{ 'library.hours.notice'|trans({
+                        '%phone%': '<a class="link-bold hover" href="tel:+390632108006">+39 06 3210806</a>',
+                        '%email%': '<a class="link-bold hover" href="mailto:segreteria@fima-online.org">segreteria@fima-online.org</a>'
+                    })|raw }}
+                </p>
+            </div>
+            <div class="library-info-strip__block box">
+                <div class="box-title">{{ 'library.services.title'|trans }}</div>
+                <p>{{ 'library.services.consultation'|trans }}</p>
+                <p><strong>{{ 'library.services.remote_label'|trans }}:</strong> {{ 'library.services.remote'|trans }}</p>
+                <p><strong>{{ 'library.services.lending_label'|trans }}:</strong> {{ 'library.services.lending'|trans }}</p>
+            </div>
+            <div class="library-info-strip__block box">
+                <div class="box-title">{{ 'library.collection_size.title'|trans }}</div>
+                <p>{{ 'library.collection_size.books'|trans }}, {{ 'library.collection_size.scores'|trans }}, {{ 'library.collection_size.journals'|trans }}</p>
+                <div class="library-info-strip__title library-info-strip__title--sub">{{ 'library.collection_size.rare_title'|trans }}</div>
+                <p>{{ 'library.collection_size.manuscripts'|trans }}</p>
+                <p>{{ 'library.collection_size.rare_editions'|trans }}</p>
+                <p>{{ 'library.collection_size.cinquecento'|trans }}</p>
+                <p>{{ 'library.collection_size.microfilms'|trans }}</p>
+            </div>
+        </div>
+
+        {# Patrimonio librario - sezione piena #}
+        <section class="library-collections">
+            <h2>{{ 'library.collections.title'|trans }}</h2>
+            <div class="library-collections__grid">
+                <div>
+                    <h3>{{ 'library.collections.volumes_title'|trans }}</h3>
+                    <p>{{ 'library.collections.organology_intro'|trans }}</p>
+                    <ul>
+                        <li>{{ 'library.collections.organology_volumes'|trans }}</li>
+                        <li>{{ 'library.collections.organology_construction'|trans }}</li>
+                        <li>{{ 'library.collections.organology_collections'|trans }}</li>
+                    </ul>
+                    <p>{{ 'library.collections.other_intro'|trans }}</p>
+                    <ul>
+                        <li>{{ 'library.collections.encyclopedias'|trans }}</li>
+                        <li>{{ 'library.collections.music_history'|trans }}</li>
+                        <li>{{ 'library.collections.composers'|trans }}</li>
+                        <li>{{ 'library.collections.treatises'|trans }}</li>
+                        <li>{{ 'library.collections.iconography'|trans }}</li>
+                        <li>{{ 'library.collections.didactics'|trans }}</li>
+                        <li>{{ 'library.collections.bibliographic'|trans }}</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>{{ 'library.collections.scores_title'|trans }}</h3>
+                    <p>{{ 'library.collections.scores_description'|trans }}</p>
+
+                    <h3>{{ 'library.collections.iconography_title'|trans }}</h3>
+                    <p>{{ 'library.collections.iconography_description'|trans }}</p>
+
+                    <h3>{{ 'library.collections.periodicals_title'|trans }}</h3>
+                    <p>{{ 'library.collections.periodicals_description'|trans }}</p>
+                </div>
+            </div>
+        </section>
+
+        {# Classificazione #}
+        <section class="library-classification">
+            <h2>{{ 'library.classification.title'|trans }}</h2>
+            <p>{{ 'library.classification.description'|trans }}</p>
+            <table class="library-classification-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'library.classification.col_authors'|trans }}</th>
+                        <th>{{ 'library.classification.col_subjects'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>{{ 'library.classification.books_label'|trans }}</strong></td>
+                        <td>{{ 'library.classification.books_authors'|trans }}</td>
+                        <td>{{ 'library.classification.books_subjects'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ 'library.classification.scores_label'|trans }}</strong></td>
+                        <td>{{ 'library.classification.scores_authors'|trans }}</td>
+                        <td>{{ 'library.classification.scores_subjects'|trans }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ 'library.classification.periodicals_label'|trans }}</strong></td>
+                        <td>{{ 'library.classification.periodicals_authors'|trans }}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        {# Fondo: catalogo + donazioni #}
+        <div class="library-bottom">
+            <div class="box">
+                <div class="box-title">{{ 'library.catalog.title'|trans }}</div>
+                <p><a class="btn hover" href="https://docs.google.com/spreadsheets/d/1SCOYK42VZ_XRfhwabaCtGDj_C7I7bonC/edit?usp=drive_link&ouid=114555337205255772593&rtpof=true&sd=true" target="_blank">{{ 'library.catalog.link_label'|trans }}</a></p>
+                <br>
+                <div class="box-title" style="margin-top: 20px;">{{ 'library.contacts.title'|trans }}</div>
+                <div class="contact-email-row">
+                    <span>{{ 'library.contacts.librarian_label'|trans }}</span>
+                    <span>{{ 'library.contacts.librarian_name'|trans }}</span>
+                </div>
+                <div class="contact-email-row">
+                    <span>Via Col di Lana 7, 00195 Roma</span>
+                    <a class="link-bold hover" href="tel:+390632108006">+39 06 3210806</a>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-title">{{ 'library.donations.title'|trans }}</div>
+                <ul>
+                    <li>Prof. Giancarlo Rostirolla</li>
+                    <li>Prof. Furio Luccichenti</li>
+                    <li>Prof. Patrizio Barbieri</li>
+                    <li>Prof. Lino Bianchi</li>
+                    <li>Prof. Renato Meucci</li>
+                    <li>Prof. Luca De Carlo</li>
+                    <li>Prof. Ulderico Guadagno</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

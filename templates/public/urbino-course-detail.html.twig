@@ -11,7 +11,7 @@
             <div class="course-head__image" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}></div>
             <div>
                 <h1 class="course-head__title">{{ course.teacherFullName }}</h1>
-                <div class="course-head__subtitle">TODO Sottotitolo</div>
+                <div class="course-head__subtitle">{{ app.locale == 'it' ? course.disciplineIt : course.disciplineEn }}</div>
                 {#            <a href="#" class="btn hover">Iscriviti</a>#}
                 {#            <div class="chip chip--soldout">Soldout</div>#}
             </div>
@@ -20,7 +20,7 @@
             <div class="box-title">{{ 'urbino_course_detail.info.title'|trans }}</div>
             <div class="course-infos__row">
                 <div>{{ 'urbino_course_detail.info.type'|trans }}</div>
-                <div class="course-infos__value">{{ course.scheduleType }}</div>
+                <div class="course-infos__value">{{ course.scheduleType|trans }}</div>
             </div>
             <div class="course-infos__row">
                 <div>{{ 'urbino_course_detail.info.price'|trans }}</div>
