@@ -40,6 +40,107 @@ donate:
         gastronomy: 'Opportunity to take part in a gastronomic experience celebrating Italian culture, designed to delight the most refined palates through a tasting of typical dishes and products from the Urbino area'
     contact: 'For more information about donations, send an email to'
 
+library:
+    page_title: 'Library'
+    heading: 'Sylvestro Ganassi Library'
+    history:
+        p1: "The Sylvestro Ganassi Library was founded in the early 1970s as a basic cultural support for the Association's activities."
+        p2: 'Between 1977 and 1979, the initial collection focused on musical practice and didactics expanded toward a broader musicological orientation.'
+        p3: "From the 1980s, the Association's official journal was first «Il flauto dolce», and then, from 1989, «Recercare», a journal that paid particular attention to organology (history and technology of musical instruments), a field usually neglected by other musicological journals. The Library followed this new direction, becoming the only one in Italy specifically dedicated to this discipline; all volumes and periodicals have been catalogued and inserted online by the Polo Capitolino in the OPAC SBN (National Library Service). The Ganassi Library participates in the SBN network of the Municipality of Rome, headquartered at the Biblioteca Romana dell'Archivio Storico Capitolino."
+        decree: 'Dirigenziale Decree no. 28 of 25 March 2004'
+    hours:
+        title: 'Opening hours'
+        tuesday: 'Tuesday'
+        thursday: 'Thursday'
+        friday: 'Friday'
+        time: '9:00 – 13:00'
+        notice: 'It is advisable to confirm opening hours by calling %phone% or by making an appointment via email at %email%.'
+    collections:
+        title: 'Library collections'
+        volumes_title: 'Volumes'
+        organology_intro: 'The largest section covers organology and is divided into three distinct parts:'
+        organology_volumes: 'Volumes and treatises on musical instruments, covering both history and performance practice'
+        organology_construction: 'Instrument making'
+        organology_collections: 'Collections and exhibitions of instruments (bibliographic works and catalogues)'
+        other_intro: 'Other sections are organised as follows:'
+        encyclopedias: 'Encyclopedias, dictionaries, and musicological vocabularies'
+        music_history: 'Music history'
+        composers: 'Composers and performers'
+        treatises: 'Ancient and modern treatises on music theory'
+        iconography: 'Musical iconography'
+        didactics: 'Music education and pedagogy'
+        bibliographic: 'Bibliographic reference works and catalogues'
+        scores_title: 'Scores'
+        scores_description: "An extensive section is dedicated to the recorder, of which the library holds almost the entire repertoire from the 13th century to the present day. All genres of instrumental/vocal ensemble, not only those including the recorder, from the 13th to 18th centuries are represented. A section of more specifically didactic content covers methods and exercises for all musical instruments and voice."
+        iconography_title: 'Musical Iconography Plates'
+        iconography_description: 'This is an extensive collection, currently being assembled, of reproductions of engravings and paintings depicting musical instruments. No other music library in Italy possesses such a rich iconographic section.'
+        periodicals_title: 'Periodicals'
+        periodicals_description: "Most are on organological or musicological subjects. Some are available in Rome only in this library, and there are no other libraries, even at the regional or national level, that bring together all these specialised journals. The collections are kept up to date through a system of subscriptions and exchanges with numerous specialised journals, many published by similar foreign associations, made possible by the high scientific quality of the Foundation's journal «Recercare. Rivista per lo studio e la pratica della musica antica»."
+    classification:
+        title: 'Classification'
+        description: "An alphabetical cataloguing system has been used from the outset, complemented by an 'open' classification system adapted to the specific characteristics of the musical material. Subject to financial resources, the Ganassi Library has significantly expanded and will continue to expand all sections in parallel."
+        col_authors: 'Authors'
+        col_subjects: 'Subjects'
+        books_label: 'Books'
+        books_authors: 'Alphabetical'
+        books_subjects: 'Encyclopedias, instruments, instrument making, collections and exhibitions of instruments, music history, composers and performers, collected studies, music theory, iconography, didactics, facsimiles, bibliographic references'
+        scores_label: 'Scores'
+        scores_authors: 'Alphabetical'
+        scores_subjects: 'Ensembles (all possible formations, with particular attention to the recorder)'
+        periodicals_label: 'Periodicals'
+        periodicals_authors: 'Alphabetical'
+        periodicals_subjects: ''
+    services:
+        title: 'Services available to the public'
+        consultation: 'Consultation, photocopying and scanning (where possible)'
+        remote: 'Scans can be sent by email (where possible); opening by appointment available'
+        lending: "Reserved for the Association's collaborators"
+        lending_label: 'Lending'
+        remote_label: 'Services'
+    collection_size:
+        title: 'Collection size'
+        books: '7,500 books'
+        scores: '15,080 scores'
+        journals: '160 active journals and 13 closed'
+        rare_title: 'Rare materials'
+        manuscripts: '160 manuscripts'
+        rare_editions: '20 rare editions'
+        cinquecento: 'Sixteenth-century editions'
+        microfilms: 'Microfilms'
+    catalog:
+        title: 'Library catalogue'
+        link_label: 'Browse the online catalogue'
+    contacts:
+        title: 'Contacts'
+        librarian_label: 'Librarian'
+        librarian_name: 'Lara Amici'
+    donations:
+        title: 'Book and journal donations received from'
+
+contacts:
+    page_title: 'Contacts'
+    heading: 'Contacts'
+    address:
+        title: 'Where we are'
+    phone:
+        title: 'Phone'
+        label: 'Number'
+    email:
+        title: 'E-mail contacts'
+        secretary: 'Secretary'
+        treasurer: 'Treasurer'
+        president: 'President'
+        courses_director: 'Courses director'
+        festival_director: 'Festival director'
+        courses_info: 'Course info'
+    pec:
+        title: 'PEC'
+        label: 'PEC address'
+
+urbino_informations:
+    page_title: 'Urbino Musica Antica • Information'
+    heading: 'General information'
+
 urbino_course_detail:
     logo_alt: 'Urbino Musica Antica Courses'
     info:

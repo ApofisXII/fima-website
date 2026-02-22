@@ -41,4 +41,16 @@ final class GeneralController extends AbstractController
     {
         return $this->render('public/donate.html.twig');
     }
+
+    #[Route('/{_locale}/contacts', name: 'contacts')]
+    public function contacts(): Response
+    {
+        return $this->render('public/contacts.html.twig');
+    }
+
+    #[Route('/{_locale}/library', name: 'library')]
+    public function library(): Response
+    {
+        return $this->render('public/library.html.twig');
+    }
 }

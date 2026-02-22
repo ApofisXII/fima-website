@@ -1,14 +1,14 @@
 {% extends 'public/base.html.twig' %}
 
-{% block title %}Urbino Musica Antica • Informazioni • {% endblock %}
+{% block title %}{{ 'urbino_informations.page_title'|trans }} • {% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <h1>Informazioni generali</h1>
+        <h1>{{ 'urbino_informations.heading'|trans }}</h1>
 
         <div class="text-from-admin">
-            {{ currentEdition.enrollmentInfoIt|raw }}
+            {{ (app.request.locale == 'it' ? currentEdition.enrollmentInfoIt : currentEdition.enrollmentInfoEn)|raw }}
         </div>
     </div>
 

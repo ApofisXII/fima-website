@@ -40,6 +40,107 @@ donate:
         gastronomy: "Possibilità di partecipare a un'esperienza gastronomica all'insegna dell'italianità, pensata per soddisfare i palati più raffinati grazie alla degustazione di piatti e prodotti tipici del territorio di Urbino"
     contact: 'Per maggiori informazioni sulle donazioni invia una mail a'
 
+library:
+    page_title: 'Biblioteca'
+    heading: 'Biblioteca Sylvestro Ganassi'
+    history:
+        p1: "La Biblioteca Sylvestro Ganassi è nata agli inizi degli anni '70 come supporto culturale di base all'attività dell'Associazione."
+        p2: "Tra il 1977 e il 1979 il fondo iniziale concernente la pratica e la didattica musicale si è ampliato verso un'impostazione musicologica più vasta."
+        p3: "Dagli anni Ottanta la rivista ufficiale dell'Associazione è stata dapprima «Il flauto dolce», e poi, dal 1989, «Recercare», rivista che ha dedicato particolare attenzione all'organologia (storia e tecnologia degli strumenti musicali), un campo di studio di solito trascurato dalle altre riviste musicologiche. Anche la Biblioteca ha seguito questa nuova direzione, diventando l'unica in Italia dedicata specificamente a questa disciplina; tutti i volumi e i periodici sono stati catalogati ed inseriti on-line dal Polo Capitolino in OPAC SBN (Servizio Bibliotecario Nazionale). La Biblioteca Ganassi partecipa al Polo SBN del Comune di Roma, che ha la propria sede presso la Biblioteca Romana dell'Archivio Storico Capitolino."
+        decree: 'Determinazione Dirigenziale n. 28 del 25 marzo 2004'
+    hours:
+        title: 'Orario di apertura al pubblico'
+        tuesday: 'Martedì'
+        thursday: 'Giovedì'
+        friday: 'Venerdì'
+        time: '9:00 – 13:00'
+        notice: "Si consiglia di sincerarsi dell'apertura telefonando al numero %phone% oppure di prendere un appuntamento inviando una mail a %email%."
+    collections:
+        title: 'Patrimonio librario'
+        volumes_title: 'Volumi'
+        organology_intro: "La sezione più ampia riguarda l'ambito organologico e si divide in tre parti distinte:"
+        organology_volumes: 'Volumi e trattati relativi agli strumenti musicali, concernenti sia la storia che la prassi esecutiva'
+        organology_construction: 'Costruzione degli strumenti'
+        organology_collections: 'Collezioni e mostre di strumenti (opere bibliografiche e cataloghi)'
+        other_intro: 'Le altre sezioni sono divise nel modo seguente:'
+        encyclopedias: 'Enciclopedie, dizionari, vocabolari di ambito musicologico'
+        music_history: 'Storia della musica'
+        composers: 'Compositori e interpreti'
+        treatises: 'Trattati antichi e moderni di teoria musicale'
+        iconography: 'Iconografia musicale'
+        didactics: 'Didattica e pedagogia musicale'
+        bibliographic: 'Opere di informazione e natura bibliografiche e cataloghi'
+        scores_title: 'Partiture'
+        scores_description: "Un'ampia sezione è dedicata al flauto dolce, del quale la biblioteca possiede quasi tutto il repertorio, dal sec. XIII fino ai giorni nostri. Sono rappresentati inoltre tutti i generi di organico strumentale/vocale, non solo comprendenti il flauto dolce, di musiche dei sec. XIII–XVIII. Una parte di contenuto più specificatamente didattico è relativa ai metodi ed agli esercizi per tutti gli strumenti musicali e la voce."
+        iconography_title: 'Tavole di Iconografia musicale'
+        iconography_description: "Si tratta di un'ampia raccolta, in via di allestimento, di riproduzioni di incisioni e dipinti che raffigurano strumenti musicali. Nessuna biblioteca musicale in Italia possiede una sezione iconografica così ricca."
+        periodicals_title: 'Periodici'
+        periodicals_description: "In buona parte sono di argomento organologico, o comunque musicologico. Alcune di esse sono reperibili, a Roma, soltanto in questa biblioteca, e non ci sono altre biblioteche, anche in ambito regionale o nazionale, che raccolgano insieme tutte queste riviste specializzate. Le raccolte sono aggiornate grazie ad un sistema di abbonamenti e di scambi con numerose riviste specializzate, molte delle quali pubblicate da associazioni straniere consimili, resi possibili dall'altissima qualità scientifica della rivista edita dalla Fondazione «Recercare. Rivista per lo studio e la pratica della musica antica»."
+    classification:
+        title: 'Classificazione'
+        description: "È stata adottata fin dall'inizio la catalogazione alfabetica, completata da un sistema 'aperto' di classificazione, adattato in base alle caratteristiche specifiche del materiale musicale. Sulla base delle disponibilità finanziarie, la Biblioteca Ganassi ha ampliato notevolmente e amplierà per il futuro parallelamente i vari settori."
+        col_authors: 'Autori'
+        col_subjects: 'Soggetti'
+        books_label: 'Libri'
+        books_authors: 'Alfabetico'
+        books_subjects: 'Enciclopedie, strumenti, costruzione degli strumenti, collezioni e mostre di strumenti, storia della musica, compositori e interpreti, raccolte di studi, teoria musicale, iconografia, didattica, facsimili, rif. bibliografici'
+        scores_label: 'Partiture'
+        scores_authors: 'Alfabetico'
+        scores_subjects: 'Organici (tutte le formazioni possibili, con particolare riguardo al flauto dolce)'
+        periodicals_label: 'Periodici'
+        periodicals_authors: 'Alfabetico'
+        periodicals_subjects: ''
+    services:
+        title: 'Servizi disponibili al pubblico'
+        consultation: 'Consultazione, fotocopie e scansioni (ove possibile)'
+        remote: 'Possibilità di invio via mail di scansioni (ove possibile), apertura su appuntamento'
+        lending: 'Riservato ai collaboratori dell''associazione'
+        lending_label: 'Prestito'
+        remote_label: 'Servizi'
+    collection_size:
+        title: 'Consistenza numerica'
+        books: '7.500 libri'
+        scores: '15.080 spartiti'
+        journals: '160 riviste aperte e 13 chiuse'
+        rare_title: 'Materiale pregiato'
+        manuscripts: '160 manoscritti'
+        rare_editions: '20 edizioni rare'
+        cinquecento: 'Cinquecentine'
+        microfilms: 'Microfilm'
+    catalog:
+        title: 'Catalogo della biblioteca'
+        link_label: 'Consulta il catalogo online'
+    contacts:
+        title: 'Contatti'
+        librarian_label: 'Bibliotecaria'
+        librarian_name: 'Lara Amici'
+    donations:
+        title: 'Donazioni di libri e riviste ricevute da'
+
+contacts:
+    page_title: 'Contatti'
+    heading: 'Contatti'
+    address:
+        title: 'Dove siamo'
+    phone:
+        title: 'Telefono'
+        label: 'Numero'
+    email:
+        title: 'Contatti e-mail'
+        secretary: 'Segreteria'
+        treasurer: 'Tesoriere'
+        president: 'Presidente'
+        courses_director: 'Direttore dei corsi'
+        festival_director: 'Direttore del festival'
+        courses_info: 'Info corsi'
+    pec:
+        title: 'PEC'
+        label: 'Indirizzo PEC'
+
+urbino_informations:
+    page_title: 'Urbino Musica Antica • Informazioni'
+    heading: 'Informazioni generali'
+
 urbino_course_detail:
     logo_alt: 'Urbino Musica Antica Corsi'
     info:

@@ -704,3 +704,130 @@ h2 {
     margin-bottom: 5px;
     background-color: var(--color-blue-light);
 }
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-email-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+/* Library */
+.library-intro {
+    margin-bottom: 40px;
+}
+
+.library-intro p {
+    margin-bottom: 12px;
+}
+
+.library-intro__decree {
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.library-info-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.library-info-strip__block {
+    border-radius: var(--border-radius-main);
+}
+
+.library-info-strip__block p {
+    margin-top: 6px;
+    font-size: 0.9rem;
+}
+
+.library-info-strip__title {
+    font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-blue);
+    margin-bottom: 10px;
+}
+
+.library-info-strip__title--sub {
+    margin-top: 14px;
+}
+
+.library-info-strip__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 3px 0;
+}
+
+.library-info-strip__notice {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted, #666);
+}
+
+.library-collections {
+    margin-bottom: 50px;
+}
+
+.library-collections h2 {
+    margin-bottom: 20px;
+}
+
+.library-collections h3 {
+    font-size: 1rem;
+    font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-blue);
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+.library-collections__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.library-classification {
+    margin-bottom: 50px;
+}
+
+.library-classification h2 {
+    margin-bottom: 12px;
+}
+
+.library-classification p {
+    margin-bottom: 16px;
+    max-width: 780px;
+}
+
+.library-classification-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.library-classification-table th,
+.library-classification-table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--color-blue-light);
+    vertical-align: top;
+}
+
+.library-classification-table th {
+    font-weight: var(--font-bold-weight-sans-serif);
+    background: var(--color-blue-light, #f0f4f8);
+    color: white;
+}
+
+.library-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
