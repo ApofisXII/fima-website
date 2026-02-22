@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\DTO\Admin\DataTableRequestDTO;
 use App\DTO\Admin\NewsRequestDTO;
+use App\Repository\NewsCategoryRepository;
 use App\Repository\NewsRepository;
 use App\Service\NewsService;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -23,6 +24,7 @@ class AdminNewsController extends AbstractController
 {
     public function __construct(
         private readonly NewsRepository $newsRepository,
+        private readonly NewsCategoryRepository $newsCategoryRepository,
         private readonly NewsService    $newsService,
     ) {}
 
@@ -35,8 +37,20 @@ class AdminNewsController extends AbstractController
     #[Route(path: '/json', name: 'adminNewsListJson')]
     public function adminNewsListJson(#[MapQueryString] DataTableRequestDTO $payload): Response
     {
+        $columnMap = [
+            0 => 'n.title_it',
+            1 => 'c.name_it',
+            2 => 'n.event_datetime',
+            4 => 'n.created_at',
+        ];
+
+        $orderColumnIndex = (int) ($payload->order[0]['column'] ?? 0);
+        $orderDir = strtolower($payload->order[0]['dir'] ?? 'desc') === 'asc' ? 'asc' : 'desc';
+        $orderColumn = $columnMap[$orderColumnIndex] ?? 'n.title_it';
+
         $qb = $this->newsRepository->createQueryBuilder("n")
-            ->orderBy("n.id", "desc");
+            ->leftJoin("n.news_category", "c")
+            ->orderBy($orderColumn, $orderDir);
 
         if ($payload->search["value"]) {
             $search = $payload->search["value"];
@@ -54,7 +68,8 @@ class AdminNewsController extends AbstractController
         $list = array_map(function ($item) {
             return [
                 "titleIt" => $item->getTitleIt(),
-                "isEvent" => $item->isEvent(),
+                "categoryName" => $item->getNewsCategory()?->getNameIt(),
+                "isEvent" => $item->getEventDatetime() !== null,
                 "isPublic" => $item->isPublic(),
                 "createdAt" => $item->getCreatedAt()->format("d/m/y \\a\\l\\l\\e H:i"),
                 "newsDetailLink" => $this->generateUrl("adminNewsDetail", ["newsId" => $item->getId()]),
@@ -73,9 +88,11 @@ class AdminNewsController extends AbstractController
     public function adminNewsDetail(Request $request): Response
     {
         $news = $this->newsRepository->findOneBy(["id" => $request->query->get("newsId")]);
+        $categories = $this->newsCategoryRepository->findBy(["is_deleted" => false], ["name_it" => "asc"]);
 
         return $this->render('admin/news-detail.html.twig', [
             "news" => $news,
+            "categories" => $categories,
         ]);
     }
 
@@ -109,6 +126,12 @@ class AdminNewsController extends AbstractController
         if (!$uploadedFile) {
             return $this->json([
                 "message" => "Nessun file caricato",
+            ], 400);
+        }
+
+        if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
+            return $this->json([
+                "message" => "Il file è troppo grande",
             ], 400);
         }
 

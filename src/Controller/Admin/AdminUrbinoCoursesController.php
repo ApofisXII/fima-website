@@ -32,12 +32,25 @@ class AdminUrbinoCoursesController extends AbstractController
     #[Route(path: '', name: 'adminUrbinoCoursesList')]
     public function adminUrbinoCoursesList(): Response
     {
-        return $this->render('admin/urbino-courses-list.html.twig');
+        $editions = $this->urbinoEditionRepository->createQueryBuilder('e')
+            ->andWhere('e.is_deleted = false')
+            ->orderBy('e.date_start', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $latestEdition = $this->urbinoEditionRepository->findLatest();
+
+        return $this->render('admin/urbino-courses-list.html.twig', [
+            'editions' => $editions,
+            'defaultEditionId' => $latestEdition?->getId(),
+        ]);
     }
 
     #[Route(path: '/json', name: 'adminUrbinoCoursesListJson')]
-    public function adminUrbinoCoursesListJson(): Response
+    public function adminUrbinoCoursesListJson(Request $request): Response
     {
+        $editionId = $request->query->getInt('editionId');
+
         $categories = $this->urbinoCourseCategoryRepository->createQueryBuilder("cat")
             ->andWhere("cat.is_deleted = false")
             ->orderBy("cat.ordering", "ASC")
@@ -48,15 +61,24 @@ class AdminUrbinoCoursesController extends AbstractController
         $categoriesData = [];
 
         foreach ($categories as $category) {
-            $courses = $this->urbinoCourseRepository->createQueryBuilder("c")
+            $qb = $this->urbinoCourseRepository->createQueryBuilder("c")
                 ->leftJoin("c.urbino_edition", "e")
                 ->andWhere("c.urbino_course_category = :categoryId")
                 ->andWhere("c.is_deleted = false")
                 ->setParameter("categoryId", $category->getId())
                 ->orderBy("c.ordering", "ASC")
-                ->addOrderBy("c.id", "DESC")
-                ->getQuery()
-                ->getResult();
+                ->addOrderBy("c.id", "DESC");
+
+            if ($editionId > 0) {
+                $qb->andWhere("c.urbino_edition = :editionId")
+                    ->setParameter("editionId", $editionId);
+            }
+
+            $courses = $qb->getQuery()->getResult();
+
+            if (empty($courses)) {
+                continue;
+            }
 
             $coursesData = array_map(function ($item) {
                 $dateRange = '';

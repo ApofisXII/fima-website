@@ -9,23 +9,47 @@
 
         <div class="box multi-detail-box gg-form">
             <h3>{{ news ? (news.titleIt ~ ' - ' ~ news.titleEn) : 'Dettaglio notizia' }}</h3>
-{#            <div class="secundary">{{ news ? "ID "~news.id }}</div>#}
 
-            <div class="gg-multilang-form">
-                <div>
-                    <label>Titolo (italiano)</label>
-                    <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
-
-                    <label>Corpo (italiano)</label>
-                    <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+            <div class="gg-form-row gg-form-row--two">
+                <div class="gg-form-row__year">
+                    <label>Categoria</label>
+                    <select name="newsCategoryId" id="category-select" required>
+                        <option value="">Seleziona una categoria</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {{ news and news.newsCategory and news.newsCategory.id == category.id ? 'selected' }}>
+                                {{ category.nameIt }} / {{ category.nameEn }}
+                            </option>
+                        {% endfor %}
+                        <option value="__create_new__" style="font-weight: bold; color: var(--color-blue);">+ Crea nuova categoria</option>
+                    </select>
                 </div>
 
-                <div>
-                    <label>Titolo (inglese)</label>
-                    <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+                <div class="gg-form-row__year">
+                    <label>Data e ora evento (lascia vuoto se è una notizia)</label>
+                    <input type="datetime-local" name="eventDatetime" id="eventDatetime" value="{{ news and news.eventDatetime ? news.eventDatetime|date('Y-m-d\\TH:i') }}">
+                </div>
+            </div>
 
-                    <label>Corpo (inglese)</label>
-                    <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+            <div class="gg-multilang-form">
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Titolo (italiano)</label>
+                        <input type="text" name="titleIt" placeholder="Titolo (italiano)" value="{{ news ? news.titleIt }}">
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Titolo (inglese)</label>
+                        <input type="text" name="titleEn" placeholder="Titolo (inglese)" value="{{ news ? news.titleEn }}">
+                    </div>
+                </div>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Corpo (italiano)</label>
+                        <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Corpo (inglese)</label>
+                        <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                    </div>
                 </div>
             </div>
 
@@ -39,10 +63,10 @@
             <label>Carica immagine</label>
             <input type="file" name="coverImage" id="cover-image-input" accept="image/*">
             {% if news %}
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button type="button" id="upload-image-btn" class="gg-submit-btn hoverizzato" style="height: 36px;">Salva immagine</button>
+                <div class="gg-action-btn-group">
+                    <button type="button" id="upload-image-btn" class="gg-action-btn hoverizzato">Salva immagine</button>
                     {% if news.hasCoverImage %}
-                        <button type="button" id="delete-image-btn" class="gg-delete-btn hoverizzato" style="height: 36px; border-radius: 8px;">Elimina immagine</button>
+                        <button type="button" id="delete-image-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina immagine</button>
                     {% endif %}
                 </div>
             {% endif %}
@@ -56,16 +80,6 @@
                     <input type="checkbox" name="isPublic" value="1" {{ news and news.isPublic ? 'checked' }}>
                     <span>Notizia visibile pubblicamente</span>
                 </label>
-
-                <label>
-                    <input type="checkbox" id="isEvent" name="isEvent" value="1" {{ news and news.isEvent ? 'checked' }} onchange="toggleEventDateTime()">
-                    <span>È un evento</span>
-                </label>
-            </div>
-
-            <div id="eventDateTimeContainer" style="{{ news and news.isEvent ? '' : 'display: none;' }}">
-                <label>Data e ora evento</label>
-                <input type="datetime-local" name="eventDatetime" id="eventDatetime" value="{{ news and news.eventDatetime ? news.eventDatetime|date('Y-m-d\\TH:i') }}">
             </div>
 
         </div>
@@ -86,26 +100,40 @@
         </div>
     {% endif %}
 
+    <div id="create-category-modal" class="gg-modal" style="display: none;">
+        <div class="gg-modal-content">
+            <h3>Crea nuova categoria</h3>
+            <form id="create-category-form">
+                <div class="gg-modal-form-group">
+                    <label>Nome categoria (italiano)</label>
+                    <input type="text" id="new-category-name-it" placeholder="Nome italiano" required>
+                </div>
+                <div class="gg-modal-form-group">
+                    <label>Nome categoria (inglese)</label>
+                    <input type="text" id="new-category-name-en" placeholder="Nome inglese" required>
+                </div>
+                <div class="gg-modal-buttons">
+                    <button type="submit" class="gg-modal-btn gg-modal-btn--primary">Crea categoria</button>
+                    <button type="button" id="cancel-create-category" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block js %}
 
     <script src="https://cdn.tiny.cloud/1/19quagaglhpufzna2p27cvo8kg2miu2f2flha91bl6aj5yqg/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
-    <script>
-        function toggleEventDateTime() {
-            const isEvent = document.getElementById('isEvent').checked;
-            const container = document.getElementById('eventDateTimeContainer');
-            container.style.display = isEvent ? 'block' : 'none';
-        }
-    </script>
-
     <script type="module">
         const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
         tinymce.init({
             selector: 'textarea',
             menubar: false,
-            toolbar: 'bold underline link bullist numlist removeformat',
+            toolbar: 'blocks | bold underline link bullist numlist removeformat',
+            toolbar_mode: 'wrap',
+            block_formats: 'Paragrafo=p; Titoletto=h2; Titoletto secondario=h3',
             plugins: 'link | lists | paste',
             branding: false,
             paste_as_text: true,
@@ -216,6 +244,98 @@
             });
             {% endif %}
         {% endif %}
+
+        const categorySelect = document.getElementById('category-select');
+        const createCategoryModal = document.getElementById('create-category-modal');
+        const createCategoryForm = document.getElementById('create-category-form');
+        const cancelCreateCategory = document.getElementById('cancel-create-category');
+        let previousCategoryValue = categorySelect.value;
+
+        categorySelect.addEventListener('change', function(e) {
+            if (this.value === '__create_new__') {
+                createCategoryModal.style.display = 'flex';
+                document.getElementById('new-category-name-it').focus();
+            } else {
+                previousCategoryValue = this.value;
+            }
+        });
+
+        cancelCreateCategory.addEventListener('click', function() {
+            createCategoryModal.style.display = 'none';
+            categorySelect.value = previousCategoryValue;
+            document.getElementById('new-category-name-it').value = '';
+            document.getElementById('new-category-name-en').value = '';
+        });
+
+        createCategoryModal.addEventListener('click', function(e) {
+            if (e.target === createCategoryModal) {
+                cancelCreateCategory.click();
+            }
+        });
+
+        createCategoryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nameIt = document.getElementById('new-category-name-it').value;
+            const nameEn = document.getElementById('new-category-name-en').value;
+
+            fetch('{{ path('adminNewsCategoriesDetailSave') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    categoryId: 0,
+                    nameIt: nameIt,
+                    nameEn: nameEn
+                })
+            })
+            .then(async response => {
+                let responseDecoded = await response.json();
+                if (!response.ok) {
+                    alert(responseDecoded.message || 'Errore nella creazione della categoria');
+                    return null;
+                }
+                return responseDecoded;
+            })
+            .then(data => {
+                if (!data) {
+                    return;
+                }
+
+                fetch('{{ path('adminNewsDetail') }}?newsId={{ news ? news.id : 0 }}')
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newSelect = doc.getElementById('category-select');
+                        const currentSelect = document.getElementById('category-select');
+
+                        const newOptions = Array.from(newSelect.options).filter(opt =>
+                            opt.text.includes(nameIt) && opt.value !== '__create_new__'
+                        );
+
+                        if (newOptions.length > 0) {
+                            const newOption = newOptions[0];
+                            const createNewOption = currentSelect.querySelector('option[value="__create_new__"]');
+                            const optionClone = document.createElement('option');
+                            optionClone.value = newOption.value;
+                            optionClone.textContent = newOption.text;
+                            currentSelect.insertBefore(optionClone, createNewOption);
+
+                            currentSelect.value = newOption.value;
+                            previousCategoryValue = newOption.value;
+                        }
+
+                        createCategoryModal.style.display = 'none';
+                        document.getElementById('new-category-name-it').value = '';
+                        document.getElementById('new-category-name-en').value = '';
+                    });
+            })
+            .catch(error => {
+                alert('Errore: ' + error.message);
+            });
+        });
     </script>
 
 {% endblock %}

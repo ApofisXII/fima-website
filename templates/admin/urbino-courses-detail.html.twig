@@ -72,21 +72,33 @@
                 </div>
             </div>
 
-            <div class="gg-multilang-form">
-                <div>
-                    <label>Descrizione programma (italiano)</label>
-                    <textarea name="programDescriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (italiano)">{{ course ? course.programDescriptionIt|raw }}</textarea>
-
-                    <label>Biografia docente (italiano)</label>
-                    <textarea name="bioDescriptionIt" class="tiny-area" placeholder="Scrivi qui la biografia del docente (italiano)">{{ course ? course.bioDescriptionIt|raw }}</textarea>
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Link form di iscrizione</label>
+                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ course ? course.enrollmentLink }}">
                 </div>
+            </div>
 
-                <div>
-                    <label>Descrizione programma (inglese)</label>
-                    <textarea name="programDescriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (inglese)">{{ course ? course.programDescriptionEn|raw }}</textarea>
-
-                    <label>Biografia docente (inglese)</label>
-                    <textarea name="bioDescriptionEn" class="tiny-area" placeholder="Scrivi qui la biografia del docente (inglese)">{{ course ? course.bioDescriptionEn|raw }}</textarea>
+            <div class="gg-multilang-form">
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Descrizione programma (italiano)</label>
+                        <textarea name="programDescriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (italiano)">{{ course ? course.programDescriptionIt|raw }}</textarea>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Descrizione programma (inglese)</label>
+                        <textarea name="programDescriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione del programma (inglese)">{{ course ? course.programDescriptionEn|raw }}</textarea>
+                    </div>
+                </div>
+                <div class="gg-form-row gg-form-row--two">
+                    <div class="gg-form-row__main">
+                        <label>Biografia docente (italiano)</label>
+                        <textarea name="bioDescriptionIt" class="tiny-area" placeholder="Scrivi qui la biografia del docente (italiano)">{{ course ? course.bioDescriptionIt|raw }}</textarea>
+                    </div>
+                    <div class="gg-form-row__main">
+                        <label>Biografia docente (inglese)</label>
+                        <textarea name="bioDescriptionEn" class="tiny-area" placeholder="Scrivi qui la biografia del docente (inglese)">{{ course ? course.bioDescriptionEn|raw }}</textarea>
+                    </div>
                 </div>
             </div>
 
@@ -100,10 +112,10 @@
             <label>Carica immagine</label>
             <input type="file" name="teacherImage" id="teacher-image-input" accept="image/*">
             {% if course %}
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button type="button" id="upload-image-btn" class="gg-submit-btn hoverizzato" style="height: 36px;">Salva immagine</button>
+                <div class="gg-action-btn-group">
+                    <button type="button" id="upload-image-btn" class="gg-action-btn hoverizzato">Salva immagine</button>
                     {% if course.isImageUploaded %}
-                        <button type="button" id="delete-image-btn" class="gg-delete-btn hoverizzato" style="height: 36px; border-radius: 8px;">Elimina immagine</button>
+                        <button type="button" id="delete-image-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina immagine</button>
                     {% endif %}
                 </div>
             {% endif %}
@@ -123,6 +135,7 @@
                     <span>Sold out</span>
                 </label>
             </div>
+
 
         </div>
 

@@ -35,6 +35,9 @@ class UrbinoEdition
     #[ORM\Column]
     private ?bool $is_public_visible = null;
 
+    #[ORM\Column]
+    private bool $is_programme_pdf_uploaded = false;
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $enrollment_info_it = null;
 
@@ -150,6 +153,18 @@ class UrbinoEdition
     public function setEnrollmentInfoEn(string $enrollment_info_en): static
     {
         $this->enrollment_info_en = $enrollment_info_en;
+
+        return $this;
+    }
+
+    public function isProgrammePdfUploaded(): bool
+    {
+        return $this->is_programme_pdf_uploaded;
+    }
+
+    public function setIsProgrammePdfUploaded(bool $is_programme_pdf_uploaded): static
+    {
+        $this->is_programme_pdf_uploaded = $is_programme_pdf_uploaded;
 
         return $this;
     }

@@ -2,9 +2,9 @@
 
 {% block body %}
 
-    <div class="gg-h1">{{ category ? 'Modifica' : 'Nuova' }} categoria</div>
+    <div class="gg-h1">{{ category ? 'Modifica' : 'Nuova' }} categoria notizia</div>
 
-    <form id="page-form" method="post" action="{{ path('adminUrbinoCategoriesDetailSave') }}">
+    <form id="page-form" method="post" action="{{ path('adminNewsCategoriesDetailSave') }}">
         <input type="hidden" name="categoryId" value="{{ category ? category.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
@@ -62,7 +62,7 @@
                 nameEn: formData.get('nameEn')
             };
 
-            fetch('{{ path('adminUrbinoCategoriesDetailSave') }}', {
+            fetch('{{ path('adminNewsCategoriesDetailSave') }}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@
                 if (!data) {
                     return;
                 }
-                location.href = "{{ path('adminUrbinoCategoriesList') }}";
+                location.href = "{{ path('adminNewsCategoriesList') }}";
             })
             .catch(error => {
                 alert('Errore: ' + error.message);
@@ -112,7 +112,7 @@
         confirmBtn.addEventListener('click', function() {
             modal.style.display = 'none';
 
-            fetch('{{ path('adminUrbinoCategoriesDelete', {'categoryId': category.id}) }}', {
+            fetch('{{ path('adminNewsCategoriesDelete', {'categoryId': category.id}) }}', {
                 method: 'DELETE'
             })
             .then(async response => {
@@ -127,7 +127,7 @@
                 if (!data) {
                     return;
                 }
-                location.href = "{{ path('adminUrbinoCategoriesList') }}";
+                location.href = "{{ path('adminNewsCategoriesList') }}";
             });
         });
         {% endif %}
