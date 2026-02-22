@@ -11,6 +11,7 @@ class DataTableRequestDTO
         public ?array $search,
         public ?int $length,
         public ?int $start,
+        public ?array $order = null,
 
     ) {}
 

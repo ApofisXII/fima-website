@@ -12,6 +12,7 @@
         <thead>
         <tr>
             <th>Titolo</th>
+            <th>Categoria</th>
             <th>Edizione</th>
             <th>Data e ora</th>
             <th>Visibilità</th>
@@ -34,23 +35,38 @@
             ajax: {
                 url: "{{ path('adminUrbinoEventsListJson') }}",
             },
-            ordering: false,
+            order: [[3, 'desc']],
             columns: [
                 { data: "title" },
+                { data: "category" },
                 { data: "editionName" },
                 { data: "eventDatetime" },
-                { data: "isPublic" },
-                { data: "createdAt" },
-                { data: "eventDetailLink" },
+                { data: "isPublic", orderable: false },
+                { data: "createdAt", orderable: false },
+                { data: "eventDetailLink", orderable: false },
             ],
             columnDefs: [
                 {
-                    targets: 3, render: function(data, type, row) {
+                    targets: '_all', orderSequence: ['desc', 'asc', '']
+                },
+                {
+                    targets: 1, render: function(data, type, row) {
+                        const map = {
+                            'Festival': 'festival',
+                            'Mostra':   'mostra',
+                            'Convegni': 'convegni',
+                        };
+                        const cls = map[data] ?? 'neutral';
+                        return "<span class='chip chip--" + cls + "'>" + (data ?? '—') + "</span>";
+                    }
+                },
+                {
+                    targets: 4, render: function(data, type, row) {
                         return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
                     }
                 },
                 {
-                    targets: 5, render: function(data, type, row) {
+                    targets: 6, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>Modifica evento</a>";
                     }
                 }

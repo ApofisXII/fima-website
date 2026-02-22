@@ -29,5 +29,8 @@ class UrbinoEventRequestDTO
         public ?string $descriptionEn = null,
         public ?bool $isPublic = false,
         public ?bool $isDeleted = false,
+        #[Assert\NotBlank]
+        #[Assert\Choice(choices: ['Festival', 'Mostra', 'Convegni'])]
+        public string $category = '',
     ) {}
 }

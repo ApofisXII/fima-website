@@ -80,6 +80,9 @@ class UrbinoCourse
     #[ORM\Column(nullable: true)]
     private ?int $price_cents = null;
 
+    #[ORM\Column(length: 2048, nullable: true)]
+    private ?string $enrollment_link = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -309,6 +312,18 @@ class UrbinoCourse
     public function setDateEnd(?\DateTime $date_end): static
     {
         $this->date_end = $date_end;
+
+        return $this;
+    }
+
+    public function getEnrollmentLink(): ?string
+    {
+        return $this->enrollment_link;
+    }
+
+    public function setEnrollmentLink(?string $enrollment_link): static
+    {
+        $this->enrollment_link = $enrollment_link;
 
         return $this;
     }

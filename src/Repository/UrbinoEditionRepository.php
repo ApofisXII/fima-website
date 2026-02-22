@@ -24,6 +24,16 @@ class UrbinoEditionRepository extends ServiceEntityRepository
         return $entity;
     }
 
+    public function findLatest(): ?UrbinoEdition
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.is_deleted = false')
+            ->addOrderBy('u.date_start', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function findCurrentEdition(): ?UrbinoEdition
     {
         return $this->createQueryBuilder('u')

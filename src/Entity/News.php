@@ -38,9 +38,6 @@ class News
     #[ORM\Column]
     private ?bool $has_cover_image = null;
 
-    #[ORM\Column]
-    private ?bool $is_event = null;
-
     #[ORM\Column(nullable: true)]
     private ?\DateTime $event_datetime = null;
 
@@ -49,6 +46,10 @@ class News
 
     #[ORM\Column]
     private ?bool $is_deleted = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?NewsCategory $news_category = null;
 
     public function getId(): ?int
     {
@@ -151,18 +152,6 @@ class News
         return $this;
     }
 
-    public function isEvent(): ?bool
-    {
-        return $this->is_event;
-    }
-
-    public function setIsEvent(bool $is_event): static
-    {
-        $this->is_event = $is_event;
-
-        return $this;
-    }
-
     public function getEventDatetime(): ?\DateTime
     {
         return $this->event_datetime;
@@ -195,6 +184,18 @@ class News
     public function setIsDeleted(bool $is_deleted): static
     {
         $this->is_deleted = $is_deleted;
+
+        return $this;
+    }
+
+    public function getNewsCategory(): ?NewsCategory
+    {
+        return $this->news_category;
+    }
+
+    public function setNewsCategory(?NewsCategory $news_category): static
+    {
+        $this->news_category = $news_category;
 
         return $this;
     }

@@ -185,6 +185,7 @@ h2 {
 
 .donate-box__body {
     padding: var(--padding-box);
+    padding-bottom: unset;
 }
 
 .news-grid {

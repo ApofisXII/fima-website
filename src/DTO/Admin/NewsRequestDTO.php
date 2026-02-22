@@ -25,9 +25,10 @@ class NewsRequestDTO
 
         public ?bool $isPublic = false,
 
-        public ?bool $isEvent = false,
-
         public ?string $eventDatetime = null,
+
+        #[Assert\NotNull(message: "La categoria è obbligatoria.")]
+        public ?int $newsCategoryId = null,
 
     ) {}
 

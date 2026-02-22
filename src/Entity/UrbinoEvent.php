@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoEventRepository::class)]
 class UrbinoEvent
 {
+    const string CATEGORY_FESTIVAL = 'Festival';
+    const string CATEGORY_MOSTRA = 'Mostra';
+    const string CATEGORY_CONVEGNI = 'Convegni';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -59,6 +62,9 @@ class UrbinoEvent
 
     #[ORM\Column]
     private ?bool $has_cover_image = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $category = null;
 
     public function getId(): ?int
     {
@@ -241,6 +247,18 @@ class UrbinoEvent
     public function setHasCoverImage(bool $has_cover_image): static
     {
         $this->has_cover_image = $has_cover_image;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
