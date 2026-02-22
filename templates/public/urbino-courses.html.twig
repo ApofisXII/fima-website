@@ -11,9 +11,16 @@
             {% for courseInCategory in coursesInCategories %}
 
                 <h2>{{ courseInCategory.category.nameIt }}</h2>
-                <div>
+                <div class="courses-grid">
                     {% for course in courseInCategory.courses %}
-                        <div>{{ course.teacherFullName }}</div>
+                        <div class="course-box" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}>
+                            <div class="course-box__inner">
+                                <div class="chip chip--course-box">type_{{ course.scheduleType }}</div>
+                                <div class="course-box__title">{{ course.teacherFullName }}</div>
+                                <div class="course-box__subtitle">TODO Sottotitolo</div>
+                                <a class="hover btn btn--course-box" href="{{ path('urbinoCourseDetail', {'course':course.id, 'slug':course.slug}) }}">Vedi corso</a>
+                            </div>
+                        </div>
                     {% endfor %}
                 </div>
 

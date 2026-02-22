@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoCourseRepository::class)]
 class UrbinoCourse
 {
-    public const SCHEDULE_TYPE_MAIN = "main";
-    public const SCHEDULE_TYPE_SECONDARY_AFTERNOON = "secondary_afternoon";
-    public const SCHEDULE_TYPES = [
+    public const string SCHEDULE_TYPE_MAIN = "main";
+    public const string SCHEDULE_TYPE_SECONDARY_AFTERNOON = "secondary_afternoon";
+    public const array SCHEDULE_TYPES = [
         self::SCHEDULE_TYPE_MAIN,
         self::SCHEDULE_TYPE_SECONDARY_AFTERNOON,
     ];
@@ -287,6 +287,15 @@ class UrbinoCourse
         $this->price_cents = $price_cents;
 
         return $this;
+    }
+
+    public function getPriceFormatted(): ?string
+    {
+        if ($this->price_cents === null) {
+            return null;
+        }
+
+        return number_format($this->price_cents / 100, 2, ',', '.') . " €";
     }
 
     public function getDateStart(): ?\DateTime

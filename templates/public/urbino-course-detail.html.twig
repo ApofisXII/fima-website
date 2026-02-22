@@ -1,0 +1,56 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}Urbino Musica Antica • {{ course.teacherFullName }} • {% endblock %}
+
+{% block body %}
+
+    <img src="{{ asset('images/logos/uma-courses-logo.svg') }}" alt="Urbino Musica Antica Corsi" class="uma-logo-small">
+
+    <div class="container course-top">
+        <div class="course-head">
+            <div class="course-head__image" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}></div>
+            <div>
+                <h1 class="course-head__title">{{ course.teacherFullName }}</h1>
+                <div class="course-head__subtitle">TODO Sottotitolo</div>
+                {#            <a href="#" class="btn hover">Iscriviti</a>#}
+                {#            <div class="chip chip--soldout">Soldout</div>#}
+            </div>
+        </div>
+        <div class="course-infos box">
+            <div class="box-title">Informazioni</div>
+            <div class="course-infos__row">
+                <div>Tipologia</div>
+                <div class="course-infos__value">type_{{ course.scheduleType }}</div>
+            </div>
+            <div class="course-infos__row">
+                <div>Prezzo</div>
+                <div class="course-infos__value">{{ course.priceCents ? course.priceFormatted : 'gratis' }}</div>
+            </div>
+            <div class="course-infos__row">
+                <div>Accesso</div>
+                <div class="course-infos__value">{{ course.preselectionRequired ? 'no_preselection' : 'yes_preselection' }}</div>
+            </div>
+            {% if course.dateStart %}
+                <div class="course-infos__row">
+                    <div>Date</div>
+                    <div class="course-infos__value">{{ course.dateStart.format("d/m/y") }} - {{ course.dateEnd.format("d/m/y") }}</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container box box--with-margin-top">
+        <div class="box-title">Programma</div>
+        <div>
+            {{ course.programDescriptionIt|raw }}
+        </div>
+    </div>
+
+    <div class="container box box--with-margin-top">
+        <div class="box-title">Biografia</div>
+        <div>
+            {{ course.bioDescriptionIt|raw }}
+        </div>
+    </div>
+
+{% endblock %}

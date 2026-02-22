@@ -3,6 +3,7 @@
 namespace App\Controller\Public;
 
 use App\DTO\Website\CoursesInCategoryDTO;
+use App\Entity\UrbinoCourse;
 use App\Repository\UrbinoCourseCategoryRepository;
 use App\Repository\UrbinoCourseRepository;
 use App\Repository\UrbinoEditionRepository;
@@ -56,6 +57,21 @@ final class UrbinoMainController extends AbstractController
 
         return $this->render('public/urbino-courses.html.twig', [
             "coursesInCategories" => $coursesInCategories,
+        ]);
+    }
+
+    #[Route('/courses/{course}/{slug}', name: 'urbinoCourseDetail')]
+    public function urbinoCourseDetail(UrbinoCourse $course, string $slug): Response
+    {
+        if ($course->getSlug() !== $slug) {
+            return $this->redirectToRoute("urbinoCourseDetail", [
+                "course" => $course->getId(),
+                "slug" => $course->getSlug(),
+            ]);
+        }
+
+        return $this->render('public/urbino-course-detail.html.twig', [
+            "course" => $course,
         ]);
     }
 
