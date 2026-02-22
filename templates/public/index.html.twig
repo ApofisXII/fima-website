@@ -6,8 +6,8 @@
 
     <div class="home-hero">
         <div class="container">
-            <div class="home-hero__since">Dal 1968</div>
-            <h1 class="home-hero__title">Fondazione Italiana per la Musica Antica</h1>
+            <div class="home-hero__since">{{ 'home.hero.since'|trans }}</div>
+            <h1 class="home-hero__title">{{ 'home.hero.title'|trans }}</h1>
             <img class="home-hero__filigrane" src="{{ asset('images/logos/fima-logo.svg') }}" alt="FIMA Logo">
         </div>
     </div>
@@ -17,20 +17,18 @@
             <img class="callout-uma__logo" src="{{ asset('images/logos/uma-logos/uma-2026-colors.svg') }}" alt="Urbino Musica Antica Logo">
         </div>
         <div>
-            <p>
-                Urbino Musica Antica è già da molto tempo un riferimento per chi ama la musica antica. Nella magnifica cornice di questa importante città medievale, per nove giorni si canta, si suona e si balla, alternando le lezioni individuali della mattina con le tante attività di gruppo pomeridiane, tra cui l’orchestra, il consort, la musica da camera, la polifonia, il laboratorio sull'oratorio, la danza rinascimentale e barocca.
-            </p>
+            <p>{{ 'home.callout_uma.description'|trans }}</p>
             <br>
-            <a class="btn hover" href="{{ path('urbinoWelcome') }}">Scopri Urbino Musica Antica</a>
+            <a class="btn hover" href="{{ path('urbinoWelcome') }}">{{ 'home.callout_uma.cta'|trans }}</a>
         </div>
     </section>
 
     <section class="container section-home">
         <div class="title-with-action">
-            <h2>News ed eventi</h2>
+            <h2>{{ 'home.news.title'|trans }}</h2>
             <a href="{{ path('newsList') }}" class="title-with-action__action hover">
-                <div class="title-with-action__action-text">Vedi tutte le news</div>
-                <img class="title-with-action__action-icon" src="{{ asset('images/icons/arrow-right-blue.svg') }}" alt="Vedi">
+                <div class="title-with-action__action-text">{{ 'home.news.view_all'|trans }}</div>
+                <img class="title-with-action__action-icon" src="{{ asset('images/icons/arrow-right-blue.svg') }}" alt="{{ 'home.news.view_all_icon_alt'|trans }}">
             </a>
         </div>
         <div class="news-grid">
@@ -42,7 +40,7 @@
 
     <section class="section-home">
         <div class="container">
-            <h2>Con il patrocinio e contributo</h2>
+            <h2>{{ 'home.partners.contribute.title'|trans }}</h2>
         </div>
         <div class="splide partner-logos" id="carousel-contribute">
             <div class="splide__track">
@@ -57,7 +55,7 @@
 
     <section class="section-home">
         <div class="container">
-            <h2>Con il sostegno</h2>
+            <h2>{{ 'home.partners.support.title'|trans }}</h2>
         </div>
         <div class="splide partner-logos" id="carousel-support">
             <div class="splide__track">

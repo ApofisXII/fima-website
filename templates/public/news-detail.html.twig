@@ -1,6 +1,6 @@
 {% extends 'public/base.html.twig' %}
 
-{% block title %}{{ news.titleIt }} • {% endblock %}
+{% block title %}{{ app.request.locale == 'it' ? news.titleIt : news.titleEn }} • {% endblock %}
 
 {% block body %}
 
@@ -15,14 +15,14 @@
                 {% endif %}
             </div>
             <div>
-                <div class="news-header__pubdate">Pubblicata il {{ news.createdAt.format("d/m/y") }}</div>
-                <h1 class="news-header__title">{{ news.titleIt }}</h1>
+                <div class="news-header__pubdate">{{ 'news_detail.published_on'|trans({'%date%': news.createdAt.format("d/m/y")}) }}</div>
+                <h1 class="news-header__title">{{ app.request.locale == 'it' ? news.titleIt : news.titleEn }}</h1>
             </div>
         </div>
     </div>
 
     <div class="container text-from-admin text-from-admin--article">
-        {{ news.bodyIt|raw }}
+        {{ (app.request.locale == 'it' ? news.bodyIt : news.bodyEn)|raw }}
     </div>
 
 {% endblock %}

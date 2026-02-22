@@ -1,11 +1,11 @@
 {% extends 'public/base.html.twig' %}
 
-{% block title %}News & Eventi • {% endblock %}
+{% block title %}{{ 'news_list.page_title'|trans }} • {% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <h1>News & eventi</h1>
+        <h1>{{ 'news_list.page_title'|trans }}</h1>
 
         <div class="news-grid">
             {% for news in newsList %}

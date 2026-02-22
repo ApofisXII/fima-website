@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}FIMA • Fondazione Italiana per la Musica Antica</title>
+        <title>{% block title %}{% endblock %}{{ 'base.title'|trans }}</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport">
         <link rel="icon" type="image/x-icon" href="{{ asset('images/logos/fav-icon.png') }}">
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -12,13 +12,13 @@
             <header class="header">
                 <img class="header__logo" src="{{ asset('images/logos/fima-logo.svg') }}" alt="FIMA Musica Antica">
                 <nav class="header__nav">
-                    <a class="header__nav-link" href="{{ path('indexLocalized') }}">Home</a>
-                    <a class="header__nav-link" href="">Chi siamo</a>
-                    <a class="header__nav-link" href="{{ path('urbinoWelcome') }}">Urbino Musica Antica</a>
-                    <a class="header__nav-link" href="">Biblioteca</a>
+                    <a class="header__nav-link" href="{{ path('indexLocalized') }}">{{ 'base.nav.home'|trans }}</a>
+                    <a class="header__nav-link" href="">{{ 'base.nav.about'|trans }}</a>
+                    <a class="header__nav-link" href="{{ path('urbinoWelcome') }}">{{ 'base.nav.urbino'|trans }}</a>
+                    <a class="header__nav-link" href="">{{ 'base.nav.library'|trans }}</a>
                     <a class="header__nav-link" href="">Recercare</a>
-                    <a class="header__nav-link" href="">Periodico</a>
-                    <a class="header__nav-link" href="{{ path('newsList') }}">Eventi</a>
+                    <a class="header__nav-link" href="">{{ 'base.nav.periodical'|trans }}</a>
+                    <a class="header__nav-link" href="{{ path('newsList') }}">{{ 'base.nav.events'|trans }}</a>
                 </nav>
             </header>
             {% if 'urbino' in app.current_route %}
@@ -29,12 +29,12 @@
                         </div>
                     </div>
                     <div class="uma-header__links">
-                        <a href="{{ path('urbinoWelcome') }}" class="uma-header__link {{ app.current_route == 'urbinoWelcome' ? 'uma-header__link--active' }}">Welcome</a>
-                        <a href="{{ path('urbinoCoursesList') }}" class="uma-header__link {{ 'urbinoCourses' in app.current_route ? 'uma-header__link--active' }}">Corsi</a>
-                        <a href="{{ path('urbinoInformations') }}" class="uma-header__link {{ app.current_route == 'urbinoInformations' ? 'uma-header__link--active' }}">Informazioni</a>
-                        <a href="#" class="uma-header__link">Festival</a>
-                        <a href="#" class="uma-header__link">Mostra</a>
-                        <a href="#" class="uma-header__link">Convegni</a>
+                        <a href="{{ path('urbinoWelcome') }}" class="uma-header__link {{ app.current_route == 'urbinoWelcome' ? 'uma-header__link--active' }}">{{ 'base.uma_nav.welcome'|trans }}</a>
+                        <a href="{{ path('urbinoCoursesList') }}" class="uma-header__link {{ 'urbinoCourses' in app.current_route ? 'uma-header__link--active' }}">{{ 'base.uma_nav.courses'|trans }}</a>
+                        <a href="{{ path('urbinoInformations') }}" class="uma-header__link {{ app.current_route == 'urbinoInformations' ? 'uma-header__link--active' }}">{{ 'base.uma_nav.informations'|trans }}</a>
+                        <a href="#" class="uma-header__link">{{ 'base.uma_nav.festival'|trans }}</a>
+                        <a href="#" class="uma-header__link">{{ 'base.uma_nav.exhibition'|trans }}</a>
+                        <a href="#" class="uma-header__link">{{ 'base.uma_nav.conferences'|trans }}</a>
                     </div>
                 </div>
             {% endif %}
@@ -46,29 +46,27 @@
 
         <div class="container pre-footer">
             <div class="box follow-box">
-                <div class="box-title">Seguici!</div>
+                <div class="box-title">{{ 'base.follow.title'|trans }}</div>
                 <a href="#" target="_blank" class="hover follow-box__link">
                     <img class="follow-box__link-image" src="{{ asset('images/social/youtube.svg') }}" alt="YouTube">
-                    <div>Canale YouTube</div>
+                    <div>{{ 'base.follow.youtube'|trans }}</div>
                 </a>
                 <a href="#" target="_blank" class="hover follow-box__link">
                     <img class="follow-box__link-image" src="{{ asset('images/social/instagram.svg') }}" alt="Instagram">
-                    <div>Pagina Instagram</div>
+                    <div>{{ 'base.follow.instagram'|trans }}</div>
                 </a>
                 <a href="#" target="_blank" class="hover follow-box__link">
                     <img class="follow-box__link-image" src="{{ asset('images/social/facebook.svg') }}" alt="Facebook">
-                    <div>Pagina Facebook</div>
+                    <div>{{ 'base.follow.facebook'|trans }}</div>
                 </a>
             </div>
             <div class="box donate-box">
                 <div class="donate-box__body">
-                    <div class="box-title">Sostieni FIMA</div>
-                    <p>
-                        La Fondazione Italiana per la Musica Antica, nei suoi cinquantasei anni di attività, ha divulgato la musica antica attraverso centinaia di concerti, conferenze e corsi, che hanno appassionato e continueranno ad appassionare migliaia di musicisti professionisti e dilettanti grazie al sostegno e al lavoro dei migliori musicisti del settore.
-                    </p>
+                    <div class="box-title">{{ 'base.donate.title'|trans }}</div>
+                    <p>{{ 'base.donate.description'|trans }}</p>
                 </div>
                 <div class="donate-box__angels">
-                    <a class="btn hover" href="{{ path('donate') }}">Sostienici</a>
+                    <a class="btn hover" href="{{ path('donate') }}">{{ 'base.donate.cta'|trans }}</a>
                 </div>
             </div>
         </div>
@@ -76,13 +74,12 @@
         <footer class="footer">
             <div class="container footer__columns">
                 <div class="footer__column">
-                    <div><b>Fondazione Italiana per la Musica Antica</b></div>
-                    <div>Via Col di Lana 7, 00195, Roma</div>
+                    <div><b>{{ 'base.footer.name'|trans }}</b></div>
+                    <div>{{ 'base.footer.address'|trans }}</div>
                 </div>
                 <div class="footer__column footer__column--right">
-                    <a href="#">Contatti</a><br>
-                    <a href="#">Amministrazione Trasparente</a><br>
-                    <a href="#">Web design credits</a><br>
+                    <a href="#">{{ 'base.footer.transparent_admin'|trans }}</a><br>
+                    <a href="https://www.earlymusicwebsites.com" target="_blank">{{ 'base.footer.web_credits'|trans }}</a><br>
                 </div>
             </div>
         </footer>

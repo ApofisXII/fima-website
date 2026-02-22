@@ -10,8 +10,8 @@
             {% endif %}
         </div>
         <div class="news-box__content">
-            <div class="news-box__title">{{ news.titleIt }}</div>
-            <div class="news-box__date">Pubblicato il {{ news.createdAt.format("d/m/y") }}</div>
+            <div class="news-box__title">{{ app.request.locale == 'it' ? news.titleIt : news.titleEn }}</div>
+            <div class="news-box__date">{{ 'news_box.published_on'|trans({'%date%': news.createdAt.format("d/m/y")}) }}</div>
         </div>
     </div>
 </a>

@@ -1,0 +1,113 @@
+home:
+    hero:
+        since: 'Dal 1968'
+        title: 'Fondazione Italiana per la Musica Antica'
+    callout_uma:
+        description: 'Urbino Musica Antica è già da molto tempo un riferimento per chi ama la musica antica. Nella magnifica cornice di questa importante città medievale, per nove giorni si canta, si suona e si balla, alternando le lezioni individuali della mattina con le tante attività di gruppo pomeridiane, tra cui l''orchestra, il consort, la musica da camera, la polifonia, il laboratorio sull''oratorio, la danza rinascimentale e barocca.'
+        cta: 'Scopri Urbino Musica Antica'
+    news:
+        title: 'News ed eventi'
+        view_all: 'Vedi tutte le news'
+        view_all_icon_alt: 'Vedi'
+    partners:
+        contribute:
+            title: 'Con il patrocinio e contributo'
+        support:
+            title: 'Con il sostegno'
+
+donate:
+    page_title: 'Sostienici'
+    intro_1: 'Dal 2024 è possibile sostenere URBINO MUSICA ANTICA attraverso erogazioni liberali diventando <b>Benefattori</b> della manifestazione.'
+    intro_2: "La Fondazione Italiana per la Musica Antica, nei suoi cinquantasei anni di attività, ha divulgato la musica antica attraverso centinaia di concerti, conferenze e corsi, che hanno appassionato e continueranno ad appassionare migliaia di musicisti professionisti e dilettanti grazie al sostegno e al lavoro dei migliori musicisti del settore."
+    intro_3: "Gli allievi di ieri sono diventati i musicisti di oggi.<br>Sostenere questa attività permetterà alla FIMA di continuare nella sua incessante e appassionante azione divulgatrice nell'ambito della musica antica."
+    bronze:
+        title: 'Benefattore BRONZE'
+        range: 'Donazione da € 150 a 1000:'
+    silver:
+        title: 'Benefattore SILVER'
+        range: 'Donazione da € 1000 a 5000:'
+    gold:
+        title: 'Benefattore GOLD'
+        range: 'Donazione da € 5000 e oltre:'
+    benefits:
+        citation: 'Citazione nella lista dei Benefattori'
+        recercare_copy: 'Una copia della rivista Recercare in omaggio'
+        rehearsal_access: 'Accesso riservato a 2 prove generali dei concerti per 2 persone'
+        concert_tickets: 'N. 2 biglietti per assistere agli ultimi due concerti inseriti nel cartellone del Festival Internazionale di Musica Antica con posti riservati'
+        didactic: 'Possibilità di partecipare alle attività didattiche dei corsi di alta formazione musicale'
+        guided_tour: "Visita guidata all'interno del Palazzo Ducale e tour alla scoperta delle maggiori attrazioni di Urbino"
+        special_event: 'Evento speciale dedicato'
+        gastronomy: "Possibilità di partecipare a un'esperienza gastronomica all'insegna dell'italianità, pensata per soddisfare i palati più raffinati grazie alla degustazione di piatti e prodotti tipici del territorio di Urbino"
+    contact: 'Per maggiori informazioni sulle donazioni invia una mail a'
+
+urbino_course_detail:
+    logo_alt: 'Urbino Musica Antica Corsi'
+    info:
+        title: 'Informazioni'
+        type: 'Tipologia'
+        price: 'Prezzo'
+        free: 'Gratis'
+        access: 'Accesso'
+        access_open: 'Libero'
+        access_preselection: 'Preselezione prevista'
+        dates: 'Date'
+    program: 'Programma'
+    biography: 'Biografia'
+
+urbino_courses:
+    page_title: 'Urbino Musica Antica • Corsi'
+    heading: 'Corsi'
+    view_course: 'Vedi corso'
+
+urbino_welcome:
+    page_title: 'Urbino Musica Antica'
+    angels_alt: 'Angeli decorativi'
+    edition_title: 'Urbino Musica Antica 2026'
+    date_range: 'Dal %start% al %end%'
+    courses:
+        description: 'Il corpo docenti dei corsi di Urbino riunisce alcuni tra i più affermati ed apprezzati artisti italiani ed internazionali, mentori e formatori d''eccezione.'
+        cta: 'Scopri i corsi'
+    festival:
+        description: 'Urbino Musica Antica è anche un festival, con concerti, conferenze e progetti speciali che coinvolgono artisti di fama internazionale, giovani talenti e le realtà musicali del territorio.'
+        cta: 'Scopri gli eventi'
+
+news_detail:
+    published_on: 'Pubblicata il %date%'
+
+news_list:
+    page_title: 'News & eventi'
+
+news_box:
+    published_on: 'Pubblicato il %date%'
+
+base:
+    title: 'FIMA • Fondazione Italiana per la Musica Antica'
+    nav:
+        home: 'Home'
+        about: 'Chi siamo'
+        urbino: 'Urbino Musica Antica'
+        library: 'Biblioteca'
+        periodical: 'Periodico'
+        events: 'Eventi'
+    uma_nav:
+        welcome: 'Welcome'
+        courses: 'Corsi'
+        informations: 'Informazioni'
+        festival: 'Festival'
+        exhibition: 'Mostra'
+        conferences: 'Convegni'
+    follow:
+        title: 'Seguici!'
+        youtube: 'Canale YouTube'
+        instagram: 'Pagina Instagram'
+        facebook: 'Pagina Facebook'
+    donate:
+        title: 'Sostieni FIMA'
+        description: "La Fondazione Italiana per la Musica Antica, nei suoi cinquantasei anni di attività, ha divulgato la musica antica attraverso centinaia di concerti, conferenze e corsi, che hanno appassionato e continueranno ad appassionare migliaia di musicisti professionisti e dilettanti grazie al sostegno e al lavoro dei migliori musicisti del settore."
+        cta: 'Sostienici'
+    footer:
+        name: 'Fondazione Italiana per la Musica Antica'
+        address: 'Via Col di Lana 7, 00195, Roma'
+        contacts: 'Contatti'
+        transparent_admin: 'Amministrazione Trasparente'
+        web_credits: 'Web design credits'

@@ -1,6 +1,6 @@
 {% extends 'public/base.html.twig' %}
 
-{% block title %}Urbino Musica Antica • {% endblock %}
+{% block title %}{{ 'urbino_welcome.page_title'|trans }} • {% endblock %}
 
 {% block body %}
 
@@ -10,32 +10,26 @@
     </div>
 
     <div class="container box uma-welcome">
-        <img class="uma-welcome__angels" src="{{ asset('images/donate-angels.webp') }}" alt="Angeli decorativi">
+        <img class="uma-welcome__angels" src="{{ asset('images/donate-angels.webp') }}" alt="{{ 'urbino_welcome.angels_alt'|trans }}">
         <div class="uma-welcome__left">
-            <h1 class="uma-welcome__title">Urbino Musica Antica 2026</h1>
-            <div class="uma-welcome__date">Dal {{ currentEdition.dateStart.format("d/m/y") }} al {{ currentEdition.dateEnd.format("d/m/y") }}</div>
+            <h1 class="uma-welcome__title">{{ 'urbino_welcome.edition_title'|trans }}</h1>
+            <div class="uma-welcome__date">{{ 'urbino_welcome.date_range'|trans({'%start%': currentEdition.dateStart.format("d/m/y"), '%end%': currentEdition.dateEnd.format("d/m/y")}) }}</div>
         </div>
         <div>
-            <p>
-                Urbino Musica Antica è già da molto tempo un riferimento per chi ama la musica antica. Nella magnifica cornice di questa importante città medievale, per nove giorni si canta, si suona e si balla, alternando le lezioni individuali della mattina con le tante attività di gruppo pomeridiane, tra cui l’orchestra, il consort, la musica da camera, la polifonia, il laboratorio sull'oratorio, la danza rinascimentale e barocca.
-            </p>
+            <p>{{ 'home.callout_uma.description'|trans }}</p>
         </div>
     </div>
 
     <div class="container uma-activities">
         <div class="box uma-activity">
-            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-courses-logo.svg') }}" alt="Corsi">
-            <p>
-                Il corpo docenti dei corsi di Urbino riunisce alcuni tra i più affermati ed apprezzati artisti italiani ed internazionali, mentori e formatori d'eccezione.
-            </p>
-            <a href="{{ path('urbinoCoursesList') }}" class="btn hover btn--uma-activity">Scopri i corsi</a>
+            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-courses-logo.svg') }}" alt="{{ 'base.uma_nav.courses'|trans }}">
+            <p>{{ 'urbino_welcome.courses.description'|trans }}</p>
+            <a href="{{ path('urbinoCoursesList') }}" class="btn hover btn--uma-activity">{{ 'urbino_welcome.courses.cta'|trans }}</a>
         </div>
         <div class="box uma-activity">
-            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-festival-logo.svg') }}" alt="Corsi">
-            <p>
-                Urbino Musica Antica è anche un festival, con concerti, conferenze e progetti speciali che coinvolgono artisti di fama internazionale, giovani talenti e le realtà musicali del territorio.
-            </p>
-            <a href="#" class="btn hover btn--uma-activity">Scopri gli eventi</a>
+            <img class="uma-activity__logo" src="{{ asset('images/logos/uma-festival-logo.svg') }}" alt="{{ 'base.uma_nav.festival'|trans }}">
+            <p>{{ 'urbino_welcome.festival.description'|trans }}</p>
+            <a href="#" class="btn hover btn--uma-activity">{{ 'urbino_welcome.festival.cta'|trans }}</a>
         </div>
     </div>
 

@@ -1,24 +1,24 @@
 {% extends 'public/base.html.twig' %}
 
-{% block title %}Urbino Musica Antica • Corsi • {% endblock %}
+{% block title %}{{ 'urbino_courses.page_title'|trans }} • {% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <h1>Corsi</h1>
+        <h1>{{ 'urbino_courses.heading'|trans }}</h1>
 
         <div>
             {% for courseInCategory in coursesInCategories %}
 
-                <h2>{{ courseInCategory.category.nameIt }}</h2>
+                <h2>{{ app.request.locale == 'it' ? courseInCategory.category.nameIt : courseInCategory.category.nameEn }}</h2>
                 <div class="courses-grid">
                     {% for course in courseInCategory.courses %}
                         <div class="course-box" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}>
                             <div class="course-box__inner">
-                                <div class="chip chip--course-box">type_{{ course.scheduleType }}</div>
+                                <div class="chip chip--course-box">{{ course.scheduleType }}</div>
                                 <div class="course-box__title">{{ course.teacherFullName }}</div>
                                 <div class="course-box__subtitle">TODO Sottotitolo</div>
-                                <a class="hover btn btn--course-box" href="{{ path('urbinoCourseDetail', {'course':course.id, 'slug':course.slug}) }}">Vedi corso</a>
+                                <a class="hover btn btn--course-box" href="{{ path('urbinoCourseDetail', {'course':course.id, 'slug':course.slug}) }}">{{ 'urbino_courses.view_course'|trans }}</a>
                             </div>
                         </div>
                     {% endfor %}

@@ -1,0 +1,113 @@
+home:
+    hero:
+        since: 'Since 1968'
+        title: 'Italian Foundation for Early Music'
+    callout_uma:
+        description: 'Urbino Musica Antica has long been a landmark for lovers of early music. Set against the magnificent backdrop of this important medieval city, for nine days participants sing, play and dance, alternating individual morning lessons with many afternoon group activities, including orchestra, consort, chamber music, polyphony, oratorio workshop, and Renaissance and Baroque dance.'
+        cta: 'Discover Urbino Musica Antica'
+    news:
+        title: 'News and events'
+        view_all: 'See all news'
+        view_all_icon_alt: 'See'
+    partners:
+        contribute:
+            title: 'With the patronage and contribution of'
+        support:
+            title: 'With the support of'
+
+donate:
+    page_title: 'Support us'
+    intro_1: 'Since 2024 it is possible to support URBINO MUSICA ANTICA through donations by becoming a <b>Benefactor</b> of the event.'
+    intro_2: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+    intro_3: "Yesterday's students have become today's musicians.<br>Supporting this activity will allow FIMA to continue its tireless and passionate mission to promote early music."
+    bronze:
+        title: 'BRONZE Benefactor'
+        range: 'Donation from € 150 to 1000:'
+    silver:
+        title: 'SILVER Benefactor'
+        range: 'Donation from € 1000 to 5000:'
+    gold:
+        title: 'GOLD Benefactor'
+        range: 'Donation from € 5000 and above:'
+    benefits:
+        citation: 'Name listed among the Benefactors'
+        recercare_copy: 'A complimentary copy of the Recercare journal'
+        rehearsal_access: 'Reserved access to 2 concert dress rehearsals for 2 people'
+        concert_tickets: '2 tickets to attend the last two concerts of the International Early Music Festival with reserved seats'
+        didactic: 'Opportunity to participate in the educational activities of the advanced music courses'
+        guided_tour: 'Guided tour of the Palazzo Ducale and discovery of the main attractions of Urbino'
+        special_event: 'Dedicated special event'
+        gastronomy: 'Opportunity to take part in a gastronomic experience celebrating Italian culture, designed to delight the most refined palates through a tasting of typical dishes and products from the Urbino area'
+    contact: 'For more information about donations, send an email to'
+
+urbino_course_detail:
+    logo_alt: 'Urbino Musica Antica Courses'
+    info:
+        title: 'Information'
+        type: 'Type'
+        price: 'Price'
+        free: 'Free'
+        access: 'Access'
+        access_open: 'Open'
+        access_preselection: 'Preselection required'
+        dates: 'Dates'
+    program: 'Programme'
+    biography: 'Biography'
+
+urbino_courses:
+    page_title: 'Urbino Musica Antica • Courses'
+    heading: 'Courses'
+    view_course: 'View course'
+
+urbino_welcome:
+    page_title: 'Urbino Musica Antica'
+    angels_alt: 'Decorative angels'
+    edition_title: 'Urbino Musica Antica 2026'
+    date_range: 'From %start% to %end%'
+    courses:
+        description: 'The teaching staff of the Urbino courses brings together some of the most acclaimed and appreciated Italian and international artists, exceptional mentors and educators.'
+        cta: 'Discover the courses'
+    festival:
+        description: 'Urbino Musica Antica is also a festival, with concerts, conferences and special projects involving internationally renowned artists, young talents and the local music scene.'
+        cta: 'Discover the events'
+
+news_detail:
+    published_on: 'Published on %date%'
+
+news_list:
+    page_title: 'News & Events'
+
+news_box:
+    published_on: 'Published on %date%'
+
+base:
+    title: 'FIMA • Italian Foundation for Early Music'
+    nav:
+        home: 'Home'
+        about: 'About us'
+        urbino: 'Urbino Musica Antica'
+        library: 'Library'
+        periodical: 'Periodical'
+        events: 'Events'
+    uma_nav:
+        welcome: 'Welcome'
+        courses: 'Courses'
+        informations: 'Information'
+        festival: 'Festival'
+        exhibition: 'Exhibition'
+        conferences: 'Conferences'
+    follow:
+        title: 'Follow us!'
+        youtube: 'YouTube Channel'
+        instagram: 'Instagram Page'
+        facebook: 'Facebook Page'
+    donate:
+        title: 'Support FIMA'
+        description: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+        cta: 'Support us'
+    footer:
+        name: 'Italian Foundation for Early Music'
+        address: 'Via Col di Lana 7, 00195, Roma'
+        contacts: 'Contacts'
+        transparent_admin: 'Transparent Administration'
+        web_credits: 'Web design credits'
