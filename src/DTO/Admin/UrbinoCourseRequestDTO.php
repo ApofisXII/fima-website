@@ -37,5 +37,11 @@ class UrbinoCourseRequestDTO
         public ?float $priceEuros = null,
 
         public ?string $enrollmentLink = null,
+
+        #[Assert\NotBlank(message: "La materia del corso è obbligatoria.")]
+        public string $disciplineIt = '',
+
+        #[Assert\NotBlank(message: "La materia del corso è obbligatoria.")]
+        public string $disciplineEn = '',
     ) {}
 }

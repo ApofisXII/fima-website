@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoEventRepository::class)]
 class UrbinoEvent
 {
-    const string CATEGORY_FESTIVAL = 'Festival';
-    const string CATEGORY_MOSTRA = 'Mostra';
-    const string CATEGORY_CONVEGNI = 'Convegni';
+    const string CATEGORY_FESTIVAL = 'event_type_festival';
+    const string CATEGORY_MOSTRA = 'event_type_mostra';
+    const string CATEGORY_CONVEGNI = 'event_type_convegni';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

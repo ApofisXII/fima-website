@@ -93,7 +93,8 @@ class AdminUrbinoCoursesController extends AbstractController
                 return [
                     "id" => $item->getId(),
                     "teacherFullName" => $item->getTeacherFullName(),
-                    "editionName" => $item->getUrbinoEdition()?->getEditionName(),
+                    "disciplineIt" => $item->getDisciplineIt(),
+                    "disciplineEn" => $item->getDisciplineEn(),
                     "dateRange" => $dateRange,
                     "scheduleType" => $item->getScheduleType(),
                     "isSoldOut" => $item->isSoldOut(),
