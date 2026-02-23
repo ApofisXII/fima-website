@@ -137,6 +137,10 @@ contacts:
         title: 'PEC'
         label: 'PEC address'
 
+transparent_administration:
+    page_title: 'Transparent Administration'
+    heading: 'Transparent Administration'
+
 urbino_event_detail:
     datetime_location: 'Time and venue'
     at_time: 'at'

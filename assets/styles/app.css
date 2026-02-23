@@ -135,6 +135,10 @@ h2 {
     max-width: 1224px;
 }
 
+.container--reduced {
+    max-width: 800px;
+}
+
 .footer {
     background-color: var(--color-blue);
     color: var(--color-white);
@@ -154,6 +158,7 @@ h2 {
 
 .footer__column--right {
     text-align: right;
+    line-height: 1.8rem;
 }
 
 .pre-footer {
@@ -767,7 +772,6 @@ h2 {
 .library-info-strip__notice {
     margin-top: 12px;
     font-size: 0.8rem;
-    color: var(--color-text-muted, #666);
 }
 
 .library-collections {
@@ -951,4 +955,13 @@ h2 {
 
 .btn--uma-event-ticket {
     margin-top: 15px;
+}
+
+.underlined-link {
+    color: var(--color-blue);
+    text-decoration: underline;
+}
+
+.h2--with-margin-top {
+    margin-top: 50px;
 }

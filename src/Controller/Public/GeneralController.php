@@ -53,4 +53,10 @@ final class GeneralController extends AbstractController
     {
         return $this->render('public/library.html.twig');
     }
+
+    #[Route('/{_locale}/transparent-administration', name: 'transparentAdministration')]
+    public function transparentAdministration(): Response
+    {
+        return $this->render('public/transparent-administration.html.twig');
+    }
 }

@@ -137,6 +137,10 @@ contacts:
         title: 'PEC'
         label: 'Indirizzo PEC'
 
+transparent_administration:
+    page_title: 'Amministrazione Trasparente'
+    heading: 'Amministrazione Trasparente'
+
 urbino_event_detail:
     datetime_location: 'Orario e luogo'
     at_time: 'ore'
