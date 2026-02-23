@@ -20,30 +20,30 @@
             </div>
             <div>
                 <h1 class="event-detail-header__title">{{ event.title }}</h1>
-                <div class="event-detail-header__subtitle">{{ event.subtitleIt }}</div>
+                <div class="event-detail-header__subtitle">{{ app.request.locale == 'it' ? event.subtitleIt : event.subtitleEn|default(event.subtitleIt) }}</div>
             </div>
         </div>
     </div>
 
     <div class="container box box--with-margin-top">
-        <div class="box-title">Orario e luogo</div>
+        <div class="box-title">{{ 'urbino_event_detail.datetime_location'|trans }}</div>
         <p>
-            {{ event.eventDatetime.format("l") }} {{ event.eventDatetime.format("d F Y") }}, ore {{ event.eventDatetime.format("H:i") }}
+            {{ event.eventDatetime.format("l") }} {{ event.eventDatetime.format("d F Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
             {% if event.locationLong %}
                 <br>
                 {{ event.locationLong }}
             {% endif %}
         </p>
         {% if event.ticketLink %}
-            <a href="{{ event.ticketLink }}" class="btn hover btn--uma-event-ticket" target="_blank">Vedi biglietti</a>
+            <a href="{{ event.ticketLink }}" class="btn hover btn--uma-event-ticket" target="_blank">{{ 'urbino_event_detail.tickets'|trans }}</a>
         {% endif %}
     </div>
 
     {% if event.descriptionIt or event.descriptionEn %}
         <div class="container box box--with-margin-top">
-            <div class="box-title">Informazioni</div>
+            <div class="box-title">{{ 'urbino_event_detail.info'|trans }}</div>
             <div>
-                {{ event.descriptionIt|raw }}
+                {{ (app.request.locale == 'it' ? event.descriptionIt : event.descriptionEn|default(event.descriptionIt))|raw }}
             </div>
         </div>
     {% endif %}

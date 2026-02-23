@@ -137,6 +137,24 @@ contacts:
         title: 'PEC'
         label: 'PEC address'
 
+urbino_event_detail:
+    datetime_location: 'Time and venue'
+    at_time: 'at'
+    tickets: 'Get tickets'
+    info: 'Information'
+
+urbino_conferences:
+    page_title: 'Urbino Musica Antica • Conferences'
+    heading: 'Conferences'
+
+urbino_exhibitions:
+    page_title: 'Urbino Musica Antica • Exhibitions'
+    heading: 'Exhibitions'
+
+urbino_festival:
+    page_title: 'Urbino Musica Antica • Festival'
+    heading: 'Festival'
+
 urbino_informations:
     page_title: 'Urbino Musica Antica • Information'
     heading: 'General information'
