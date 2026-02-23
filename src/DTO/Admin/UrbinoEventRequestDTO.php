@@ -2,6 +2,7 @@
 
 namespace App\DTO\Admin;
 
+use App\Entity\UrbinoEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UrbinoEventRequestDTO
@@ -29,8 +30,9 @@ class UrbinoEventRequestDTO
         public ?string $descriptionEn = null,
         public ?bool $isPublic = false,
         public ?bool $isDeleted = false,
+
         #[Assert\NotBlank]
-        #[Assert\Choice(choices: ['Festival', 'Mostra', 'Convegni'])]
+        #[Assert\Choice(choices: UrbinoEvent::CATEGORIES)]
         public string $category = '',
     ) {}
 }

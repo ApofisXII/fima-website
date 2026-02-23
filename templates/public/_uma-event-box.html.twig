@@ -1,0 +1,20 @@
+{# requires: event #}
+<div class="uma-event-box">
+    <div class="uma-event-box__image" style="background-image: url('{{ asset('uploads-uma-event/'~event.id~'.webp') }}')">
+        <div class="uma-event-box__overlay">
+            <div class="uma-event-box__day-box">
+                <div class="uma-event-box__dow">{{ event.eventDatetime.format("D") }}</div>
+                <div class="uma-event-box__dom">{{ event.eventDatetime.format("d") }}</div>
+                <div class="uma-event-box__month">{{ event.eventDatetime.format("M") }}</div>
+            </div>
+            <div class="uma-event-box__hour-box">
+                {{ event.eventDatetime.format("h:i") }}
+            </div>
+        </div>
+    </div>
+    <div class="uma-event-box__data">
+        <div class="uma-event-box__title">{{ event.title }}</div>
+        <div class="uma-event-box__location-short">{{ event.locationShort }}</div>
+        <a href="{{ path('urbinoEventDetail', {'event':event.id, 'slug':event.slug}) }}" class="btn hover btn--uma-event-box">Scopri di più</a>
+    </div>
+</div>

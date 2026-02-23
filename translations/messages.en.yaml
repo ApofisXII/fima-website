@@ -198,7 +198,7 @@ base:
         courses: 'Courses'
         informations: 'Information'
         festival: 'Festival'
-        exhibition: 'Exhibition'
+        exhibition: 'Exhibitions'
         conferences: 'Conferences'
     follow:
         title: 'Follow us!'

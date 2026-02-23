@@ -1,0 +1,17 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}Urbino Musica Antica • Convegni • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Convegni</h1>
+    </div>
+
+    <div class="container events-grid">
+        {% for event in events %}
+            {% include 'public/_uma-event-box.html.twig' %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

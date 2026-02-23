@@ -1,0 +1,51 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ event.title }} • Urbino Musica Antica • {% endblock %}
+
+{% block body %}
+
+    <div class="container event-detail-header" style="background-image: url('{{ asset('uploads-uma-event/'~event.id~'.webp') }}')">
+        <div class="event-detail-header__overlay">
+            <div class="event-detail-header__date-box">
+                <div>
+                    <div class="uma-event-box__day-box">
+                        <div class="uma-event-box__dow">{{ event.eventDatetime.format("D") }}</div>
+                        <div class="uma-event-box__dom">{{ event.eventDatetime.format("d") }}</div>
+                        <div class="uma-event-box__month">{{ event.eventDatetime.format("M") }}</div>
+                    </div>
+                    <div class="uma-event-box__hour-box">
+                        {{ event.eventDatetime.format("h:i") }}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1 class="event-detail-header__title">{{ event.title }}</h1>
+                <div class="event-detail-header__subtitle">{{ event.subtitleIt }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container box box--with-margin-top">
+        <div class="box-title">Orario e luogo</div>
+        <p>
+            {{ event.eventDatetime.format("l") }} {{ event.eventDatetime.format("d F Y") }}, ore {{ event.eventDatetime.format("H:i") }}
+            {% if event.locationLong %}
+                <br>
+                {{ event.locationLong }}
+            {% endif %}
+        </p>
+        {% if event.ticketLink %}
+            <a href="{{ event.ticketLink }}" class="btn hover btn--uma-event-ticket" target="_blank">Vedi biglietti</a>
+        {% endif %}
+    </div>
+
+    {% if event.descriptionIt or event.descriptionEn %}
+        <div class="container box box--with-margin-top">
+            <div class="box-title">Informazioni</div>
+            <div>
+                {{ event.descriptionIt|raw }}
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

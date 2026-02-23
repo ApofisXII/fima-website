@@ -15,9 +15,9 @@
                     <label>Categoria</label>
                     <select name="category" required>
                         <option value="">Seleziona categoria</option>
-                        <option value="Festival" {{ event and event.category == 'Festival' ? 'selected' }}>Festival</option>
-                        <option value="Mostra" {{ event and event.category == 'Mostra' ? 'selected' }}>Mostra</option>
-                        <option value="Convegni" {{ event and event.category == 'Convegni' ? 'selected' }}>Convegni</option>
+                        <option value="event_category_festival" {{ event and event.category == 'event_category_festival' ? 'selected' }}>Festival</option>
+                        <option value="event_category_exhibition" {{ event and event.category == 'event_category_exhibition' ? 'selected' }}>Mostra</option>
+                        <option value="event_category_conference" {{ event and event.category == 'event_category_conference' ? 'selected' }}>Convegni</option>
                     </select>
                 </div>
 

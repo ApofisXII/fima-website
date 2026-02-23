@@ -198,7 +198,7 @@ base:
         courses: 'Corsi'
         informations: 'Informazioni'
         festival: 'Festival'
-        exhibition: 'Mostra'
+        exhibition: 'Mostre'
         conferences: 'Convegni'
     follow:
         title: 'Seguici!'
