@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\DTO\Admin\UrbinoEventRequestDTO;
 use App\Entity\UrbinoEdition;
+use App\Entity\UrbinoEvent;
 use App\Service\UrbinoEventService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -40,6 +41,7 @@ class UrbinoEventFixtures extends Fixture implements DependentFixtureInterface
                 descriptionEn: 'The opening concert of the Urbino Music Week 2025 will feature Concerto Italiano with a programme dedicated to Claudio Monteverdi and Carlo Gesualdo da Venosa. A journey through the Italian madrigal between the 16th and 17th centuries.',
                 isPublic: true,
                 isDeleted: false,
+                category: UrbinoEvent::CATEGORY_FESTIVAL,
             ),
             new UrbinoEventRequestDTO(
                 urbinoEditionId: $edition2025->getId(),
@@ -54,6 +56,7 @@ class UrbinoEventFixtures extends Fixture implements DependentFixtureInterface
                 descriptionEn: 'An exceptional evening in which the teachers of the Music Week will perform together in a programme of chamber music and solo pieces. Repertoire from the late Renaissance to early Classicism.',
                 isPublic: true,
                 isDeleted: false,
+                category: UrbinoEvent::CATEGORY_FESTIVAL,
             ),
             new UrbinoEventRequestDTO(
                 urbinoEditionId: $edition2025->getId(),
@@ -67,6 +70,7 @@ class UrbinoEventFixtures extends Fixture implements DependentFixtureInterface
                 descriptionEn: 'The traditional students\' concert, a culminating moment of the week of study. Students will present the work carried out during their courses with their teachers.',
                 isPublic: true,
                 isDeleted: false,
+                category: UrbinoEvent::CATEGORY_FESTIVAL,
             ),
             new UrbinoEventRequestDTO(
                 urbinoEditionId: $edition2025->getId(),
@@ -80,6 +84,7 @@ class UrbinoEventFixtures extends Fixture implements DependentFixtureInterface
                 descriptionEn: 'The grand final concert closing the Urbino Music Week 2025. All teachers will come together for an extraordinary programme in collaboration with the most deserving students.',
                 isPublic: false,
                 isDeleted: false,
+                category: UrbinoEvent::CATEGORY_FESTIVAL,
             ),
         ];
 

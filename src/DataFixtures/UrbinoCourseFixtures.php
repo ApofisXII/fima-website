@@ -56,6 +56,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-20',
                 dateEnd: '2025-08-03',
                 priceEuros: 450.00,
+                disciplineIt: 'Violoncello barocco',
+                disciplineEn: 'Baroque cello',
             ),
             new UrbinoCourseRequestDTO(
                 teacherFullName: 'Cecilia Bartoli',
@@ -71,6 +73,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-20',
                 dateEnd: '2025-08-03',
                 priceEuros: 520.00,
+                disciplineIt: 'Canto barocco',
+                disciplineEn: 'Baroque singing',
             ),
             new UrbinoCourseRequestDTO(
                 teacherFullName: 'Rinaldo Alessandrini',
@@ -86,6 +90,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-21',
                 dateEnd: '2025-08-02',
                 priceEuros: 480.00,
+                disciplineIt: 'Clavicembalo',
+                disciplineEn: 'Harpsichord',
             ),
             new UrbinoCourseRequestDTO(
                 teacherFullName: 'Rachel Podger',
@@ -101,6 +107,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-22',
                 dateEnd: '2025-08-01',
                 priceEuros: 390.00,
+                disciplineIt: 'Violino barocco',
+                disciplineEn: 'Baroque violin',
             ),
             new UrbinoCourseRequestDTO(
                 teacherFullName: 'Alfredo Bernardini',
@@ -116,6 +124,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-20',
                 dateEnd: '2025-08-03',
                 priceEuros: 420.00,
+                disciplineIt: 'Oboe barocco',
+                disciplineEn: 'Baroque oboe',
             ),
             new UrbinoCourseRequestDTO(
                 teacherFullName: 'Monica Huggett',
@@ -131,6 +141,8 @@ class UrbinoCourseFixtures extends Fixture implements DependentFixtureInterface
                 dateStart: '2025-07-23',
                 dateEnd: '2025-08-02',
                 priceEuros: null,
+                disciplineIt: 'Musica da camera',
+                disciplineEn: 'Chamber music',
             ),
         ];
 
