@@ -9,9 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoEventRepository::class)]
 class UrbinoEvent
 {
-    const string CATEGORY_FESTIVAL = 'event_type_festival';
-    const string CATEGORY_MOSTRA = 'event_type_mostra';
-    const string CATEGORY_CONVEGNI = 'event_type_convegni';
+    const string EVENT_CATEGORY_FESTIVAL = 'event_category_festival';
+    const string EVENT_CATEGORY_EXHIBITION = 'event_category_exhibition';
+    const string EVENT_CATEGORY_CONFERENCE = 'event_category_conference';
+    const array CATEGORIES = [
+        self::EVENT_CATEGORY_FESTIVAL,
+        self::EVENT_CATEGORY_EXHIBITION,
+        self::EVENT_CATEGORY_CONFERENCE,
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -65,6 +71,9 @@ class UrbinoEvent
 
     #[ORM\Column(length: 255)]
     private ?string $category = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -259,6 +268,18 @@ class UrbinoEvent
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -7,9 +7,12 @@ use App\Entity\UrbinoEvent;
 use App\Repository\UrbinoEditionRepository;
 use App\Repository\UrbinoEventRepository;
 use App\Utils\ImageUtils;
+use DateTime;
+use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class UrbinoEventService
 {
@@ -19,12 +22,13 @@ final readonly class UrbinoEventService
         private ParameterBagInterface $parameterBag,
         private Filesystem $filesystem,
         private ImageUtils $imageUtils,
+        private SluggerInterface $slugger,
     ) {}
 
     public function create(UrbinoEventRequestDTO $dto): UrbinoEvent
     {
         $event = new UrbinoEvent();
-        $event->setCreatedAt(new \DateTime());
+        $event->setCreatedAt(new DateTime());
         $event->setHasCoverImage(false);
         return $this->update($event, $dto);
     }
@@ -32,12 +36,9 @@ final readonly class UrbinoEventService
     public function update(UrbinoEvent $event, UrbinoEventRequestDTO $dto): UrbinoEvent
     {
         $edition = $this->urbinoEditionRepository->find($dto->urbinoEditionId);
-        if (!$edition) {
-            throw new \Exception("Edizione non trovata");
-        }
 
         $event->setUrbinoEdition($edition);
-        $event->setEventDatetime(new \DateTime($dto->eventDatetime));
+        $event->setEventDatetime(new DateTime($dto->eventDatetime));
         $event->setTitle($dto->title);
         $event->setSubtitleIt($dto->subtitleIt);
         $event->setSubtitleEn($dto->subtitleEn);
@@ -49,7 +50,8 @@ final readonly class UrbinoEventService
         $event->setIsPublic($dto->isPublic ?? false);
         $event->setIsDeleted($dto->isDeleted ?? false);
         $event->setCategory($dto->category ?? '');
-        $event->setUpdatedAt(new \DateTime());
+        $event->setUpdatedAt(new DateTime());
+        $event->setSlug($this->slugger->slug(strtolower($dto->title)));
 
         return $this->urbinoEventRepository->save($event);
     }
@@ -57,7 +59,7 @@ final readonly class UrbinoEventService
     public function delete(UrbinoEvent $event): UrbinoEvent
     {
         $event->setIsDeleted(true);
-        $event->setUpdatedAt(new \DateTime());
+        $event->setUpdatedAt(new DateTime());
 
         return $this->urbinoEventRepository->save($event);
     }
@@ -72,7 +74,7 @@ final readonly class UrbinoEventService
         $this->imageUtils->compressImage($imagePath);
 
         $event->setHasCoverImage(true);
-        $event->setUpdatedAt(new \DateTime());
+        $event->setUpdatedAt(new DateTime());
         $this->urbinoEventRepository->save($event);
 
         return $event;
@@ -89,7 +91,7 @@ final readonly class UrbinoEventService
         }
 
         $event->setHasCoverImage(false);
-        $event->setUpdatedAt(new \DateTime());
+        $event->setUpdatedAt(new DateTime());
         $this->urbinoEventRepository->save($event);
 
         return $event;
