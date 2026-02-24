@@ -1039,13 +1039,11 @@ h2 {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-family: 'Platypi', serif;
-        font-weight: var(--font-bold-weight-serif);
+        font-weight: var(--font-bold-weight-sans-serif);
         background: none;
         border: none;
         color: var(--color-white);
-        font-size: 1.1rem;
-        letter-spacing: 0.1rem;
+        font-size: 1rem;
         cursor: pointer;
         padding: 10px;
     }
