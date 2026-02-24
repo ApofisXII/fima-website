@@ -121,6 +121,21 @@ h2 {
     display: flex;
     gap: 30px;
     flex-direction: row;
+    position: relative;
+}
+
+.header__nav-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--color-white);
+    transition: left 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.header__nav.has-indicator .header__nav-link--active {
+    border-bottom-color: transparent;
 }
 
 .header__nav-link {
@@ -336,6 +351,21 @@ h2 {
 .uma-header__links {
     display: flex;
     gap: 40px;
+    position: relative;
+}
+
+.uma-header__indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--color-red);
+    transition: left 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.uma-header__links.has-indicator .uma-header__link--active {
+    border-bottom-color: transparent;
 }
 
 .uma-header__clip {

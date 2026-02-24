@@ -30,6 +30,7 @@
 {#                    <a class="header__nav-link" href="">Recercare</a>#}
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.periodical'|trans }}</a>#}
                     <a class="header__nav-link {{ 'news' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('newsList') }}" data-label="{{ 'base.nav.events'|trans }}">{{ 'base.nav.events'|trans }}</a>
+                    <span class="header__nav-indicator"></span>
                 </nav>
             </header>
             {% if 'urbino' in app.current_route %}
@@ -54,6 +55,7 @@
                         <a href="{{ path('urbinoEventsFestival') }}" class="uma-header__link {{ app.current_route == 'urbinoEventsFestival' ? 'uma-header__link--active' }}" data-label="{{ 'base.uma_nav.festival'|trans }}">{{ 'base.uma_nav.festival'|trans }}</a>
                         <a href="{{ path('urbinoEventsExhibitions') }}" class="uma-header__link {{ app.current_route == 'urbinoEventsExhibitions' ? 'uma-header__link--active' }}" data-label="{{ 'base.uma_nav.exhibition'|trans }}">{{ 'base.uma_nav.exhibition'|trans }}</a>
                         <a href="{{ path('urbinoEventsConferences') }}" class="uma-header__link {{ app.current_route == 'urbinoEventsConferences' ? 'uma-header__link--active' }}" data-label="{{ 'base.uma_nav.conferences'|trans }}">{{ 'base.uma_nav.conferences'|trans }}</a>
+                        <span class="uma-header__indicator"></span>
                     </div>
                 </div>
             {% endif %}
