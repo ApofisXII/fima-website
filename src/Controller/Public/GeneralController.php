@@ -61,4 +61,10 @@ final class GeneralController extends AbstractController
     {
         return $this->render('public/transparent-administration.html.twig');
     }
+
+    #[Route('/404', name: 'error404preview')]
+    public function error404preview(): Response
+    {
+        return $this->render('@Twig/Exception/error404.html.twig');
+    }
 }

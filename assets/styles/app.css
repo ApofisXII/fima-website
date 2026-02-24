@@ -1053,6 +1053,98 @@ h2 {
 
 
 
+/* 404 ERROR PAGE */
+.error-404 {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 0 80px;
+}
+
+.error-404__staff {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    pointer-events: none;
+    padding: 80px 0;
+    opacity: 0.07;
+}
+
+.error-404__staff-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-blue);
+}
+
+.error-404__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.error-404__clef {
+    font-size: 8rem;
+    color: var(--color-blue);
+    line-height: 1;
+    opacity: 0.15;
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 250px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.error-404__code {
+    font-family: 'Platypi', serif;
+    font-size: 10rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.error-404__title {
+    font-family: 'Platypi', serif;
+    font-size: 2rem;
+    color: var(--color-blue);
+    margin: 0;
+    font-weight: 400;
+}
+
+.error-404__description {
+    color: #555;
+    font-size: 1.05rem;
+    max-width: 560px;
+    line-height: 1.7rem;
+    margin: 0;
+}
+
+.error-404__notes {
+    font-size: 1.8rem;
+    letter-spacing: 0.4rem;
+    color: var(--color-blue-light);
+    margin: 5px 0;
+}
+
+.error-404__btn {
+    margin-top: 10px;
+}
+
 /* RESPONSIVE MOBILE MEDIA QUERY */
 @media (max-width: 768px) {
 
@@ -1328,6 +1420,14 @@ h2 {
         line-height: 2.7rem;
         margin-bottom: 20px;
         margin-top: 30px;
+    }
+
+    .error-404__code {
+        font-size: 7rem;
+    }
+
+    .error-404__clef {
+        font-size: 6rem;
     }
 
 }
