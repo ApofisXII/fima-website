@@ -43,18 +43,22 @@
         </div>
     </div>
 
-    <div class="container box box--with-margin-top">
-        <div class="box-title">{{ 'urbino_course_detail.program'|trans }}</div>
-        <div>
-            {{ (app.request.locale == 'it' ? course.programDescriptionIt : course.programDescriptionEn)|raw }}
+    {% if course.programDescriptionIt or course.programDescriptionEn %}
+        <div class="container box box--with-margin-top">
+            <div class="box-title">{{ 'urbino_course_detail.program'|trans }}</div>
+            <div>
+                {{ (app.request.locale == 'it' ? course.programDescriptionIt : course.programDescriptionEn)|raw }}
+            </div>
         </div>
-    </div>
+    {% endif %}
 
-    <div class="container box box--with-margin-top">
-        <div class="box-title">{{ 'urbino_course_detail.biography'|trans }}</div>
-        <div>
-            {{ (app.request.locale == 'it' ? course.bioDescriptionIt : course.bioDescriptionEn)|raw }}
+    {% if course.bioDescriptionIt or course.bioDescriptionEn %}
+        <div class="container box box--with-margin-top">
+            <div class="box-title">{{ 'urbino_course_detail.biography'|trans }}</div>
+            <div>
+                {{ (app.request.locale == 'it' ? course.bioDescriptionIt : course.bioDescriptionEn)|raw }}
+            </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endblock %}
