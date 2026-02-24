@@ -6,6 +6,9 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport">
         <link rel="icon" type="image/x-icon" href="{{ asset('images/logos/fav-icon.png') }}">
         {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% if 'preload' in app.request.host or 'fimamusicaantica.com' in app.request.host %}
+            <script src="{{ asset('plugins/script-events.js') }}" data-website-id="c3f393c0-d1ad-45b6-aa79-00a0620c5636"></script>
+        {% endif %}
     </head>
     <body class="{{ 'urbino' in app.current_route ? 'body--urbino-section' }}">
         <div class="header-container">
