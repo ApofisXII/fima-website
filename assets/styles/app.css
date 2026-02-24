@@ -108,7 +108,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 0 20px;
     background-color: var(--color-blue);
     color: var(--color-white);
 }
@@ -127,6 +127,11 @@ h2 {
     color: var(--color-white);
     text-decoration: none;
     font-size: 1rem;
+    padding: 35px 5px;
+}
+
+.header__nav-link--active {
+    border-bottom: solid 3px var(--color-white);
 }
 
 .container {
@@ -964,4 +969,47 @@ h2 {
 
 .h2--with-margin-top {
     margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE MOBILE MEDIA QUERY */
+@media (max-width: 768px) {
+
+    .callout-uma {
+        flex-direction: column;
+    }
+
+    .callout-uma__logo {
+        margin: 20px 0 10px 0;
+    }
+
+    .btn--callout-uma {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+
+    .pre-footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
 }
