@@ -23,7 +23,7 @@
                     </svg>
                 </button>
                 <nav class="header__nav">
-                    <a class="header__nav-link {{ app.current_route == 'indexLocalized' ? 'header__nav-link--active' }}" href="{{ path('indexLocalized') }}">{{ 'base.nav.home'|trans }}</a>
+                    <a class="header__nav-link header__nav-link--no-border {{ app.current_route == 'indexLocalized' ? 'header__nav-link--active' }}" href="{{ path('indexLocalized') }}">{{ 'base.nav.home'|trans }}</a>
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.about'|trans }}</a>#}
                     <a class="header__nav-link {{ 'urbino' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('urbinoWelcome') }}">{{ 'base.nav.urbino'|trans }}</a>
                     <a class="header__nav-link {{ app.current_route == 'library' ? 'header__nav-link--active' }}" href="{{ path('library') }}">{{ 'base.nav.library'|trans }}</a>
