@@ -17,6 +17,8 @@ final class GeneralController extends AbstractController
     #[Route('/', name: 'indexRedirectLocalize')]
     public function indexRedirectLocalize(Request $request): Response
     {
+        return new Response("Lavori in corso, il sito sarà disponibile a breve.");
+
         if (str_contains(strtolower($request->getPreferredLanguage()), "it")) {
             return $this->redirectToRoute("indexLocalized", ["_locale" => "it"]);
         }
