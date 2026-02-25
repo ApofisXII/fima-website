@@ -55,6 +55,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const isOpen = nav.classList.toggle('header__nav--open');
             toggleLabel.textContent = isOpen ? 'CHIUDI' : 'MENU';
             toggleIcon.style.display = isOpen ? 'none' : 'block';
+            if (isOpen) {
+                toggleLabel.classList.remove('toggle-label--animate');
+                void toggleLabel.offsetWidth;
+                toggleLabel.classList.add('toggle-label--animate');
+            }
         });
     }
 
@@ -70,8 +75,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const umaToggleIcon = umaToggle.querySelector('.uma-header__menu-icon');
         umaToggle.addEventListener('click', function () {
             const isOpen = umaLinks.classList.toggle('uma-header__links--open');
-            umaToggleLabel.textContent = isOpen ? 'Chiudi' : 'Urbino Musica Antica';
+            umaToggleLabel.textContent = isOpen ? 'CHIUDI' : 'Urbino Musica Antica';
             umaToggleIcon.style.display = isOpen ? 'none' : 'block';
+            document.body.classList.toggle('uma-menu-open', isOpen);
+            if (isOpen) {
+                umaToggleLabel.classList.remove('toggle-label--animate');
+                void umaToggleLabel.offsetWidth;
+                umaToggleLabel.classList.add('toggle-label--animate');
+            }
         });
     }
 
