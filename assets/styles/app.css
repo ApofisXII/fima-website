@@ -514,17 +514,17 @@ h2 {
 
 .partner-logos {
     background-color: white;
-    padding: 50px 0;
+    padding: 40px 0;
 }
 
 .partner-logos__logo {
     height: auto;
     width: auto;
-    max-height: 80px;
+    max-height: 65px;
 }
 
 .partner-logos__logo--horizontal {
-    max-height: 50px;
+    max-height: 40px;
 }
 
 .section-home {
