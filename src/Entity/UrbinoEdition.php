@@ -38,6 +38,9 @@ class UrbinoEdition
     #[ORM\Column]
     private bool $is_programme_pdf_uploaded = false;
 
+    #[ORM\Column(length: 2048, nullable: true)]
+    private ?string $enrollment_link = null;
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $enrollment_info_it = null;
 
@@ -129,6 +132,18 @@ class UrbinoEdition
     public function setIsPublicVisible(bool $is_public_visible): static
     {
         $this->is_public_visible = $is_public_visible;
+
+        return $this;
+    }
+
+    public function getEnrollmentLink(): ?string
+    {
+        return $this->enrollment_link;
+    }
+
+    public function setEnrollmentLink(?string $enrollment_link): static
+    {
+        $this->enrollment_link = $enrollment_link;
 
         return $this;
     }

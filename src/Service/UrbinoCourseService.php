@@ -50,7 +50,6 @@ final readonly class UrbinoCourseService
         $course->setIsPreselectionRequired($dto->isPreselectionRequired ?? false);
         $course->setIsSoldOut($dto->isSoldOut ?? false);
         $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_MAIN);
-        $course->setEnrollmentLink($dto->enrollmentLink ?: null);
         $course->setDisciplineIt($dto->disciplineIt);
         $course->setDisciplineEn($dto->disciplineEn);
 

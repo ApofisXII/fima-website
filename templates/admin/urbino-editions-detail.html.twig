@@ -29,6 +29,13 @@
                 </div>
             </div>
 
+            <div class="gg-form-row">
+                <div class="gg-form-row__main">
+                    <label>Link per form di iscrizione</label>
+                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ edition ? edition.enrollmentLink }}">
+                </div>
+            </div>
+
             <div class="gg-checkbox-group">
                 <label>
                     <input type="checkbox" name="isPublicVisible" value="1" {{ edition and edition.isPublicVisible ? 'checked' }}>
@@ -133,7 +140,8 @@
                 dateEnd: formData.get('dateEnd'),
                 isPublicVisible: isPublicVisible,
                 enrollmentInfoIt: formData.get('enrollmentInfoIt'),
-                enrollmentInfoEn: formData.get('enrollmentInfoEn')
+                enrollmentInfoEn: formData.get('enrollmentInfoEn'),
+                enrollmentLink: formData.get('enrollmentLink') || null
             };
 
             fetch('{{ path('adminUrbinoEditionsDetailSave') }}', {
