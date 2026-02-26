@@ -32,6 +32,8 @@ class UrbinoEditionRequestDTO
 
         public ?string $enrollmentDeadline = null,
 
+        public ?float $enrollmentPriceEuros = null,
+
     ) {}
 
 }

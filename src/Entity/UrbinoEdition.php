@@ -42,6 +42,9 @@ class UrbinoEdition
     private ?string $enrollment_link = null;
 
     #[ORM\Column(nullable: true)]
+    private ?int $enrollment_price_cents = null;
+
+    #[ORM\Column(nullable: true)]
     private ?\DateTime $enrollment_deadline = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -149,6 +152,27 @@ class UrbinoEdition
         $this->enrollment_link = $enrollment_link;
 
         return $this;
+    }
+
+    public function getEnrollmentPriceCents(): ?int
+    {
+        return $this->enrollment_price_cents;
+    }
+
+    public function setEnrollmentPriceCents(?int $enrollment_price_cents): static
+    {
+        $this->enrollment_price_cents = $enrollment_price_cents;
+
+        return $this;
+    }
+
+    public function getEnrollmentPriceFormatted(): ?string
+    {
+        if ($this->enrollment_price_cents === null) {
+            return null;
+        }
+
+        return number_format($this->enrollment_price_cents / 100, 2, ',', '.') . ' €';
     }
 
     public function getEnrollmentDeadline(): ?\DateTime
