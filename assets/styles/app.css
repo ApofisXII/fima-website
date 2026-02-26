@@ -1093,6 +1093,28 @@ h2 {
 
 
 
+@keyframes fima-link-in {
+    from {
+        transform: translateY(8px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes uma-link-in {
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @keyframes slide-in-right {
     from {
         transform: translateX(-16px);
@@ -1201,10 +1223,20 @@ h2 {
         pointer-events: auto;
     }
 
+    .header__nav--open .header__nav-link {
+        animation: fima-link-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .header__nav--open .header__nav-link:nth-child(1) { animation-delay: 0.15s; }
+    .header__nav--open .header__nav-link:nth-child(2) { animation-delay: 0.22s; }
+    .header__nav--open .header__nav-link:nth-child(3) { animation-delay: 0.29s; }
+    .header__nav--open .header__nav-link:nth-child(4) { animation-delay: 0.36s; }
+
     .header__nav-link {
         padding: 0;
         border-bottom: none;
         font-size: 1.4rem;
+        opacity: 0;
     }
 
     .header__nav-link--active {
@@ -1313,21 +1345,35 @@ h2 {
         padding: 0 50px;
         background-color: var(--color-yellow);
         pointer-events: none;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 9998;
     }
 
     .uma-header__links--open {
         transform: translateY(0);
+        opacity: 1;
         pointer-events: auto;
     }
+
+    .uma-header__links--open .uma-header__link {
+        animation: uma-link-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .uma-header__links--open .uma-header__link:nth-child(1) { animation-delay: 0.1s; }
+    .uma-header__links--open .uma-header__link:nth-child(2) { animation-delay: 0.15s; }
+    .uma-header__links--open .uma-header__link:nth-child(3) { animation-delay: 0.2s; }
+    .uma-header__links--open .uma-header__link:nth-child(4) { animation-delay: 0.25s; }
+    .uma-header__links--open .uma-header__link:nth-child(5) { animation-delay: 0.3s; }
+    .uma-header__links--open .uma-header__link:nth-child(6) { animation-delay: 0.35s; }
 
     .uma-header__link {
         padding: 0;
         font-family: 'Platypi', serif;
         font-weight: 600;
         font-size: 1.4rem;
+        opacity: 0;
     }
 
     .uma-header__link--active {
