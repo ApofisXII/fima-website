@@ -30,6 +30,8 @@ class UrbinoEditionRequestDTO
 
         public ?string $enrollmentLink = null,
 
+        public ?string $enrollmentDeadline = null,
+
     ) {}
 
 }

@@ -63,7 +63,7 @@ final readonly class NewsService
 
     public function saveCoverImage(News $news, UploadedFile $uploadedFile): News
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/images/';
         $imageName = $news->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 
@@ -78,7 +78,7 @@ final readonly class NewsService
 
     public function deleteCoverImage(News $news): News
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/images/';
         $imageName = $news->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 
@@ -87,6 +87,34 @@ final readonly class NewsService
         }
 
         $news->setHasCoverImage(false);
+        $this->newsRepository->save($news);
+
+        return $news;
+    }
+
+    public function savePoster(News $news, UploadedFile $uploadedFile): News
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/posters/';
+        $fileName = $news->getId() . '.pdf';
+
+        $uploadedFile->move($serverPath, $fileName);
+
+        $news->setHasPoster(true);
+        $this->newsRepository->save($news);
+
+        return $news;
+    }
+
+    public function deletePoster(News $news): News
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-news/posters/';
+        $filePath = $serverPath . $news->getId() . '.pdf';
+
+        if ($this->filesystem->exists($filePath)) {
+            $this->filesystem->remove($filePath);
+        }
+
+        $news->setHasPoster(false);
         $this->newsRepository->save($news);
 
         return $news;
