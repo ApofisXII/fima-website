@@ -9,11 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UrbinoCourseRepository::class)]
 class UrbinoCourse
 {
-    public const string SCHEDULE_TYPE_MAIN = "schedule_type_main";
-    public const string SCHEDULE_TYPE_SECONDARY_AFTERNOON = "schedule_type_secondary_afternoon";
+    public const string SCHEDULE_TYPE_INDIVIDUAL = "schedule_type_individual";
+    public const string SCHEDULE_TYPE_ENSEMBLE = "schedule_type_ensemble";
     public const array SCHEDULE_TYPES = [
-        self::SCHEDULE_TYPE_MAIN,
-        self::SCHEDULE_TYPE_SECONDARY_AFTERNOON,
+        self::SCHEDULE_TYPE_INDIVIDUAL,
+        self::SCHEDULE_TYPE_ENSEMBLE,
     ];
 
     #[ORM\Id]

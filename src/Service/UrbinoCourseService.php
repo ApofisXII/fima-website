@@ -30,7 +30,7 @@ final readonly class UrbinoCourseService
         $course = new UrbinoCourse();
         $course->setCreatedAt(new \DateTime());
         $course->setIsImageUploaded(false);
-        $course->setScheduleType(UrbinoCourse::SCHEDULE_TYPE_MAIN);
+        $course->setScheduleType(UrbinoCourse::SCHEDULE_TYPE_INDIVIDUAL);
         $course->setIsDeleted(false);
         return $this->update($course, $dto);
     }
@@ -49,7 +49,7 @@ final readonly class UrbinoCourseService
         $course->setBioDescriptionEn($dto->bioDescriptionEn);
         $course->setIsPreselectionRequired($dto->isPreselectionRequired ?? false);
         $course->setIsSoldOut($dto->isSoldOut ?? false);
-        $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_MAIN);
+        $course->setScheduleType($dto->scheduleType ?? UrbinoCourse::SCHEDULE_TYPE_INDIVIDUAL);
         $course->setDisciplineIt($dto->disciplineIt);
         $course->setDisciplineEn($dto->disciplineEn);
 

@@ -177,8 +177,8 @@ urbino_course_detail:
     program: 'Programma'
     biography: 'Biografia'
 
-schedule_type_main: 'Corso principale'
-schedule_type_secondary_afternoon: 'Corso aggiuntivo pomeridiano'
+schedule_type_individual: 'Corso individuale'
+schedule_type_ensemble: "Corso d'insieme"
 
 urbino_courses:
     page_title: 'Urbino Musica Antica • Corsi'

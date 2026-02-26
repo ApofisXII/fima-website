@@ -61,8 +61,8 @@
                 <div class="gg-form-row__year">
                     <label>Tipo di corso</label>
                     <select name="scheduleType" required>
-                        <option value="schedule_type_main" {{ course and course.scheduleType == 'schedule_type_main' ? 'selected' }}>Principale</option>
-                        <option value="schedule_type_secondary_afternoon" {{ course and course.scheduleType == 'schedule_type_secondary_afternoon' ? 'selected' }}>Pomeridiano</option>
+                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Individuale</option>
+                        <option value="schedule_type_ensemble" {{ course and course.scheduleType == 'schedule_type_ensemble' ? 'selected' }}>D'insieme</option>
                     </select>
                 </div>
 

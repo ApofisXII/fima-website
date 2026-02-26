@@ -19,7 +19,7 @@ final class Version20260226143345 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE news ADD has_poster TINYINT NOT NULL');
+        $this->addSql('ALTER TABLE news ADD has_poster TINYINT NOT NULL DEFAULT 0');
 
         $uploadsDir = __DIR__ . '/../public/uploads-news/';
         $imagesDir = $uploadsDir . 'images/';
