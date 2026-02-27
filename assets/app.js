@@ -80,7 +80,11 @@ document.addEventListener('DOMContentLoaded', function () {
             umaToggleIcon.style.display = isOpen ? 'none' : 'block';
             document.body.classList.toggle('uma-menu-open', isOpen);
             if (themeColorMeta) {
-                themeColorMeta.setAttribute('content', isOpen ? '#FBBB21' : '#18407E');
+                themeColorMeta.remove();
+                const newMeta = document.createElement('meta');
+                newMeta.name = 'theme-color';
+                newMeta.content = isOpen ? '#FBBB21' : '#18407E';
+                document.head.appendChild(newMeta);
             }
             if (isOpen) {
                 umaToggleLabel.classList.remove('toggle-label--animate');
