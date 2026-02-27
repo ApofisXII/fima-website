@@ -37,9 +37,9 @@
             {% if 'urbino' in app.current_route %}
                 <div class="uma-header">
                     <div>
-                        <div class="uma-header__clip">
+                        <a href="{{ path('urbinoWelcome') }}" class="uma-header__clip">
                             <img class="uma-header__logo" src="{{ asset('images/logos/uma-logos/uma-2026-colors.svg') }}" alt="Urbino Musica Antica Logo">
-                        </div>
+                        </a>
                     </div>
                     <button class="uma-header__menu-toggle" aria-label="Menu Urbino">
                         <span class="uma-header__menu-toggle-label">Urbino Musica Antica</span>
