@@ -256,12 +256,20 @@ h2 {
 
 .follow-box {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.follow-box .follow-box__link {
+    margin-top: auto;
 }
 
 .donate-box {
     padding: 0;
     flex: 2;
     background: linear-gradient(to bottom right, #FEF1CB, #FFFCF3);
+    display: flex;
+    flex-direction: column;
 }
 
 .donate-box__body {
@@ -322,6 +330,7 @@ h2 {
     background-image: url('../images/donate-angels.webp');
     background-size: auto 100%;
     padding: var(--padding-box);
+    margin-top: auto;
 }
 
 .btn {
