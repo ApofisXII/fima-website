@@ -103,6 +103,7 @@ h2 {
     left: 0;
     width: 100%;
     z-index: 9999;
+    background-color: var(--color-blue);
 }
 
 .header {
@@ -255,12 +256,20 @@ h2 {
 
 .follow-box {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.follow-box .follow-box__link {
+    margin-top: auto;
 }
 
 .donate-box {
     padding: 0;
     flex: 2;
     background: linear-gradient(to bottom right, #FEF1CB, #FFFCF3);
+    display: flex;
+    flex-direction: column;
 }
 
 .donate-box__body {
@@ -321,6 +330,7 @@ h2 {
     background-image: url('../images/donate-angels.webp');
     background-size: auto 100%;
     padding: var(--padding-box);
+    margin-top: auto;
 }
 
 .btn {
@@ -401,21 +411,22 @@ h2 {
 }
 
 .uma-header__clip {
-    width: 170px;
-    height: 130px;
+    width: 150px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom right, #FFCF5A, #FBBB21);
+    background: var(--color-yellow);
     position: absolute;
     top: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    left: 1rem;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
     box-shadow: 0 5px 15px rgba(214, 39, 37, 0.21);
 }
 
 .uma-header__logo {
-    width: 110px;
+    width: 100px;
 }
 
 .uma-header__link {
@@ -513,18 +524,51 @@ h2 {
 }
 
 .partner-logos {
-    background-color: white;
+    background-color: var(--color-white);
     padding: 40px 0;
+    position: relative;
+}
+
+.partner-logos::before,
+.partner-logos::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 350px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.partner-logos::before {
+    left: 0;
+    width: max(5%, calc((100% - 1224px) / 2));
+    background: linear-gradient(to right, var(--color-white), transparent);
+}
+
+.partner-logos::after {
+    right: 0;
+    width: max(5%, calc((100% - 1224px) / 2));
+    background: linear-gradient(to left, var(--color-white), transparent);
 }
 
 .partner-logos__logo {
     height: auto;
     width: auto;
-    max-height: 65px;
+    max-height: 70px;
+    mix-blend-mode: multiply;
 }
 
 .partner-logos__logo--horizontal {
-    max-height: 40px;
+    max-height: 44px;
+}
+
+#carousel-support .partner-logos__logo {
+    max-height: 63px;
+}
+
+#carousel-support .partner-logos__logo--horizontal {
+    max-height: 38px;
 }
 
 .section-home {
@@ -817,8 +861,17 @@ h2 {
 .chip--course-box {
     font-size: 0.7rem;
     padding: 5px 10px;
+    background-color: rgba(144, 149, 190, 0.75);
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+
+.course-box__info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
     margin-bottom: 10px;
-    background-color: var(--color-blue-light);
 }
 
 .contacts-grid {
@@ -1488,8 +1541,9 @@ h2 {
     }
 
     .uma-header__clip {
-        width: 110px;
-        height: 90px;
+        width: 111px;
+        height: 74px;
+        left: .6rem;
         z-index: 9997;
     }
 
@@ -1579,6 +1633,26 @@ h2 {
 
     .error-404__clef {
         font-size: 6rem;
+    }
+
+    .partner-logos__logo {
+        max-height: 48px;
+    }
+
+    .partner-logos__logo--horizontal {
+        max-height: 31px;
+    }
+
+    #carousel-support .partner-logos__logo {
+        max-height: 42px;
+    }
+
+    #carousel-support .partner-logos__logo--horizontal {
+        max-height: 27px;
+    }
+
+    .partner-logos {
+        padding: 30px 0;
     }
 
 }

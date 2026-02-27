@@ -12,7 +12,7 @@
     <div class="container box uma-welcome">
         <img class="uma-welcome__angels" src="{{ asset('images/donate-angels.webp') }}" alt="{{ 'urbino_welcome.angels_alt'|trans }}">
         <div class="uma-welcome__left">
-            <h1 class="uma-welcome__title">{{ 'urbino_welcome.edition_title'|trans }}</h1>
+            <h1 class="uma-welcome__title">{{ currentEdition.editionName }}</h1>
             <div class="uma-welcome__date">{{ 'urbino_welcome.date_range'|trans({'%start%': currentEdition.dateStart.format("d/m/y"), '%end%': currentEdition.dateEnd.format("d/m/y")}) }}</div>
         </div>
         <div>
