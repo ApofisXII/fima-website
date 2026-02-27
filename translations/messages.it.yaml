@@ -209,6 +209,7 @@ news_box:
 
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
+    close: 'CHIUDI'
     nav:
         home: 'Home'
         about: 'Chi siamo'

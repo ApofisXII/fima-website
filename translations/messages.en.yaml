@@ -209,6 +209,7 @@ news_box:
 
 base:
     title: 'FIMA • Italian Foundation for Early Music'
+    close: 'CLOSE'
     nav:
         home: 'Home'
         about: 'About us'
