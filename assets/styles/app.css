@@ -1503,6 +1503,7 @@ h2 {
         bottom: 0;
         padding: 0 50px;
         border-top: solid 1px var(--color-blue);
+        border-bottom: solid 1px var(--color-blue);
         background-color: var(--color-yellow);
         pointer-events: none;
         opacity: 0;
