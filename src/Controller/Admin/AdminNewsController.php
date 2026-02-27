@@ -154,4 +154,28 @@ class AdminNewsController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/upload-poster/{newsId}', name: 'adminNewsUploadPoster', methods: ['POST'], format: 'json')]
+    public function adminNewsUploadPoster(int $newsId, #[MapUploadedFile] ?UploadedFile $poster): Response
+    {
+        $news = $this->newsRepository->find($newsId);
+
+        if (!$poster) {
+            return $this->json(["message" => "Nessun file selezionato"], 400);
+        }
+
+        $this->newsService->savePoster($news, $poster);
+
+        return $this->json(["message" => "Locandina caricata"]);
+    }
+
+    #[Route(path: '/delete-poster/{newsId}', name: 'adminNewsDeletePoster', methods: ['DELETE'], format: 'json')]
+    public function adminNewsDeletePoster(int $newsId): Response
+    {
+        $news = $this->newsRepository->find($newsId);
+
+        $this->newsService->deletePoster($news);
+
+        return $this->json(["message" => "Locandina eliminata"]);
+    }
+
 }

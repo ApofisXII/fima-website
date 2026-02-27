@@ -325,7 +325,8 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     flex: 1;
 }
 
-.course-date-field input[type="date"] {
+.course-date-field input[type="date"],
+.course-date-field input[type="datetime-local"] {
     width: 100%;
 }
 
@@ -521,6 +522,11 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 
 .gg-form-row--two .gg-form-row__year {
     flex: 1;
+}
+
+.gg-form-row--enrollment .course-date-field:first-child,
+.gg-form-row--enrollment .course-form-field:first-child {
+    flex: 2;
 }
 
 .gg-form-row__year input[type="datetime-local"] {

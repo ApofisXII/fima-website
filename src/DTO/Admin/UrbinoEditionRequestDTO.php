@@ -28,6 +28,10 @@ class UrbinoEditionRequestDTO
         #[Assert\NotBlank(message: "Le informazioni per i partecipanti in inglese sono obbligatorie.")]
         public ?string $enrollmentInfoEn,
 
+        public ?string $enrollmentLink = null,
+
+        public ?string $enrollmentDeadline = null,
+
     ) {}
 
 }

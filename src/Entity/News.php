@@ -38,6 +38,9 @@ class News
     #[ORM\Column]
     private ?bool $has_cover_image = null;
 
+    #[ORM\Column]
+    private bool $has_poster = false;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTime $event_datetime = null;
 
@@ -148,6 +151,18 @@ class News
     public function setHasCoverImage(bool $has_cover_image): static
     {
         $this->has_cover_image = $has_cover_image;
+
+        return $this;
+    }
+
+    public function hasPoster(): bool
+    {
+        return $this->has_poster;
+    }
+
+    public function setHasPoster(bool $has_poster): static
+    {
+        $this->has_poster = $has_poster;
 
         return $this;
     }

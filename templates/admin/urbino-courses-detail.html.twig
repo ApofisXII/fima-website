@@ -61,21 +61,14 @@
                 <div class="gg-form-row__year">
                     <label>Tipo di corso</label>
                     <select name="scheduleType" required>
-                        <option value="schedule_type_main" {{ course and course.scheduleType == 'schedule_type_main' ? 'selected' }}>Principale</option>
-                        <option value="schedule_type_secondary_afternoon" {{ course and course.scheduleType == 'schedule_type_secondary_afternoon' ? 'selected' }}>Pomeridiano</option>
+                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Individuale</option>
+                        <option value="schedule_type_ensemble" {{ course and course.scheduleType == 'schedule_type_ensemble' ? 'selected' }}>D'insieme</option>
                     </select>
                 </div>
 
                 <div class="gg-form-row__year">
                     <label>Prezzo del corso (in €)</label>
                     <input type="number" name="priceEuros" step="0.01" min="0" placeholder="0.00" value="{{ course and course.priceCents ? (course.priceCents / 100)|number_format(2, '.', '') }}">
-                </div>
-            </div>
-
-            <div class="gg-form-row">
-                <div class="gg-form-row__main">
-                    <label>Link form di iscrizione</label>
-                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ course ? course.enrollmentLink }}">
                 </div>
             </div>
 

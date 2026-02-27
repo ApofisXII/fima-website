@@ -97,11 +97,15 @@
                 <div class="footer__column">
                     <div><b>{{ 'base.footer.name'|trans }}</b></div>
                     <div>{{ 'base.footer.address'|trans }}</div>
+                    <div class="footer__lang-switch">
+                        <a class="footer__lang-link {{ app.request.locale == 'it' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'it'})) }}">IT</a>
+                        <a class="footer__lang-link {{ app.request.locale == 'en' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a>
+                    </div>
                 </div>
                 <div class="footer__column footer__column--right">
-                    <a href="{{ path('contacts') }}">{{ 'base.footer.contacts'|trans }}</a><br>
-                    <a href="{{ path('transparentAdministration') }}">{{ 'base.footer.transparent_admin'|trans }}</a><br>
-                    <a href="https://www.earlymusicwebsites.com" target="_blank">{{ 'base.footer.web_credits'|trans }}</a><br>
+                    <a href="{{ path('contacts') }}">{{ 'base.footer.contacts'|trans }}</a>
+                    <a href="{{ path('transparentAdministration') }}">{{ 'base.footer.transparent_admin'|trans }}</a>
+                    <a href="https://www.earlymusicwebsites.com" target="_blank">{{ 'base.footer.web_credits'|trans }}</a>
                 </div>
             </div>
         </footer>

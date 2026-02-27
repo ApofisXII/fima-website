@@ -10,23 +10,33 @@
         <div class="box multi-detail-box gg-form">
             <h3>{{ edition ? edition.editionName : 'Dettaglio edizione' }}</h3>
 
-            <div class="gg-form-row gg-form-row--no-margin">
-                <div class="course-form-field">
+            <div class="gg-form-row gg-form-row--no-margin gg-form-row--enrollment">
+                <div class="course-date-field">
                     <label>Nome edizione</label>
                     <input type="text" name="editionName" placeholder="Nome edizione" value="{{ edition ? edition.editionName }}" required>
                 </div>
 
-                <div class="course-dates-wrapper">
-                    <div class="course-date-field">
-                        <label>Data di inizio</label>
-                        <input type="date" name="dateStart" value="{{ edition and edition.dateStart ? edition.dateStart|date('Y-m-d') }}" required>
-                    </div>
-
-                    <div class="course-date-field">
-                        <label>Data di fine</label>
-                        <input type="date" name="dateEnd" value="{{ edition and edition.dateEnd ? edition.dateEnd|date('Y-m-d') }}" required>
-                    </div>
+                <div class="course-date-field">
+                    <label>Data di inizio</label>
+                    <input type="date" name="dateStart" value="{{ edition and edition.dateStart ? edition.dateStart|date('Y-m-d') }}" required>
                 </div>
+
+                <div class="course-date-field">
+                    <label>Data di fine</label>
+                    <input type="date" name="dateEnd" value="{{ edition and edition.dateEnd ? edition.dateEnd|date('Y-m-d') }}" required>
+                </div>
+            </div>
+
+            <div class="gg-form-row gg-form-row--enrollment">
+                <div class="course-date-field">
+                    <label>Link per form di iscrizione</label>
+                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ edition ? edition.enrollmentLink }}">
+                </div>
+                <div class="course-date-field">
+                    <label>Scadenza iscrizioni</label>
+                    <input type="datetime-local" name="enrollmentDeadline" value="{{ edition and edition.enrollmentDeadline ? edition.enrollmentDeadline|date('Y-m-d\\TH:i') }}">
+                </div>
+
             </div>
 
             <div class="gg-checkbox-group">
@@ -133,7 +143,9 @@
                 dateEnd: formData.get('dateEnd'),
                 isPublicVisible: isPublicVisible,
                 enrollmentInfoIt: formData.get('enrollmentInfoIt'),
-                enrollmentInfoEn: formData.get('enrollmentInfoEn')
+                enrollmentInfoEn: formData.get('enrollmentInfoEn'),
+                enrollmentLink: formData.get('enrollmentLink') || null,
+                enrollmentDeadline: formData.get('enrollmentDeadline') || null
             };
 
             fetch('{{ path('adminUrbinoEditionsDetailSave') }}', {

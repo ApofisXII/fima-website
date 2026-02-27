@@ -27,6 +27,8 @@ final readonly class UrbinoEditionService
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
             ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
+            ->setEnrollmentLink($payload->enrollmentLink ?: null)
+            ->setEnrollmentDeadline($payload->enrollmentDeadline ? new \DateTime($payload->enrollmentDeadline) : null)
             ->setIsProgrammePdfUploaded(false)
             ->setIsDeleted(false)
             ->setCreatedAt(new \DateTime())
@@ -44,6 +46,8 @@ final readonly class UrbinoEditionService
             ->setIsPublicVisible($payload->isPublicVisible ?? false)
             ->setEnrollmentInfoIt($payload->enrollmentInfoIt)
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
+            ->setEnrollmentLink($payload->enrollmentLink ?: null)
+            ->setEnrollmentDeadline($payload->enrollmentDeadline ? new \DateTime($payload->enrollmentDeadline) : null)
             ->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEditionRepository->save($edition);

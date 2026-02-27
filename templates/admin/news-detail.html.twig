@@ -58,7 +58,7 @@
         <div class="box multi-detail-box gg-form">
             <h3>Immagine di copertina</h3>
             {% if news and news.hasCoverImage %}
-                <img class="gg-admin-copertina" alt="Copertina notizia" src="{{ asset('uploads-news/'~news.id~'.webp') }}?v={{ random(1,9999) }}">
+                <img class="gg-admin-copertina" alt="Copertina notizia" src="{{ asset('uploads-news/images/'~news.id~'.webp') }}?v={{ random(1,9999) }}">
             {% endif %}
             <label>Carica immagine</label>
             <input type="file" name="coverImage" id="cover-image-input" accept="image/*">
@@ -71,6 +71,26 @@
                 </div>
             {% endif %}
         </div>
+
+        {% if news %}
+        <div class="box multi-detail-box gg-form">
+            <h3>Locandina (PDF)</h3>
+
+            {% if news.hasPoster %}
+                <p><a href="{{ asset('uploads-news/posters/' ~ news.id ~ '.pdf') }}" target="_blank">Visualizza locandina caricata</a></p>
+            {% endif %}
+
+            <label>Carica locandina</label>
+            <input type="file" id="poster-input" accept="application/pdf">
+
+            <div class="gg-action-btn-group">
+                <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva locandina</button>
+                {% if news.hasPoster %}
+                    <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina locandina</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
 
         <div class="box multi-detail-box gg-form">
             <h3>Impostazioni</h3>
@@ -243,6 +263,49 @@
                 });
             });
             {% endif %}
+        const uploadPosterBtn = document.getElementById('upload-poster-btn');
+        const posterInput = document.getElementById('poster-input');
+
+        uploadPosterBtn.addEventListener('click', function() {
+            if (!posterInput.files || !posterInput.files[0]) {
+                alert('Seleziona prima un file PDF');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('poster', posterInput.files[0]);
+
+            fetch('{{ path('adminNewsUploadPoster', {'newsId': news.id}) }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+
+        {% if news.hasPoster %}
+        document.getElementById('delete-poster-btn').addEventListener('click', function() {
+            if (!confirm('Confermi di voler eliminare la locandina?')) return;
+
+            fetch('{{ path('adminNewsDeletePoster', {'newsId': news.id}) }}', {
+                method: 'DELETE'
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+        {% endif %}
         {% endif %}
 
         const categorySelect = document.getElementById('category-select');
