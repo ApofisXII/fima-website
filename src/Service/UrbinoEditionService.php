@@ -29,7 +29,6 @@ final readonly class UrbinoEditionService
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
             ->setEnrollmentLink($payload->enrollmentLink ?: null)
             ->setEnrollmentDeadline($payload->enrollmentDeadline ? new \DateTime($payload->enrollmentDeadline) : null)
-            ->setEnrollmentPriceCents($payload->enrollmentPriceEuros !== null ? (int) round($payload->enrollmentPriceEuros * 100) : null)
             ->setIsProgrammePdfUploaded(false)
             ->setIsDeleted(false)
             ->setCreatedAt(new \DateTime())
@@ -49,7 +48,6 @@ final readonly class UrbinoEditionService
             ->setEnrollmentInfoEn($payload->enrollmentInfoEn)
             ->setEnrollmentLink($payload->enrollmentLink ?: null)
             ->setEnrollmentDeadline($payload->enrollmentDeadline ? new \DateTime($payload->enrollmentDeadline) : null)
-            ->setEnrollmentPriceCents($payload->enrollmentPriceEuros !== null ? (int) round($payload->enrollmentPriceEuros * 100) : null)
             ->setUpdatedAt(new \DateTime());
 
         return $this->urbinoEditionRepository->save($edition);
