@@ -176,6 +176,7 @@ urbino_course_detail:
         dates: 'Date'
     program: 'Programma'
     biography: 'Biografia'
+    enroll_cta: "Vai all'iscrizione"
 
 schedule_type_individual: 'Corso individuale'
 schedule_type_ensemble: "Corso d'insieme"
@@ -218,7 +219,7 @@ base:
     uma_nav:
         welcome: 'Welcome'
         courses: 'Corsi'
-        informations: 'Iscrizioni'
+        informations: 'Iscrizione'
         festival: 'Festival'
         exhibition: 'Mostre'
         conferences: 'Convegni'

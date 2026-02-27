@@ -176,6 +176,7 @@ urbino_course_detail:
         dates: 'Dates'
     program: 'Programme'
     biography: 'Biography'
+    enroll_cta: 'Go to enrollment'
 
 schedule_type_individual: 'Individual course'
 schedule_type_ensemble: 'Ensemble course'
