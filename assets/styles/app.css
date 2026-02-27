@@ -108,6 +108,7 @@ h2 {
     left: 0;
     width: 100%;
     z-index: 9999;
+    background-color: var(--color-blue);
 }
 
 .header {
@@ -491,6 +492,7 @@ h2 {
 
 .home-hero__title {
     color: white;
+    font-family: 'Platypi', serif;
     font-weight: normal;
     text-align: left;
     font-size: 4.6rem;
@@ -1500,6 +1502,7 @@ h2 {
         right: 0;
         bottom: 0;
         padding: 0 50px;
+        border-top: solid 1px var(--color-blue);
         background-color: var(--color-yellow);
         pointer-events: none;
         opacity: 0;
