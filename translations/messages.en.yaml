@@ -208,7 +208,7 @@ news_box:
     published_on: 'Published on %date%'
 
 base:
-    title: 'FIMA • Italian Foundation for Early Music'
+    title: 'FIMA • Fondazione Italiana per la Musica Antica'
     close: 'CLOSE'
     nav:
         home: 'Home'
