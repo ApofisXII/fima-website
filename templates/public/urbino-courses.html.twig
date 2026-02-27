@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container">
-        <h1>{{ 'urbino_courses.heading'|trans }}</h1>
+        <h1 class="font-serif">{{ 'urbino_courses.heading'|trans }}</h1>
 
         <div>
             {% for courseInCategory in coursesInCategories %}
@@ -20,7 +20,7 @@
                                         <div class="course-box__title">{{ course.teacherFullName }}</div>
                                         <div class="course-box__subtitle">{{ app.locale == 'it' ? course.disciplineIt : course.disciplineEn }}</div>
                                     </div>
-                                    <div class="chip chip--course-box">{{ course.scheduleType|trans }}</div>
+                                    <div class="chip chip--course-box {{ course.scheduleType == 'schedule_type_individual' ? 'chip--course-box-individual' }}">{{ course.scheduleType|trans }}</div>
                                 </div>
                                 <a class="hover btn btn--course-box" href="{{ path('urbinoCourseDetail', {'course':course.id, 'slug':course.slug}) }}">{{ 'urbino_courses.view_course'|trans }}</a>
                             </div>

@@ -13,8 +13,8 @@
                 <h1 class="course-head__title">{{ course.teacherFullName }}</h1>
                 <div class="course-head__subtitle">{{ app.locale == 'it' ? course.disciplineIt : course.disciplineEn }}</div>
 
-                {% if not course.soldOut and course.urbinoEdition.enrollmentLink %}
-                    <a href="{{ course.urbinoEdition.enrollmentLink }}" target="_blank" class="btn hover">Iscriviti</a>
+                {% if not course.soldOut and course.urbinoEdition.dateEnd >= date("now") %}
+                    <a href="{{ path('urbinoInformations') }}" class="btn hover">Iscrizioni</a>
                 {% elseif course.soldOut %}
                     <div class="chip chip--soldout">Sold out</div>
                 {% endif %}

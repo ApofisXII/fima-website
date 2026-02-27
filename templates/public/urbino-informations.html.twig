@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container">
-        <h1>{{ 'urbino_informations.heading'|trans }}</h1>
+        <h1 class="font-serif">{{ 'urbino_informations.heading'|trans }}</h1>
 
         <div class="text-from-admin">
             {{ (app.request.locale == 'it' ? currentEdition.enrollmentInfoIt : currentEdition.enrollmentInfoEn)|raw }}

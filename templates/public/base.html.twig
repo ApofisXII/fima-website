@@ -9,6 +9,7 @@
         {% if 'preload' in app.request.host or 'fimamusicaantica.com' in app.request.host %}
             <script src="{{ asset('plugins/script-events.js') }}" data-website-id="c3f393c0-d1ad-45b6-aa79-00a0620c5636"></script>
         {% endif %}
+        <meta name="theme-color" content="#18407E">
     </head>
     <body class="{{ 'urbino' in app.current_route ? 'body--urbino-section' }}">
         <div class="header-container">

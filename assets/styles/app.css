@@ -71,10 +71,15 @@ li {
 }
 
 h1, h2, h3 {
-    font-family: 'Platypi', serif;
     margin-bottom: 20px;
     text-align: center;
     color: var(--color-blue);
+    font-weight: var(--font-bold-weight-sans-serif);
+}
+
+.font-serif {
+    font-family: 'Platypi', serif;
+    font-weight: normal;
 }
 
 h1 {
@@ -301,7 +306,7 @@ h2 {
 
 .news-box__title {
     font-size: 1.1rem;
-    font-family: 'Platypi', serif;
+    font-weight: var(--font-bold-weight-sans-serif);
     margin-bottom: 10px;
 }
 
@@ -416,7 +421,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-yellow);
+    background: linear-gradient(to bottom right, #FFCF5A, #FBBB21);
     position: absolute;
     top: 0;
     left: 1rem;
@@ -604,7 +609,6 @@ h2 {
     padding: 50px;
     margin-top: -50px;
     display: flex;
-    align-items: center;
     gap: 80px;
     min-height: 200px;
     background: linear-gradient(to bottom right, #D62725, #99110F);
@@ -622,6 +626,7 @@ h2 {
     margin: 0;
     font-size: 2.4rem;
     font-weight: normal;
+    font-family: 'Platypi', serif;
     color: white;
 }
 
@@ -635,7 +640,7 @@ h2 {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 300%;
     opacity: 0.2;
 }
 
@@ -737,7 +742,8 @@ h2 {
     text-align: left;
     color: white;
     font-size: 2.5rem;
-    font-weight: normal;
+    font-weight: var(--font-bold-weight-sans-serif);
+    font-family: "Sofia Sans", sans-serif;
 }
 
 .courses-grid {
@@ -803,6 +809,7 @@ h2 {
 .course-head__title {
     font-size: 2.1rem;
     margin: 0 0 10px 0;
+    font-family: 'Platypi', serif;
 }
 
 .course-head__subtitle {
@@ -864,6 +871,11 @@ h2 {
     background-color: rgba(144, 149, 190, 0.75);
     flex-shrink: 0;
     align-self: flex-end;
+    border: solid 1px rgba(255, 255, 255, 0.2);
+}
+
+.chip--course-box-individual {
+    background-color: var(--color-blue);
 }
 
 .course-box__info-row {
@@ -1111,6 +1123,7 @@ h2 {
     text-align: left;
     font-size: 3rem;
     margin-bottom: 10px;
+    font-family: 'Platypi', serif;
 }
 
 .event-detail-header__subtitle {
