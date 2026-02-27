@@ -18,7 +18,7 @@ home:
 donate:
     page_title: 'Support us'
     intro_1: 'Since 2024 it is possible to support URBINO MUSICA ANTICA through donations by becoming a <b>Benefactor</b> of the event.'
-    intro_2: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+    intro_2: 'Fondazione Italiana per la Musica Antica, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
     intro_3: "Yesterday's students have become today's musicians.<br>Supporting this activity will allow FIMA to continue its tireless and passionate mission to promote early music."
     bronze:
         title: 'BRONZE Benefactor'
@@ -231,10 +231,10 @@ base:
         facebook: 'Facebook Page'
     donate:
         title: 'Support FIMA'
-        description: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+        description: 'Fondazione Italiana per la Musica Antica, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
         cta: 'Support us'
     footer:
-        name: 'Italian Foundation for Early Music'
+        name: 'Fondazione Italiana per la Musica Antica'
         address: 'Via Col di Lana 7, 00195, Roma'
         contacts: 'Contacts'
         transparent_admin: 'Transparent Administration'

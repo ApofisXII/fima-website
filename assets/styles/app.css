@@ -263,9 +263,10 @@ h2 {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-.follow-box .follow-box__link {
+.follow-box .follow-box__link:first-of-type {
     margin-top: auto;
 }
 
@@ -323,7 +324,6 @@ h2 {
     justify-content: flex-start;
     align-items: center;
     font-weight: var(--font-bold-weight-sans-serif);
-    margin-top: 10px;
     color: var(--color-blue);
 }
 
