@@ -103,6 +103,7 @@ h2 {
     left: 0;
     width: 100%;
     z-index: 9999;
+    background-color: var(--color-blue);
 }
 
 .header {
@@ -817,8 +818,17 @@ h2 {
 .chip--course-box {
     font-size: 0.7rem;
     padding: 5px 10px;
+    background-color: rgba(144, 149, 190, 0.75);
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+
+.course-box__info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
     margin-bottom: 10px;
-    background-color: var(--color-blue-light);
 }
 
 .contacts-grid {
