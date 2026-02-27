@@ -218,7 +218,7 @@ base:
     uma_nav:
         welcome: 'Welcome'
         courses: 'Courses'
-        informations: 'Information'
+        informations: 'Enrollment'
         festival: 'Festival'
         exhibition: 'Exhibitions'
         conferences: 'Conferences'
