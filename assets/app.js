@@ -78,14 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
             umaToggleLabel.textContent = isOpen ? 'CHIUDI' : 'Urbino Musica Antica';
             umaToggleIcon.style.display = isOpen ? 'none' : 'block';
             document.body.classList.toggle('uma-menu-open', isOpen);
-            const currentMeta = document.querySelector('meta[name="theme-color"]');
-            if (currentMeta) {
-                currentMeta.remove();
-            }
-            const newMeta = document.createElement('meta');
-            newMeta.name = 'theme-color';
-            newMeta.content = isOpen ? '#FBBB21' : '#18407E';
-            document.head.appendChild(newMeta);
             if (isOpen) {
                 umaToggleLabel.classList.remove('toggle-label--animate');
                 void umaToggleLabel.offsetWidth;
