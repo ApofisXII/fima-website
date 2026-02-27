@@ -411,21 +411,22 @@ h2 {
 }
 
 .uma-header__clip {
-    width: 170px;
-    height: 130px;
+    width: 150px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom right, #FFCF5A, #FBBB21);
+    background: var(--color-yellow);
     position: absolute;
     top: 0;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    left: 1rem;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
     box-shadow: 0 5px 15px rgba(214, 39, 37, 0.21);
 }
 
 .uma-header__logo {
-    width: 110px;
+    width: 100px;
 }
 
 .uma-header__link {
@@ -1540,8 +1541,9 @@ h2 {
     }
 
     .uma-header__clip {
-        width: 110px;
-        height: 90px;
+        width: 111px;
+        height: 74px;
+        left: .6rem;
         z-index: 9997;
     }
 
