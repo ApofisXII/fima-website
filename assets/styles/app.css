@@ -591,6 +591,10 @@ img[src*="ministerio-asuntos"] {
     max-height: 55px;
 }
 
+img[src*="comune-gradara"] {
+    max-height: 75px;
+}
+
 
 .section-home {
     margin-bottom: 80px;
