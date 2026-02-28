@@ -441,7 +441,7 @@ h2 {
 }
 
 .uma-header__link {
-    padding: 15px 1px;
+    padding: 18px 1px;
     font-family: 'Platypi', serif;
     font-weight: 600;
     font-size: .9rem;
@@ -579,21 +579,22 @@ h2 {
 .partner-logos__logo {
     height: auto;
     width: auto;
-    max-height: 70px;
+    max-height: 65px;
     mix-blend-mode: multiply;
 }
 
 .partner-logos__logo--horizontal {
-    max-height: 44px;
+    max-height: 40px;
 }
 
-#carousel-support .partner-logos__logo {
-    max-height: 63px;
+img[src*="ministerio-asuntos"] {
+    max-height: 50px;
 }
 
-#carousel-support .partner-logos__logo--horizontal {
-    max-height: 38px;
+img[src*="comune-gradara"] {
+    max-height: 70px;
 }
+
 
 .section-home {
     margin-bottom: 80px;
@@ -902,14 +903,14 @@ h2 {
 .chip--course-box {
     font-size: 0.7rem;
     padding: 5px 10px;
-    background-color: rgba(144, 149, 190, 0.75);
+    background-color: rgba(144, 149, 190, 0.8);
     flex-shrink: 0;
     align-self: flex-end;
     border: solid 1px rgba(255, 255, 255, 0.2);
 }
 
 .chip--course-box-individual {
-    background-color: var(--color-blue);
+    background-color: rgba(24, 64, 126, 0.8);
 }
 
 .course-box__info-row {
@@ -1707,20 +1708,21 @@ h2 {
     }
 
     .partner-logos__logo {
-        max-height: 48px;
+        max-height: 55px;
     }
 
     .partner-logos__logo--horizontal {
-        max-height: 31px;
+        max-height: 30px;
     }
 
-    #carousel-support .partner-logos__logo {
+    img[src*="ministerio-asuntos"] {
         max-height: 42px;
     }
 
-    #carousel-support .partner-logos__logo--horizontal {
-        max-height: 27px;
+    img[src*="comune-gradara"] {
+        max-height: 65px;
     }
+
 
     .partner-logos {
         padding: 30px 0;

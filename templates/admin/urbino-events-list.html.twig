@@ -52,9 +52,9 @@
                 {
                     targets: 1, render: function(data, type, row) {
                         const map = {
-                            'event_type_festival': { label: 'Festival',  cls: 'festival' },
-                            'event_type_mostra':   { label: 'Mostra',    cls: 'mostra'   },
-                            'event_type_convegni': { label: 'Convegni',  cls: 'convegni' },
+                            'event_category_festival':   { label: 'Festival',  cls: 'festival' },
+                            'event_category_exhibition': { label: 'Mostra',    cls: 'mostra'   },
+                            'event_category_conference': { label: 'Convegni',  cls: 'convegni' },
                         };
                         const entry = map[data];
                         return entry
