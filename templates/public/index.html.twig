@@ -45,8 +45,8 @@
         <div class="splide partner-logos" id="carousel-contribute">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for imageName in ["camera-commercio-marche.webp", "citta-urbino.webp", "comune.webp", "galleria-nazionale-marche.webp", "governo-spagnolo.webp", "ministero-cultura.webp"] %}
-                        <img class="splide__slide partner-logos__logo {{ imageName in ['governo-spagnolo.webp', 'camera-commercio-marche.webp'] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-contribute/' ~ imageName) }}" alt="{{ imageName|split('.webp')|first }}">
+                    {% for imageName in ["camera-commercio-marche.webp", "citta-urbino.webp", "comune-gradara.webp", "galleria-nazionale-marche.webp", "ministerio-asuntos-exteriores-espana.webp", "ministero-cultura.webp"] %}
+                        <img class="splide__slide partner-logos__logo {{ imageName in ['ministerio-asuntos-exteriores-espana.webp', 'camera-commercio-marche.webp'] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-contribute/' ~ imageName) }}" alt="{{ imageName|split('.webp')|first }}">
                     {% endfor %}
                 </ul>
             </div>
@@ -60,8 +60,8 @@
         <div class="splide partner-logos" id="carousel-support">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for imageName in ["arcidiocesi-urbino.webp", "club-unesco-montefeltro.webp", "confraternita-san-giuseppe.webp", "conservatorio-rossini.webp", "erdis-marche.webp", "fai.webp", "isiau.webp", "legato-albani.webp", "universita-urbino.svg"] %}
-                        <img class="splide__slide partner-logos__logo {{ imageName in ["erdis-marche.webp", "fai.webp", "isiau.webp"] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-support/' ~ imageName) }}" alt="{{ imageName|split('.')|first }}">
+                    {% for imageName in ["arcidiocesi-urbino.webp", "club-unesco-montefeltro.webp", "confraternita-san-giuseppe.webp", "conservatorio-rossini.webp", "erdis-marche.webp", "fai.webp", "isiau.webp", "legato-albani.webp", "universita-urbino.webp"] %}
+                        <img class="splide__slide partner-logos__logo {{ imageName in ["erdis-marche.webp"] ? 'partner-logos__logo--horizontal' }}" src="{{ asset('images/carousel-support/' ~ imageName) }}" alt="{{ imageName|split('.webp')|first }}">
                     {% endfor %}
                 </ul>
             </div>
