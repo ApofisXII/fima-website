@@ -356,20 +356,6 @@ h2 {
     letter-spacing: 0.02rem;
 }
 
-.body--urbino-section .btn,
-.btn--callout-uma {
-    color: var(--color-blue);
-}
-
-.body--urbino-section .btn::first-letter,
-.btn--callout-uma::first-letter {
-    color: var(--color-red);
-}
-
-.donate-box .btn,
-.donate-box .btn::first-letter {
-    color: white;
-}
 
 .news-box__date-container {
     height: 90px;
