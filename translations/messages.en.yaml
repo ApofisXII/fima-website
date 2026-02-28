@@ -18,7 +18,7 @@ home:
 donate:
     page_title: 'Support us'
     intro_1: 'Since 2024 it is possible to support URBINO MUSICA ANTICA through donations by becoming a <b>Benefactor</b> of the event.'
-    intro_2: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+    intro_2: 'Fondazione Italiana per la Musica Antica, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
     intro_3: "Yesterday's students have become today's musicians.<br>Supporting this activity will allow FIMA to continue its tireless and passionate mission to promote early music."
     bronze:
         title: 'BRONZE Benefactor'
@@ -161,7 +161,7 @@ urbino_festival:
 
 urbino_informations:
     page_title: 'Urbino Musica Antica • Information'
-    heading: 'General information'
+    heading: 'How to enroll'
 
 urbino_course_detail:
     logo_alt: 'Urbino Musica Antica Courses'
@@ -174,8 +174,9 @@ urbino_course_detail:
         access_open: 'Open'
         access_preselection: 'Preselection required'
         dates: 'Dates'
-    program: 'Programme'
+    program: 'Programme and information'
     biography: 'Biography'
+    enroll_cta: 'Go to enrollment'
 
 schedule_type_individual: 'Individual course'
 schedule_type_ensemble: 'Ensemble course'
@@ -207,7 +208,8 @@ news_box:
     published_on: 'Published on %date%'
 
 base:
-    title: 'FIMA • Italian Foundation for Early Music'
+    title: 'FIMA • Fondazione Italiana per la Musica Antica'
+    close: 'CLOSE'
     nav:
         home: 'Home'
         about: 'About us'
@@ -229,10 +231,10 @@ base:
         facebook: 'Facebook Page'
     donate:
         title: 'Support FIMA'
-        description: 'The Italian Foundation for Early Music, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
+        description: 'Fondazione Italiana per la Musica Antica, over its fifty-six years of activity, has promoted early music through hundreds of concerts, conferences and courses, which have inspired and will continue to inspire thousands of professional and amateur musicians, thanks to the support and work of the finest musicians in the field.'
         cta: 'Support us'
     footer:
-        name: 'Italian Foundation for Early Music'
+        name: 'Fondazione Italiana per la Musica Antica'
         address: 'Via Col di Lana 7, 00195, Roma'
         contacts: 'Contacts'
         transparent_admin: 'Transparent Administration'

@@ -23,6 +23,7 @@
     --font-bold-weight-sans-serif: 800;
 
     --padding-box: 30px;
+    --padding-box-smaller: 25px;
 
     --gradient-overlay-blue: linear-gradient(to bottom, rgba(24, 64, 126, 0.1), rgba(24, 64, 126, 0.5));
 }
@@ -79,7 +80,11 @@ h1, h2, h3 {
 
 .font-serif {
     font-family: 'Platypi', serif;
-    font-weight: normal;
+    font-weight: 600;
+}
+
+.font-serif::first-letter {
+    color: var(--color-red);
 }
 
 h1 {
@@ -263,9 +268,10 @@ h2 {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-.follow-box .follow-box__link {
+.follow-box .follow-box__link:first-of-type {
     margin-top: auto;
 }
 
@@ -323,7 +329,6 @@ h2 {
     justify-content: flex-start;
     align-items: center;
     font-weight: var(--font-bold-weight-sans-serif);
-    margin-top: 10px;
     color: var(--color-blue);
 }
 
@@ -350,6 +355,7 @@ h2 {
     text-transform: uppercase;
     letter-spacing: 0.02rem;
 }
+
 
 .news-box__date-container {
     height: 90px;
@@ -435,8 +441,15 @@ h2 {
 }
 
 .uma-header__link {
-    padding: 18px 1px 15px 0;
+    padding: 15px 1px;
+    font-family: 'Platypi', serif;
     font-weight: 600;
+    font-size: .9rem;
+    text-transform: lowercase;
+}
+
+.uma-header__link::first-letter {
+    color: var(--color-red);
 }
 
 .uma-header__link::after {
@@ -452,7 +465,11 @@ h2 {
 .uma-header__link--active {
     color: var(--color-red);
     border-bottom: solid 3px var(--color-red);
-    font-weight: 800;
+    font-weight: 700;
+}
+
+.uma-header__link--active::first-letter {
+    color: var(--color-blue);
 }
 
 .uma-header__menu-toggle {
@@ -527,6 +544,7 @@ h2 {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--color-blue);
+    white-space: nowrap;
 }
 
 .partner-logos {
@@ -603,13 +621,15 @@ h2 {
 }
 
 .uma-hero__logo {
-    width: 200px;
+    width: 230px;
+    margin-bottom: 30px;
 }
 
 .uma-welcome {
     padding: 50px;
     margin-top: -50px;
     display: flex;
+    align-items: center;
     gap: 80px;
     min-height: 200px;
     background: linear-gradient(to bottom right, #D62725, #99110F);
@@ -788,7 +808,9 @@ h2 {
 }
 
 .course-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 180px;
     gap: 20px;
     max-width: 600px;
     flex: 1;
@@ -796,15 +818,25 @@ h2 {
 
 .course-infos {
     flex: 1;
+    padding: var(--padding-box-smaller) var(--padding-box);
 }
 
 .course-head__image {
     background-color: var(--color-blue);
-    height: 140px;
-    width: 140px;
+    height: 180px;
+    width: 180px;
     border-radius: var(--border-radius-main);
     background-size: cover;
     background-position: center;
+}
+
+.course-head__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-head__content .btn {
+    margin-top: auto;
 }
 
 .course-head__title {
@@ -821,7 +853,7 @@ h2 {
 }
 
 .chip {
-    padding: 10px 20px;
+    padding: 10px 20px 8px;
     border-radius: 100px;
     color: white;
     background: black;
@@ -840,9 +872,9 @@ h2 {
 }
 
 .uma-logo-small {
-    height: 80px;
+    height: 100px;
     display: block;
-    margin: 70px auto 30px;
+    margin: 80px auto 60px;
 }
 
 .course-infos__row {
@@ -1294,7 +1326,12 @@ h2 {
 @media (max-width: 800px) {
 
     body {
-        padding-top: 70px;
+        padding-top: 60px;
+    }
+
+
+    .body--urbino-section {
+        padding-top: 120px;
     }
 
     .callout-uma {
@@ -1312,6 +1349,10 @@ h2 {
 
     .btn {
         font-size: 0.9rem;
+    }
+
+    .btn--small {
+        padding: 12px 25px;
     }
 
     .pre-footer {
@@ -1338,14 +1379,14 @@ h2 {
     }
 
     .header__logo {
-        margin: 15px 0;
+        margin: 20px 0 15px;
         height: 55px;
     }
 
     .header__menu-toggle {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         font-weight: var(--font-bold-weight-sans-serif);
         background: none;
         border: none;
@@ -1354,7 +1395,7 @@ h2 {
         cursor: pointer;
         padding: 10px;
         position: relative;
-        z-index: 9999;
+        z-index: 10001;
     }
 
     .header__nav {
@@ -1368,13 +1409,13 @@ h2 {
         left: 0;
         right: 0;
         bottom: 0;
-        padding: 0 50px;
+        padding: 50px 50px 0;
         background-color: var(--color-blue);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
         transition: opacity 0.4s ease, visibility 0.4s ease;
-        z-index: 9998;
+        z-index: 10000;
     }
 
     .header__nav--open {
@@ -1425,17 +1466,16 @@ h2 {
     }
 
     .title-with-action {
-        align-items: center;
+        align-items: baseline;
     }
 
     .title-with-action__action-text {
-        text-align: right;
-        max-width: 70px;
         font-size: 0.9rem;
+        margin-top: -2px;
     }
 
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .section-home {
@@ -1464,10 +1504,21 @@ h2 {
         grid-template-columns: 1fr;
     }
 
+    .uma-header__menu-toggle-label {
+        text-transform: lowercase;
+        font-family: 'Platypi', serif;
+        font-weight: var(--font-bold-weight-serif);
+        margin-top: -3px;
+    }
+
+    .uma-header__menu-toggle-initial {
+        color: var(--color-red);
+    }
+
     .uma-header__menu-toggle {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         background: none;
         border: none;
         color: var(--color-blue);
@@ -1481,6 +1532,7 @@ h2 {
     .uma-menu-open .header {
         visibility: hidden;
     }
+
 
     .uma-header__menu-toggle {
         position: relative;
@@ -1502,7 +1554,7 @@ h2 {
         left: 0;
         right: 0;
         bottom: 0;
-        padding: 0 50px;
+        padding: 50px 50px 0;
         background-color: var(--color-yellow);
         pointer-events: none;
         opacity: 0;
@@ -1567,7 +1619,7 @@ h2 {
     }
 
     .uma-header {
-        padding: 5px 10px;
+        padding: 8px 10px;
     }
 
     .uma-hero, .uma-hero__video {
@@ -1609,11 +1661,14 @@ h2 {
         text-align: left;
     }
 
+    .course-head {
+        grid-template-columns: 120px 1fr;
+        grid-template-rows: 120px;
+    }
+
     .course-head__image {
         width: 120px;
         height: 120px;
-        min-width: 120px;
-        min-height: 120px;
     }
 
     h1 {
@@ -1671,8 +1726,31 @@ h2 {
         padding: 30px 0;
     }
 
+    .partner-logos::before,
+    .partner-logos::after {
+        width: 40px;
+    }
+
     .uma-welcome__angels {
         width: 300%;
+    }
+
+    .uma-logo-small {
+        height: 80px;
+        margin: 70px auto 40px;
+    }
+
+    .follow-box__link {
+        padding: 12px 15px;
+    }
+
+    .uma-hero__logo {
+        width: 180px;
+        margin-bottom: 40px;
+    }
+
+    .uma-activity__logo {
+        height: 90px;
     }
 
 }

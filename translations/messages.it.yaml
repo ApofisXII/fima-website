@@ -11,9 +11,9 @@ home:
         view_all_icon_alt: 'Vedi'
     partners:
         contribute:
-            title: 'Con il patrocinio e contributo'
+            title: 'Con il patrocinio e il contributo di'
         support:
-            title: 'Con il sostegno'
+            title: 'Con il sostegno di'
 
 donate:
     page_title: 'Sostienici'
@@ -161,7 +161,7 @@ urbino_festival:
 
 urbino_informations:
     page_title: 'Urbino Musica Antica • Informazioni'
-    heading: 'Informazioni generali'
+    heading: 'Come iscriversi'
 
 urbino_course_detail:
     logo_alt: 'Urbino Musica Antica Corsi'
@@ -174,8 +174,9 @@ urbino_course_detail:
         access_open: 'Libero'
         access_preselection: 'Preselezione prevista'
         dates: 'Date'
-    program: 'Programma'
+    program: 'Programma e informazioni'
     biography: 'Biografia'
+    enroll_cta: "Vai all'iscrizione"
 
 schedule_type_individual: 'Corso individuale'
 schedule_type_ensemble: "Corso d'insieme"
@@ -208,6 +209,7 @@ news_box:
 
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
+    close: 'CHIUDI'
     nav:
         home: 'Home'
         about: 'Chi siamo'
@@ -218,7 +220,7 @@ base:
     uma_nav:
         welcome: 'Welcome'
         courses: 'Corsi'
-        informations: 'Iscrizioni'
+        informations: 'Iscrizione'
         festival: 'Festival'
         exhibition: 'Mostre'
         conferences: 'Convegni'

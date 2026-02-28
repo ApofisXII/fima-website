@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const toggleIcon = toggle.querySelector('.header__menu-icon');
         toggle.addEventListener('click', function () {
             const isOpen = nav.classList.toggle('header__nav--open');
-            toggleLabel.textContent = isOpen ? 'CHIUDI' : 'MENU';
+            toggleLabel.textContent = isOpen ? toggle.dataset.closeLabel : 'MENU';
             toggleIcon.style.display = isOpen ? 'none' : 'block';
             if (isOpen) {
                 toggleLabel.classList.remove('toggle-label--animate');
@@ -73,9 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (umaToggle && umaLinks) {
         const umaToggleLabel = umaToggle.querySelector('.uma-header__menu-toggle-label');
         const umaToggleIcon = umaToggle.querySelector('.uma-header__menu-icon');
+        const umaOriginalHTML = umaToggleLabel.innerHTML;
+        const closeLabel = umaToggle.dataset.closeLabel;
+        const closeHTML = `<span class="uma-header__menu-toggle-initial">${closeLabel[0]}</span>${closeLabel.slice(1)}`;
         umaToggle.addEventListener('click', function () {
             const isOpen = umaLinks.classList.toggle('uma-header__links--open');
-            umaToggleLabel.textContent = isOpen ? 'CHIUDI' : 'Urbino Musica Antica';
+            umaToggleLabel.innerHTML = isOpen ? closeHTML : umaOriginalHTML;
             umaToggleIcon.style.display = isOpen ? 'none' : 'block';
             document.body.classList.toggle('uma-menu-open', isOpen);
             if (isOpen) {
