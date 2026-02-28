@@ -782,6 +782,16 @@ img[src*="comune-gradara"] {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
+}
+
+.course-box__fallback-logo {
+    position: absolute;
+    width: 45%;
+    top: 35%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
 }
 
 .course-box__inner {
@@ -1051,6 +1061,7 @@ img[src*="comune-gradara"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+    margin-top: 60px;
 }
 
 .uma-event-box {
@@ -1066,6 +1077,16 @@ img[src*="comune-gradara"] {
     background-color: var(--color-blue);
     border-top-left-radius: var(--border-radius-main);
     border-top-right-radius: var(--border-radius-main);
+    position: relative;
+}
+
+.uma-event-box__fallback-logo {
+    position: absolute;
+    width: 45%;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
 }
 
 .uma-event-box__overlay {
@@ -1678,6 +1699,7 @@ img[src*="comune-gradara"] {
 
     .events-grid {
         grid-template-columns: 1fr;
+        margin-top: 40px;
     }
 
     .uma-event-box__overlay {
