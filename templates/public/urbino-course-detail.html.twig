@@ -14,7 +14,7 @@
                 <div class="course-head__subtitle">{{ app.locale == 'it' ? course.disciplineIt : course.disciplineEn }}</div>
 
                 {% if not course.soldOut and course.urbinoEdition.dateEnd >= date("now") %}
-                    <a href="{{ path('urbinoInformations') }}" class="btn hover">{{ 'urbino_course_detail.enroll_cta'|trans }}</a>
+                    <a href="{{ path('urbinoInformations') }}" class="btn btn--small hover">{{ 'urbino_course_detail.enroll_cta'|trans }}</a>
                 {% elseif course.soldOut %}
                     <div class="chip chip--soldout">Sold out</div>
                 {% endif %}

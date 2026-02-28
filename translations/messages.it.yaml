@@ -174,7 +174,7 @@ urbino_course_detail:
         access_open: 'Libero'
         access_preselection: 'Preselezione prevista'
         dates: 'Date'
-    program: 'Programma'
+    program: 'Programma e informazioni'
     biography: 'Biografia'
     enroll_cta: "Vai all'iscrizione"
 

@@ -23,6 +23,7 @@
     --font-bold-weight-sans-serif: 800;
 
     --padding-box: 30px;
+    --padding-box-smaller: 25px;
 
     --gradient-overlay-blue: linear-gradient(to bottom, rgba(24, 64, 126, 0.1), rgba(24, 64, 126, 0.5));
 }
@@ -798,6 +799,7 @@ h2 {
 
 .course-infos {
     flex: 1;
+    padding: var(--padding-box-smaller) var(--padding-box);
 }
 
 .course-head__image {
@@ -832,7 +834,7 @@ h2 {
 }
 
 .chip {
-    padding: 10px 20px;
+    padding: 10px 20px 8px;
     border-radius: 100px;
     color: white;
     background: black;
@@ -1325,6 +1327,10 @@ h2 {
         font-size: 0.9rem;
     }
 
+    .btn--small {
+        padding: 12px 25px;
+    }
+
     .pre-footer {
         flex-direction: column;
         gap: 20px;
@@ -1621,16 +1627,13 @@ h2 {
     }
 
     .course-head {
-        display: flex;
-        grid-template-columns: unset;
-        grid-template-rows: unset;
+        grid-template-columns: 120px 1fr;
+        grid-template-rows: 120px;
     }
 
     .course-head__image {
         width: 120px;
         height: 120px;
-        min-width: 120px;
-        min-height: 120px;
     }
 
     h1 {
@@ -1695,6 +1698,10 @@ h2 {
     .uma-logo-small {
         height: 80px;
         margin: 70px auto 40px;
+    }
+
+    .follow-box__link {
+        padding: 12px 15px;
     }
 
 }

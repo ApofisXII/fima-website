@@ -174,7 +174,7 @@ urbino_course_detail:
         access_open: 'Open'
         access_preselection: 'Preselection required'
         dates: 'Dates'
-    program: 'Programme'
+    program: 'Programme and information'
     biography: 'Biography'
     enroll_cta: 'Go to enrollment'
 
