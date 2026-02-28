@@ -579,20 +579,20 @@ h2 {
 .partner-logos__logo {
     height: auto;
     width: auto;
-    max-height: 70px;
+    max-height: 65px;
     mix-blend-mode: multiply;
 }
 
 .partner-logos__logo--horizontal {
-    max-height: 44px;
+    max-height: 40px;
 }
 
 img[src*="ministerio-asuntos"] {
-    max-height: 55px;
+    max-height: 50px;
 }
 
 img[src*="comune-gradara"] {
-    max-height: 75px;
+    max-height: 70px;
 }
 
 
@@ -1713,6 +1713,14 @@ img[src*="comune-gradara"] {
 
     .partner-logos__logo--horizontal {
         max-height: 30px;
+    }
+
+    img[src*="ministerio-asuntos"] {
+        max-height: 42px;
+    }
+
+    img[src*="comune-gradara"] {
+        max-height: 65px;
     }
 
 
