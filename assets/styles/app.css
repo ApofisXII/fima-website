@@ -624,6 +624,7 @@ h2 {
     padding: 50px;
     margin-top: -50px;
     display: flex;
+    align-items: center;
     gap: 80px;
     min-height: 200px;
     background: linear-gradient(to bottom right, #D62725, #99110F);
