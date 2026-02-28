@@ -14,6 +14,9 @@
                 <div class="courses-grid">
                     {% for course in courseInCategory.courses %}
                         <div class="course-box" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}>
+                            {% if not course.imageUploaded %}
+                                <img class="course-box__fallback-logo" src="{{ asset('images/logos/uma-courses-logo.svg') }}" alt="Urbino Musica Antica Corsi">
+                            {% endif %}
                             <div class="course-box__inner">
                                 <div class="course-box__info-row">
                                     <div>
