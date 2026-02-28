@@ -528,6 +528,7 @@ h2 {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--color-blue);
+    white-space: nowrap;
 }
 
 .partner-logos {
@@ -1308,7 +1309,12 @@ h2 {
 @media (max-width: 800px) {
 
     body {
-        padding-top: 70px;
+        padding-top: 60px;
+    }
+
+
+    .body--urbino-section {
+        padding-top: 120px;
     }
 
     .callout-uma {
@@ -1443,17 +1449,16 @@ h2 {
     }
 
     .title-with-action {
-        align-items: center;
+        align-items: baseline;
     }
 
     .title-with-action__action-text {
-        text-align: right;
-        max-width: 70px;
         font-size: 0.9rem;
+        margin-top: -2px;
     }
 
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .section-home {
@@ -1713,6 +1718,10 @@ h2 {
     .uma-hero__logo {
         width: 180px;
         margin-bottom: 40px;
+    }
+
+    .uma-activity__logo {
+        height: 90px;
     }
 
 }
