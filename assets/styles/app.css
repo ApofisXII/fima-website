@@ -20,7 +20,7 @@
     --border-radius-main: 7px;
 
     --font-bold-weight-serif: 600;
-    --font-bold-weight-sans-serif: 800;
+    --font-bold-weight-sans-serif: 700;
 
     --padding-box: 30px;
     --padding-box-smaller: 25px;
@@ -80,7 +80,11 @@ h1, h2, h3 {
 
 .font-serif {
     font-family: 'Platypi', serif;
-    font-weight: normal;
+    font-weight: 600;
+}
+
+.font-serif::first-letter {
+    color: var(--color-red);
 }
 
 h1 {
@@ -350,6 +354,21 @@ h2 {
     font-weight: var(--font-bold-weight-sans-serif);
     text-transform: uppercase;
     letter-spacing: 0.02rem;
+}
+
+.body--urbino-section .btn,
+.btn--callout-uma {
+    color: var(--color-blue);
+}
+
+.body--urbino-section .btn::first-letter,
+.btn--callout-uma::first-letter {
+    color: var(--color-red);
+}
+
+.donate-box .btn,
+.donate-box .btn::first-letter {
+    color: white;
 }
 
 .news-box__date-container {
