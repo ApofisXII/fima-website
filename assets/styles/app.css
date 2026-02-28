@@ -1327,12 +1327,12 @@ img[src*="comune-gradara"] {
 @media (max-width: 800px) {
 
     body {
-        padding-top: 60px;
+        padding-top: 90px;
     }
 
 
     .body--urbino-section {
-        padding-top: 120px;
+        padding-top: 130px;
     }
 
     .callout-uma {
@@ -1748,7 +1748,6 @@ img[src*="comune-gradara"] {
 
     .uma-hero__logo {
         width: 180px;
-        margin-bottom: 40px;
     }
 
     .uma-activity__logo {
