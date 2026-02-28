@@ -1691,6 +1691,11 @@ h2 {
         padding: 30px 0;
     }
 
+    .partner-logos::before,
+    .partner-logos::after {
+        width: 40px;
+    }
+
     .uma-welcome__angels {
         width: 300%;
     }
