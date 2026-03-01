@@ -808,24 +808,32 @@ img[src*="comune-gradara"] {
     margin-top: 10px;
 }
 
+.course-head-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    max-width: 600px;
+}
+
 .course-head {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    grid-template-rows: 180px;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 200px;
     gap: 20px;
-    max-width: 600px;
-    flex: 1;
 }
 
 .course-infos {
     flex: 1;
     padding: var(--padding-box-smaller) var(--padding-box);
+    display: flex;
+    flex-direction: column;
 }
 
 .course-head__image {
     background-color: var(--color-blue);
-    height: 180px;
-    width: 180px;
+    height: 200px;
+    width: 200px;
     border-radius: var(--border-radius-main);
     background-size: cover;
     background-position: center;
@@ -836,8 +844,10 @@ img[src*="comune-gradara"] {
     flex-direction: column;
 }
 
-.course-head__content .btn {
-    margin-top: auto;
+.course-enroll-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .course-head__title {
@@ -884,6 +894,7 @@ img[src*="comune-gradara"] {
     align-items: center;
     padding: 10px 0;
     border-bottom: solid 2px rgba(144, 149, 190, 0.2);
+    flex: 1;
 }
 
 .course-infos__row:last-child {
@@ -1327,12 +1338,12 @@ img[src*="comune-gradara"] {
 @media (max-width: 800px) {
 
     body {
-        padding-top: 60px;
+        padding-top: 90px;
     }
 
 
     .body--urbino-section {
-        padding-top: 120px;
+        padding-top: 130px;
     }
 
     .callout-uma {
@@ -1343,17 +1354,17 @@ img[src*="comune-gradara"] {
         margin: 20px 0 10px 0;
     }
 
-    .btn--callout-uma {
-        width: 100%;
-        text-align: center;
-    }
-
     .btn {
         font-size: 0.9rem;
     }
 
     .btn--small {
         padding: 12px 25px;
+    }
+
+    .btn--full {
+        width: 100%;
+        text-align: center;
     }
 
     .pre-footer {
@@ -1663,14 +1674,15 @@ img[src*="comune-gradara"] {
     }
 
     .course-head {
-        grid-template-columns: 120px 1fr;
-        grid-template-rows: 120px;
+        grid-template-columns: 140px 1fr;
+        grid-template-rows: 140px;
     }
 
     .course-head__image {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
     }
+
 
     h1 {
         font-size: 2rem;
@@ -1748,7 +1760,6 @@ img[src*="comune-gradara"] {
 
     .uma-hero__logo {
         width: 180px;
-        margin-bottom: 40px;
     }
 
     .uma-activity__logo {
