@@ -707,9 +707,16 @@ img[src*="comune-gradara"] {
     margin-bottom: 100px;
 }
 
-.text-from-admin h2, .text-from-admin h3 {
+.text-from-admin h2 {
     margin-top: 30px;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+.text-from-admin h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .news-header__date-container {
