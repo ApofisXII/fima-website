@@ -469,7 +469,7 @@ h2 {
 }
 
 .uma-header__link--active::first-letter {
-    color: var(--color-blue);
+    color: var(--color-red);
 }
 
 .uma-header__menu-toggle {
