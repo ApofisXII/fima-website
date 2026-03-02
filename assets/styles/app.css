@@ -1421,7 +1421,7 @@ img[src*="comune-gradara"] {
     .header__nav {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 20px;
         align-items: flex-start;
         justify-content: center;
         position: fixed;
@@ -1454,10 +1454,12 @@ img[src*="comune-gradara"] {
     .header__nav--open .header__nav-link:nth-child(4) { animation-delay: 0.36s; }
 
     .header__nav-link {
-        padding: 0;
+        padding: 10px 0;
         border-bottom: none;
         font-size: 1.4rem;
         opacity: 0;
+        display: block;
+        width: 100%;
     }
 
     .header__nav-link--active {
@@ -1566,7 +1568,7 @@ img[src*="comune-gradara"] {
     .uma-header__links {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 20px;
         align-items: flex-start;
         justify-content: center;
         position: fixed;
@@ -1601,9 +1603,11 @@ img[src*="comune-gradara"] {
     .uma-header__links--open .uma-header__link:nth-child(6) { animation-delay: 0.36s; }
 
     .uma-header__link {
-        padding: 0;
+        padding: 10px 0;
         font-family: 'Platypi', serif;
         font-weight: 600;
+        display: block;
+        width: 100%;
         font-size: 1.4rem;
         opacity: 0;
     }
