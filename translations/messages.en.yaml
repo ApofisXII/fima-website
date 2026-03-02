@@ -148,19 +148,19 @@ urbino_event_detail:
     info: 'Information'
 
 urbino_conferences:
-    page_title: 'Urbino Musica Antica • Conferences'
+    page_title: 'Conferences'
     heading: 'Conferences'
 
 urbino_exhibitions:
-    page_title: 'Urbino Musica Antica • Exhibitions'
+    page_title: 'Exhibitions'
     heading: 'Exhibitions'
 
 urbino_festival:
-    page_title: 'Urbino Musica Antica • Festival'
+    page_title: 'Festival'
     heading: 'Festival'
 
 urbino_informations:
-    page_title: 'Urbino Musica Antica • Information'
+    page_title: 'Enrollment'
     heading: 'How to enroll'
 
 urbino_course_detail:
@@ -182,12 +182,12 @@ schedule_type_individual: 'Individual course'
 schedule_type_ensemble: 'Ensemble course'
 
 urbino_courses:
-    page_title: 'Urbino Musica Antica • Courses'
+    page_title: 'Courses'
     heading: 'Courses'
     view_course: 'View course'
 
 urbino_welcome:
-    page_title: 'Urbino Musica Antica'
+    page_title: 'Welcome • Urbino Musica Antica'
     angels_alt: 'Decorative angels'
     edition_title: 'Urbino Musica Antica 2026'
     date_range: 'From %start% to %end%'
