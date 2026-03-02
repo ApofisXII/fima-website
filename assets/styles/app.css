@@ -649,8 +649,9 @@ img[src*="comune-gradara"] {
     font-size: 2.4rem;
     font-weight: normal;
     font-family: 'Platypi', serif;
-    color: white;
+    color: var(--color-white);
 }
+
 
 .uma-welcome__date {
     margin-top: 10px;
