@@ -10,10 +10,12 @@ use App\Service\UrbinoEventService;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Attribute\MapUploadedFile;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/admin/urbino/events')]
@@ -166,5 +168,29 @@ class AdminUrbinoEventsController extends AbstractController
         return $this->json([
             "message" => "Immagine eliminata",
         ]);
+    }
+
+    #[Route(path: '/upload-poster/{eventId}', name: 'adminUrbinoEventsUploadPoster', methods: ['POST'], format: 'json')]
+    public function adminUrbinoEventsUploadPoster(int $eventId, #[MapUploadedFile] ?UploadedFile $poster): Response
+    {
+        $event = $this->urbinoEventRepository->find($eventId);
+
+        if (!$poster) {
+            return $this->json(["message" => "Nessun file selezionato"], 400);
+        }
+
+        $this->urbinoEventService->savePoster($event, $poster);
+
+        return $this->json(["message" => "Locandina caricata"]);
+    }
+
+    #[Route(path: '/delete-poster/{eventId}', name: 'adminUrbinoEventsDeletePoster', methods: ['DELETE'], format: 'json')]
+    public function adminUrbinoEventsDeletePoster(int $eventId): Response
+    {
+        $event = $this->urbinoEventRepository->find($eventId);
+
+        $this->urbinoEventService->deletePoster($event);
+
+        return $this->json(["message" => "Locandina eliminata"]);
     }
 }

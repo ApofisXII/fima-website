@@ -102,6 +102,26 @@
             {% endif %}
         </div>
 
+        {% if event %}
+        <div class="box multi-detail-box gg-form">
+            <h3>Locandina (PDF)</h3>
+
+            {% if event.hasPoster %}
+                <p><a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank">Visualizza locandina caricata</a></p>
+            {% endif %}
+
+            <label>Carica locandina</label>
+            <input type="file" id="poster-input" accept="application/pdf">
+
+            <div class="gg-action-btn-group">
+                <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva locandina</button>
+                {% if event.hasPoster %}
+                    <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina locandina</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
         <div class="box multi-detail-box gg-form">
             <h3>Impostazioni</h3>
 
@@ -321,6 +341,50 @@
                 });
             });
             {% endif %}
+
+        const uploadPosterBtn = document.getElementById('upload-poster-btn');
+        const posterInput = document.getElementById('poster-input');
+
+        uploadPosterBtn.addEventListener('click', function() {
+            if (!posterInput.files || !posterInput.files[0]) {
+                alert('Seleziona prima un file PDF');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('poster', posterInput.files[0]);
+
+            fetch('{{ path('adminUrbinoEventsUploadPoster', {'eventId': event.id}) }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+
+        {% if event.hasPoster %}
+        document.getElementById('delete-poster-btn').addEventListener('click', function() {
+            if (!confirm('Confermi di voler eliminare la locandina?')) return;
+
+            fetch('{{ path('adminUrbinoEventsDeletePoster', {'eventId': event.id}) }}', {
+                method: 'DELETE'
+            })
+            .then(async response => {
+                const data = await response.json();
+                if (!response.ok) { alert(data.message); return null; }
+                return data;
+            })
+            .then(data => {
+                if (data) location.reload();
+            });
+        });
+        {% endif %}
         {% endif %}
     </script>
 

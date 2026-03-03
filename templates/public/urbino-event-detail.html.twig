@@ -40,12 +40,17 @@
         {% endif %}
     </div>
 
-    {% if event.descriptionIt or event.descriptionEn %}
+    {% if event.descriptionIt or event.descriptionEn or event.hasPoster %}
         <div class="container box box--with-margin-top">
-            <div class="box-title">{{ 'urbino_event_detail.info'|trans }}</div>
-            <div>
-                {{ (app.request.locale == 'it' ? event.descriptionIt : event.descriptionEn|default(event.descriptionIt))|raw }}
-            </div>
+            {% if event.descriptionIt or event.descriptionEn %}
+                <div class="box-title">{{ 'urbino_event_detail.info'|trans }}</div>
+                <div class="text-from-admin">
+                    {{ (app.request.locale == 'it' ? event.descriptionIt : event.descriptionEn|default(event.descriptionIt))|raw }}
+                </div>
+            {% endif %}
+            {% if event.hasPoster %}
+                <a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank" rel="noopener" class="btn btn--small">{{ 'news_detail.open_poster'|trans }}</a>
+            {% endif %}
         </div>
     {% endif %}
 
