@@ -200,6 +200,7 @@ urbino_welcome:
 
 news_detail:
     published_on: 'Published on %date%'
+    open_poster: 'Open poster'
 
 news_list:
     page_title: 'News & Events'

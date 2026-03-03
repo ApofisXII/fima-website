@@ -23,6 +23,9 @@
 
     <div class="container text-from-admin text-from-admin--article">
         {{ (app.request.locale == 'it' ? news.bodyIt : news.bodyEn)|raw }}
+        {% if news.hasPoster %}
+            <a href="{{ asset('uploads-news/posters/' ~ news.id ~ '.pdf') }}" target="_blank" rel="noopener" class="btn btn--blue btn--small">{{ 'news_detail.open_poster'|trans }}</a>
+        {% endif %}
     </div>
 
 {% endblock %}

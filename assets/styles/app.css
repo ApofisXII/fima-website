@@ -292,6 +292,7 @@ h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+    margin-top: 40px;
 }
 
 .news-box {
@@ -354,6 +355,11 @@ h2 {
     font-weight: var(--font-bold-weight-sans-serif);
     text-transform: uppercase;
     letter-spacing: 0.02rem;
+}
+
+.btn--blue {
+    background-color: var(--color-blue);
+    box-shadow: 0 5px 15px rgba(24, 64, 126, 0.3);
 }
 
 
@@ -703,8 +709,12 @@ img[src*="comune-gradara"] {
 
 .text-from-admin--article {
     max-width: 700px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.text-from-admin--article .btn {
     margin-top: 40px;
-    margin-bottom: 100px;
 }
 
 .text-from-admin h2 {
@@ -1070,6 +1080,7 @@ img[src*="comune-gradara"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+    margin-top: 40px;
 }
 
 .uma-event-box {
@@ -1776,6 +1787,17 @@ img[src*="comune-gradara"] {
 
     .uma-activity__logo {
         height: 90px;
+    }
+
+    .text-from-admin--article {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .text-from-admin--article .btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
     }
 
 }
