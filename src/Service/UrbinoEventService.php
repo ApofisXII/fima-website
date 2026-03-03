@@ -66,7 +66,7 @@ final readonly class UrbinoEventService
 
     public function saveCoverImage(UrbinoEvent $event, UploadedFile $uploadedFile): UrbinoEvent
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/images/';
         $imageName = $event->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 
@@ -82,7 +82,7 @@ final readonly class UrbinoEventService
 
     public function deleteCoverImage(UrbinoEvent $event): UrbinoEvent
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/images/';
         $imageName = $event->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 

@@ -88,7 +88,7 @@
         <div class="box multi-detail-box gg-form">
             <h3>Immagine di copertina</h3>
             {% if event and event.hasCoverImage %}
-                <img class="gg-admin-copertina" alt="Copertina evento" src="{{ asset('uploads-uma-event/'~event.id~'.webp') }}?v={{ random(1,9999) }}">
+                <img class="gg-admin-copertina" alt="Copertina evento" src="{{ asset('uploads-uma-event/images/'~event.id~'.webp') }}?v={{ random(1,9999) }}">
             {% endif %}
             <label>Carica immagine</label>
             <input type="file" name="coverImage" id="cover-image-input" accept="image/*">
