@@ -102,21 +102,21 @@
             {% endif %}
         </div>
 
-        {% if event %}
+        {% if event and event.category == 'event_category_festival' %}
         <div class="box multi-detail-box gg-form">
-            <h3>Locandina (PDF)</h3>
+            <h3>Programma di sala (PDF)</h3>
 
             {% if event.hasPoster %}
-                <p><a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank">Visualizza locandina caricata</a></p>
+                <p><a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank">Visualizza programma di sala caricato</a></p>
             {% endif %}
 
-            <label>Carica locandina</label>
+            <label>Carica programma di sala</label>
             <input type="file" id="poster-input" accept="application/pdf">
 
             <div class="gg-action-btn-group">
-                <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva locandina</button>
+                <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva programma di sala</button>
                 {% if event.hasPoster %}
-                    <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina locandina</button>
+                    <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina programma di sala</button>
                 {% endif %}
             </div>
         </div>

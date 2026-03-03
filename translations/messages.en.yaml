@@ -146,6 +146,7 @@ urbino_event_detail:
     at_time: 'at'
     tickets: 'Get tickets'
     info: 'Information'
+    open_programme: 'Open the programme'
 
 urbino_conferences:
     page_title: 'Conferences'

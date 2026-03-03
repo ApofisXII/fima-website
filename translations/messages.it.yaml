@@ -146,6 +146,7 @@ urbino_event_detail:
     at_time: 'ore'
     tickets: 'Vedi biglietti'
     info: 'Informazioni'
+    open_programme: 'Apri il programma di sala'
 
 urbino_conferences:
     page_title: 'Convegni'
