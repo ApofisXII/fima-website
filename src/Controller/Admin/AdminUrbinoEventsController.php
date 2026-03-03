@@ -99,7 +99,7 @@ class AdminUrbinoEventsController extends AbstractController
     }
 
     #[Route(path: '/detail', name: 'adminUrbinoEventsDetailSave', methods: ['POST'], format: 'json')]
-    public function adminUrbinoEventsDetailSave(#[MapRequestPayload] UrbinoEventRequestDTO $payload): Response
+    public function adminUrbinoEventsDetailSave(#[MapRequestPayload] UrbinoEventRequestDTO $payload, #[MapUploadedFile] ?UploadedFile $poster): Response
     {
         $event = $this->urbinoEventRepository->findOneBy(["id" => $payload->eventId]);
 
@@ -107,6 +107,10 @@ class AdminUrbinoEventsController extends AbstractController
             $event = $this->urbinoEventService->create($payload);
         } else {
             $event = $this->urbinoEventService->update($event, $payload);
+        }
+
+        if ($poster) {
+            $this->urbinoEventService->savePoster($event, $poster);
         }
 
         return $this->json([

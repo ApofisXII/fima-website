@@ -4,7 +4,7 @@
 
     <div class="gg-h1">{{ event ? 'Modifica' : 'Nuovo' }} evento</div>
 
-    <form id="page-form" method="post" action="{{ path('adminUrbinoEventsDetailSave') }}">
+    <form id="page-form" method="post" action="{{ path('adminUrbinoEventsDetailSave') }}" enctype="multipart/form-data">
         <input type="hidden" name="eventId" value="{{ event ? event.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
@@ -13,7 +13,7 @@
             <div class="gg-form-row gg-form-row--two">
                 <div class="gg-form-row__main">
                     <label>Categoria</label>
-                    <select name="category" required>
+                    <select name="category" id="category-select" required>
                         <option value="">Seleziona categoria</option>
                         <option value="event_category_festival" {{ event and event.category == 'event_category_festival' ? 'selected' }}>Festival</option>
                         <option value="event_category_exhibition" {{ event and event.category == 'event_category_exhibition' ? 'selected' }}>Mostra</option>
@@ -102,25 +102,26 @@
             {% endif %}
         </div>
 
-        {% if event and event.category == 'event_category_festival' %}
-        <div class="box multi-detail-box gg-form">
+        <div id="poster-section" class="box multi-detail-box gg-form" style="display: none;">
             <h3>Programma di sala (PDF)</h3>
 
-            {% if event.hasPoster %}
+            {% if event and event.hasPoster %}
                 <p><a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank">Visualizza programma di sala caricato</a></p>
             {% endif %}
 
             <label>Carica programma di sala</label>
-            <input type="file" id="poster-input" accept="application/pdf">
-
-            <div class="gg-action-btn-group">
-                <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva programma di sala</button>
-                {% if event.hasPoster %}
-                    <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina programma di sala</button>
-                {% endif %}
-            </div>
+            {% if event %}
+                <input type="file" id="poster-input" accept="application/pdf">
+                <div class="gg-action-btn-group">
+                    <button type="button" id="upload-poster-btn" class="gg-action-btn hoverizzato">Salva programma di sala</button>
+                    {% if event.hasPoster %}
+                        <button type="button" id="delete-poster-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina programma di sala</button>
+                    {% endif %}
+                </div>
+            {% else %}
+                <input type="file" name="poster" accept="application/pdf">
+            {% endif %}
         </div>
-        {% endif %}
 
         <div class="box multi-detail-box gg-form">
             <h3>Impostazioni</h3>
@@ -196,6 +197,16 @@
             custom_colors: false,
             content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
         });
+
+        const categorySelect = document.getElementById('category-select');
+        const posterSection = document.getElementById('poster-section');
+
+        function updatePosterVisibility() {
+            posterSection.style.display = categorySelect.value === 'event_category_festival' ? 'block' : 'none';
+        }
+
+        categorySelect.addEventListener('change', updatePosterVisibility);
+        updatePosterVisibility();
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
