@@ -53,4 +53,7 @@ return [
         'version' => '1.5.1',
         'type' => 'css',
     ],
+    'tinymce-config' => [
+        'path' => './assets/tinymce-config.js',
+    ],
 ];

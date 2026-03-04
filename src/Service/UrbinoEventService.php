@@ -66,7 +66,7 @@ final readonly class UrbinoEventService
 
     public function saveCoverImage(UrbinoEvent $event, UploadedFile $uploadedFile): UrbinoEvent
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/images/';
         $imageName = $event->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 
@@ -82,7 +82,7 @@ final readonly class UrbinoEventService
 
     public function deleteCoverImage(UrbinoEvent $event): UrbinoEvent
     {
-        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/';
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/images/';
         $imageName = $event->getId() . '.webp';
         $imagePath = $serverPath . $imageName;
 
@@ -92,6 +92,34 @@ final readonly class UrbinoEventService
 
         $event->setHasCoverImage(false);
         $event->setUpdatedAt(new DateTime());
+        $this->urbinoEventRepository->save($event);
+
+        return $event;
+    }
+
+    public function savePoster(UrbinoEvent $event, UploadedFile $uploadedFile): UrbinoEvent
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/posters/';
+        $fileName = $event->getId() . '.pdf';
+
+        $uploadedFile->move($serverPath, $fileName);
+
+        $event->setHasPoster(true);
+        $this->urbinoEventRepository->save($event);
+
+        return $event;
+    }
+
+    public function deletePoster(UrbinoEvent $event): UrbinoEvent
+    {
+        $serverPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-uma-event/posters/';
+        $filePath = $serverPath . $event->getId() . '.pdf';
+
+        if ($this->filesystem->exists($filePath)) {
+            $this->filesystem->remove($filePath);
+        }
+
+        $event->setHasPoster(false);
         $this->urbinoEventRepository->save($event);
 
         return $event;
