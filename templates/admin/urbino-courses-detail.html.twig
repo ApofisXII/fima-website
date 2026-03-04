@@ -244,6 +244,7 @@
     </script>
 
     <script type="module">
+        import { fimaInitTinymce } from 'tinymce-config';
         // Restore scroll position after reload
         const savedScrollPosition = sessionStorage.getItem('courseDetailScrollPosition');
         if (savedScrollPosition) {
@@ -350,25 +351,10 @@
         });
 
         const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
-        tinymce.init({
+        fimaInitTinymce({
+            fontUrl,
             selector: 'textarea',
-            menubar: false,
             toolbar: 'bold italic underline forecolor | alignleft aligncenter alignright | link bullist numlist removeformat',
-            toolbar_mode: 'wrap',
-            plugins: 'link | lists | paste',
-            branding: false,
-            paste_as_text: true,
-            statusbar: false,
-            color_map: [
-                '000000', 'Nero',
-                '18407E', 'Blu FIMA',
-                '9095BE', 'Blu chiaro',
-                'D62725', 'Rosso',
-                'FBBB21', 'Giallo',
-            ],
-            color_cols: 5,
-            custom_colors: false,
-            content_style: `@font-face { font-family: "Sofia Sans"; src: url("${fontUrl}") format("truetype"); font-weight: 100 900; } body { font-family: "Sofia Sans", sans-serif; background-color: #F3F5F9; } body[data-mce-placeholder]:not(.mce-visualblocks)::before { opacity: 0.5; color: #999; font-size: 0.9rem; }`,
         });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
