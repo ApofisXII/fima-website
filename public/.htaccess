@@ -6,9 +6,7 @@
 DirectoryIndex index.php
 
 <IfModule mod_security2.c>
-    <LocationMatch "^/admin/">
-        SecRuleEngine Off
-    </LocationMatch>
+    SecRule REQUEST_URI "@beginsWith /admin/" "id:1000,phase:1,pass,nolog,ctl:ruleEngine=Off"
 </IfModule>
 
 # By default, Apache does not evaluate symbolic links if you did not enable this
