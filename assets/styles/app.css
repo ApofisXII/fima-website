@@ -1795,8 +1795,7 @@ img[src*="comune-gradara"] {
         margin-bottom: 40px;
     }
 
-    .text-from-admin--article .btn,
-    .box .btn {
+    .text-from-admin--article .btn {
         width: 100%;
         text-align: center;
         margin-top: 30px;

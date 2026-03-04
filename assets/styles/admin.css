@@ -420,6 +420,32 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     border: 1px solid #EBEBEB !important;
 }
 
+.gg-form .ql-toolbar.ql-snow {
+    border: none;
+    border-radius: 10px 10px 0 0;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.gg-form .ql-container.ql-snow {
+    border: none;
+    border-radius: 0 0 10px 10px;
+    background-color: var(--color-selected);
+    font-size: inherit;
+    font-family: inherit;
+    min-height: 200px;
+}
+
+.gg-form .ql-editor {
+    min-height: 200px;
+    outline: none !important;
+}
+
+.gg-form .ql-editor:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .tox-edit-area::placeholder,
 .tox-edit-area__iframe::placeholder {
     opacity: 0.5 !important;
@@ -492,7 +518,7 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
 .gg-form-row {
     display: flex;
     gap: 20px;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 

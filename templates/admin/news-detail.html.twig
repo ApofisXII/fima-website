@@ -44,11 +44,13 @@
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
                         <label>Corpo (italiano)</label>
-                        <textarea name="bodyIt" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (italiano)">{{ news ? news.bodyIt|raw }}</textarea>
+                        <div id="editor-it">{{ news ? news.bodyIt|raw }}</div>
+                        <input type="hidden" name="bodyIt" id="bodyIt">
                     </div>
                     <div class="gg-form-row__main">
                         <label>Corpo (inglese)</label>
-                        <textarea name="bodyEn" class="tiny-area" placeholder="Scrivi qui il corpo della notizia (inglese)">{{ news ? news.bodyEn|raw }}</textarea>
+                        <div id="editor-en">{{ news ? news.bodyEn|raw }}</div>
+                        <input type="hidden" name="bodyEn" id="bodyEn">
                     </div>
                 </div>
             </div>
@@ -144,21 +146,32 @@
 
 {% block js %}
 
-    <script src="https://cdn.tiny.cloud/1/{{ tinymce_apikey }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
     <script type="module">
-        import { fimaInitTinymce } from 'tinymce-config';
-        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
-        fimaInitTinymce({
-            fontUrl,
-            selector: 'textarea',
-            toolbar: 'blocks | bold italic underline forecolor | alignleft aligncenter alignright | link bullist numlist removeformat',
-            block_formats: 'Paragrafo=p; Titoletto=h2; Titoletto secondario=h3',
-        });
+        import Quill from 'quill';
+
+        const quillConfig = {
+            modules: {
+                toolbar: [
+                    [{ header: [2, 3, false] }],
+                    ['bold', 'italic', 'underline', { color: [] }],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link'],
+                    ['clean']
+                ]
+            },
+            placeholder: 'Scrivi qui...',
+            theme: 'snow'
+        };
+
+        const quillIt = new Quill('#editor-it', quillConfig);
+        const quillEn = new Quill('#editor-en', quillConfig);
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            tinymce.triggerSave(true, true);
+
+            document.getElementById('bodyIt').value = quillIt.root.innerHTML;
+            document.getElementById('bodyEn').value = quillEn.root.innerHTML;
 
             fetch('{{ path('adminNewsDetailSave') }}', {
                 method: 'POST',
