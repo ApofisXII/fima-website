@@ -51,6 +51,7 @@ class AdminUrbinoEventsController extends AbstractController
 
         $qb = $this->urbinoEventRepository->createQueryBuilder("e")
             ->leftJoin("e.urbino_edition", "ed")
+            ->andWhere("e.is_deleted = false")
             ->orderBy($orderColumn, $orderDir);
 
         if ($payload->search["value"]) {
