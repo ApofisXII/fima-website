@@ -50,6 +50,7 @@ class AdminNewsController extends AbstractController
 
         $qb = $this->newsRepository->createQueryBuilder("n")
             ->leftJoin("n.news_category", "c")
+            ->andWhere("n.is_deleted = false")
             ->orderBy($orderColumn, $orderDir);
 
         if ($payload->search["value"]) {
