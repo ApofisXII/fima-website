@@ -148,30 +148,20 @@
 
 
     <script type="module">
-        import Quill from 'quill';
+        import { fimaInitQuill, fimaQuillSync } from 'quill-config';
 
-        const quillConfig = {
-            modules: {
-                toolbar: [
-                    [{ header: [2, 3, false] }],
-                    ['bold', 'italic', 'underline', { color: [] }],
-                    [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['link'],
-                    ['clean']
-                ]
-            },
-            placeholder: 'Scrivi qui...',
-            theme: 'snow'
-        };
-
-        const quillIt = new Quill('#editor-it', quillConfig);
-        const quillEn = new Quill('#editor-en', quillConfig);
+        const editors = fimaInitQuill({
+            editors: [
+                { editorId: 'editor-it', inputId: 'bodyIt', placeholder: 'Scrivi qui il corpo della notizia (italiano)...' },
+                { editorId: 'editor-en', inputId: 'bodyEn', placeholder: 'Scrivi qui il corpo della notizia (inglese)...' }
+            ],
+            withStyles: true
+        });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            document.getElementById('bodyIt').value = quillIt.root.innerHTML;
-            document.getElementById('bodyEn').value = quillEn.root.innerHTML;
+            fimaQuillSync(editors);
 
             fetch('{{ path('adminNewsDetailSave') }}', {
                 method: 'POST',

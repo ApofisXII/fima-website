@@ -53,8 +53,8 @@ return [
         'version' => '1.5.1',
         'type' => 'css',
     ],
-    'tinymce-config' => [
-        'path' => './assets/tinymce-config.js',
+    'quill-config' => [
+        'path' => './assets/quill-config.js',
     ],
     'quill' => [
         'version' => '2.0.3',
