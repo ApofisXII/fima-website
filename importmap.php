@@ -84,4 +84,8 @@ return [
         'version' => '2.0.3',
         'type' => 'css',
     ],
+    'quill/dist/quill.core.css' => [
+        'version' => '2.0.3',
+        'type' => 'css',
+    ],
 ];

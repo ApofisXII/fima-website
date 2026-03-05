@@ -300,6 +300,11 @@ div.dt-container .dt-paging .dt-paging-button.current:hover {
     background-color: var(--color-selected);
     font-size: inherit;
     outline: none;
+    color: inherit;
+}
+
+.gg-form select option {
+    color: #000;
 }
 
 .gg-form input[type="datetime-local"],
