@@ -87,21 +87,25 @@
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
                         <label>Programma e informazioni (italiano)</label>
-                        <textarea name="programDescriptionIt" class="tiny-area" placeholder="Scrivi qui programma e informazioni (italiano)">{{ course ? course.programDescriptionIt|raw }}</textarea>
+                        <div id="editor-programDescriptionIt">{{ course ? course.programDescriptionIt|raw }}</div>
+                        <input type="hidden" name="programDescriptionIt" id="programDescriptionIt">
                     </div>
                     <div class="gg-form-row__main">
                         <label>Programma e informazioni (inglese)</label>
-                        <textarea name="programDescriptionEn" class="tiny-area" placeholder="Scrivi qui programma e informazioni (inglese)">{{ course ? course.programDescriptionEn|raw }}</textarea>
+                        <div id="editor-programDescriptionEn">{{ course ? course.programDescriptionEn|raw }}</div>
+                        <input type="hidden" name="programDescriptionEn" id="programDescriptionEn">
                     </div>
                 </div>
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
                         <label>Biografia docente (italiano)</label>
-                        <textarea name="bioDescriptionIt" class="tiny-area" placeholder="Scrivi qui la biografia del docente (italiano)">{{ course ? course.bioDescriptionIt|raw }}</textarea>
+                        <div id="editor-bioDescriptionIt">{{ course ? course.bioDescriptionIt|raw }}</div>
+                        <input type="hidden" name="bioDescriptionIt" id="bioDescriptionIt">
                     </div>
                     <div class="gg-form-row__main">
                         <label>Biografia docente (inglese)</label>
-                        <textarea name="bioDescriptionEn" class="tiny-area" placeholder="Scrivi qui la biografia del docente (inglese)">{{ course ? course.bioDescriptionEn|raw }}</textarea>
+                        <div id="editor-bioDescriptionEn">{{ course ? course.bioDescriptionEn|raw }}</div>
+                        <input type="hidden" name="bioDescriptionEn" id="bioDescriptionEn">
                     </div>
                 </div>
             </div>
@@ -200,8 +204,6 @@
 
 {% block js %}
 
-    <script src="https://cdn.tiny.cloud/1/{{ tinymce_apikey }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-
     <script>
         const editionSelect = document.getElementById('edition-select');
         const dateStartInput = document.getElementById('date-start');
@@ -244,7 +246,7 @@
     </script>
 
     <script type="module">
-        import { fimaInitTinymce } from 'tinymce-config';
+        import { fimaInitQuill, fimaQuillSync } from 'quill-config';
         // Restore scroll position after reload
         const savedScrollPosition = sessionStorage.getItem('courseDetailScrollPosition');
         if (savedScrollPosition) {
@@ -350,16 +352,19 @@
             });
         });
 
-        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
-        fimaInitTinymce({
-            fontUrl,
-            selector: 'textarea',
-            toolbar: 'bold italic underline forecolor | alignleft aligncenter alignright | link bullist numlist removeformat',
+        const editors = fimaInitQuill({
+            editors: [
+                { editorId: 'editor-programDescriptionIt', inputId: 'programDescriptionIt', placeholder: 'Scrivi qui programma e informazioni (italiano)' },
+                { editorId: 'editor-programDescriptionEn', inputId: 'programDescriptionEn', placeholder: 'Scrivi qui programma e informazioni (inglese)' },
+                { editorId: 'editor-bioDescriptionIt', inputId: 'bioDescriptionIt', placeholder: 'Scrivi qui la biografia del docente (italiano)' },
+                { editorId: 'editor-bioDescriptionEn', inputId: 'bioDescriptionEn', placeholder: 'Scrivi qui la biografia del docente (inglese)' }
+            ],
+            withStyles: false
         });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            tinymce.triggerSave(true, true);
+            fimaQuillSync(editors);
 
             fetch('{{ path('adminUrbinoCoursesDetailSave') }}', {
                 method: 'POST',

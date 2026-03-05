@@ -55,11 +55,13 @@
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
                         <label>Informazioni - iscrizione e alloggio (italiano)</label>
-                        <textarea name="enrollmentInfoIt" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (italiano)">{{ edition ? edition.enrollmentInfoIt|raw }}</textarea>
+                        <div id="editor-enrollmentInfoIt">{{ edition ? edition.enrollmentInfoIt|raw }}</div>
+                        <input type="hidden" name="enrollmentInfoIt" id="enrollmentInfoIt">
                     </div>
                     <div class="gg-form-row__main">
                         <label>Informazioni - iscrizione e alloggio (inglese)</label>
-                        <textarea name="enrollmentInfoEn" class="tiny-area" placeholder="Scrivi qui le informazioni per i partecipanti (inglese)">{{ edition ? edition.enrollmentInfoEn|raw }}</textarea>
+                        <div id="editor-enrollmentInfoEn">{{ edition ? edition.enrollmentInfoEn|raw }}</div>
+                        <input type="hidden" name="enrollmentInfoEn" id="enrollmentInfoEn">
                     </div>
                 </div>
             </div>
@@ -110,21 +112,20 @@
 
 {% block js %}
 
-    <script src="https://cdn.tiny.cloud/1/{{ tinymce_apikey }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-
     <script type="module">
-        import { fimaInitTinymce } from 'tinymce-config';
-        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
-        fimaInitTinymce({
-            fontUrl,
-            selector: '.tiny-area',
-            toolbar: 'blocks | bold italic underline forecolor | alignleft aligncenter alignright | link bullist numlist removeformat',
-            block_formats: 'Paragrafo=p; Titoletto=h2; Titoletto secondario=h3',
+        import { fimaInitQuill, fimaQuillSync } from 'quill-config';
+
+        const editors = fimaInitQuill({
+            editors: [
+                { editorId: 'editor-enrollmentInfoIt', inputId: 'enrollmentInfoIt', placeholder: 'Scrivi qui le informazioni per i partecipanti (italiano)' },
+                { editorId: 'editor-enrollmentInfoEn', inputId: 'enrollmentInfoEn', placeholder: 'Scrivi qui le informazioni per i partecipanti (inglese)' }
+            ],
+            withStyles: true
         });
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            tinymce.triggerSave(true, true);
+            fimaQuillSync(editors);
 
             const formData = new FormData(e.target);
 

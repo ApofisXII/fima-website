@@ -50,7 +50,7 @@
     {% if course.programDescriptionIt or course.programDescriptionEn %}
         <div class="container box box--with-margin-top">
             <div class="box-title">{{ 'urbino_course_detail.program'|trans }}</div>
-            <div>
+            <div class="text-from-admin">
                 {{ (app.request.locale == 'it' ? course.programDescriptionIt : course.programDescriptionEn)|raw }}
             </div>
         </div>
@@ -59,7 +59,7 @@
     {% if course.bioDescriptionIt or course.bioDescriptionEn %}
         <div class="container box box--with-margin-top">
             <div class="box-title">{{ 'urbino_course_detail.biography'|trans }}</div>
-            <div>
+            <div class="text-from-admin">
                 {{ (app.request.locale == 'it' ? course.bioDescriptionIt : course.bioDescriptionEn)|raw }}
             </div>
         </div>

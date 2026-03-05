@@ -60,11 +60,13 @@
                 <div class="gg-form-row gg-form-row--two">
                     <div class="gg-form-row__main">
                         <label>Descrizione (italiano)</label>
-                        <textarea name="descriptionIt" class="tiny-area" placeholder="Scrivi qui la descrizione (italiano)">{{ event ? event.descriptionIt|raw }}</textarea>
+                        <div id="editor-descriptionIt">{{ event ? event.descriptionIt|raw }}</div>
+                        <input type="hidden" name="descriptionIt" id="descriptionIt">
                     </div>
                     <div class="gg-form-row__main">
                         <label>Descrizione (inglese)</label>
-                        <textarea name="descriptionEn" class="tiny-area" placeholder="Scrivi qui la descrizione (inglese)">{{ event ? event.descriptionEn|raw }}</textarea>
+                        <div id="editor-descriptionEn">{{ event ? event.descriptionEn|raw }}</div>
+                        <input type="hidden" name="descriptionEn" id="descriptionEn">
                     </div>
                 </div>
             </div>
@@ -172,16 +174,15 @@
 
 {% block js %}
 
-    <script src="https://cdn.tiny.cloud/1/{{ tinymce_apikey }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-
     <script type="module">
-        import { fimaInitTinymce } from 'tinymce-config';
-        const fontUrl = '{{ asset("fonts/SofiaSans-VariableFont_wght.ttf") }}';
-        fimaInitTinymce({
-            fontUrl,
-            selector: 'textarea',
-            toolbar: 'blocks | bold italic underline forecolor | alignleft aligncenter alignright | link bullist numlist removeformat',
-            block_formats: 'Paragrafo=p; Titoletto=h2; Titoletto secondario=h3',
+        import { fimaInitQuill, fimaQuillSync } from 'quill-config';
+
+        const editors = fimaInitQuill({
+            editors: [
+                { editorId: 'editor-descriptionIt', inputId: 'descriptionIt', placeholder: 'Scrivi qui la descrizione (italiano)' },
+                { editorId: 'editor-descriptionEn', inputId: 'descriptionEn', placeholder: 'Scrivi qui la descrizione (inglese)' }
+            ],
+            withStyles: true
         });
 
         const categorySelect = document.getElementById('category-select');
@@ -196,7 +197,7 @@
 
         document.getElementById('page-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            tinymce.triggerSave(true, true);
+            fimaQuillSync(editors);
 
             fetch('{{ path('adminUrbinoEventsDetailSave') }}', {
                 method: 'POST',
