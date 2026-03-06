@@ -1783,6 +1783,15 @@ img[src*="comune-gradara"] {
 
     .uma-event-box__overlay {
         height: auto;
+        padding: 15px;
+    }
+
+    .uma-event-box__day-box, .uma-event-box__hour-box {
+        width: 62px;
+        font-size: 0.8rem;
+        padding: 5px;
+        border-radius: 8px;
+        margin-bottom: 6px;
     }
 
     .uma-event-box__title {
@@ -1868,6 +1877,25 @@ img[src*="comune-gradara"] {
 
     .news-grid {
         margin-top: 10px;
+    }
+
+    .news-box__inner {
+        padding: 15px;
+    }
+
+    .news-box__date-container {
+        height: 70px;
+    }
+
+    .news-box__date-box {
+        width: 55px;
+        height: 55px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    .news-box__day {
+        font-size: 1.1rem;
     }
 
     .library-intro {
