@@ -13,6 +13,7 @@
 
                 <h2>{{ app.request.locale == 'it' ? courseInCategory.category.nameIt : courseInCategory.category.nameEn }}</h2>
                 <div class="courses-grid">
+                    <div class="courses-grid__track">
                     {% for course in courseInCategory.courses %}
                         <div class="course-box" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}>
                             <div class="course-box__inner">
@@ -27,6 +28,7 @@
                             </div>
                         </div>
                     {% endfor %}
+                    </div>
                 </div>
 
             {% endfor %}

@@ -800,6 +800,10 @@ img[src*="comune-gradara"] {
     margin-bottom: 50px;
 }
 
+.courses-grid__track {
+    display: contents;
+}
+
 .course-box {
     background: var(--color-blue);
     border-radius: var(--border-radius-main);
@@ -1710,7 +1714,37 @@ img[src*="comune-gradara"] {
     }
 
     .courses-grid {
-        grid-template-columns: 1fr;
+        display: block;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 5vw;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: unset;
+        margin-left: calc(50% - 50vw);
+        width: 100vw;
+        scrollbar-width: none;
+    }
+
+    .courses-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .courses-grid__track {
+        display: flex;
+        gap: 16px;
+        padding-left: 5vw;
+        padding-right: 0;
+    }
+
+    .courses-grid .course-box {
+        flex: 0 0 80vw;
+        scroll-snap-align: start;
+    }
+
+    .courses-grid__track::after {
+        content: '';
+        flex-shrink: 0;
+        width: calc(5vw - 16px);
     }
 
     .course-top {

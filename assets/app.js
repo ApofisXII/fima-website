@@ -92,4 +92,5 @@ document.addEventListener('DOMContentLoaded', function () {
     if (umaLinks) {
         initSlidingIndicator(umaLinks, '.uma-header__link', '.uma-header__link--active', '.uma-header__indicator', null);
     }
+
 });
