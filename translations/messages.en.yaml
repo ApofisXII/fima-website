@@ -6,8 +6,8 @@ home:
         description: 'Urbino Musica Antica has long been a landmark for lovers of early music. Set against the magnificent backdrop of this important medieval city, for nine days participants sing, play and dance, alternating individual morning lessons with many afternoon group activities, including orchestra, consort, chamber music, polyphony, oratorio workshop, and Renaissance and Baroque dance.'
         cta: 'Discover Urbino Musica Antica'
     news:
-        title: 'News and events'
-        view_all: 'See all news'
+        title: 'Events'
+        view_all: 'See all events'
         view_all_icon_alt: 'See'
     partners:
         contribute:
@@ -204,7 +204,7 @@ news_detail:
     open_poster: 'Open poster'
 
 news_list:
-    page_title: 'News & Events'
+    page_title: 'Events'
 
 news_box:
     published_on: 'Published on %date%'
