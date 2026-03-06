@@ -11,7 +11,7 @@
         <div>
             {% for courseInCategory in coursesInCategories %}
 
-                <h2>{{ app.request.locale == 'it' ? courseInCategory.category.nameIt : courseInCategory.category.nameEn }}</h2>
+                <h2 class="courses-category-title">{{ app.request.locale == 'it' ? courseInCategory.category.nameIt : courseInCategory.category.nameEn }}</h2>
                 <div class="courses-grid">
                     <div class="courses-grid__track">
                     {% for course in courseInCategory.courses %}
