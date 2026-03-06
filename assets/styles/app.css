@@ -292,7 +292,7 @@ h2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .news-box {
@@ -488,7 +488,7 @@ h2 {
     align-items: center;
     justify-content: flex-start;
     gap: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
 }
 
 .callout-uma__logo {
@@ -800,6 +800,10 @@ img[src*="comune-gradara"] {
     margin-bottom: 50px;
 }
 
+.courses-grid__track {
+    display: contents;
+}
+
 .course-box {
     background: var(--color-blue);
     border-radius: var(--border-radius-main);
@@ -972,6 +976,7 @@ img[src*="comune-gradara"] {
 /* Library */
 .library-intro {
     margin-bottom: 40px;
+    padding-top: 20px;
 }
 
 .library-intro p {
@@ -1363,6 +1368,10 @@ img[src*="comune-gradara"] {
 /* RESPONSIVE MOBILE MEDIA QUERY */
 @media (max-width: 800px) {
 
+    .container--text {
+        width: 85%;
+    }
+
     body {
         padding-top: 90px;
     }
@@ -1490,8 +1499,12 @@ img[src*="comune-gradara"] {
     }
 
     .home-hero__title {
-        font-size: 3rem;
+        font-size: 2.8rem;
         width: 100%;
+    }
+
+    .home-hero__since {
+        font-size: 1.3rem;
     }
 
     .home-hero {
@@ -1518,6 +1531,10 @@ img[src*="comune-gradara"] {
         font-size: 1.4rem;
     }
 
+    .courses-category-title {
+        font-size: 1.5rem;
+    }
+
     .section-home {
         margin-bottom: 50px;
     }
@@ -1531,6 +1548,16 @@ img[src*="comune-gradara"] {
         margin-top: 10px;
     }
 
+    .library-collections h2,
+    .library-classification h2 {
+        text-align: center;
+    }
+
+    .library-collections h3,
+    .library-classification h3 {
+        text-align: left;
+    }
+
     .library-info-strip {
         display: flex;
         flex-direction: column;
@@ -1538,6 +1565,7 @@ img[src*="comune-gradara"] {
 
     .library-collections__grid {
         grid-template-columns: 1fr;
+        gap: unset;
     }
 
     .library-bottom {
@@ -1690,7 +1718,37 @@ img[src*="comune-gradara"] {
     }
 
     .courses-grid {
-        grid-template-columns: 1fr;
+        display: block;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 5vw;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: unset;
+        margin-left: calc(50% - 50vw);
+        width: 100vw;
+        scrollbar-width: none;
+    }
+
+    .courses-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .courses-grid__track {
+        display: flex;
+        gap: 16px;
+        padding-left: 5vw;
+        padding-right: 0;
+    }
+
+    .courses-grid .course-box {
+        flex: 0 0 80vw;
+        scroll-snap-align: start;
+    }
+
+    .courses-grid__track::after {
+        content: '';
+        flex-shrink: 0;
+        width: calc(5vw - 16px);
     }
 
     .course-top {
@@ -1716,6 +1774,7 @@ img[src*="comune-gradara"] {
 
     h1 {
         font-size: 2rem;
+        margin-top: 60px;
     }
 
     .events-grid {
@@ -1724,6 +1783,15 @@ img[src*="comune-gradara"] {
 
     .uma-event-box__overlay {
         height: auto;
+        padding: 15px;
+    }
+
+    .uma-event-box__day-box, .uma-event-box__hour-box {
+        width: 62px;
+        font-size: 0.8rem;
+        padding: 5px;
+        border-radius: 8px;
+        margin-bottom: 6px;
     }
 
     .uma-event-box__title {
@@ -1805,6 +1873,33 @@ img[src*="comune-gradara"] {
         width: 100%;
         text-align: center;
         margin-top: 30px;
+    }
+
+    .news-grid {
+        margin-top: 10px;
+    }
+
+    .news-box__inner {
+        padding: 15px;
+    }
+
+    .news-box__date-container {
+        height: 70px;
+    }
+
+    .news-box__date-box {
+        width: 55px;
+        height: 55px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    .news-box__day {
+        font-size: 1.1rem;
+    }
+
+    .library-intro {
+        padding-top: 0;
     }
 
 }
