@@ -93,4 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
         initSlidingIndicator(umaLinks, '.uma-header__link', '.uma-header__link--active', '.uma-header__indicator', null);
     }
 
+    if (document.querySelector('.uma-header')) {
+        const referrer = document.referrer;
+        const fromUrbino = referrer && new URL(referrer).host === window.location.host && new URL(referrer).pathname.includes('urbino');
+        if (!fromUrbino) {
+            document.body.classList.add('uma-animate-entry');
+        } else {
+            document.body.classList.add('uma-no-animate');
+        }
+
+    }
 });
