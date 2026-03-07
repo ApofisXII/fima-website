@@ -397,6 +397,16 @@ h2 {
     flex-direction: column;
 }
 
+.uma-animate-entry .uma-header__link {
+    animation: uma-link-in 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.uma-animate-entry .uma-header__link:nth-child(1) { animation-delay: 0.04s; }
+.uma-animate-entry .uma-header__link:nth-child(2) { animation-delay: 0.10s; }
+.uma-animate-entry .uma-header__link:nth-child(3) { animation-delay: 0.16s; }
+.uma-animate-entry .uma-header__link:nth-child(4) { animation-delay: 0.22s; }
+.uma-animate-entry .uma-header__link:nth-child(5) { animation-delay: 0.28s; }
+.uma-animate-entry .uma-header__link:nth-child(6) { animation-delay: 0.34s; }
+
 .uma-header {
     background-color: var(--color-yellow);
     color: var(--color-blue);
@@ -625,6 +635,7 @@ img[src*="comune-gradara"] {
     object-fit: cover;
     position: absolute;
     z-index: -1;
+    /* animation applied via .uma-animate-entry */
 }
 
 .uma-hero__logo {
@@ -1249,6 +1260,17 @@ img[src*="comune-gradara"] {
 
 
 
+
+
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.uma-animate-entry .uma-hero__video {
+    animation: fade-in 1.2s ease both;
+}
 
 
 
