@@ -640,7 +640,11 @@ img[src*="comune-gradara"] {
     object-fit: cover;
     position: absolute;
     z-index: -1;
-    /* animation applied via .uma-animate-entry */
+    opacity: 0;
+}
+
+.uma-no-animate .uma-hero__video {
+    opacity: 1;
 }
 
 .uma-hero__logo {
