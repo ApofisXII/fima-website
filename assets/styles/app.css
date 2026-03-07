@@ -707,6 +707,22 @@ img[src*="comune-gradara"] {
     text-align: left;
 }
 
+.text-from-admin p {
+    margin: 0;
+}
+
+.text-from-admin .ql-align-center {
+    text-align: center;
+}
+
+.text-from-admin .ql-align-right {
+    text-align: right;
+}
+
+.text-from-admin .ql-align-justify {
+    text-align: justify;
+}
+
 .text-from-admin--article {
     max-width: 700px;
     margin-top: 80px;
@@ -719,20 +735,20 @@ img[src*="comune-gradara"] {
 
 .text-from-admin a {
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
     color: var(--color-blue);
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .text-from-admin h2 {
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: unset;
     text-align: center;
 }
 
 .text-from-admin h3 {
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     text-align: left;
 }
 
