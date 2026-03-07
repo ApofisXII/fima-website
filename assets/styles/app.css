@@ -462,6 +462,11 @@ h2 {
     font-weight: 600;
     font-size: .9rem;
     text-transform: lowercase;
+    opacity: 0;
+}
+
+.uma-no-animate .uma-header__link {
+    opacity: 1;
 }
 
 .uma-header__link::first-letter {

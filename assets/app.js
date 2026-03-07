@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const fromUrbino = referrer && new URL(referrer).host === window.location.host && new URL(referrer).pathname.includes('urbino');
         if (!fromUrbino) {
             document.body.classList.add('uma-animate-entry');
+        } else {
+            document.body.classList.add('uma-no-animate');
         }
 
     }
