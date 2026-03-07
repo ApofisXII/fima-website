@@ -1411,10 +1411,6 @@ img[src*="comune-gradara"] {
 /* RESPONSIVE MOBILE MEDIA QUERY */
 @media (max-width: 800px) {
 
-    .container--text {
-        width: 85%;
-    }
-
     body {
         padding-top: 90px;
     }
@@ -1943,6 +1939,10 @@ img[src*="comune-gradara"] {
 
     .library-intro {
         padding-top: 0;
+    }
+
+    .paragraph {
+        padding: 0 10px;
     }
 
 }
