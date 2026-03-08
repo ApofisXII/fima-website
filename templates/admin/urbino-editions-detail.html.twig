@@ -25,18 +25,11 @@
                     <label>Data di fine</label>
                     <input type="date" name="dateEnd" value="{{ edition and edition.dateEnd ? edition.dateEnd|date('Y-m-d') }}" required>
                 </div>
-            </div>
 
-            <div class="gg-form-row gg-form-row--enrollment">
-                <div class="course-date-field">
-                    <label>Link per form di iscrizione</label>
-                    <input type="url" name="enrollmentLink" placeholder="https://..." value="{{ edition ? edition.enrollmentLink }}">
-                </div>
                 <div class="course-date-field">
                     <label>Scadenza iscrizioni</label>
                     <input type="datetime-local" name="enrollmentDeadline" value="{{ edition and edition.enrollmentDeadline ? edition.enrollmentDeadline|date('Y-m-d\\TH:i') }}">
                 </div>
-
             </div>
 
             <div class="gg-checkbox-group">
@@ -140,7 +133,6 @@
                 isPublicVisible: isPublicVisible,
                 enrollmentInfoIt: formData.get('enrollmentInfoIt'),
                 enrollmentInfoEn: formData.get('enrollmentInfoEn'),
-                enrollmentLink: formData.get('enrollmentLink') || null,
                 enrollmentDeadline: formData.get('enrollmentDeadline') || null
             };
 
