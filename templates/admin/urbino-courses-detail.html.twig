@@ -522,8 +522,8 @@
 
         function updatePricePlaceholders() {
             const isEnsemble = scheduleTypeSelect.value === 'schedule_type_ensemble';
-            priceInfoIt.placeholder = isEnsemble ? 'Es. 225 € / gratis se iscritti a un corso principale' : 'Es. 500 €';
-            priceInfoEn.placeholder = isEnsemble ? 'Es. 225 € / free if enrolled in a main course' : 'Es. 500 €';
+            priceInfoIt.placeholder = isEnsemble ? 'Es. 225,00 € / gratis se iscritti a un corso principale' : 'Es. 500,00 €';
+            priceInfoEn.placeholder = isEnsemble ? 'Es. 225,00 € / free if enrolled in a main course' : 'Es. 500,00 €';
         }
 
         scheduleTypeSelect.addEventListener('change', updatePricePlaceholders);
