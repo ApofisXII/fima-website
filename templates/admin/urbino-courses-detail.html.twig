@@ -71,11 +71,11 @@
             <div class="gg-form-row gg-form-row--two">
                 <div class="gg-form-row__main">
                     <label>Info prezzo (italiano)</label>
-                    <input type="text" name="priceInfoIt" placeholder="Es. 500 € / gratis se iscritti a un corso principale" value="{{ course ? course.priceInfoIt }}">
+                    <input type="text" name="priceInfoIt" placeholder="Es. 500 € / gratis se iscritti a un corso principale" value="{{ course ? course.priceInfoIt }}" required>
                 </div>
                 <div class="gg-form-row__main">
                     <label>Info prezzo (inglese)</label>
-                    <input type="text" name="priceInfoEn" placeholder="Es. 500 € / free if enrolled in a main course" value="{{ course ? course.priceInfoEn }}">
+                    <input type="text" name="priceInfoEn" placeholder="Es. 500 € / free if enrolled in a main course" value="{{ course ? course.priceInfoEn }}" required>
                 </div>
             </div>
 

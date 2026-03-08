@@ -34,7 +34,10 @@ class UrbinoCourseRequestDTO
 
         public ?string $dateEnd = null,
 
+        #[Assert\NotBlank(message: "Il prezzo è obbligatorio.")]
         public ?string $priceInfoIt = null,
+
+        #[Assert\NotBlank(message: "Il prezzo è obbligatorio.")]
         public ?string $priceInfoEn = null,
 
         #[Assert\NotBlank(message: "La materia del corso è obbligatoria.")]
