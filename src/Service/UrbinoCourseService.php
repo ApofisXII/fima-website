@@ -53,12 +53,6 @@ final readonly class UrbinoCourseService
         $course->setDisciplineIt($dto->disciplineIt);
         $course->setDisciplineEn($dto->disciplineEn);
 
-        if ($dto->priceEuros !== null) {
-            $course->setPriceCents((int) round($dto->priceEuros * 100));
-        } else {
-            $course->setPriceCents(null);
-        }
-
         $course->setPriceInfoIt($dto->priceInfoIt);
         $course->setPriceInfoEn($dto->priceInfoEn);
 

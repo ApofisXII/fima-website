@@ -77,9 +77,6 @@ class UrbinoCourse
     #[ORM\Column]
     private ?bool $is_deleted = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $price_cents = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $price_info_it = null;
 
@@ -289,18 +286,6 @@ class UrbinoCourse
         return $this;
     }
 
-    public function getPriceCents(): ?int
-    {
-        return $this->price_cents;
-    }
-
-    public function setPriceCents(?int $price_cents): static
-    {
-        $this->price_cents = $price_cents;
-
-        return $this;
-    }
-
     public function getPriceInfoIt(): ?string
     {
         return $this->price_info_it;
@@ -323,15 +308,6 @@ class UrbinoCourse
         $this->price_info_en = $price_info_en;
 
         return $this;
-    }
-
-    public function getPriceFormatted(): ?string
-    {
-        if ($this->price_cents === null) {
-            return null;
-        }
-
-        return number_format($this->price_cents / 100, 2, ',', '.') . " €";
     }
 
     public function getDateStart(): ?\DateTime

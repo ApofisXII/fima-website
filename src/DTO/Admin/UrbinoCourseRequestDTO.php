@@ -34,7 +34,6 @@ class UrbinoCourseRequestDTO
 
         public ?string $dateEnd = null,
 
-        public ?float $priceEuros = null,
         public ?string $priceInfoIt = null,
         public ?string $priceInfoEn = null,
 
