@@ -516,6 +516,18 @@
             });
             {% endif %}
         {% endif %}
+        const scheduleTypeSelect = document.querySelector('select[name="scheduleType"]');
+        const priceInfoIt = document.querySelector('input[name="priceInfoIt"]');
+        const priceInfoEn = document.querySelector('input[name="priceInfoEn"]');
+
+        function updatePricePlaceholders() {
+            const isEnsemble = scheduleTypeSelect.value === 'schedule_type_ensemble';
+            priceInfoIt.placeholder = isEnsemble ? 'Es. 225 € / gratis se iscritti a un corso principale' : 'Es. 500 €';
+            priceInfoEn.placeholder = isEnsemble ? 'Es. 225 € / free if enrolled in a main course' : 'Es. 500 €';
+        }
+
+        scheduleTypeSelect.addEventListener('change', updatePricePlaceholders);
+        updatePricePlaceholders();
     </script>
 
 {% endblock %}
