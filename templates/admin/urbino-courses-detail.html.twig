@@ -61,7 +61,7 @@
                 <div class="gg-form-row__year">
                     <label>Tipo di corso</label>
                     <select name="scheduleType" required>
-                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Individuale</option>
+                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Principale</option>
                         <option value="schedule_type_ensemble" {{ course and course.scheduleType == 'schedule_type_ensemble' ? 'selected' }}>D'insieme</option>
                     </select>
                 </div>
@@ -69,6 +69,18 @@
                 <div class="gg-form-row__year">
                     <label>Prezzo del corso (in €)</label>
                     <input type="number" name="priceEuros" step="0.01" min="0" placeholder="0.00" value="{{ course and course.priceCents ? (course.priceCents / 100)|number_format(2, '.', '') }}">
+                </div>
+
+            </div>
+
+            <div class="gg-form-row gg-form-row--two">
+                <div class="gg-form-row__main">
+                    <label>Info prezzo (italiano)</label>
+                    <input type="text" name="priceInfoIt" placeholder="Es. / gratis se iscritti a un corso principale" value="{{ course ? course.priceInfoIt }}">
+                </div>
+                <div class="gg-form-row__main">
+                    <label>Info prezzo (inglese)</label>
+                    <input type="text" name="priceInfoEn" placeholder="Es. / free if enrolled in a main course" value="{{ course ? course.priceInfoEn }}">
                 </div>
             </div>
 

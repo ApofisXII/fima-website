@@ -59,6 +59,9 @@ final readonly class UrbinoCourseService
             $course->setPriceCents(null);
         }
 
+        $course->setPriceInfoIt($dto->priceInfoIt);
+        $course->setPriceInfoEn($dto->priceInfoEn);
+
         $dateStart = $dto->dateStart ? new \DateTime($dto->dateStart) : $edition->getDateStart();
         $dateEnd   = $dto->dateEnd   ? new \DateTime($dto->dateEnd)   : $edition->getDateEnd();
 

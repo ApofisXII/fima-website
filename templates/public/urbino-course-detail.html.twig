@@ -32,7 +32,8 @@
             </div>
             <div class="course-infos__row">
                 <div>{{ 'urbino_course_detail.info.price'|trans }}</div>
-                <div class="course-infos__value">{{ course.priceCents ? course.priceFormatted : 'urbino_course_detail.info.free'|trans }}</div>
+                {% set priceInfo = app.request.locale == 'en' ? course.priceInfoEn : course.priceInfoIt %}
+                <div class="course-infos__value">{{ course.priceCents ? course.priceFormatted : 'urbino_course_detail.info.free'|trans }}{% if priceInfo %} <span class="course-infos__price-info">{{ priceInfo }}</span>{% endif %}</div>
             </div>
             <div class="course-infos__row">
                 <div>{{ 'urbino_course_detail.info.access'|trans }}</div>

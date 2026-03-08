@@ -80,6 +80,12 @@ class UrbinoCourse
     #[ORM\Column(nullable: true)]
     private ?int $price_cents = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $price_info_it = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $price_info_en = null;
+
     #[ORM\Column(length: 255)]
     private ?string $discipline_it = null;
 
@@ -291,6 +297,30 @@ class UrbinoCourse
     public function setPriceCents(?int $price_cents): static
     {
         $this->price_cents = $price_cents;
+
+        return $this;
+    }
+
+    public function getPriceInfoIt(): ?string
+    {
+        return $this->price_info_it;
+    }
+
+    public function setPriceInfoIt(?string $price_info_it): static
+    {
+        $this->price_info_it = $price_info_it;
+
+        return $this;
+    }
+
+    public function getPriceInfoEn(): ?string
+    {
+        return $this->price_info_en;
+    }
+
+    public function setPriceInfoEn(?string $price_info_en): static
+    {
+        $this->price_info_en = $price_info_en;
 
         return $this;
     }

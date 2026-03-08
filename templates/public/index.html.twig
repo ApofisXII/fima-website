@@ -13,8 +13,11 @@
     </div>
 
     <section class="container box callout-uma">
-        <div>
+        <div class="callout-uma__brand">
             <img class="callout-uma__logo" src="{{ asset('images/logos/uma-logos/uma-2026-colors.svg') }}" alt="Urbino Musica Antica Logo">
+            {% if currentEdition %}
+                <div class="callout-uma__date">{{ 'urbino_welcome.date_range'|trans({'%start%': currentEdition.dateStart.format("d/m/y"), '%end%': currentEdition.dateEnd.format("d/m/y")}) }}</div>
+            {% endif %}
         </div>
         <div>
             <p>{{ 'home.callout_uma.description'|trans }}</p>
