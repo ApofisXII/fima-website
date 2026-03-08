@@ -1837,7 +1837,7 @@ img[src*="comune-gradara"] {
 
     .course-head {
         grid-template-columns: 140px 1fr;
-        grid-template-rows: 140px;
+        grid-template-rows: auto;
     }
 
     .course-head__image {
