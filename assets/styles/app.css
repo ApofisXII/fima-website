@@ -1711,6 +1711,10 @@ img[src*="comune-gradara"] {
         pointer-events: auto;
     }
 
+    .uma-animate-entry .uma-header__link {
+        animation: none;
+    }
+
     .uma-header__links--open .uma-header__link {
         animation: uma-link-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
