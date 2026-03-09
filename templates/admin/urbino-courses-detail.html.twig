@@ -75,7 +75,7 @@
                 </div>
                 <div class="gg-form-row__main">
                     <label>Prezzo (inglese)</label>
-                    <input type="text" name="priceInfoEn" placeholder="Es. 500 € / free if enrolled in a main course" value="{{ course ? course.priceInfoEn }}" required>
+                    <input type="text" name="priceInfoEn" placeholder="Es. 500 € / free if enrolled in a principal course" value="{{ course ? course.priceInfoEn }}" required>
                 </div>
             </div>
 
@@ -522,8 +522,8 @@
 
         function updatePricePlaceholders() {
             const isEnsemble = scheduleTypeSelect.value === 'schedule_type_ensemble';
-            priceInfoIt.placeholder = isEnsemble ? 'Es. 225,00 € / gratis se iscritti a un corso principale' : 'Es. 500,00 €';
-            priceInfoEn.placeholder = isEnsemble ? 'Es. 225,00 € / free if enrolled in a main course' : 'Es. 500,00 €';
+            priceInfoIt.placeholder = isEnsemble ? 'Es. 225,00 € / gratis se iscritti a un altro corso' : 'Es. 500,00 €';
+            priceInfoEn.placeholder = isEnsemble ? 'Es. 225,00 € / free if enrolled in another course' : 'Es. 500,00 €';
         }
 
         scheduleTypeSelect.addEventListener('change', updatePricePlaceholders);
