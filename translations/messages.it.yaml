@@ -179,8 +179,8 @@ urbino_course_detail:
     biography: 'Biografia'
     enroll_cta: "Vai all'iscrizione"
 
-schedule_type_individual: 'Corso principale'
-schedule_type_ensemble: "Corso d'insieme"
+schedule_type_individual: 'Corso individuale'
+schedule_type_ensemble: 'Corso collettivo'
 
 urbino_courses:
     page_title: 'Corsi'
