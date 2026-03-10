@@ -506,9 +506,25 @@ h2 {
     margin-bottom: 70px;
 }
 
+.callout-uma__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .callout-uma__logo {
     height: 80px;
     margin: 40px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.callout-uma__date {
+    text-align: center;
+    font-weight: 800;
+    color: var(--color-blue);
+    font-size: 0.9rem;
 }
 
 .home-hero {
@@ -643,9 +659,6 @@ img[src*="comune-gradara"] {
     opacity: 0;
 }
 
-.uma-no-animate .uma-hero__video {
-    opacity: 1;
-}
 
 .uma-hero__logo {
     width: 230px;
@@ -957,6 +970,7 @@ img[src*="comune-gradara"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 50px;
     padding: 10px 0;
     border-bottom: solid 2px rgba(144, 149, 190, 0.2);
     flex: 1;
@@ -970,6 +984,7 @@ img[src*="comune-gradara"] {
 .course-infos__value {
     font-weight: var(--font-bold-weight-sans-serif);
     color: var(--color-blue);
+    text-align: right;
 }
 
 .box--with-margin-top {
@@ -1277,11 +1292,11 @@ img[src*="comune-gradara"] {
     to { opacity: 1; }
 }
 
-.uma-animate-entry .uma-hero__video {
+.uma-hero__video {
     animation: fade-in 1.2s ease both;
 }
 
-.uma-animate-entry .uma-welcome {
+.uma-welcome {
     animation: slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -1693,6 +1708,10 @@ img[src*="comune-gradara"] {
         pointer-events: auto;
     }
 
+    .uma-animate-entry .uma-header__link {
+        animation: none;
+    }
+
     .uma-header__links--open .uma-header__link {
         animation: uma-link-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
     }
@@ -1819,7 +1838,7 @@ img[src*="comune-gradara"] {
 
     .course-head {
         grid-template-columns: 140px 1fr;
-        grid-template-rows: 140px;
+        grid-template-rows: auto;
     }
 
     .course-head__image {
@@ -1958,8 +1977,17 @@ img[src*="comune-gradara"] {
         padding-top: 0;
     }
 
+    .callout-uma__date {
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+
     .paragraph {
         padding: 0 10px;
+    }
+
+    .course-infos__row {
+        align-items: flex-start;
     }
 
 }

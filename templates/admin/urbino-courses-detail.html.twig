@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="gg-form-row gg-form-row--three">
+            <div class="gg-form-row gg-form-row--two">
                 <div class="gg-form-row__year">
                     <label>Categoria</label>
                     <select name="urbinoCategoryId" id="category-select" required>
@@ -61,14 +61,21 @@
                 <div class="gg-form-row__year">
                     <label>Tipo di corso</label>
                     <select name="scheduleType" required>
-                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Individuale</option>
+                        <option value="schedule_type_individual" {{ course and course.scheduleType == 'schedule_type_individual' ? 'selected' }}>Principale</option>
                         <option value="schedule_type_ensemble" {{ course and course.scheduleType == 'schedule_type_ensemble' ? 'selected' }}>D'insieme</option>
                     </select>
                 </div>
 
-                <div class="gg-form-row__year">
-                    <label>Prezzo del corso (in €)</label>
-                    <input type="number" name="priceEuros" step="0.01" min="0" placeholder="0.00" value="{{ course and course.priceCents ? (course.priceCents / 100)|number_format(2, '.', '') }}">
+            </div>
+
+            <div class="gg-form-row gg-form-row--two">
+                <div class="gg-form-row__main">
+                    <label>Prezzo (italiano)</label>
+                    <input type="text" name="priceInfoIt" placeholder="Es. 500,00 € / gratis se iscritti a un altro corso" value="{{ course ? course.priceInfoIt }}" required>
+                </div>
+                <div class="gg-form-row__main">
+                    <label>Prezzo (inglese)</label>
+                    <input type="text" name="priceInfoEn" placeholder="Es. 500,00 € / free if enrolled in another course" value="{{ course ? course.priceInfoEn }}" required>
                 </div>
             </div>
 
@@ -509,6 +516,18 @@
             });
             {% endif %}
         {% endif %}
+        const scheduleTypeSelect = document.querySelector('select[name="scheduleType"]');
+        const priceInfoIt = document.querySelector('input[name="priceInfoIt"]');
+        const priceInfoEn = document.querySelector('input[name="priceInfoEn"]');
+
+        function updatePricePlaceholders() {
+            const isEnsemble = scheduleTypeSelect.value === 'schedule_type_ensemble';
+            priceInfoIt.placeholder = isEnsemble ? 'Es. 225,00 € / gratis se iscritti a un altro corso' : 'Es. 500,00 €';
+            priceInfoEn.placeholder = isEnsemble ? 'Es. 225,00 € / free if enrolled in another course' : 'Es. 500,00 €';
+        }
+
+        scheduleTypeSelect.addEventListener('change', updatePricePlaceholders);
+        updatePricePlaceholders();
     </script>
 
 {% endblock %}

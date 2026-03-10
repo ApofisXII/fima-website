@@ -1449,6 +1449,7 @@ tbody tr[draggable="true"] {
 .courses-table td {
     padding: 8px 10px;
     border-top: 1px solid #bbb;
+    max-width: 300px;
 }
 
 .courses-table .reorder {
