@@ -501,6 +501,7 @@ h2 {
     margin-top: -50px;
     display: flex;
     align-items: center;
+    animation: fade-in 0.5s ease-out 1s both, slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.1s both;
     justify-content: flex-start;
     gap: 30px;
     margin-bottom: 70px;
@@ -540,8 +541,31 @@ h2 {
     z-index: -1;
 }
 
+@keyframes hero-filigrane-in {
+    from {
+        opacity: 0;
+        transform: rotate(-28deg) scale(0.88);
+    }
+    to {
+        opacity: 0.2;
+        transform: rotate(-20deg) scale(1);
+    }
+}
+
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .home-hero__since {
     font-size: 1.5rem;
+    animation: hero-fade-up 0.8s ease-out 0.3s both;
 }
 
 .home-hero__title {
@@ -552,16 +576,30 @@ h2 {
     font-size: 4.6rem;
     margin-top: 0;
     width: 800px;
+    animation: hero-fade-up 0.9s ease-out 0.55s both;
 }
 
 .home-hero__filigrane {
     height: 70vh;
     position: absolute;
     bottom: 0;
-    opacity: 0.2;
     right: 20%;
     margin-bottom: -100px;
-    transform: rotate(-20deg);
+    animation: hero-filigrane-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-hero__since,
+    .home-hero__title,
+    .home-hero__filigrane,
+    .callout-uma {
+        animation: none;
+    }
+
+    .home-hero__filigrane {
+        opacity: 0.2;
+        transform: rotate(-20deg);
+    }
 }
 
 .title-with-action {
