@@ -15,7 +15,7 @@
                 <div class="courses-grid">
                     <div class="courses-grid__track">
                     {% for course in courseInCategory.courses %}
-                        <div class="course-box" {% if course.imageUploaded %}style="background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');" {% endif %}>
+                        <div class="course-box" style="animation-delay: {{ loop.index0 * 0.1 }}s; {% if course.imageUploaded %}background-image: url('{{ asset('uploads-uma-courses/'~course.id~'.webp') }}');{% endif %}">
                             <div class="course-box__inner">
                                 <div class="course-box__info-row">
                                     <div>

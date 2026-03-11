@@ -300,6 +300,7 @@ h2 {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    animation: hero-fade-up 0.5s ease-out both;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: var(--border-radius-main);
 }
@@ -592,7 +593,10 @@ h2 {
     .home-hero__since,
     .home-hero__title,
     .home-hero__filigrane,
-    .callout-uma {
+    .callout-uma,
+    .uma-event-box,
+    .news-box,
+    .course-box {
         animation: none;
     }
 
@@ -899,6 +903,7 @@ img[src*="comune-gradara"] {
     background: var(--color-blue);
     border-radius: var(--border-radius-main);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: hero-fade-up 0.5s ease-out both;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1191,6 +1196,7 @@ img[src*="comune-gradara"] {
 .uma-event-box {
     background-color: white;
     border-radius: var(--border-radius-main);
+    animation: hero-fade-up 0.5s ease-out both;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -1863,6 +1869,7 @@ img[src*="comune-gradara"] {
     .courses-grid .course-box {
         flex: 0 0 80vw;
         scroll-snap-align: start;
+        animation-name: fade-in;
     }
 
     .courses-grid__track::after {
