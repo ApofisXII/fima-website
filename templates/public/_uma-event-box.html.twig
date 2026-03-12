@@ -1,5 +1,5 @@
 {# requires: event #}
-<div class="uma-event-box">
+<div class="uma-event-box" style="animation-delay: {{ loop.index0 * 0.1 }}s">
     <div class="uma-event-box__image" style="background-image: url('{{ asset('uploads-uma-event/images/'~event.id~'.webp') }}')">
         <div class="uma-event-box__overlay">
             <div class="uma-event-box__day-box">
