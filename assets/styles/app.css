@@ -1045,6 +1045,10 @@ img[src*="comune-gradara"] {
     margin-top: 30px;
 }
 
+.box--with-margin-top > .btn {
+    margin-top: 20px;
+}
+
 .chip--course-box {
     font-size: 0.7rem;
     padding: 5px 10px;
