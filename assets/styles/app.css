@@ -463,6 +463,9 @@ h2 {
     font-weight: 600;
     font-size: .9rem;
     text-transform: lowercase;
+}
+
+.js .uma-header__link {
     opacity: 0;
 }
 
@@ -502,7 +505,6 @@ h2 {
     margin-top: -50px;
     display: flex;
     align-items: center;
-    animation: fade-in 0.35s ease-out 0.7s both, slide-up 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.77s both;
     justify-content: flex-start;
     gap: 30px;
     margin-bottom: 70px;
@@ -566,7 +568,6 @@ h2 {
 
 .home-hero__since {
     font-size: 1.5rem;
-    animation: hero-fade-up 0.55s ease-out 0.2s both;
 }
 
 .home-hero__title {
@@ -577,7 +578,6 @@ h2 {
     font-size: 4.6rem;
     margin-top: 0;
     width: 800px;
-    animation: hero-fade-up 0.65s ease-out 0.38s both;
 }
 
 .home-hero__filigrane {
@@ -590,10 +590,7 @@ h2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .home-hero__since,
-    .home-hero__title,
     .home-hero__filigrane,
-    .callout-uma,
     .uma-event-box,
     .news-box,
     .course-box {
@@ -1344,9 +1341,6 @@ img[src*="comune-gradara"] {
     animation: fade-in 1.2s ease both;
 }
 
-.uma-welcome {
-    animation: slide-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
 
 @keyframes slide-up {
     from {
