@@ -11,7 +11,7 @@
         {% endif %}
         <meta name="theme-color" content="#18407E">
     </head>
-    <body class="{{ 'urbino' in app.current_route ? 'body--urbino-section' }}">
+    <body class="{{ app.current_route and 'urbino' in app.current_route ? 'body--urbino-section' }}">
         <div class="header-container">
             <header class="header">
                 <a href="{{ path('indexLocalized') }}" class="hover"><img class="header__logo" src="{{ asset('images/logos/fima-logo.svg') }}" alt="FIMA Musica Antica"></a>
@@ -24,17 +24,17 @@
                     </svg>
                 </button>
                 <nav class="header__nav">
-                    <a class="header__nav-link header__nav-link--no-border {{ app.current_route == 'indexLocalized' ? 'header__nav-link--active' }}" href="{{ path('indexLocalized') }}" data-label="{{ 'base.nav.home'|trans }}">{{ 'base.nav.home'|trans }}</a>
+                    <a class="header__nav-link header__nav-link--no-border {{ app.current_route and app.current_route == 'indexLocalized' ? 'header__nav-link--active' }}" href="{{ path('indexLocalized') }}" data-label="{{ 'base.nav.home'|trans }}">{{ 'base.nav.home'|trans }}</a>
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.about'|trans }}</a>#}
-                    <a class="header__nav-link {{ 'urbino' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('urbinoWelcome') }}" data-label="{{ 'base.nav.urbino'|trans }}">{{ 'base.nav.urbino'|trans }}</a>
-                    <a class="header__nav-link {{ app.current_route == 'library' ? 'header__nav-link--active' }}" href="{{ path('library') }}" data-label="{{ 'base.nav.library'|trans }}">{{ 'base.nav.library'|trans }}</a>
+                    <a class="header__nav-link {{ app.current_route and 'urbino' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('urbinoWelcome') }}" data-label="{{ 'base.nav.urbino'|trans }}">{{ 'base.nav.urbino'|trans }}</a>
+                    <a class="header__nav-link {{ app.current_route and app.current_route == 'library' ? 'header__nav-link--active' }}" href="{{ path('library') }}" data-label="{{ 'base.nav.library'|trans }}">{{ 'base.nav.library'|trans }}</a>
 {#                    <a class="header__nav-link" href="">Recercare</a>#}
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.periodical'|trans }}</a>#}
-                    <a class="header__nav-link {{ 'news' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('newsList') }}" data-label="{{ 'base.nav.events'|trans }}">{{ 'base.nav.events'|trans }}</a>
+                    <a class="header__nav-link {{ app.current_route and 'news' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('newsList') }}" data-label="{{ 'base.nav.events'|trans }}">{{ 'base.nav.events'|trans }}</a>
                     <span class="header__nav-indicator"></span>
                 </nav>
             </header>
-            {% if 'urbino' in app.current_route %}
+            {% if app.current_route and 'urbino' in app.current_route %}
                 <div class="uma-header">
                     <div>
                         <a href="{{ path('urbinoWelcome') }}" class="uma-header__clip">
@@ -98,10 +98,12 @@
                 <div class="footer__column">
                     <div><b>{{ 'base.footer.name'|trans }}</b></div>
                     <div>{{ 'base.footer.address'|trans }}</div>
-                    <div class="footer__lang-switch">
-                        <a class="footer__lang-link {{ app.request.locale == 'it' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'it'})) }}">IT</a>
-                        <a class="footer__lang-link {{ app.request.locale == 'en' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a>
-                    </div>
+                    {% if app.current_route %}
+                        <div class="footer__lang-switch">
+                            <a class="footer__lang-link {{ app.request.locale == 'it' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'it'})) }}">IT</a>
+                            <a class="footer__lang-link {{ app.request.locale == 'en' ? 'footer__lang-link--active' }}" href="{{ path(app.current_route, app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="footer__column footer__column--right">
                     <a href="{{ path('contacts') }}">{{ 'base.footer.contacts'|trans }}</a>
