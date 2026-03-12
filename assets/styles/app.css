@@ -463,9 +463,6 @@ h2 {
     font-weight: 600;
     font-size: .9rem;
     text-transform: lowercase;
-}
-
-.js .uma-header__link {
     opacity: 0;
 }
 
