@@ -692,7 +692,6 @@ img[src*="comune-gradara"] {
     align-items: center;
 }
 
-.uma-hero__poster,
 .uma-hero__video {
     height: 100%;
     max-height: 500px;
@@ -700,9 +699,6 @@ img[src*="comune-gradara"] {
     object-fit: cover;
     position: absolute;
     z-index: -1;
-}
-
-.uma-hero__video {
     opacity: 0;
 }
 
@@ -1858,9 +1854,9 @@ img[src*="comune-gradara"] {
     .courses-grid {
         display: block;
         overflow-x: auto;
-        scroll-snap-type: x proximity;
+        scroll-snap-type: x mandatory;
         scroll-padding-left: 5vw;
-        touch-action: pan-x pinch-zoom;
+        -webkit-overflow-scrolling: touch;
         padding-bottom: unset;
         margin-left: calc(50% - 50vw);
         width: 100vw;
