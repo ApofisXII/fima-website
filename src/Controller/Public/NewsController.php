@@ -21,6 +21,7 @@ final class NewsController extends AbstractController
     {
         $newsList = $this->newsRepository->findBy([
             "is_deleted" => false,
+            "is_public" => true,
         ], ["created_at" => "desc"]);
 
         return $this->render('public/news-list.html.twig', [

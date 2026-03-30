@@ -27,6 +27,7 @@ final class UrbinoEventController extends AbstractController
             "urbino_edition" => $currentEdition,
             "category" => UrbinoEvent::EVENT_CATEGORY_FESTIVAL,
             "is_deleted" => false,
+            "is_public" => true,
         ]);
 
         return $this->render('public/urbino-events-festival.html.twig', [
@@ -44,6 +45,7 @@ final class UrbinoEventController extends AbstractController
             "urbino_edition" => $currentEdition,
             "category" => UrbinoEvent::EVENT_CATEGORY_EXHIBITION,
             "is_deleted" => false,
+            "is_public" => true,
         ]);
 
         return $this->render('public/urbino-events-exhibitions.html.twig', [
@@ -61,6 +63,7 @@ final class UrbinoEventController extends AbstractController
             "urbino_edition" => $currentEdition,
             "category" => UrbinoEvent::EVENT_CATEGORY_CONFERENCE,
             "is_deleted" => false,
+            "is_public" => true,
         ]);
 
         return $this->render('public/urbino-events-conferences.html.twig', [
