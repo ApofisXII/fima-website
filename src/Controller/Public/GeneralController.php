@@ -31,6 +31,7 @@ final class GeneralController extends AbstractController
     {
         $newsList = $this->newsRepository->findBy([
             "is_deleted" => false,
+            "is_public" => true,
         ], ["created_at" => "desc"], 3);
 
         $currentEdition = $this->urbinoEditionRepository->findCurrentEdition();
