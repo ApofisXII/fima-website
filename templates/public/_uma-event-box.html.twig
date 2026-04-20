@@ -3,17 +3,19 @@
     <div class="uma-event-box__image" style="background-image: url('{{ asset('uploads-uma-event/images/'~event.id~'.webp') }}')">
         <div class="uma-event-box__overlay">
             <div class="uma-event-box__day-box">
-                <div class="uma-event-box__dow">{{ event.eventDatetime.format("D") }}</div>
-                <div class="uma-event-box__dom">{{ event.eventDatetime.format("d") }}</div>
-                <div class="uma-event-box__month">{{ event.eventDatetime.format("M") }}</div>
+                <div class="uma-event-box__dow">{{ event.eventDatetime|locale_date('EEE', app.request.locale) }}</div>
+                <div class="uma-event-box__dom">{{ event.eventDatetime.format('d') }}</div>
+                <div class="uma-event-box__month">{{ event.eventDatetime|locale_date('MMM', app.request.locale) }}</div>
             </div>
             <div class="uma-event-box__hour-box">
-                {{ event.eventDatetime.format("h:i") }}
+                {{ event.eventDatetime.format(app.request.locale == 'en' ? "g:i A" : "H:i") }}
             </div>
         </div>
     </div>
     <div class="uma-event-box__data">
         <div class="uma-event-box__title">{{ event.title }}</div>
+        {% set subtitle = app.request.locale == 'it' ? event.subtitleIt : event.subtitleEn|default(event.subtitleIt) %}
+        {% if subtitle %}<div class="uma-event-box__subtitle">{{ subtitle }}</div>{% endif %}
         <div class="uma-event-box__location-short">{{ event.locationShort }}</div>
         <a href="{{ path('urbinoEventDetail', {'event':event.id, 'slug':event.slug}) }}" class="btn hover btn--uma-event-box">Scopri di più</a>
     </div>
