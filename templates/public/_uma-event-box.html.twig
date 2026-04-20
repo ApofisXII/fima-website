@@ -8,7 +8,7 @@
                 <div class="uma-event-box__month">{{ event.eventDatetime|locale_date('MMM', app.request.locale) }}</div>
             </div>
             <div class="uma-event-box__hour-box">
-                {{ event.eventDatetime.format("H:i") }}
+                {{ event.eventDatetime.format(app.request.locale == 'en' ? "g:i A" : "H:i") }}
             </div>
         </div>
     </div>
