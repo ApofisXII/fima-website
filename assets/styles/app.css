@@ -1228,39 +1228,34 @@ img[src*="comune-gradara"] {
     padding: 12px;
 }
 
-.uma-event-box__date-badge {
+.uma-event-box__day-box, .uma-event-box__hour-box {
+    width: 70px;
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    padding: 6px 12px;
+    padding: 6px;
+    margin-bottom: 8px;
     color: var(--color-blue);
     text-transform: uppercase;
     font-size: 0.85rem;
 }
 
-.uma-event-box__date-line {
-    display: flex;
-    gap: 4px;
-    align-items: baseline;
-    font-weight: var(--font-bold-weight-sans-serif);
-}
-
 .uma-event-box__dow {
-    color: var(--color-blue-light);
     font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-blue-light);
 }
 
 .uma-event-box__dom {
-    color: var(--color-red);
-    font-weight: var(--font-bold-weight-sans-serif);
     font-size: 1rem;
+    font-weight: var(--font-bold-weight-sans-serif);
+    color: var(--color-red);
 }
 
 .uma-event-box__month {
     font-weight: var(--font-bold-weight-sans-serif);
 }
 
-.uma-event-box__hour-line {
+.uma-event-box__hour-box {
     font-weight: var(--font-bold-weight-sans-serif);
     font-size: 0.9rem;
 }
@@ -1939,10 +1934,12 @@ img[src*="comune-gradara"] {
         padding: 12px;
     }
 
-    .uma-event-box__date-badge {
-        font-size: 0.78rem;
-        padding: 5px 10px;
+    .uma-event-box__day-box, .uma-event-box__hour-box {
+        width: 52px;
+        font-size: 0.72rem;
+        padding: 4px;
         border-radius: 8px;
+        margin-bottom: 5px;
     }
 
     .uma-event-box__title {

@@ -9,13 +9,13 @@
         <div class="event-detail-header__overlay">
             <div class="event-detail-header__date-box">
                 <div>
-                    <div class="uma-event-box__date-badge">
-                        <div class="uma-event-box__date-line">
-                            <span class="uma-event-box__dow">{{ event.eventDatetime|locale_date('EEE', app.request.locale) }}</span>
-                            <span class="uma-event-box__dom">{{ event.eventDatetime.format('d') }}</span>
-                            <span class="uma-event-box__month">{{ event.eventDatetime|locale_date('MMM', app.request.locale) }}</span>
-                        </div>
-                        <div class="uma-event-box__hour-line">{{ event.eventDatetime.format("H:i") }}</div>
+                    <div class="uma-event-box__day-box">
+                        <div class="uma-event-box__dow">{{ event.eventDatetime|locale_date('EEE', app.request.locale) }}</div>
+                        <div class="uma-event-box__dom">{{ event.eventDatetime.format('d') }}</div>
+                        <div class="uma-event-box__month">{{ event.eventDatetime|locale_date('MMM', app.request.locale) }}</div>
+                    </div>
+                    <div class="uma-event-box__hour-box">
+                        {{ event.eventDatetime.format("H:i") }}
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
     <div class="container box box--with-margin-top">
         <div class="box-title">{{ 'urbino_event_detail.datetime_location'|trans }}</div>
         <p>
-            {{ event.eventDatetime.format("l") }} {{ event.eventDatetime.format("d F Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
+            {{ event.eventDatetime|locale_date('EEEE', app.request.locale)|capitalize }} {{ event.eventDatetime.format("d") }} {{ event.eventDatetime|locale_date('MMMM', app.request.locale) }} {{ event.eventDatetime.format("Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
             {% if event.locationLong %}
                 <br>
                 {{ event.locationLong }}
