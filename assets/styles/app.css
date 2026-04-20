@@ -1217,7 +1217,7 @@ img[src*="comune-gradara"] {
 }
 
 .uma-event-box__overlay {
-    height: 240px;
+    height: 260px;
     background: var(--gradient-overlay-blue);
     border-top-left-radius: var(--border-radius-main);
     border-top-right-radius: var(--border-radius-main);
@@ -1306,7 +1306,7 @@ img[src*="comune-gradara"] {
     flex-direction: column;
     justify-content: flex-end;
     color: white;
-    min-height: 380px;
+    min-height: 400px;
 }
 
 .event-detail-header__bottom {
@@ -1940,7 +1940,7 @@ img[src*="comune-gradara"] {
     }
 
     .uma-event-box__overlay {
-        height: 150px;
+        height: 180px;
         padding: 12px;
     }
 
