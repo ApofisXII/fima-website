@@ -9,13 +9,13 @@
         <div class="event-detail-header__overlay">
             <div class="event-detail-header__date-box">
                 <div>
-                    <div class="uma-event-box__day-box">
-                        <div class="uma-event-box__dow">{{ event.eventDatetime.format("D") }}</div>
-                        <div class="uma-event-box__dom">{{ event.eventDatetime.format("d") }}</div>
-                        <div class="uma-event-box__month">{{ event.eventDatetime.format("M") }}</div>
-                    </div>
-                    <div class="uma-event-box__hour-box">
-                        {{ event.eventDatetime.format("h:i") }}
+                    <div class="uma-event-box__date-badge">
+                        <div class="uma-event-box__date-line">
+                            <span class="uma-event-box__dow">{{ event.eventDatetime|locale_date('EEE', app.request.locale) }}</span>
+                            <span class="uma-event-box__dom">{{ event.eventDatetime.format('d') }}</span>
+                            <span class="uma-event-box__month">{{ event.eventDatetime|locale_date('MMM', app.request.locale) }}</span>
+                        </div>
+                        <div class="uma-event-box__hour-line">{{ event.eventDatetime.format("H:i") }}</div>
                     </div>
                 </div>
             </div>
