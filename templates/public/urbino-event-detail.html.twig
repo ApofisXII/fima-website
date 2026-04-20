@@ -46,7 +46,7 @@
     <div class="container box box--with-margin-top">
         <div class="box-title">{{ 'urbino_event_detail.datetime_location'|trans }}</div>
         <p>
-            {{ event.eventDatetime|locale_date('EEEE', app.request.locale)|capitalize }} {{ event.eventDatetime.format("d") }} {{ event.eventDatetime|locale_date('MMMM', app.request.locale) }} {{ event.eventDatetime.format("Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
+            {{ event.eventDatetime|locale_date('EEEE', app.request.locale)|capitalize }} {{ event.eventDatetime.format("d") }} {{ event.eventDatetime|locale_date('MMMM', app.request.locale) }} {{ event.eventDatetime.format("Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format(app.request.locale == 'en' ? "g:i A" : "H:i") }}
             {% if event.locationLong %}
                 <br>
                 {{ event.locationLong }}
