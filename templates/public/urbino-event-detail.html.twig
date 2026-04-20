@@ -7,8 +7,12 @@
 
     <div class="container event-detail-header" style="background-image: url('{{ asset('uploads-uma-event/images/'~event.id~'.webp') }}')">
         <div class="event-detail-header__overlay">
-            <div class="event-detail-header__date-box">
+            <div class="event-detail-header__bottom">
                 <div>
+                    <h1 class="event-detail-header__title">{{ event.title }}</h1>
+                    <div class="event-detail-header__subtitle">{{ app.request.locale == 'it' ? event.subtitleIt : event.subtitleEn|default(event.subtitleIt) }}</div>
+                </div>
+                <div class="event-detail-header__date-box">
                     <div class="uma-event-box__day-box">
                         <div class="uma-event-box__dow">{{ event.eventDatetime|locale_date('EEE', app.request.locale) }}</div>
                         <div class="uma-event-box__dom">{{ event.eventDatetime.format('d') }}</div>
@@ -19,28 +23,10 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <h1 class="event-detail-header__title">{{ event.title }}</h1>
-                <div class="event-detail-header__subtitle">{{ app.request.locale == 'it' ? event.subtitleIt : event.subtitleEn|default(event.subtitleIt) }}</div>
-            </div>
         </div>
     </div>
 
-    <div class="container box box--with-margin-top">
-        <div class="box-title">{{ 'urbino_event_detail.datetime_location'|trans }}</div>
-        <p>
-            {{ event.eventDatetime|locale_date('EEEE', app.request.locale)|capitalize }} {{ event.eventDatetime.format("d") }} {{ event.eventDatetime|locale_date('MMMM', app.request.locale) }} {{ event.eventDatetime.format("Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
-            {% if event.locationLong %}
-                <br>
-                {{ event.locationLong }}
-            {% endif %}
-        </p>
-        {% if event.ticketLink %}
-            <a href="{{ event.ticketLink }}" class="btn hover btn--uma-event-ticket" target="_blank">{{ 'urbino_event_detail.tickets'|trans }}</a>
-        {% endif %}
-    </div>
-
-    {% if event.descriptionIt or event.descriptionEn or event.hasPoster %}
+    {% if event.descriptionIt or event.descriptionEn or event.hasPoster or event.ticketLink %}
         <div class="container box box--with-margin-top">
             {% if event.descriptionIt or event.descriptionEn %}
                 <div class="box-title">{{ 'urbino_event_detail.info'|trans }}</div>
@@ -51,7 +37,21 @@
             {% if event.hasPoster %}
                 <a href="{{ asset('uploads-uma-event/posters/' ~ event.id ~ '.pdf') }}" target="_blank" rel="noopener" class="btn btn--small">{{ 'urbino_event_detail.open_programme'|trans }}</a>
             {% endif %}
+            {% if event.ticketLink %}
+                <a href="{{ event.ticketLink }}" class="btn hover btn--uma-event-ticket" target="_blank">{{ 'urbino_event_detail.tickets'|trans }}</a>
+            {% endif %}
         </div>
     {% endif %}
+
+    <div class="container box box--with-margin-top">
+        <div class="box-title">{{ 'urbino_event_detail.datetime_location'|trans }}</div>
+        <p>
+            {{ event.eventDatetime|locale_date('EEEE', app.request.locale)|capitalize }} {{ event.eventDatetime.format("d") }} {{ event.eventDatetime|locale_date('MMMM', app.request.locale) }} {{ event.eventDatetime.format("Y") }}, {{ 'urbino_event_detail.at_time'|trans }} {{ event.eventDatetime.format("H:i") }}
+            {% if event.locationLong %}
+                <br>
+                {{ event.locationLong }}
+            {% endif %}
+        </p>
+    </div>
 
 {% endblock %}

@@ -1274,13 +1274,13 @@ img[src*="comune-gradara"] {
 
 .uma-event-box__subtitle {
     font-size: 1rem;
-    color: var(--color-blue-light);
     margin-bottom: 8px;
 }
 
 .uma-event-box__location-short {
     font-size: 1rem;
     font-weight: 600;
+    color: var(--color-blue-light);
     margin-bottom: 10px;
 }
 
@@ -1304,13 +1304,23 @@ img[src*="comune-gradara"] {
     background: var(--gradient-overlay-blue);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     color: white;
+    min-height: 380px;
+}
+
+.event-detail-header__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
 }
 
 .event-detail-header__date-box {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
 }
 
 .event-detail-header__title {
@@ -1950,11 +1960,20 @@ img[src*="comune-gradara"] {
         font-size: 1rem;
     }
 
+    .event-detail-header__overlay {
+        min-height: 220px;
+        padding: 15px;
+    }
+
     .event-detail-header__title {
-        font-size: 2.3rem;
-        line-height: 2.7rem;
-        margin-bottom: 20px;
-        margin-top: 30px;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .event-detail-header__subtitle {
+        font-size: 0.9rem;
     }
 
     .error-404__code {
