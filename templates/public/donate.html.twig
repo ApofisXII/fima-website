@@ -6,10 +6,39 @@
 
     <div class="container">
         <h1>{{ 'donate.page_title'|trans }}</h1>
+
         {% if app.request.locale == 'en' %}
             <p class="donation-trailing">Information on how to support us is being updated. For donation inquiries, please email: <a class="link-bold hover" href="mailto:info@fima-online.org">info@fima-online.org</a></p>
         {% else %}
-            <p class="donation-trailing">Le informazioni su come sostenerci sono in aggiornamento. Per informazioni sulle donazioni invia una mail a: <a class="link-bold hover" href="mailto:info@fima-online.org">info@fima-online.org</a></p>
+
+            <div class="box donate-5x1000">
+                <div class="donate-5x1000__header">
+                    <div class="donate-5x1000__label">Destina il tuo</div>
+                    <div class="donate-5x1000__amount">5<span>×</span>1000</div>
+                    <div class="donate-5x1000__org">Fondazione Italiana per la Musica Antica</div>
+                    <div class="donate-5x1000__cf">
+                        Codice Fiscale: <strong>80412990584</strong>
+                    </div>
+                </div>
+
+                <p class="donate-5x1000__purpose">Il ricavato sarà destinato a progetti formativi sulla musica antica rivolti ai giovani musicisti.</p>
+
+                <div class="donate-body">
+                    <p>Dal 1968, la Fondazione Italiana per la Musica Antica è una delle realtà più riconosciute a livello internazionale nella diffusione della pratica musicale storicamente informata. Gli storici corsi estivi che ogni anno la FIMA organizza ad Urbino, assieme al festival internazionale, rappresentano da anni un punto di riferimento, un laboratorio, un'esperienza formativa entusiasmante ed unica nel suo genere.</p>
+
+                    <p>Si può devolvere alla Fondazione Italiana per la Musica Antica il 5×1000, l'aliquota Irpef che lo Stato non incamera ma destina a fondazioni, associazioni e organizzazioni di riconosciuto valore socio-culturale. Si tratta di una donazione del tutto <strong>gratuita per il contribuente</strong>, che non comporta alcun onere di spesa: non cambia la somma che viene versata, ma varia l'utilizzo di una sua parte.</p>
+
+                    <div class="donate-how-to">
+                        <div class="box-title">Come fare</div>
+                        <p>Per donare il 5×1000 compilando la dichiarazione dei redditi di quest'anno (relativa ai redditi del 2025) è necessario:</p>
+                        <ol>
+                            <li>Apporre la propria <strong>firma</strong> nell'apposito spazio dedicato al <em>«Sostegno del volontariato e delle altre organizzazioni non lucrative di utilità sociale, delle associazioni di promozione sociale e delle associazioni e fondazioni riconosciute che operano nei settori di cui all'articolo 10, comma 1, lettera a), del Decreto Legislativo n. 460 del 1997»</em>.</li>
+                            <li>Indicare il <strong>codice fiscale 80412990584</strong> nel campo corrispondente.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
         {% endif %}
 
         {# TODO: ripristinare quando le informazioni sono aggiornate
