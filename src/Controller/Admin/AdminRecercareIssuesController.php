@@ -9,7 +9,6 @@ use App\Repository\RecercareIssueRepository;
 use App\Service\RecercareIssueService;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,18 +98,18 @@ class AdminRecercareIssuesController extends AbstractController
         return $this->json(['message' => 'Dati salvati']);
     }
 
-    #[Route(path: '/delete/{issueId}', name: 'adminRecercareIssuesDelete', methods: ['DELETE'], format: 'json')]
+    #[Route(path: '/delete/{issue}', name: 'adminRecercareIssuesDelete', methods: ['DELETE'], format: 'json')]
     public function adminRecercareIssuesDelete(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
     ): Response {
         $this->recercareIssueService->delete($issue);
 
         return $this->json(['message' => 'Numero eliminato']);
     }
 
-    #[Route(path: '/upload-cover/{issueId}', name: 'adminRecercareIssuesUploadCover', methods: ['POST'], format: 'json')]
+    #[Route(path: '/upload-cover/{issue}', name: 'adminRecercareIssuesUploadCover', methods: ['POST'], format: 'json')]
     public function adminRecercareIssuesUploadCover(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
         #[MapUploadedFile] ?UploadedFile $cover,
     ): Response {
         if (!$cover) {
@@ -122,18 +121,18 @@ class AdminRecercareIssuesController extends AbstractController
         return $this->json(['message' => 'Copertina caricata']);
     }
 
-    #[Route(path: '/delete-cover/{issueId}', name: 'adminRecercareIssuesDeleteCover', methods: ['DELETE'], format: 'json')]
+    #[Route(path: '/delete-cover/{issue}', name: 'adminRecercareIssuesDeleteCover', methods: ['DELETE'], format: 'json')]
     public function adminRecercareIssuesDeleteCover(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
     ): Response {
         $this->recercareIssueService->deleteCover($issue);
 
         return $this->json(['message' => 'Copertina eliminata']);
     }
 
-    #[Route(path: '/upload-index-it/{issueId}', name: 'adminRecercareIssuesUploadIndexIt', methods: ['POST'], format: 'json')]
+    #[Route(path: '/upload-index-it/{issue}', name: 'adminRecercareIssuesUploadIndexIt', methods: ['POST'], format: 'json')]
     public function adminRecercareIssuesUploadIndexIt(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
         #[MapUploadedFile] ?UploadedFile $indexIt,
     ): Response {
         if (!$indexIt) {
@@ -145,18 +144,18 @@ class AdminRecercareIssuesController extends AbstractController
         return $this->json(['message' => 'Indice italiano caricato']);
     }
 
-    #[Route(path: '/delete-index-it/{issueId}', name: 'adminRecercareIssuesDeleteIndexIt', methods: ['DELETE'], format: 'json')]
+    #[Route(path: '/delete-index-it/{issue}', name: 'adminRecercareIssuesDeleteIndexIt', methods: ['DELETE'], format: 'json')]
     public function adminRecercareIssuesDeleteIndexIt(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
     ): Response {
         $this->recercareIssueService->deleteIndexIt($issue);
 
         return $this->json(['message' => 'Indice italiano eliminato']);
     }
 
-    #[Route(path: '/upload-index-en/{issueId}', name: 'adminRecercareIssuesUploadIndexEn', methods: ['POST'], format: 'json')]
+    #[Route(path: '/upload-index-en/{issue}', name: 'adminRecercareIssuesUploadIndexEn', methods: ['POST'], format: 'json')]
     public function adminRecercareIssuesUploadIndexEn(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
         #[MapUploadedFile] ?UploadedFile $indexEn,
     ): Response {
         if (!$indexEn) {
@@ -168,9 +167,9 @@ class AdminRecercareIssuesController extends AbstractController
         return $this->json(['message' => 'Indice inglese caricato']);
     }
 
-    #[Route(path: '/delete-index-en/{issueId}', name: 'adminRecercareIssuesDeleteIndexEn', methods: ['DELETE'], format: 'json')]
+    #[Route(path: '/delete-index-en/{issue}', name: 'adminRecercareIssuesDeleteIndexEn', methods: ['DELETE'], format: 'json')]
     public function adminRecercareIssuesDeleteIndexEn(
-        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        RecercareIssue $issue,
     ): Response {
         $this->recercareIssueService->deleteIndexEn($issue);
 

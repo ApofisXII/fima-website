@@ -201,7 +201,7 @@
         {% if issue and issue.hasCover %}
         document.getElementById('delete-cover-btn').addEventListener('click', function() {
             if (!confirm('Confermi di voler eliminare la copertina?')) return;
-            fetch('{{ path('adminRecercareIssuesDeleteCover', {'issueId': issue.id}) }}', { method: 'DELETE' })
+            fetch('{{ path('adminRecercareIssuesDeleteCover', {'issue': issue.id}) }}', { method: 'DELETE' })
             .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
             .then(d => { if (d) location.reload(); });
         });
@@ -210,14 +210,14 @@
         {% if issue %}
         document.getElementById('delete-index-it-btn').addEventListener('click', function() {
             if (!confirm('Confermi di voler eliminare il PDF italiano?')) return;
-            fetch('{{ path('adminRecercareIssuesDeleteIndexIt', {'issueId': issue.id}) }}', { method: 'DELETE' })
+            fetch('{{ path('adminRecercareIssuesDeleteIndexIt', {'issue': issue.id}) }}', { method: 'DELETE' })
             .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
             .then(d => { if (d) location.reload(); });
         });
 
         document.getElementById('delete-index-en-btn').addEventListener('click', function() {
             if (!confirm('Confermi di voler eliminare il PDF inglese?')) return;
-            fetch('{{ path('adminRecercareIssuesDeleteIndexEn', {'issueId': issue.id}) }}', { method: 'DELETE' })
+            fetch('{{ path('adminRecercareIssuesDeleteIndexEn', {'issue': issue.id}) }}', { method: 'DELETE' })
             .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
             .then(d => { if (d) location.reload(); });
         });
@@ -233,7 +233,7 @@
 
         document.getElementById('confirm-delete').addEventListener('click', function() {
             modal.style.display = 'none';
-            fetch('{{ path('adminRecercareIssuesDelete', {'issueId': issue.id}) }}', { method: 'DELETE' })
+            fetch('{{ path('adminRecercareIssuesDelete', {'issue': issue.id}) }}', { method: 'DELETE' })
             .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
             .then(d => { if (d) location.href = "{{ path('adminRecercareIssuesList') }}"; });
         });
