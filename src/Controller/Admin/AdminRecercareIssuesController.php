@@ -4,10 +4,12 @@ namespace App\Controller\Admin;
 
 use App\DTO\Admin\DataTableRequestDTO;
 use App\DTO\Admin\RecercareIssueRequestDTO;
+use App\Entity\RecercareIssue;
 use App\Repository\RecercareIssueRepository;
 use App\Service\RecercareIssueService;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,76 +100,78 @@ class AdminRecercareIssuesController extends AbstractController
     }
 
     #[Route(path: '/delete/{issueId}', name: 'adminRecercareIssuesDelete', methods: ['DELETE'], format: 'json')]
-    public function adminRecercareIssuesDelete(int $issueId): Response
-    {
-        $issue = $this->recercareIssueRepository->find($issueId);
-
+    public function adminRecercareIssuesDelete(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+    ): Response {
         $this->recercareIssueService->delete($issue);
 
         return $this->json(['message' => 'Numero eliminato']);
     }
 
     #[Route(path: '/upload-cover/{issueId}', name: 'adminRecercareIssuesUploadCover', methods: ['POST'], format: 'json')]
-    public function adminRecercareIssuesUploadCover(int $issueId, #[MapUploadedFile] ?UploadedFile $cover): Response
-    {
+    public function adminRecercareIssuesUploadCover(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        #[MapUploadedFile] ?UploadedFile $cover,
+    ): Response {
         if (!$cover) {
             return $this->json(['message' => 'Nessun file selezionato'], 400);
         }
 
-        $issue = $this->recercareIssueRepository->find($issueId);
         $this->recercareIssueService->saveCover($issue, $cover);
 
         return $this->json(['message' => 'Copertina caricata']);
     }
 
     #[Route(path: '/delete-cover/{issueId}', name: 'adminRecercareIssuesDeleteCover', methods: ['DELETE'], format: 'json')]
-    public function adminRecercareIssuesDeleteCover(int $issueId): Response
-    {
-        $issue = $this->recercareIssueRepository->find($issueId);
+    public function adminRecercareIssuesDeleteCover(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+    ): Response {
         $this->recercareIssueService->deleteCover($issue);
 
         return $this->json(['message' => 'Copertina eliminata']);
     }
 
     #[Route(path: '/upload-index-it/{issueId}', name: 'adminRecercareIssuesUploadIndexIt', methods: ['POST'], format: 'json')]
-    public function adminRecercareIssuesUploadIndexIt(int $issueId, #[MapUploadedFile] ?UploadedFile $indexIt): Response
-    {
+    public function adminRecercareIssuesUploadIndexIt(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        #[MapUploadedFile] ?UploadedFile $indexIt,
+    ): Response {
         if (!$indexIt) {
             return $this->json(['message' => 'Nessun file selezionato'], 400);
         }
 
-        $issue = $this->recercareIssueRepository->find($issueId);
         $this->recercareIssueService->saveIndexIt($issue, $indexIt);
 
         return $this->json(['message' => 'Indice italiano caricato']);
     }
 
     #[Route(path: '/delete-index-it/{issueId}', name: 'adminRecercareIssuesDeleteIndexIt', methods: ['DELETE'], format: 'json')]
-    public function adminRecercareIssuesDeleteIndexIt(int $issueId): Response
-    {
-        $issue = $this->recercareIssueRepository->find($issueId);
+    public function adminRecercareIssuesDeleteIndexIt(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+    ): Response {
         $this->recercareIssueService->deleteIndexIt($issue);
 
         return $this->json(['message' => 'Indice italiano eliminato']);
     }
 
     #[Route(path: '/upload-index-en/{issueId}', name: 'adminRecercareIssuesUploadIndexEn', methods: ['POST'], format: 'json')]
-    public function adminRecercareIssuesUploadIndexEn(int $issueId, #[MapUploadedFile] ?UploadedFile $indexEn): Response
-    {
+    public function adminRecercareIssuesUploadIndexEn(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+        #[MapUploadedFile] ?UploadedFile $indexEn,
+    ): Response {
         if (!$indexEn) {
             return $this->json(['message' => 'Nessun file selezionato'], 400);
         }
 
-        $issue = $this->recercareIssueRepository->find($issueId);
         $this->recercareIssueService->saveIndexEn($issue, $indexEn);
 
         return $this->json(['message' => 'Indice inglese caricato']);
     }
 
     #[Route(path: '/delete-index-en/{issueId}', name: 'adminRecercareIssuesDeleteIndexEn', methods: ['DELETE'], format: 'json')]
-    public function adminRecercareIssuesDeleteIndexEn(int $issueId): Response
-    {
-        $issue = $this->recercareIssueRepository->find($issueId);
+    public function adminRecercareIssuesDeleteIndexEn(
+        #[MapEntity(mapping: ['issueId' => 'id'])] RecercareIssue $issue,
+    ): Response {
         $this->recercareIssueService->deleteIndexEn($issue);
 
         return $this->json(['message' => 'Indice inglese eliminato']);

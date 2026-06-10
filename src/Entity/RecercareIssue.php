@@ -29,12 +29,6 @@ class RecercareIssue
     private bool $has_cover = false;
 
     #[ORM\Column]
-    private bool $has_index_it = false;
-
-    #[ORM\Column]
-    private bool $has_index_en = false;
-
-    #[ORM\Column]
     private bool $has_summary = false;
 
     #[ORM\Column]
@@ -110,30 +104,6 @@ class RecercareIssue
     public function setHasCover(bool $has_cover): static
     {
         $this->has_cover = $has_cover;
-
-        return $this;
-    }
-
-    public function hasIndexIt(): bool
-    {
-        return $this->has_index_it;
-    }
-
-    public function setHasIndexIt(bool $has_index_it): static
-    {
-        $this->has_index_it = $has_index_it;
-
-        return $this;
-    }
-
-    public function hasIndexEn(): bool
-    {
-        return $this->has_index_en;
-    }
-
-    public function setHasIndexEn(bool $has_index_en): static
-    {
-        $this->has_index_en = $has_index_en;
 
         return $this;
     }

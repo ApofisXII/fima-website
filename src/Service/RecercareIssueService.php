@@ -29,8 +29,6 @@ final readonly class RecercareIssueService
             ->setIsPublic($payload->isPublic ?? false)
             ->setHasSummary($payload->hasSummary ?? false)
             ->setHasCover(false)
-            ->setHasIndexIt(false)
-            ->setHasIndexEn(false)
             ->setIsDeleted(false)
             ->setCreatedAt(new \DateTime())
             ->setUpdatedAt(new \DateTime());
@@ -106,8 +104,6 @@ final readonly class RecercareIssueService
 
         $uploadedFile->move($serverPath, $fileName);
 
-        $issue->setHasIndexIt(true);
-
         return $this->recercareIssueRepository->save($issue);
     }
 
@@ -120,8 +116,6 @@ final readonly class RecercareIssueService
             $this->filesystem->remove($filePath);
         }
 
-        $issue->setHasIndexIt(false);
-
         return $this->recercareIssueRepository->save($issue);
     }
 
@@ -131,8 +125,6 @@ final readonly class RecercareIssueService
         $fileName = $issue->getId() . '_en.pdf';
 
         $uploadedFile->move($serverPath, $fileName);
-
-        $issue->setHasIndexEn(true);
 
         return $this->recercareIssueRepository->save($issue);
     }
@@ -145,8 +137,6 @@ final readonly class RecercareIssueService
         if ($this->filesystem->exists($filePath)) {
             $this->filesystem->remove($filePath);
         }
-
-        $issue->setHasIndexEn(false);
 
         return $this->recercareIssueRepository->save($issue);
     }

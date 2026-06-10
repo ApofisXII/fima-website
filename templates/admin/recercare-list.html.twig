@@ -47,7 +47,9 @@
             ],
             columnDefs: [
                 {
-                    targets: 3, render: function(data, type, row) {
+                    targets: 3,
+                    className: 'text-nowrap',
+                    render: function(data, type, row) {
                         let chips = "<span class='chip chip--neutral'>Indice</span>";
                         if (data) chips += " <span class='chip chip--event'>Sommario</span>";
                         return chips;

@@ -62,14 +62,14 @@
         <div class="box multi-detail-box gg-form">
             <h3>Indice e sommario (italiano)</h3>
 
-            {% if issue and issue.hasIndexIt %}
+            {% if issue %}
                 <p><a href="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_it.pdf') }}" target="_blank">Visualizza PDF caricato</a></p>
             {% endif %}
 
-            <label>{{ issue and issue.hasIndexIt ? 'Sostituisci PDF (italiano)' : 'Carica PDF (italiano)' }}</label>
+            <label>Sostituisci PDF (italiano)</label>
             <input type="file" id="index-it-input" name="indexIt" accept="application/pdf">
 
-            {% if issue and issue.hasIndexIt %}
+            {% if issue %}
                 <div class="gg-action-btn-group">
                     <button type="button" id="delete-index-it-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina PDF italiano</button>
                 </div>
@@ -79,14 +79,14 @@
         <div class="box multi-detail-box gg-form">
             <h3>Indice e sommario (inglese)</h3>
 
-            {% if issue and issue.hasIndexEn %}
+            {% if issue %}
                 <p><a href="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_en.pdf') }}" target="_blank">Visualizza PDF caricato</a></p>
             {% endif %}
 
-            <label>{{ issue and issue.hasIndexEn ? 'Sostituisci PDF (inglese)' : 'Carica PDF (inglese)' }}</label>
+            <label>Sostituisci PDF (inglese)</label>
             <input type="file" id="index-en-input" name="indexEn" accept="application/pdf">
 
-            {% if issue and issue.hasIndexEn %}
+            {% if issue %}
                 <div class="gg-action-btn-group">
                     <button type="button" id="delete-index-en-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina PDF inglese</button>
                 </div>
@@ -128,6 +128,18 @@
             const formData = new FormData(e.target);
             const isPublic = formData.get('isPublic') === '1';
             const hasSummary = formData.get('hasSummary') === '1';
+            const isNew = formData.get('issueId') === '0';
+
+            if (isNew) {
+                if (!document.getElementById('index-it-input').files[0]) {
+                    alert('Il PDF italiano (indice e sommario) è obbligatorio.');
+                    return;
+                }
+                if (!document.getElementById('index-en-input').files[0]) {
+                    alert('Il PDF inglese (indice e sommario) è obbligatorio.');
+                    return;
+                }
+            }
 
             const payload = {
                 issueId:    formData.get('issueId'),
@@ -195,16 +207,14 @@
         });
         {% endif %}
 
-        {% if issue and issue.hasIndexIt %}
+        {% if issue %}
         document.getElementById('delete-index-it-btn').addEventListener('click', function() {
             if (!confirm('Confermi di voler eliminare il PDF italiano?')) return;
             fetch('{{ path('adminRecercareIssuesDeleteIndexIt', {'issueId': issue.id}) }}', { method: 'DELETE' })
             .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
             .then(d => { if (d) location.reload(); });
         });
-        {% endif %}
 
-        {% if issue and issue.hasIndexEn %}
         document.getElementById('delete-index-en-btn').addEventListener('click', function() {
             if (!confirm('Confermi di voler eliminare il PDF inglese?')) return;
             fetch('{{ path('adminRecercareIssuesDeleteIndexEn', {'issueId': issue.id}) }}', { method: 'DELETE' })
