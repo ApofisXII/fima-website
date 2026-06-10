@@ -1,0 +1,89 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">Recercare</div>
+
+    <div style="margin-bottom: 20px;">
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminRecercareIssuesDetail') }}">+ Nuovo numero</a>
+    </div>
+
+    <table id="main-table">
+        <thead>
+        <tr>
+            <th>Volume</th>
+            <th>Anno</th>
+            <th>ISBN</th>
+            <th>Contenuto</th>
+            <th>Visibilità</th>
+            <th>Creato</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        import DataTable from 'datatables.net-dt';
+        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+
+        const table = new DataTable("#main-table", {
+            serverSide: true,
+            ajax: {
+                url: "{{ path('adminRecercareIssuesListJson') }}",
+            },
+            ordering: false,
+            columns: [
+                { data: "volume" },
+                { data: "year" },
+                { data: "isbn" },
+                { data: "hasSummary" },
+                { data: "isPublic" },
+                { data: "createdAt" },
+                { data: "issueDetailLink" },
+            ],
+            columnDefs: [
+                {
+                    targets: 3,
+                    className: 'text-nowrap',
+                    render: function(data, type, row) {
+                        let chips = "<span class='chip chip--neutral'>Indice</span>";
+                        if (data) chips += " <span class='chip chip--event'>Sommario</span>";
+                        return chips;
+                    }
+                },
+                {
+                    targets: 4, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
+                    }
+                },
+                {
+                    targets: 6, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica numero</a>";
+                    }
+                }
+            ],
+            pageLength: 25,
+            language: {
+                search: "Cerca:",
+                lengthMenu: "Mostra _MENU_ risultati per pagina",
+                info: "Mostrati da _START_ a _END_ di _TOTAL_ risultati",
+                infoEmpty: "Nessun risultato disponibile",
+                infoFiltered: "(filtrati da _MAX_ risultati totali)",
+                paginate: {
+                    first: "Primo",
+                    last: "Ultimo",
+                    next: "Successivo",
+                    previous: "Precedente"
+                },
+                emptyTable: "Nessun dato disponibile nella tabella",
+                zeroRecords: "Nessun risultato trovato"
+            }
+        });
+
+    </script>
+
+{% endblock %}
