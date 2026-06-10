@@ -49,6 +49,19 @@ final readonly class RecercareIssueService
 
     public function delete(RecercareIssue $issue): RecercareIssue
     {
+        $coversPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-recercare/covers/';
+        $indexesPath = $this->parameterBag->get('kernel.project_dir') . '/public/uploads-recercare/indexes/';
+
+        foreach ([
+            $coversPath . $issue->getId() . '.webp',
+            $indexesPath . $issue->getId() . '_it.pdf',
+            $indexesPath . $issue->getId() . '_en.pdf',
+        ] as $path) {
+            if ($this->filesystem->exists($path)) {
+                $this->filesystem->remove($path);
+            }
+        }
+
         $issue->setIsDeleted(true);
 
         return $this->recercareIssueRepository->save($issue);
