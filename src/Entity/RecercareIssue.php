@@ -22,6 +22,9 @@ class RecercareIssue
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $isbn = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $note = null;
+
     #[ORM\Column]
     private bool $has_cover = false;
 
@@ -30,6 +33,9 @@ class RecercareIssue
 
     #[ORM\Column]
     private bool $has_index_en = false;
+
+    #[ORM\Column]
+    private bool $has_summary = false;
 
     #[ORM\Column]
     private ?bool $is_public = null;
@@ -84,6 +90,18 @@ class RecercareIssue
         return $this;
     }
 
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): static
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
     public function hasCover(): bool
     {
         return $this->has_cover;
@@ -116,6 +134,18 @@ class RecercareIssue
     public function setHasIndexEn(bool $has_index_en): static
     {
         $this->has_index_en = $has_index_en;
+
+        return $this;
+    }
+
+    public function hasSummary(): bool
+    {
+        return $this->has_summary;
+    }
+
+    public function setHasSummary(bool $has_summary): static
+    {
+        $this->has_summary = $has_summary;
 
         return $this;
     }

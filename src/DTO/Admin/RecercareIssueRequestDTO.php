@@ -18,7 +18,11 @@ class RecercareIssueRequestDTO
 
         public ?string $isbn = null,
 
+        public ?string $note = null,
+
         public ?bool $isPublic = false,
+
+        public ?bool $hasSummary = false,
 
     ) {}
 }

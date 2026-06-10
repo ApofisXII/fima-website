@@ -14,6 +14,7 @@
             <th>Volume</th>
             <th>Anno</th>
             <th>ISBN</th>
+            <th>Contenuto</th>
             <th>Visibilità</th>
             <th>Creato</th>
             <th></th>
@@ -39,6 +40,7 @@
                 { data: "volume" },
                 { data: "year" },
                 { data: "isbn" },
+                { data: "hasSummary" },
                 { data: "isPublic" },
                 { data: "createdAt" },
                 { data: "issueDetailLink" },
@@ -46,11 +48,18 @@
             columnDefs: [
                 {
                     targets: 3, render: function(data, type, row) {
+                        let chips = "<span class='chip chip--neutral'>Indice</span>";
+                        if (data) chips += " <span class='chip chip--event'>Sommario</span>";
+                        return chips;
+                    }
+                },
+                {
+                    targets: 4, render: function(data, type, row) {
                         return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
                     }
                 },
                 {
-                    targets: 5, render: function(data, type, row) {
+                    targets: 6, render: function(data, type, row) {
                         return "<a href='"+data+"' class='gg-table-btn'>Modifica numero</a>";
                     }
                 }

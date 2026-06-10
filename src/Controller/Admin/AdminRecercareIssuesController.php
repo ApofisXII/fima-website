@@ -57,6 +57,7 @@ class AdminRecercareIssuesController extends AbstractController
                 'year'            => $item->getYear(),
                 'isbn'            => $item->getIsbn() ?? '—',
                 'isPublic'        => $item->isPublic(),
+                'hasSummary'      => $item->hasSummary(),
                 'createdAt'       => $item->getCreatedAt()->format('d/m/y \\a\\l\\l\\e H:i'),
                 'issueDetailLink' => $this->generateUrl('adminRecercareIssuesDetail', ['issueId' => $item->getId()]),
             ];

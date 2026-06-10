@@ -25,7 +25,9 @@ final readonly class RecercareIssueService
             ->setVolume($payload->volume)
             ->setYear($payload->year)
             ->setIsbn($payload->isbn)
+            ->setNote($payload->note)
             ->setIsPublic($payload->isPublic ?? false)
+            ->setHasSummary($payload->hasSummary ?? false)
             ->setHasCover(false)
             ->setHasIndexIt(false)
             ->setHasIndexEn(false)
@@ -42,7 +44,9 @@ final readonly class RecercareIssueService
             ->setVolume($payload->volume)
             ->setYear($payload->year)
             ->setIsbn($payload->isbn)
-            ->setIsPublic($payload->isPublic ?? false);
+            ->setNote($payload->note)
+            ->setIsPublic($payload->isPublic ?? false)
+            ->setHasSummary($payload->hasSummary ?? false);
 
         return $this->recercareIssueRepository->save($issue);
     }
