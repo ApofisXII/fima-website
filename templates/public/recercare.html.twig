@@ -1,0 +1,138 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'recercare.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'recercare.page_title'|trans }}</h1>
+
+        <div class="recercare-subtitle">
+            {{ 'recercare.subtitle'|trans }}
+        </div>
+
+        <div>
+            <b>{{ 'recercare.director'|trans }}</b>
+            <div>
+                {{ 'recercare.scientific_committee'|trans }}
+            </div>
+        </div>
+
+        <div class="recercare-actions">
+            <a class="btn btn--blue hover" href="{{ asset(app.request.locale == 'en' ? 'documents/authors_information_en.doc' : 'documents/authors_information_it.docx') }}" target="_blank">
+                {{ 'recercare.authors_information'|trans }}
+            </a>
+            <a class="btn btn--blue hover" href="https://www.lim.it/it/22-recercare" target="_blank">
+                {{ 'recercare.subscriptions'|trans }}
+            </a>
+        </div>
+
+        <div class="recercare-grid">
+            {% for issue in issues %}
+                <div class="recercare-box{{ issue.hasCover ? ' recercare-box--cover' }}">
+                    {% if issue.hasCover %}
+                        <img class="recercare-box__cover" src="{{ asset('uploads-recercare/covers/' ~ issue.id ~ '.webp') }}" alt="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}" loading="lazy">
+                    {% else %}
+                        <div class="recercare-box__year">{{ issue.year }}</div>
+                        <div class="recercare-box__edition">{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}</div>
+                    {% endif %}
+                    <button type="button" class="btn btn--blue btn--recercare-open hover"
+                            data-recercare-open
+                            data-edition="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}"
+                            data-year="{{ issue.year }}"
+                            data-isbn="{{ issue.isbn }}"
+                            data-note="{{ issue.note }}"
+                            {% if issue.hasSummary %}data-pdf="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_' ~ app.request.locale ~ '.pdf') }}"{% endif %}>
+                        {{ 'recercare.open_index'|trans }}
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div id="recercare-modal" class="recercare-modal" hidden>
+        <div class="recercare-modal__backdrop" data-recercare-close></div>
+        <div class="recercare-modal__content" role="dialog" aria-modal="true" aria-labelledby="recercare-modal-title">
+            <button type="button" class="recercare-modal__close" data-recercare-close aria-label="{{ 'base.close'|trans }}">&times;</button>
+            <h2 id="recercare-modal-title" class="recercare-modal__title" data-field="edition"></h2>
+            <dl class="recercare-modal__meta">
+                <div class="recercare-modal__row">
+                    <dt>{{ 'recercare.year_label'|trans }}</dt>
+                    <dd data-field="year"></dd>
+                </div>
+                <div class="recercare-modal__row" data-row="isbn">
+                    <dt>{{ 'recercare.isbn_label'|trans }}</dt>
+                    <dd data-field="isbn"></dd>
+                </div>
+                <div class="recercare-modal__row" data-row="note">
+                    <dt>{{ 'recercare.note_label'|trans }}</dt>
+                    <dd data-field="note"></dd>
+                </div>
+            </dl>
+            <a class="btn btn--blue hover recercare-modal__download" data-field="download" target="_blank" rel="noopener">{{ 'recercare.download_index'|trans }}</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module">
+        (function () {
+            const modal = document.getElementById('recercare-modal');
+            if (!modal) return;
+
+            const fields = {
+                edition: modal.querySelector('[data-field="edition"]'),
+                year: modal.querySelector('[data-field="year"]'),
+                isbn: modal.querySelector('[data-field="isbn"]'),
+                note: modal.querySelector('[data-field="note"]'),
+                download: modal.querySelector('[data-field="download"]'),
+            };
+            const rows = {
+                isbn: modal.querySelector('[data-row="isbn"]'),
+                note: modal.querySelector('[data-row="note"]'),
+            };
+
+            function setRow(row, valueEl, value) {
+                const has = value && value.trim() !== '';
+                if (has) valueEl.textContent = value;
+                row.hidden = !has;
+            }
+
+            function open(btn) {
+                fields.edition.textContent = btn.dataset.edition || '';
+                fields.year.textContent = btn.dataset.year || '';
+                setRow(rows.isbn, fields.isbn, btn.dataset.isbn);
+                setRow(rows.note, fields.note, btn.dataset.note);
+
+                const pdf = btn.dataset.pdf;
+                if (pdf) {
+                    fields.download.href = pdf;
+                    fields.download.hidden = false;
+                } else {
+                    fields.download.hidden = true;
+                }
+
+                modal.hidden = false;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                modal.hidden = true;
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-recercare-open]').forEach(function (btn) {
+                btn.addEventListener('click', function () { open(btn); });
+            });
+            modal.querySelectorAll('[data-recercare-close]').forEach(function (el) {
+                el.addEventListener('click', close);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.hidden) close();
+            });
+        })();
+    </script>
+{% endblock %}
