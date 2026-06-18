@@ -7,11 +7,11 @@
     <div class="container">
         <h1>{{ 'recercare.page_title'|trans }}</h1>
 
-        <div class="recercare-subtitle">
+        <div class="recercare-subtitle paragraph">
             {{ 'recercare.subtitle'|trans }}
         </div>
 
-        <div>
+        <div class="paragraph">
             <b>{{ 'recercare.director'|trans }}</b>
             <div>
                 {{ 'recercare.scientific_committee'|trans }}
@@ -19,7 +19,7 @@
         </div>
 
         <div class="recercare-actions">
-            <a class="btn btn--blue hover" href="{{ asset(app.request.locale == 'en' ? 'documents/authors_information_en.doc' : 'documents/authors_information_it.docx') }}" target="_blank">
+            <a class="btn btn--blue hover" href="{{ asset(app.request.locale == 'en' ? 'documents/authors_information_en.pdf' : 'documents/authors_information_it.pdf') }}" target="_blank">
                 {{ 'recercare.authors_information'|trans }}
             </a>
             <a class="btn btn--blue hover" href="https://www.lim.it/it/22-recercare" target="_blank">
@@ -42,8 +42,13 @@
                             data-year="{{ issue.year }}"
                             data-isbn="{{ issue.isbn }}"
                             data-note="{{ issue.note }}"
-                            {% if issue.hasSummary %}data-pdf="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_' ~ app.request.locale ~ '.pdf') }}"{% endif %}>
-                        {{ 'recercare.open_index'|trans }}
+                            {% if issue.hasSummary %}
+                            data-pdf="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_' ~ app.request.locale ~ '.pdf') }}"
+                            data-download-label="{{ 'recercare.download_index'|trans }}"
+                            {% else %}
+                            data-download-label="{{ 'recercare.download_index_only'|trans }}"
+                            {% endif %}>
+                        {{ issue.hasSummary ? 'recercare.open_index'|trans : 'recercare.open_index_only'|trans }}
                     </button>
                 </div>
             {% endfor %}
@@ -110,6 +115,7 @@
                 const pdf = btn.dataset.pdf;
                 if (pdf) {
                     fields.download.href = pdf;
+                    fields.download.textContent = btn.dataset.downloadLabel || fields.download.textContent;
                     fields.download.hidden = false;
                 } else {
                     fields.download.hidden = true;

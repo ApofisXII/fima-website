@@ -28,7 +28,7 @@
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.about'|trans }}</a>#}
                     <a class="header__nav-link {{ app.current_route and 'urbino' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('urbinoWelcome') }}" data-label="{{ 'base.nav.urbino'|trans }}">{{ 'base.nav.urbino'|trans }}</a>
                     <a class="header__nav-link {{ app.current_route and app.current_route == 'library' ? 'header__nav-link--active' }}" href="{{ path('library') }}" data-label="{{ 'base.nav.library'|trans }}">{{ 'base.nav.library'|trans }}</a>
-{#                    <a class="header__nav-link {{ app.current_route == 'recercare' ? 'header__nav-link--active' }}" href="{{ path('recercare') }}">Recercare</a>#}
+{#                    <a class="header__nav-link {{ app.current_route and app.current_route == 'recercare' ? 'header__nav-link--active' }}" href="{{ path('recercare') }}" data-label="Recercare">Recercare</a>#}
 {#                    <a class="header__nav-link" href="">{{ 'base.nav.periodical'|trans }}</a>#}
                     <a class="header__nav-link {{ app.current_route and 'news' in app.current_route ? 'header__nav-link--active' }}" href="{{ path('newsList') }}" data-label="{{ 'base.nav.events'|trans }}">{{ 'base.nav.events'|trans }}</a>
                     <span class="header__nav-indicator"></span>

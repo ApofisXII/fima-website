@@ -1664,6 +1664,12 @@ img[src*="comune-gradara"] {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    animation: recercare-backdrop-in 0.25s ease both;
+}
+
+@keyframes recercare-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .recercare-modal__content {
@@ -1674,6 +1680,12 @@ img[src*="comune-gradara"] {
     max-width: 480px;
     width: 100%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: recercare-modal-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes recercare-modal-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .recercare-modal__close {
@@ -1871,6 +1883,7 @@ img[src*="comune-gradara"] {
     .header__nav--open .header__nav-link:nth-child(2) { animation-delay: 0.22s; }
     .header__nav--open .header__nav-link:nth-child(3) { animation-delay: 0.29s; }
     .header__nav--open .header__nav-link:nth-child(4) { animation-delay: 0.36s; }
+    .header__nav--open .header__nav-link:nth-child(5) { animation-delay: 0.43s; }
 
     .header__nav-link {
         padding: 10px 0;
@@ -2327,11 +2340,16 @@ img[src*="comune-gradara"] {
 
     .recercare-actions {
         flex-direction: column;
+        padding: 0 10px;
     }
 
     .recercare-actions > .btn {
         width: 100%;
         text-align: center;
+    }
+
+    .recercare-grid {
+        padding: 0 10px;
     }
 
 }
