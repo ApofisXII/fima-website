@@ -222,8 +222,8 @@ recercare:
     year_label: 'Anno'
     isbn_label: 'ISBN'
     note_label: 'Nota'
-    download_index: 'Scarica indice e sommario'
-    download_index_only: 'Scarica indice'
+    download_index: 'Apri indice e sommario'
+    download_index_only: 'Apri indice'
 
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
