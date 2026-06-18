@@ -217,11 +217,13 @@ recercare:
     authors_information: 'Informazioni per gli autori'
     subscriptions: 'Abbonamenti e acquisti'
     open_index: 'Indice & sommario'
+    open_index_only: 'Indice'
     edition: 'Recercare %number%'
     year_label: 'Anno'
     isbn_label: 'ISBN'
     note_label: 'Nota'
     download_index: 'Scarica indice e sommario'
+    download_index_only: 'Scarica indice'
 
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
@@ -231,6 +233,7 @@ base:
         about: 'Chi siamo'
         urbino: 'Urbino Musica Antica'
         library: 'Biblioteca'
+        recercare: 'Recercare'
         periodical: 'Periodico'
         events: 'Eventi'
     uma_nav:
