@@ -29,13 +29,8 @@
 
         <div class="recercare-grid">
             {% for issue in issues %}
-                <div class="recercare-box{{ issue.hasCover ? ' recercare-box--cover' }}">
-                    {% if issue.hasCover %}
-                        <img class="recercare-box__cover" src="{{ asset('uploads-recercare/covers/' ~ issue.id ~ '.webp') }}" alt="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}" loading="lazy">
-                    {% else %}
-                        <div class="recercare-box__year">{{ issue.year }}</div>
-                        <div class="recercare-box__edition">{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}</div>
-                    {% endif %}
+                <div class="recercare-box recercare-box--cover">
+                    <img class="recercare-box__cover" src="{{ issue.hasCover ? asset('uploads-recercare/covers/' ~ issue.id ~ '.webp') : asset('images/recercare-fallback.webp') }}" alt="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}" loading="lazy">
                     <button type="button" class="btn btn--blue btn--recercare-open hover"
                             data-recercare-open
                             data-edition="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}"
