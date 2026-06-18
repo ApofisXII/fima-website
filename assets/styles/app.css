@@ -1627,16 +1627,34 @@ img[src*="comune-gradara"] {
     object-fit: cover;
 }
 
+.recercare-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 55%);
+    z-index: 0;
+}
+
+
 .recercare-box__year {
-    font-size: 2.7rem;
-    opacity: 0.3;
+    position: relative;
+    z-index: 1;
+    font-size: 1.4rem;
     font-weight: var(--font-bold-weight-sans-serif);
+    color: white;
+    opacity: 0.85;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 .recercare-box__edition {
-    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+    font-size: 1.05rem;
     font-weight: var(--font-bold-weight-sans-serif);
     margin-bottom: 10px;
+    color: white;
+    opacity: 0.85;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 .btn--recercare-open {
@@ -2350,6 +2368,18 @@ img[src*="comune-gradara"] {
 
     .recercare-grid {
         padding: 0 10px;
+    }
+
+    .recercare-box {
+        padding: 15px;
+    }
+
+    .recercare-box__year {
+        font-size: 1.8rem;
+    }
+
+    .recercare-box__edition {
+        font-size: 1.3rem;
     }
 
 }

@@ -29,8 +29,10 @@
 
         <div class="recercare-grid">
             {% for issue in issues %}
-                <div class="recercare-box recercare-box--cover">
+                <div class="recercare-box">
                     <img class="recercare-box__cover" src="{{ issue.hasCover ? asset('uploads-recercare/covers/' ~ issue.id ~ '.webp') : asset('images/recercare-fallback.webp') }}" alt="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}" loading="lazy">
+                    <div class="recercare-box__year">{{ issue.year }}</div>
+                    <div class="recercare-box__edition">{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}</div>
                     <button type="button" class="btn btn--blue btn--recercare-open hover"
                             data-recercare-open
                             data-edition="{{ 'recercare.edition'|trans({'%number%': issue.volume}) }}"
