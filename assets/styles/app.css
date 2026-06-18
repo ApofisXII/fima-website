@@ -1611,7 +1611,7 @@ img[src*="comune-gradara"] {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: white;
-    aspect-ratio: 9 / 13;
+    aspect-ratio: 9 / 12;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
