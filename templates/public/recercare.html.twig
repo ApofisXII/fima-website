@@ -42,12 +42,9 @@
                             data-year="{{ issue.year }}"
                             data-isbn="{{ issue.isbn }}"
                             data-note="{{ issue.note }}"
-                            {% if issue.hasSummary %}
                             data-pdf="{{ asset('uploads-recercare/indexes/' ~ issue.id ~ '_' ~ app.request.locale ~ '.pdf') }}"
-                            data-download-label="{{ 'recercare.download_index'|trans }}"
-                            {% else %}
-                            data-download-label="{{ 'recercare.download_index_only'|trans }}"
-                            {% endif %}>
+                            data-download-label="{{ issue.hasSummary ? 'recercare.download_index'|trans : 'recercare.download_index_only'|trans }}"
+                            >
                         {{ issue.hasSummary ? 'recercare.open_index'|trans : 'recercare.open_index_only'|trans }}
                     </button>
                 </div>
