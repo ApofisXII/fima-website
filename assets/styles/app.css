@@ -353,6 +353,7 @@ h2 {
     background-color: var(--color-yellow);
     color: white;
     box-shadow: 0 5px 15px rgba(214, 39, 37, 0.21);
+    font-family: inherit;
     font-weight: var(--font-bold-weight-sans-serif);
     text-transform: uppercase;
     letter-spacing: 0.02rem;
@@ -1600,7 +1601,7 @@ img[src*="comune-gradara"] {
 
 .recercare-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 60px;
 }
@@ -1662,6 +1663,7 @@ img[src*="comune-gradara"] {
     position: relative;
     z-index: 1;
     width: 100%;
+    font-size: 0.9rem;
 }
 
 /* Recercare issue modal */
@@ -2369,6 +2371,18 @@ img[src*="comune-gradara"] {
 
     .recercare-grid {
         padding: 0 10px;
+    }
+
+    .recercare-modal__download {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn--uma-activity {
+        display: block;
+        width: 100%;
+        text-align: center;
     }
 
     .recercare-box {
