@@ -216,13 +216,13 @@ recercare:
     scientific_committee: "Scientific committee: Anna Maria Busse Berger (University of California, Davis), Mauro Calcagno (University of Pennsylvania, Philadelphia), Philippe Canguilhem (Université de Tours), Ivano Cavallini (Università di Palermo), Valeria De Lucca (University of Southampton), Andrea Garavaglia (Université de Fribourg), Giuseppe Gerbino (Columbia University, New York), Michael Klaper (Friedrich-Schiller-Universität, Jena), Stefano Lorenzetti (Conservatorio di Vicenza), Renato Meucci (Accademia Nazionale di Santa Cecilia, Roma), Margaret Murata (University of California, Irvine), John Nádas (University of North Carolina, Chapel Hill), Noel O'Regan (University of Edinburgh), Franco Piperno (Università di Roma – La Sapienza), Giancarlo Rostirolla (Università di Chieti-Pescara), Kate van Orden (Harvard University, Cambridge, Mass.), Luca Zoppelli (Université de Fribourg)."
     authors_information: 'Information for authors'
     subscriptions: 'Subscriptions and purchases'
-    open_index: 'Index & summary'
+    open_index: 'Index & summaries'
     open_index_only: 'Index'
     edition: 'Recercare %number%'
     year_label: 'Year'
     isbn_label: 'ISBN'
     note_label: 'Note'
-    download_index: 'Open index & summary'
+    download_index: 'Open index & summaries'
     download_index_only: 'Open index'
 
 base:
