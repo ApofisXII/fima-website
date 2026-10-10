@@ -15,6 +15,40 @@ home:
         support:
             title: 'Con il sostegno di'
 
+about:
+    page_title: 'Chi siamo'
+    heading: 'Chi siamo'
+    quote: "Mi resi conto di quanto fosse importante sul piano culturale e sociale la conoscenza e l’esperienza musicale e così decisi con qualche collaboratore di organizzare una piccola scuola a Roma. A Torino era stata fondata un'accademia del flauto dolce, ma in Italia non c’erano luoghi o occasioni per poter studiare e praticare la musica antica e si avvertiva il bisogno di stare insieme e il desiderio di qualcosa che avvicinasse e unisse le persone"
+    quote_role: 'Fondatore'
+    intro: "Con queste parole, il prof. Giancarlo Rostirolla ricorda come, nel 1968, gettò le basi di quella che nel 1970 sarebbe stata la <b>Società Italiana del Flauto Dolce</b> che, con il festival internazionale ed i corsi estivi ad Urbino, fu immediatamente un punto di riferimento di primaria importanza per lo studio e l'esecuzione storicamente informata del repertorio antico. La SIFD è, dal 1993, la <b>Fondazione Italiana per la Musica Antica</b>."
+    timeline:
+        title: 'La nostra storia'
+        1968:
+            title: 'Una piccola scuola a Roma'
+            description: 'Giancarlo Rostirolla e alcuni collaboratori creano un luogo dove studiare e praticare insieme la musica antica.'
+        1970:
+            title: 'Società Italiana del Flauto Dolce'
+            description: "Con il festival internazionale e i corsi estivi di Urbino diventa subito un punto di riferimento per l'esecuzione storicamente informata."
+        1993:
+            title: 'Fondazione Italiana per la Musica Antica'
+            description: 'La SIFD diventa fondazione: nasce la FIMA.'
+        today:
+            label: 'Oggi'
+            title: '%years% anni di musica antica'
+            description: 'Corsi, concerti, ricerca e divulgazione, con lo stesso desiderio di avvicinare e unire le persone attraverso la musica.'
+    today:
+        title: 'La FIMA oggi'
+        discover: 'Scopri'
+        urbino:
+            kicker: 'Corsi e festival'
+            description: 'Corsi estivi di alta formazione musicale e festival internazionale nel cuore della città ducale.'
+        library:
+            kicker: 'Biblioteca'
+            description: "Nata agli inizi degli anni '70, è l'unica biblioteca in Italia dedicata specificamente all'organologia."
+        recercare:
+            kicker: 'Rivista'
+            description: 'Rivista per lo studio e la pratica della musica antica, pubblicata dal 1989.'
+
 donate:
     page_title: 'Sostienici'
     intro_1: 'Dal 2024 è possibile sostenere URBINO MUSICA ANTICA attraverso erogazioni liberali diventando <b>Benefattori</b> della manifestazione.'

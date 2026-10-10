@@ -15,6 +15,40 @@ home:
         support:
             title: 'With the support of'
 
+about:
+    page_title: 'About us'
+    heading: 'About us'
+    quote: 'I realised how important musical knowledge and experience were, both culturally and socially, and so, together with a few collaborators, I decided to set up a small school in Rome. A recorder academy had been founded in Turin, but in Italy there were no places or opportunities to study and practise early music, and there was a need to be together, a desire for something that would bring people closer and unite them'
+    quote_role: 'Founder'
+    intro: 'With these words, Prof. Giancarlo Rostirolla recalls how, in 1968, he laid the foundations of what in 1970 would become the <b>Società Italiana del Flauto Dolce</b> (Italian Recorder Society), which, with its international festival and summer courses in Urbino, immediately became a leading point of reference for the study and historically informed performance of early repertoire. Since 1993, the SIFD has been the <b>Fondazione Italiana per la Musica Antica</b>.'
+    timeline:
+        title: 'Our history'
+        1968:
+            title: 'A small school in Rome'
+            description: 'Giancarlo Rostirolla and a few collaborators create a place to study and practise early music together.'
+        1970:
+            title: 'Società Italiana del Flauto Dolce'
+            description: 'With its international festival and summer courses in Urbino, it immediately becomes a point of reference for historically informed performance.'
+        1993:
+            title: 'Fondazione Italiana per la Musica Antica'
+            description: 'The SIFD becomes a foundation: FIMA is born.'
+        today:
+            label: 'Today'
+            title: '%years% years of early music'
+            description: 'Courses, concerts, research and outreach, driven by the same desire to bring people closer and unite them through music.'
+    today:
+        title: 'FIMA today'
+        discover: 'Discover'
+        urbino:
+            kicker: 'Courses and festival'
+            description: 'Advanced summer music courses and an international festival in the heart of the ducal city.'
+        library:
+            kicker: 'Library'
+            description: 'Founded in the early 1970s, it is the only library in Italy specifically devoted to organology.'
+        recercare:
+            kicker: 'Journal'
+            description: 'Journal for the study and practice of early music, published since 1989.'
+
 donate:
     page_title: 'Support us'
     intro_1: 'Since 2024 it is possible to support URBINO MUSICA ANTICA through donations by becoming a <b>Benefactor</b> of the event.'

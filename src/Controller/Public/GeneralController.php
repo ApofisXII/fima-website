@@ -42,6 +42,12 @@ final class GeneralController extends AbstractController
         ]);
     }
 
+    #[Route('/{_locale}/about', name: 'about')]
+    public function about(): Response
+    {
+        return $this->render('public/about.html.twig');
+    }
+
     #[Route('/{_locale}/donate', name: 'donate')]
     public function donate(): Response
     {

@@ -1,0 +1,85 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'about.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <script>document.documentElement.classList.add('reveal-ready');</script>
+
+    {% set yearsOfActivity = 'now'|date('Y') - 1968 %}
+
+    <section class="about-hero">
+        <div class="container container--reduced about-hero__inner">
+            <h1 class="about-hero__heading">{{ 'about.heading'|trans }}</h1>
+            <figure class="about-quote">
+                <blockquote class="about-quote__text">
+                    <p><span class="about-quote__ellipsis">[…]</span> {{ 'about.quote'|trans }} <span class="about-quote__ellipsis">[…]</span></p>
+                </blockquote>
+                <figcaption class="about-quote__author">
+                    <span class="about-quote__author-name">Giancarlo Rostirolla</span>
+                    <span class="about-quote__author-role">{{ 'about.quote_role'|trans }}</span>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="container container--reduced about-intro" data-reveal>
+        <p class="about-intro__text">{{ 'about.intro'|trans|raw }}</p>
+    </section>
+
+    <section class="container about-timeline">
+        <h2>{{ 'about.timeline.title'|trans }}</h2>
+        <ol class="about-timeline__list">
+            {% for step in ['1968', '1970', '1993', 'today'] %}
+                <li class="about-timeline__item {{ step == 'today' ? 'about-timeline__item--today' }}" data-reveal style="--reveal-delay: {{ loop.index0 * 150 }}ms">
+                    <div class="about-timeline__year">{{ step == 'today' ? 'about.timeline.today.label'|trans : step }}</div>
+                    <div class="about-timeline__title">{{ ('about.timeline.' ~ step ~ '.title')|trans({'%years%': yearsOfActivity}) }}</div>
+                    <p>{{ ('about.timeline.' ~ step ~ '.description')|trans }}</p>
+                </li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <section class="container about-today">
+        <h2>{{ 'about.today.title'|trans }}</h2>
+        <div class="about-today__grid">
+            {% for card in [
+                {key: 'urbino', title: 'Urbino Musica Antica', route: 'urbinoWelcome'},
+                {key: 'library', title: 'Biblioteca Sylvestro Ganassi', route: 'library'},
+                {key: 'recercare', title: 'Recercare', route: 'recercare'},
+            ] %}
+                <div data-reveal style="--reveal-delay: {{ loop.index0 * 150 }}ms">
+                    <a href="{{ path(card.route) }}" class="box about-card hover">
+                        <div class="about-card__kicker">{{ ('about.today.' ~ card.key ~ '.kicker')|trans }}</div>
+                        <div class="about-card__title font-serif">{{ card.title }}</div>
+                        <p>{{ ('about.today.' ~ card.key ~ '.description')|trans }}</p>
+                        <span class="about-card__cta">
+                            {{ 'about.today.discover'|trans }}
+                            <img class="about-card__cta-icon" src="{{ asset('images/icons/arrow-right-blue.svg') }}" alt="">
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="module">
+        const revealItems = document.querySelectorAll('[data-reveal]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealItems.forEach((item) => observer.observe(item));
+    </script>
+
+{% endblock %}
