@@ -2688,6 +2688,11 @@ img[src*="comune-gradara"] {
         align-items: flex-start;
     }
 
+    .recercare-subtitle {
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
     .recercare-actions {
         flex-direction: column;
         padding: 0 10px;

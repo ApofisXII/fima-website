@@ -261,6 +261,8 @@ recercare:
 
 bulletins:
     page_title: 'Nuovo Bollettino Musicale'
+    subtitle: "The <i>Nuovo Bollettino Musicale</i>, a biannual online publication promoted by the Fondazione Italiana per la Musica Antica in collaboration with the University of Rome Tor Vergata, features accessible contributions on musicology and ethnomusicology, in-depth articles on musical instruments and traditions, listening guides, reports on conferences and study days, as well as news about concerts, festivals and cultural initiatives. The publication also serves as a space for training and editorial experimentation for university students."
+    scientific_committee: "Scientific Board: Alberto Annarilli (Fondazione Italiana per la Musica Antica), Giuseppe Giordano (University of Rome Tor Vergata), Giacomo Sciommeri (University of Rome Tor Vergata)."
     open: 'Read the bulletin'
     editor_label: 'Edited by'
     authors_label: 'Authors'

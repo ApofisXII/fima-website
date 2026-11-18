@@ -7,6 +7,14 @@
     <div class="container">
         <h1>{{ 'bulletins.page_title'|trans }}</h1>
 
+        <div class="recercare-subtitle paragraph">
+            {{ 'bulletins.subtitle'|trans|raw }}
+        </div>
+
+        <div class="paragraph">
+            {{ 'bulletins.scientific_committee'|trans }}
+        </div>
+
         <div class="recercare-grid">
             {% for bulletin in bulletins %}
                 <div class="recercare-box">

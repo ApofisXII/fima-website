@@ -261,6 +261,8 @@ recercare:
 
 bulletins:
     page_title: 'Nuovo Bollettino Musicale'
+    subtitle: "Il <i>Nuovo Bollettino Musicale</i>, pubblicazione semestrale online promossa dalla Fondazione Italiana per la Musica Antica in collaborazione con l’Università degli Studi di Roma Tor Vergata, propone contributi di carattere divulgativo dedicati alla musicologia e all’etnomusicologia, approfondimenti su strumenti e tradizioni musicali, guide all’ascolto, resoconti di convegni e giornate di studio, nonché notizie su concerti, festival e iniziative culturali. La pubblicazione si configura inoltre come uno spazio di formazione e sperimentazione editoriale rivolto a studenti e studentesse universitari."
+    scientific_committee: "Consiglio Scientifico: Alberto Annarilli (Fondazione Italiana per la Musica Antica), Giuseppe Giordano (Università degli Studi di Roma Tor Vergata), Giacomo Sciommeri (Università degli Studi di Roma Tor Vergata)."
     open: 'Leggi il bollettino'
     editor_label: 'A cura di'
     authors_label: 'Autori'
