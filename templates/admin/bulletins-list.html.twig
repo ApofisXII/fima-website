@@ -1,0 +1,78 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">Bollettini</div>
+
+    <div style="margin-bottom: 20px;">
+        <a class="gg-btn gg-btn--plus hoverizzato" href="{{ path('adminBulletinsDetail') }}">+ Nuovo bollettino</a>
+    </div>
+
+    <table id="main-table">
+        <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Data pubblicazione</th>
+            <th>Visibilità</th>
+            <th>Creato</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+        import DataTable from 'datatables.net-dt';
+        import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+
+        const table = new DataTable("#main-table", {
+            serverSide: true,
+            ajax: {
+                url: "{{ path('adminBulletinsListJson') }}",
+            },
+            ordering: false,
+            columns: [
+                { data: "title" },
+                { data: "author" },
+                { data: "publishedAt" },
+                { data: "isPublic" },
+                { data: "createdAt" },
+                { data: "bulletinDetailLink" },
+            ],
+            columnDefs: [
+                {
+                    targets: 3, render: function(data, type, row) {
+                        return data ? "<span class='chip chip--visible'>Pubblico</span>" : "<span class='chip chip--deleted'>Nascosto</span>";
+                    }
+                },
+                {
+                    targets: 5, render: function(data, type, row) {
+                        return "<a href='"+data+"' class='gg-table-btn'>Modifica bollettino</a>";
+                    }
+                }
+            ],
+            pageLength: 25,
+            language: {
+                search: "Cerca:",
+                lengthMenu: "Mostra _MENU_ risultati per pagina",
+                info: "Mostrati da _START_ a _END_ di _TOTAL_ risultati",
+                infoEmpty: "Nessun risultato disponibile",
+                infoFiltered: "(filtrati da _MAX_ risultati totali)",
+                paginate: {
+                    first: "Primo",
+                    last: "Ultimo",
+                    next: "Successivo",
+                    previous: "Precedente"
+                },
+                emptyTable: "Nessun dato disponibile nella tabella",
+                zeroRecords: "Nessun risultato trovato"
+            }
+        });
+
+    </script>
+
+{% endblock %}

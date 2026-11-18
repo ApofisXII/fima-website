@@ -259,6 +259,14 @@ recercare:
     download_index: 'Open index & summaries'
     download_index_only: 'Open index'
 
+bulletins:
+    page_title: 'Bulletins'
+    subtitle: 'The periodical bulletins of the Italian Foundation for Early Music (in Italian).'
+    open: 'Read the bulletin'
+    author_label: 'Author'
+    date_label: 'Date'
+    download: 'Open PDF (Italian)'
+
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
     close: 'CLOSE'
@@ -267,6 +275,7 @@ base:
         about: 'About us'
         urbino: 'Urbino Musica Antica'
         library: 'Library'
+        bulletins: 'Bulletins'
         periodical: 'Periodical'
         events: 'Events'
     uma_nav:

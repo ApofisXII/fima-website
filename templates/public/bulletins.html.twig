@@ -1,0 +1,96 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'bulletins.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'bulletins.page_title'|trans }}</h1>
+
+        <div class="recercare-subtitle paragraph">
+            {{ 'bulletins.subtitle'|trans }}
+        </div>
+
+        <div class="recercare-grid">
+            {% for bulletin in bulletins %}
+                <div class="recercare-box">
+                    <img class="recercare-box__cover" src="{{ bulletin.hasCover ? asset('uploads-bulletins/covers/' ~ bulletin.id ~ '.webp') : asset('images/recercare-fallback.webp') }}" alt="{{ bulletin.title }}" loading="lazy">
+                    <div class="recercare-box__year">{{ bulletin.publishedAt|date('Y') }}</div>
+                    <div class="recercare-box__edition">{{ bulletin.title }}</div>
+                    <button type="button" class="btn btn--blue btn--recercare-open hover"
+                            data-bulletin-open
+                            data-title="{{ bulletin.title }}"
+                            data-author="{{ bulletin.author }}"
+                            data-date="{{ bulletin.publishedAt|date('d/m/Y') }}"
+                            data-pdf="{{ asset('uploads-bulletins/pdfs/' ~ bulletin.id ~ '.pdf') }}"
+                            >
+                        {{ 'bulletins.open'|trans }}
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div id="bulletin-modal" class="recercare-modal" hidden>
+        <div class="recercare-modal__backdrop" data-bulletin-close></div>
+        <div class="recercare-modal__content" role="dialog" aria-modal="true" aria-labelledby="bulletin-modal-title">
+            <button type="button" class="recercare-modal__close" data-bulletin-close aria-label="{{ 'base.close'|trans }}">&times;</button>
+            <h2 id="bulletin-modal-title" class="recercare-modal__title" data-field="title"></h2>
+            <dl class="recercare-modal__meta">
+                <div class="recercare-modal__row">
+                    <dt>{{ 'bulletins.author_label'|trans }}</dt>
+                    <dd data-field="author"></dd>
+                </div>
+                <div class="recercare-modal__row">
+                    <dt>{{ 'bulletins.date_label'|trans }}</dt>
+                    <dd data-field="date"></dd>
+                </div>
+            </dl>
+            <a class="btn btn--blue hover recercare-modal__download" data-field="download" target="_blank" rel="noopener">{{ 'bulletins.download'|trans }}</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module">
+        (function () {
+            const modal = document.getElementById('bulletin-modal');
+            if (!modal) return;
+
+            const fields = {
+                title: modal.querySelector('[data-field="title"]'),
+                author: modal.querySelector('[data-field="author"]'),
+                date: modal.querySelector('[data-field="date"]'),
+                download: modal.querySelector('[data-field="download"]'),
+            };
+
+            function open(btn) {
+                fields.title.textContent = btn.dataset.title || '';
+                fields.author.textContent = btn.dataset.author || '';
+                fields.date.textContent = btn.dataset.date || '';
+                fields.download.href = btn.dataset.pdf;
+
+                modal.hidden = false;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                modal.hidden = true;
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-bulletin-open]').forEach(function (btn) {
+                btn.addEventListener('click', function () { open(btn); });
+            });
+            modal.querySelectorAll('[data-bulletin-close]').forEach(function (el) {
+                el.addEventListener('click', close);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.hidden) close();
+            });
+        })();
+    </script>
+{% endblock %}
