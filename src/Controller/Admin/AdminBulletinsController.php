@@ -37,11 +37,12 @@ class AdminBulletinsController extends AbstractController
     {
         $qb = $this->bulletinRepository->createQueryBuilder('b')
             ->andWhere('b.is_deleted = false')
-            ->orderBy('b.published_at', 'desc');
+            ->orderBy('b.year', 'desc')
+            ->addOrderBy('b.number', 'desc');
 
         if ($payload->search['value']) {
             $search = $payload->search['value'];
-            $qb->andWhere('b.title LIKE :search OR b.author LIKE :search')
+            $qb->andWhere('CAST(b.number AS TEXT) LIKE :search OR CAST(b.year AS TEXT) LIKE :search OR b.editor LIKE :search OR b.authors LIKE :search')
                 ->setParameter('search', '%'.$search.'%');
         }
 
@@ -54,9 +55,9 @@ class AdminBulletinsController extends AbstractController
 
         $list = array_map(function ($item) {
             return [
-                'title'              => $item->getTitle(),
-                'author'             => $item->getAuthor(),
-                'publishedAt'        => $item->getPublishedAt()->format('d/m/Y'),
+                'number'             => $item->getNumber(),
+                'year'               => $item->getYear(),
+                'editor'             => $item->getEditor() ?? '—',
                 'isPublic'           => $item->isPublic(),
                 'createdAt'          => $item->getCreatedAt()->format('d/m/y \\a\\l\\l\\e H:i'),
                 'bulletinDetailLink' => $this->generateUrl('adminBulletinsDetail', ['bulletinId' => $item->getId()]),

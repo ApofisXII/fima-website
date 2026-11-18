@@ -1663,6 +1663,19 @@ img[src*="comune-gradara"] {
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
 
+.bulletin-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30%;
+    background: radial-gradient(circle at 50% 35%, #24539b 0%, var(--color-blue) 65%);
+}
+
+.bulletin-fallback__logo {
+    width: 45%;
+    opacity: 0.9;
+}
+
 .btn--recercare-open {
     position: relative;
     z-index: 1;

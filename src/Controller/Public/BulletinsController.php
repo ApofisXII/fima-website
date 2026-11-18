@@ -18,7 +18,7 @@ final class BulletinsController extends AbstractController
     {
         $bulletins = $this->bulletinRepository->findBy(
             ['is_public' => true, 'is_deleted' => false],
-            ['published_at' => 'desc'],
+            ['year' => 'desc', 'number' => 'desc'],
         );
 
         return $this->render('public/bulletins.html.twig', [

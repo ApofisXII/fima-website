@@ -22,9 +22,10 @@ final readonly class BulletinService
     public function create(BulletinRequestDTO $payload): Bulletin
     {
         $bulletin = (new Bulletin())
-            ->setTitle($payload->title)
-            ->setAuthor($payload->author)
-            ->setPublishedAt(new \DateTime($payload->publishedAt))
+            ->setNumber($payload->number)
+            ->setYear($payload->year)
+            ->setEditor($payload->editor)
+            ->setAuthors($payload->authors)
             ->setIsPublic($payload->isPublic ?? false)
             ->setHasCover(false)
             ->setIsDeleted(false)
@@ -37,9 +38,10 @@ final readonly class BulletinService
     public function update(Bulletin $bulletin, BulletinRequestDTO $payload): Bulletin
     {
         $bulletin
-            ->setTitle($payload->title)
-            ->setAuthor($payload->author)
-            ->setPublishedAt(new \DateTime($payload->publishedAt))
+            ->setNumber($payload->number)
+            ->setYear($payload->year)
+            ->setEditor($payload->editor)
+            ->setAuthors($payload->authors)
             ->setIsPublic($payload->isPublic ?? false);
 
         return $this->bulletinRepository->save($bulletin);

@@ -260,11 +260,11 @@ recercare:
     download_index_only: 'Open index'
 
 bulletins:
-    page_title: 'Bulletins'
-    subtitle: 'The periodical bulletins of the Italian Foundation for Early Music (in Italian).'
+    page_title: 'Nuovo Bollettino Musicale'
     open: 'Read the bulletin'
-    author_label: 'Author'
-    date_label: 'Date'
+    editor_label: 'Edited by'
+    authors_label: 'Authors'
+    edition: 'Issue %number%, Year %year%'
     download: 'Open PDF (Italian)'
 
 base:
@@ -275,7 +275,7 @@ base:
         about: 'About us'
         urbino: 'Urbino Musica Antica'
         library: 'Library'
-        bulletins: 'Bulletins'
+        bulletins: 'Bulletin'
         periodical: 'Periodical'
         events: 'Events'
     uma_nav:

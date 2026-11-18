@@ -8,22 +8,27 @@
         <input type="hidden" name="bulletinId" value="{{ bulletin ? bulletin.id : "0" }}">
 
         <div class="box multi-detail-box gg-form">
-            <h3>{{ bulletin ? bulletin.title : 'Dettaglio bollettino' }}</h3>
+            <h3>{{ bulletin ? 'Nuovo Bollettino Musicale ' ~ bulletin.number ~ ' (' ~ bulletin.year ~ ')' : 'Dettaglio bollettino' }}</h3>
 
-            <label>Titolo</label>
-            <input type="text" name="title" placeholder="Es. La musicologia nell'era digitale" value="{{ bulletin ? bulletin.title }}" required>
-
-            <div class="gg-form-row gg-form-row--no-margin gg-form-row--enrollment">
+            <div class="gg-form-row gg-form-row--no-margin">
                 <div class="course-date-field">
-                    <label>Autore</label>
-                    <input type="text" name="author" placeholder="Es. Giacomo Sciommeri" value="{{ bulletin ? bulletin.author }}" required>
+                    <label>Numero</label>
+                    <input type="number" name="number" placeholder="Es. 12" value="{{ bulletin ? bulletin.number }}" required min="1">
                 </div>
 
                 <div class="course-date-field">
-                    <label>Data di pubblicazione</label>
-                    <input type="date" name="publishedAt" value="{{ bulletin ? bulletin.publishedAt|date('Y-m-d') }}" required>
+                    <label>Anno</label>
+                    <input type="number" name="year" placeholder="Es. 2026" value="{{ bulletin ? bulletin.year }}" required min="1900">
+                </div>
+
+                <div class="course-date-field">
+                    <label>A cura di (facoltativo)</label>
+                    <input type="text" name="editor" placeholder="Es. Mario Rossi" value="{{ bulletin ? bulletin.editor }}">
                 </div>
             </div>
+
+            <label>Autori (facoltativo)</label>
+            <input type="text" name="authors" placeholder="Es. Giacomo Sciommeri, Anna Bianchi, Luca Verdi" value="{{ bulletin ? bulletin.authors }}" maxlength="500">
 
             <div class="gg-checkbox-group">
                 <label>
@@ -107,9 +112,10 @@
 
             const payload = {
                 bulletinId:  formData.get('bulletinId'),
-                title:       formData.get('title') || null,
-                author:      formData.get('author') || null,
-                publishedAt: formData.get('publishedAt') || null,
+                number:      formData.get('number') ? parseInt(formData.get('number')) : null,
+                year:        formData.get('year') ? parseInt(formData.get('year')) : null,
+                editor:      formData.get('editor') || null,
+                authors:     formData.get('authors') || null,
                 isPublic:    formData.get('isPublic') === '1',
             };
 

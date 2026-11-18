@@ -260,11 +260,11 @@ recercare:
     download_index_only: 'Apri indice'
 
 bulletins:
-    page_title: 'Bollettini'
-    subtitle: 'I bollettini periodici della Fondazione Italiana per la Musica Antica.'
+    page_title: 'Nuovo Bollettino Musicale'
     open: 'Leggi il bollettino'
-    author_label: 'Autore'
-    date_label: 'Data'
+    editor_label: 'A cura di'
+    authors_label: 'Autori'
+    edition: 'Numero %number%, Anno %year%'
     download: 'Apri PDF'
 
 base:
@@ -275,7 +275,7 @@ base:
         about: 'Chi siamo'
         urbino: 'Urbino Musica Antica'
         library: 'Biblioteca'
-        bulletins: 'Bollettini'
+        bulletins: 'Bollettino'
         periodical: 'Periodico'
         events: 'Eventi'
     uma_nav:

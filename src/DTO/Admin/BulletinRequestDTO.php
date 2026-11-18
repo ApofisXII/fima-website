@@ -10,15 +10,17 @@ class BulletinRequestDTO
 
         public ?string $bulletinId,
 
-        #[Assert\NotBlank(message: "Il titolo è obbligatorio.")]
-        public ?string $title,
+        #[Assert\NotBlank(message: "Il numero è obbligatorio.")]
+        public ?int $number,
 
-        #[Assert\NotBlank(message: "L'autore è obbligatorio.")]
-        public ?string $author,
+        #[Assert\NotBlank(message: "L'anno è obbligatorio.")]
+        public ?int $year,
 
-        #[Assert\NotBlank(message: "La data di pubblicazione è obbligatoria.")]
-        #[Assert\Date(message: "La data di pubblicazione non è valida.")]
-        public ?string $publishedAt,
+        #[Assert\Length(max: 255, maxMessage: "Il campo \"A cura di\" può contenere al massimo {{ limit }} caratteri.")]
+        public ?string $editor = null,
+
+        #[Assert\Length(max: 500, maxMessage: "Il campo \"Autori\" può contenere al massimo {{ limit }} caratteri.")]
+        public ?string $authors = null,
 
         public ?bool $isPublic = false,
 

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\BulletinRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BulletinRepository::class)]
@@ -14,14 +13,17 @@ class Bulletin
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    #[ORM\Column]
+    private ?int $number = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $author = null;
+    #[ORM\Column]
+    private ?int $year = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $published_at = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $editor = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $authors = null;
 
     #[ORM\Column]
     private bool $has_cover = false;
@@ -43,38 +45,50 @@ class Bulletin
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getNumber(): ?int
     {
-        return $this->title;
+        return $this->number;
     }
 
-    public function setTitle(string $title): static
+    public function setNumber(int $number): static
     {
-        $this->title = $title;
+        $this->number = $number;
 
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getYear(): ?int
     {
-        return $this->author;
+        return $this->year;
     }
 
-    public function setAuthor(string $author): static
+    public function setYear(int $year): static
     {
-        $this->author = $author;
+        $this->year = $year;
 
         return $this;
     }
 
-    public function getPublishedAt(): ?\DateTime
+    public function getEditor(): ?string
     {
-        return $this->published_at;
+        return $this->editor;
     }
 
-    public function setPublishedAt(\DateTime $published_at): static
+    public function setEditor(?string $editor): static
     {
-        $this->published_at = $published_at;
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function getAuthors(): ?string
+    {
+        return $this->authors;
+    }
+
+    public function setAuthors(?string $authors): static
+    {
+        $this->authors = $authors;
 
         return $this;
     }
