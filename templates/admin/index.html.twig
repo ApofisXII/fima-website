@@ -11,8 +11,16 @@
             <div class="stats-row__box__number">{{ newsCount }}</div>
             <a href="{{ path('adminNewsList') }}">Vedi tutte →</a>
         </div>
-        <div class="box stats-row__box box stats-row__box--invisible"></div>
-        <div class="box stats-row__box box stats-row__box--invisible"></div>
+        <div class="box stats-row__box">
+            <div class="secundary">Recercare</div>
+            <div class="stats-row__box__number">{{ recercareCount }}</div>
+            <a href="{{ path('adminRecercareIssuesList') }}">Vedi tutti →</a>
+        </div>
+        <div class="box stats-row__box">
+            <div class="secundary">Bollettini</div>
+            <div class="stats-row__box__number">{{ bulletinsCount }}</div>
+            <a href="{{ path('adminBulletinsList') }}">Vedi tutti →</a>
+        </div>
     </div>
 
     <h3>Urbino</h3>
