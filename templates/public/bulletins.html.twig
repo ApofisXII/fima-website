@@ -1,0 +1,108 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ 'bulletins.page_title'|trans }} • {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'bulletins.page_title'|trans }}</h1>
+
+        <div class="recercare-grid">
+            {% for bulletin in bulletins %}
+                <div class="recercare-box">
+                    {% if bulletin.hasCover %}
+                        <img class="recercare-box__cover" src="{{ asset('uploads-bulletins/covers/' ~ bulletin.id ~ '.webp') }}" alt="{{ 'bulletins.edition'|trans({'%number%': bulletin.number, '%year%': bulletin.year}) }}" loading="lazy">
+                    {% else %}
+                        <div class="recercare-box__cover bulletin-fallback">
+                            <img class="bulletin-fallback__logo" src="{{ asset('images/logos/fima-logo.svg') }}" alt="">
+                        </div>
+                    {% endif %}
+                    <div class="recercare-box__edition">{{ 'bulletins.edition'|trans({'%number%': bulletin.number, '%year%': bulletin.year}) }}</div>
+                    <button type="button" class="btn btn--blue btn--recercare-open hover"
+                            data-bulletin-open
+                            data-title="{{ 'bulletins.edition'|trans({'%number%': bulletin.number, '%year%': bulletin.year}) }}"
+                            data-editor="{{ bulletin.editor }}"
+                            data-authors="{{ bulletin.authors }}"
+                            data-pdf="{{ asset('uploads-bulletins/pdfs/' ~ bulletin.id ~ '.pdf') }}"
+                            >
+                        {{ 'bulletins.open'|trans }}
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div id="bulletin-modal" class="recercare-modal" hidden>
+        <div class="recercare-modal__backdrop" data-bulletin-close></div>
+        <div class="recercare-modal__content" role="dialog" aria-modal="true" aria-labelledby="bulletin-modal-title">
+            <button type="button" class="recercare-modal__close" data-bulletin-close aria-label="{{ 'base.close'|trans }}">&times;</button>
+            <h2 id="bulletin-modal-title" class="recercare-modal__title" data-field="title"></h2>
+            <dl class="recercare-modal__meta">
+                <div class="recercare-modal__row" data-row="editor">
+                    <dt>{{ 'bulletins.editor_label'|trans }}</dt>
+                    <dd data-field="editor"></dd>
+                </div>
+                <div class="recercare-modal__row" data-row="authors">
+                    <dt>{{ 'bulletins.authors_label'|trans }}</dt>
+                    <dd data-field="authors"></dd>
+                </div>
+            </dl>
+            <a class="btn btn--blue hover recercare-modal__download" data-field="download" target="_blank" rel="noopener">{{ 'bulletins.download'|trans }}</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module">
+        (function () {
+            const modal = document.getElementById('bulletin-modal');
+            if (!modal) return;
+
+            const fields = {
+                title: modal.querySelector('[data-field="title"]'),
+                editor: modal.querySelector('[data-field="editor"]'),
+                authors: modal.querySelector('[data-field="authors"]'),
+                download: modal.querySelector('[data-field="download"]'),
+            };
+
+            const rows = {
+                editor: modal.querySelector('[data-row="editor"]'),
+                authors: modal.querySelector('[data-row="authors"]'),
+            };
+
+            function setRow(row, valueEl, value) {
+                const has = value && value.trim() !== '';
+                if (has) valueEl.textContent = value;
+                row.hidden = !has;
+            }
+
+            function open(btn) {
+                fields.title.textContent = btn.dataset.title || '';
+                setRow(rows.editor, fields.editor, btn.dataset.editor);
+                setRow(rows.authors, fields.authors, btn.dataset.authors);
+                fields.download.href = btn.dataset.pdf;
+
+                modal.hidden = false;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function close() {
+                modal.hidden = true;
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-bulletin-open]').forEach(function (btn) {
+                btn.addEventListener('click', function () { open(btn); });
+            });
+            modal.querySelectorAll('[data-bulletin-close]').forEach(function (el) {
+                el.addEventListener('click', close);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.hidden) close();
+            });
+        })();
+    </script>
+{% endblock %}

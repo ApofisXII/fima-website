@@ -1,0 +1,194 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <div class="gg-h1">{{ bulletin ? 'Modifica' : 'Nuovo' }} bollettino</div>
+
+    <form id="page-form" method="post" action="{{ path('adminBulletinsDetailSave') }}">
+        <input type="hidden" name="bulletinId" value="{{ bulletin ? bulletin.id : "0" }}">
+
+        <div class="box multi-detail-box gg-form">
+            <h3>{{ bulletin ? 'Nuovo Bollettino Musicale ' ~ bulletin.number ~ ' (' ~ bulletin.year ~ ')' : 'Dettaglio bollettino' }}</h3>
+
+            <div class="gg-form-row gg-form-row--no-margin">
+                <div class="course-date-field">
+                    <label>Numero</label>
+                    <input type="number" name="number" placeholder="Es. 12" value="{{ bulletin ? bulletin.number }}" required min="1">
+                </div>
+
+                <div class="course-date-field">
+                    <label>Anno</label>
+                    <input type="number" name="year" placeholder="Es. 2026" value="{{ bulletin ? bulletin.year }}" required min="1900">
+                </div>
+
+                <div class="course-date-field">
+                    <label>A cura di (facoltativo)</label>
+                    <input type="text" name="editor" placeholder="Es. Mario Rossi" value="{{ bulletin ? bulletin.editor }}">
+                </div>
+            </div>
+
+            <label>Autori (facoltativo)</label>
+            <input type="text" name="authors" placeholder="Es. Giacomo Sciommeri, Anna Bianchi, Luca Verdi" value="{{ bulletin ? bulletin.authors }}" maxlength="500">
+
+            <div class="gg-checkbox-group">
+                <label>
+                    <input type="checkbox" name="isPublic" value="1" {{ bulletin and bulletin.isPublic ? 'checked' }}>
+                    <span>Bollettino visibile pubblicamente</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>Copertina</h3>
+
+            {% if bulletin and bulletin.hasCover %}
+                <p><img src="{{ asset('uploads-bulletins/covers/' ~ bulletin.id ~ '.webp') }}" alt="Copertina" style="max-height: 200px;"></p>
+            {% endif %}
+
+            <label>{{ bulletin and bulletin.hasCover ? 'Sostituisci copertina' : 'Carica immagine copertina' }}</label>
+            <input type="file" id="cover-input" name="cover" accept="image/*">
+
+            {% if bulletin and bulletin.hasCover %}
+                <div class="gg-action-btn-group">
+                    <button type="button" id="delete-cover-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina copertina</button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="box multi-detail-box gg-form">
+            <h3>PDF del bollettino</h3>
+
+            {% if bulletin %}
+                <p><a href="{{ asset('uploads-bulletins/pdfs/' ~ bulletin.id ~ '.pdf') }}" target="_blank">Visualizza PDF caricato</a></p>
+            {% endif %}
+
+            <label>{{ bulletin ? 'Sostituisci PDF' : 'Carica PDF' }}</label>
+            <input type="file" id="pdf-input" name="pdf" accept="application/pdf">
+
+            {% if bulletin %}
+                <div class="gg-action-btn-group">
+                    <button type="button" id="delete-pdf-btn" class="gg-action-btn gg-action-btn--delete hoverizzato">Elimina PDF</button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="gg-btn-group">
+            <button type="submit" class="gg-submit-btn hoverizzato">Salva bollettino</button>
+            {% if bulletin %}
+                <button id="delete-btn" class="gg-delete-btn hoverizzato">Elimina bollettino</button>
+            {% endif %}
+        </div>
+
+    </form>
+
+    {% if bulletin %}
+        <div id="delete-modal" class="gg-modal" style="display: none;">
+            <div class="gg-modal-content">
+                <p>Confermi di voler eliminare questo bollettino?</p>
+                <div class="gg-modal-buttons">
+                    <button id="confirm-delete" class="gg-modal-btn gg-modal-btn--danger">Sì, elimina</button>
+                    <button id="cancel-delete" class="gg-modal-btn gg-modal-btn--cancel">Annulla</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="module">
+
+        document.getElementById('page-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const isNew = formData.get('bulletinId') === '0';
+
+            if (isNew && !document.getElementById('pdf-input').files[0]) {
+                alert('Il PDF del bollettino è obbligatorio.');
+                return;
+            }
+
+            const payload = {
+                bulletinId:  formData.get('bulletinId'),
+                number:      formData.get('number') ? parseInt(formData.get('number')) : null,
+                year:        formData.get('year') ? parseInt(formData.get('year')) : null,
+                editor:      formData.get('editor') || null,
+                authors:     formData.get('authors') || null,
+                isPublic:    formData.get('isPublic') === '1',
+            };
+
+            // 1. Salva i dati dell'entità
+            let saveData;
+            try {
+                const saveRes = await fetch('{{ path('adminBulletinsDetailSave') }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                saveData = await saveRes.json();
+                if (!saveRes.ok) { alert(saveData.message || 'Errore nel salvataggio'); return; }
+            } catch (err) {
+                alert('Errore: ' + err.message);
+                return;
+            }
+
+            const bulletinId = saveData.bulletinId ?? payload.bulletinId;
+
+            // 2. Upload copertina se selezionata
+            const coverFile = document.getElementById('cover-input').files[0];
+            if (coverFile) {
+                const fd = new FormData();
+                fd.append('cover', coverFile);
+                const r = await fetch('/admin/bulletins/upload-cover/' + bulletinId, { method: 'POST', body: fd });
+                if (!r.ok) { const d = await r.json(); alert('Errore copertina: ' + d.message); }
+            }
+
+            // 3. Upload PDF se selezionato
+            const pdfFile = document.getElementById('pdf-input').files[0];
+            if (pdfFile) {
+                const fd = new FormData();
+                fd.append('pdf', pdfFile);
+                const r = await fetch('/admin/bulletins/upload-pdf/' + bulletinId, { method: 'POST', body: fd });
+                if (!r.ok) { const d = await r.json(); alert('Errore PDF: ' + d.message); }
+            }
+
+            location.href = "{{ path('adminBulletinsList') }}";
+        });
+
+        {% if bulletin and bulletin.hasCover %}
+        document.getElementById('delete-cover-btn').addEventListener('click', function() {
+            if (!confirm('Confermi di voler eliminare la copertina?')) return;
+            fetch('{{ path('adminBulletinsDeleteCover', {'bulletin': bulletin.id}) }}', { method: 'DELETE' })
+            .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
+            .then(d => { if (d) location.reload(); });
+        });
+        {% endif %}
+
+        {% if bulletin %}
+        document.getElementById('delete-pdf-btn').addEventListener('click', function() {
+            if (!confirm('Confermi di voler eliminare il PDF?')) return;
+            fetch('{{ path('adminBulletinsDeletePdf', {'bulletin': bulletin.id}) }}', { method: 'DELETE' })
+            .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
+            .then(d => { if (d) location.reload(); });
+        });
+
+        const modal = document.getElementById('delete-modal');
+        const deleteBtn = document.getElementById('delete-btn');
+
+        deleteBtn.addEventListener('click', function(e) { e.preventDefault(); modal.style.display = 'flex'; });
+        document.getElementById('cancel-delete').addEventListener('click', function() { modal.style.display = 'none'; });
+        modal.addEventListener('click', function(e) { if (e.target === modal) modal.style.display = 'none'; });
+
+        document.getElementById('confirm-delete').addEventListener('click', function() {
+            modal.style.display = 'none';
+            fetch('{{ path('adminBulletinsDelete', {'bulletin': bulletin.id}) }}', { method: 'DELETE' })
+            .then(async r => { const d = await r.json(); if (!r.ok) { alert(d.message); return null; } return d; })
+            .then(d => { if (d) location.href = "{{ path('adminBulletinsList') }}"; });
+        });
+        {% endif %}
+
+    </script>
+
+{% endblock %}

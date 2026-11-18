@@ -29,9 +29,8 @@
 
                     <div class="gg-navbar-divider">FIMA</div>
                     <a href="{{ path('adminNewsList') }}" class="gg-navbar-link {{ 'News' in app.current_route ? 'selected' }}">Notizie</a>
-
-                    <div class="gg-navbar-divider">Recercare</div>
-                    <a href="{{ path('adminRecercareIssuesList') }}" class="gg-navbar-link {{ 'RecercareIssues' in app.current_route ? 'selected' }}">Numeri</a>
+                    <a href="{{ path('adminRecercareIssuesList') }}" class="gg-navbar-link {{ 'RecercareIssues' in app.current_route ? 'selected' }}">Recercare</a>
+                    <a href="{{ path('adminBulletinsList') }}" class="gg-navbar-link {{ 'Bulletins' in app.current_route ? 'selected' }}">Bollettini</a>
 
                     <div class="gg-navbar-divider">Urbino</div>
                     <a href="{{ path('adminUrbinoEditionsList') }}" class="gg-navbar-link {{ 'UrbinoEditions' in app.current_route ? 'selected' }}">Edizioni</a>

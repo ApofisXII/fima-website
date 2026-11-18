@@ -259,6 +259,14 @@ recercare:
     download_index: 'Apri indice e sommari'
     download_index_only: 'Apri indice'
 
+bulletins:
+    page_title: 'Nuovo Bollettino Musicale'
+    open: 'Leggi il bollettino'
+    editor_label: 'A cura di'
+    authors_label: 'Autori'
+    edition: 'Numero %number%, Anno %year%'
+    download: 'Apri PDF'
+
 base:
     title: 'FIMA • Fondazione Italiana per la Musica Antica'
     close: 'CHIUDI'
@@ -267,6 +275,7 @@ base:
         about: 'Chi siamo'
         urbino: 'Urbino Musica Antica'
         library: 'Biblioteca'
+        bulletins: 'Bollettino'
         periodical: 'Periodico'
         events: 'Eventi'
     uma_nav:

@@ -205,6 +205,10 @@ h2 {
     display: none;
 }
 
+.header__nav-lang {
+    display: none;
+}
+
 .container {
     margin: 0 auto;
     width: 90%;
@@ -1659,6 +1663,19 @@ img[src*="comune-gradara"] {
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
 
+.bulletin-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30%;
+    background: radial-gradient(circle at 50% 35%, #24539b 0%, var(--color-blue) 65%);
+}
+
+.bulletin-fallback__logo {
+    width: 45%;
+    opacity: 0.9;
+}
+
 .btn--recercare-open {
     position: relative;
     z-index: 1;
@@ -2179,6 +2196,8 @@ img[src*="comune-gradara"] {
     .header__nav--open .header__nav-link:nth-child(4) { animation-delay: 0.36s; }
     .header__nav--open .header__nav-link:nth-child(5) { animation-delay: 0.43s; }
     .header__nav--open .header__nav-link:nth-child(6) { animation-delay: 0.50s; }
+    .header__nav--open .header__nav-link:nth-child(7) { animation-delay: 0.57s; }
+    .header__nav--open .header__nav-link:nth-child(6) { animation-delay: 0.50s; }
 
     .header__nav-link {
         padding: 10px 0;
@@ -2196,6 +2215,42 @@ img[src*="comune-gradara"] {
 
     .header__nav-indicator {
         display: none;
+    }
+
+    .header__nav-lang {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        top: 26px;
+        left: 40px;
+    }
+
+    .header__nav--open .header__nav-lang {
+        animation: fima-link-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+        animation-delay: 0.1s;
+    }
+
+    .header__nav-lang-link {
+        color: var(--color-white);
+        text-decoration: none;
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
+        padding: 12px 10px;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+    }
+
+    .header__nav-lang-link--active {
+        opacity: 1;
+        font-weight: 800;
+    }
+
+    .header__nav-lang-divider {
+        width: 1px;
+        height: 16px;
+        background-color: var(--color-white);
+        opacity: 0.4;
     }
 
     .home-hero__title {
